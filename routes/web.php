@@ -72,6 +72,7 @@ Route::group(['prefix' => 'superadmin'],function(){
     Route::post('/product/{id}',[ProductController::class, 'deleteProduct']);
     Route::get('/voucher',[VoucherController::class, 'getVoucher']);
     Route::get('/user',[UserController::class, 'getUser']);
+    Route::post('/user/{id}',[UserController::class, 'deleteUser']);
     Route::get('/merchant',[MerchantController::class, 'getMerchant']);
 });
 

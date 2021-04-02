@@ -18,8 +18,9 @@ class UserController extends Controller
 
     }
 
-    public function deleteUser(){
-
+    public function deleteUser($id){
+        User::where('id','=',$id)->delete();
+        return redirect('/superadmin/user');
     }
     
 }
