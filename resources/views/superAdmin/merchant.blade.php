@@ -13,7 +13,7 @@
                                         <div class="title-content">List Merchant</div>
                                     </div>
                                         <div class="col-md-3 offset-md-9 button-position mb-1">
-                                <button class="button-add" data-toggle="modal" data-target="#addModal">Tambah Produk</button>
+                                <button class="button-add" data-toggle="modal" data-target="#addModal">Tambah Merchant</button>
                             </div>
                                         <table class="table table-responsive-sm table-bordered table-striped table-sm mydatatable">
                                     <thead>
@@ -21,45 +21,41 @@
                                             <th>Id Merchant</th>
                                             <th>Nama </th>
                                             <th>Email</th>
-                                            <th>Tanggal Lahir</th>
+                                            <th>Umur</th>
                                             <th>Alamat</th>
                                             <th>Nomor Telepon</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($merchants as $merchant)
                                         <tr>
-                                            <td>Yiorgos Avraamu</td>
-                                            <td>2012/01/01</td>
-                                            <td>Member</td>
-                                            <td>Jl. Raya Bandung Sumedang KM.21, Hegarmanah, Jatinangor, Kabupaten Sumedang, Jawa Barat 45363</td>
-                                            <td>Member</td>
-                                            <td>Member</td>
+                                            <td>{{$merchant->id}}</td>
+                                            <td>{{$merchant->name}}</td>
+                                            <td>{{$merchant->email}}</td>
+                                            <td>{{$merchant->age}}</td>
+                                            <td>{{$merchant->address}}</td>
+                                            <td>{{$merchant->telephone}}</td>
                                             <td>
-                                            <button class="button badge badge-success" data-toggle="modal" data-target="#updateModal"
-                                                style="background: #A6CB26;"
-                                                >Update</button>
+                                            <button class="button badge badge-success" data-toggle="modal" data-target="#updateModal" style="background: #A6CB26;">
+                                            Update
+                                            </button>
+                                            </td>
+                                            <td>
+                                            <form action="/superadmin/merchant/{{$merchant->id}}" method="post">@csrf
+                                            <button type="submit" class="button badge badge-success" data-toggle="modal" data-target="#updateModal" style="background: #A6CB26;">
+                                            Delete
+                                            </button>
+                                            </form>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>Gio</td>
-                                            <td>2012/01/01</td>
-                                            <td>Member</td>
-                                            <td>Jl. Raya Bandung Sumedang KM.21, Hegarmanah, Jatinangor, Kabupaten Sumedang, Jawa Barat 45363</td>
-                                            <td>Member</td>
-                                            <td>Member</td>
-                                            <td>
-                                            <button class="button badge badge-success" data-toggle="modal" data-target="#updateModal"
-                                                style="background: #A6CB26;"
-                                                >Update</button>
-                                            </td>
-                                        </tr>
+                                    @endforeach 
                                     </tbody>
                                 </table>
                                 </div>
-                                @include('admin.addProduct')
+                                @include('superadmin.addMerchant')
                             </div>
-                        @include('admin.updateProduct')
+                        @include('superadmin.updateMerchant')
                         </div>
                     </div>
                 </div>

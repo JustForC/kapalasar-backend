@@ -74,6 +74,8 @@ Route::group(['prefix' => 'superadmin'],function(){
     Route::get('/user',[UserController::class, 'getUser']);
     Route::post('/user/{id}',[UserController::class, 'deleteUser']);
     Route::get('/merchant',[MerchantController::class, 'getMerchant']);
+    Route::post('/merchant',[MerchantController::class, 'registerMerchant']);
+    Route::post('/merchant/{id}',[MerchantController::class, 'deleteMerchant']);
 });
 
 // End Super Admin Route
