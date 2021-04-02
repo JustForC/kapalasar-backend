@@ -55,6 +55,7 @@
                               v-model="email"
                               :rules="[rules.required, rules.email]"
                               placeholder="Email"
+                              name = "email"
                               outlined
                               dense
                             ></v-text-field>
@@ -65,6 +66,7 @@
                               v-model="telepon"
                               :rules="[rules.required, rules.onlyNum]"
                               placeholder="Nomor Telepon"
+                              name = "telephone"
                               outlined
                               dense
                             ></v-text-field>
@@ -77,6 +79,7 @@
                                   v-model="usia"
                                   :rules="[rules.required, rules.onlyNum]"
                                   placeholder="Usia"
+                                  name = "age"
                                   outlined
                                   dense
                                 ></v-text-field>
@@ -89,6 +92,7 @@
                                   v-model="pekerjaan"
                                   :rules="[rules.required]"
                                   placeholder="Pekerjaan"
+                                  name = "job"
                                   outlined
                                   dense
                                 ></v-text-field>
@@ -99,6 +103,7 @@
                               v-model="alamat"
                               :rules="[rules.required]"
                               placeholder="Alamat"
+                              name = "address"
                               outlined
                               dense
                             ></v-text-field>
@@ -107,29 +112,29 @@
                                 <span class="label font-weight-medium"
                                   >Kelurahan</span
                                 >
-                                <v-select
+                                <v-text-field
                                   :items="kelurahan"
                                   v-model="kelurahan"
                                   placeholder="Kelurahan"
                                   dense
+                                  name = "district"
                                   outlined
-                                  menu-props="auto"
                                   :rules="[rules.required]"
-                                ></v-select>
+                                ></v-text-field>
                               </v-col>
                               <v-col class="">
                                 <span class="label font-weight-medium"
                                   >Kecamatan</span
                                 >
-                                <v-select
+                                <v-text-field
                                   :items="kecamatan"
                                   v-model="kecamatan"
                                   placeholder="Kecamatan"
                                   dense
+                                  name = "subdistrict"
                                   outlined
-                                  menu-props="auto"
                                   :rules="[rules.required]"
-                                ></v-select>
+                                ></v-text-field>
                               </v-col>
                             </v-row>
                             <span class="label font-weight-medium"
@@ -143,6 +148,7 @@
                               hint="At least 8 characters"
                               @click:append="show = !show"
                               outlined
+                              name = "password"
                               dense
                               placeholder="Password"
                             ></v-text-field>
