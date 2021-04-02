@@ -68,6 +68,8 @@ Route::group(['prefix' => 'superadmin'],function(){
     Route::post('/admin',[AdminController::class, 'makeAdmin']);
     Route::post('/admin/{id}',[AdminController::class, 'deleteAdmin']);
     Route::get('/product',[ProductController::class, 'getProduct']);
+    Route::post('/product',[ProductController::class, 'makeProduct']);
+    Route::post('/product/{id}',[ProductController::class, 'deleteProduct']);
     Route::get('/voucher',[VoucherController::class, 'getVoucher']);
     Route::get('/user',[UserController::class, 'getUser']);
     Route::get('/merchant',[MerchantController::class, 'getMerchant']);
