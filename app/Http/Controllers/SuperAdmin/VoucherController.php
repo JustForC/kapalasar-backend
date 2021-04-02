@@ -9,7 +9,7 @@ class VoucherController extends Controller
 {
     //
     public function getVoucher(){
-
+        return view('superAdmin/voucher');
     }
 
     public function makeVoucher(){

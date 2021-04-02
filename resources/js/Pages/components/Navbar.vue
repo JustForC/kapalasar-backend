@@ -76,12 +76,16 @@
             </v-menu>
           </div>
           <div v-else class="button text-center ma-1">
-            <v-btn class="mr-2" outlined color="#A6CB26" pa-1 to="Signin"
-              >Masuk</v-btn
-            >
-            <v-btn color="#A6CB26" dark depressed pa-1 to="Signup"
-              >Daftar</v-btn
-            >
+          <a href="/login">
+            <v-btn class="mr-2" outlined color="#A6CB26" pa-1 to="/login">
+            Masuk
+            </v-btn>
+          </a>
+          <a href="/register">
+            <v-btn color="#A6CB26" dark depressed pa-1 to="/register">
+            Daftar
+            </v-btn>
+          </a>
           </div>
         </v-col>
       </v-row>

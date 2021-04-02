@@ -9,7 +9,7 @@ class AdminProductController extends Controller
 {
     //
     public function getProduct(){
-
+        return view('/admin/product');
     }
 
     public function makeProduct(){

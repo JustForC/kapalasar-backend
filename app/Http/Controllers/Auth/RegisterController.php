@@ -32,11 +32,11 @@ class RegisterController extends Controller
 
         User::create([
             'name' => $request->name,
-            'email' => $request->name,
+            'email' => $request->email,
             'password' => Hash::make($request->name),
             'age' => $request->age,
             'job' => $request->job,
-            'address_detail' =>"Kelurahan ".$request->distric." "."Kecamatan ".$request->subdistrict,
+            'address_detail' =>"Kelurahan ".$request->district." "."Kecamatan ".$request->subdistrict,
             'address' => $request->address,
             'telephone' => $request->name,
             'role_id' => 3,

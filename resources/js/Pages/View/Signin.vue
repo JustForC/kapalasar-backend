@@ -47,9 +47,9 @@
                         </v-form>
                         <div class="pt-5">
                           Tidak punya akun?
-                          <!-- <router-link to="Signup"> -->
+                          <a href="/register">
                             <span class="label font-weight-medium">Daftar</span>
-                          <!-- </router-link> -->
+                          </a>
                         </div>
                       </div>
                     </div>

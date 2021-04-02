@@ -43,13 +43,38 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/myself', 'SkeletonControl
 
 Route::get('/register',[RegisterController::class, 'registerForm']);
 Route::post('/register',[RegisterController::class, 'doRegister']);
-Route::get('login',[LoginController::class, 'loginForm']);
-Route::post('login',[LoginController::class, 'doLogin']);
-Route::post('logout',[LoginController::class, 'doLogout']);
+Route::get('/login',[LoginController::class, 'loginForm']);
+Route::post('/login',[LoginController::class, 'doLogin']);
+Route::post('/logout',[LoginController::class, 'doLogout']);
 
 // End Authentication Route
 
 // Admin Route
 
+Route::group(['prefix' => 'admin'],function(){
+    Route::get('/home',[AdminHomeController::class, 'getHome']);
+    Route::get('/product',[AdminProductController::class, 'getProduct']);
+    Route::get('/voucher',[AdminVoucherController::class, 'getVoucher']);
+});
 
 // End Admin Route
+
+
+// Super Admin Route
+
+Route::group(['prefix' => 'superadmin'],function(){
+    Route::get('/home',[HomeController::class, 'getHome']);
+    Route::get('/admin',[AdminController::class, 'getAdmin']);
+    Route::post('/admin',[AdminController::class, 'makeAdmin']);
+    Route::post('/admin/{id}',[AdminController::class, 'deleteAdmin']);
+    Route::get('/product',[ProductController::class, 'getProduct']);
+    Route::get('/voucher',[VoucherController::class, 'getVoucher']);
+    Route::get('/user',[UserController::class, 'getUser']);
+    Route::get('/merchant',[MerchantController::class, 'getMerchant']);
+});
+
+// End Super Admin Route
+
+// Merchant Route
+
+// End Merchant Route

@@ -9,7 +9,7 @@ class ProductController extends Controller
 {
     //
     public function getProduct(){
-
+        return view('superAdmin/Product');
     }
     
     public function makeProduct(){

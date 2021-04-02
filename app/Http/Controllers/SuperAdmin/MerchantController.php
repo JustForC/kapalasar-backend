@@ -9,7 +9,7 @@ class MerchantController extends Controller
 {
     //
     public function getMerchant(){
-
+        return view('superAdmin/merchant');
     }
     
     public function registerMerchant(){

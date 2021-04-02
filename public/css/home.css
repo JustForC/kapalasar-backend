@@ -1,0 +1,36 @@
+.logoKapalasar {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.sidebar-row {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+.headTable {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 19px;
+    /* identical to box height */
+
+    color: #ffffff;
+}
+.has-search .form-control {
+    padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}

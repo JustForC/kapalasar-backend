@@ -159,9 +159,9 @@
                         </v-form>
                         <div class="">
                           Punya akun?
-                          <router-link to="Signin">
+                          <a href="/login">
                             <span class="label font-weight-medium">Masuk</span>
-                          </router-link>
+                          </a>
                         </div>
                       </div>
                     </div>
