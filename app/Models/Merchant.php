@@ -9,7 +9,11 @@ class Merchant extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'merchant_email',
+        'user_id',
         'merchant_code',
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

@@ -30,7 +30,7 @@ class MerchantController extends Controller
             'telephone' => ['required'],
         ]);
 
-        User::create([
+        $merchant = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password,
@@ -43,7 +43,7 @@ class MerchantController extends Controller
         ]);
 
         Merchant::create([
-            'merchant_email' => $request->email,
+            'user_id' => $merchant->id,
             'merchant_code' => $request->merchant_code
         ]);
 

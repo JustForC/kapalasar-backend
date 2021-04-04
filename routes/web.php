@@ -14,6 +14,7 @@ use App\Http\Controllers\SuperAdmin\VoucherController;
 use App\Http\Controllers\Admin\AdminProductController;
 use App\Http\Controllers\Admin\AdminVoucherController;
 use App\Http\Controllers\Admin\AdminHomeController;
+use App\Http\Controllers\User\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +55,8 @@ Route::post('/logout',[LoginController::class, 'doLogout']);
 Route::group(['prefix' => 'admin'],function(){
     Route::get('/home',[AdminHomeController::class, 'getHome']);
     Route::get('/product',[AdminProductController::class, 'getProduct']);
+    Route::post('/product',[AdminProductController::class, 'makeProduct']);
+    Route::get('/product',[AdminProductController::class, 'getProduct']);
     Route::get('/voucher',[AdminVoucherController::class, 'getVoucher']);
 });
 
@@ -85,3 +88,12 @@ Route::group(['prefix' => 'superadmin'],function(){
 // Merchant Route
 
 // End Merchant Route
+
+// User Route Without Merchant Code
+
+
+// User Route
+
+// User Route With Merchant Code
+
+// 

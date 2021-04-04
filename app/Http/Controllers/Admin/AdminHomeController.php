@@ -13,7 +13,7 @@ class AdminHomeController extends Controller
 {
     //
     public function getHome(){
-        return view('admin/home');
+        return view('admin/index');
     }
 
     public function editTransaction(){
