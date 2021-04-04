@@ -33,7 +33,7 @@ class MerchantController extends Controller
         $merchant = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => $request->password,
+            'password' => Hash::make($request->password),
             'address' => $request->address,
             'address_detail' => $request->address_detail,
             'job' => $request->job,

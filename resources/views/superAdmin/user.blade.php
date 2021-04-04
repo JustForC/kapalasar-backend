@@ -54,9 +54,8 @@
                                 </table>
                                     </div>
                                 </div>
-                                @include('admin.addProduct')
                             </div>
-                        @include('admin.updateProduct')
+                        @include('superadmin.updateUser')
                         </div>
                     </div>
                 </div>

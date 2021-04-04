@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\User;
-use Hash;
+use Illuminate\Support\Facades\Hash;
 use Validator;
 
 class RegisterController extends Controller
@@ -33,7 +33,7 @@ class RegisterController extends Controller
         User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->name),
+            'password' => Hash::make($request->password),
             'age' => $request->age,
             'job' => $request->job,
             'address_detail' =>"Kelurahan ".$request->district." "."Kecamatan ".$request->subdistrict,

@@ -14,7 +14,8 @@
                         Masuk ke akunmu
                       </h3>
                       <div class="pt-md-16 pt-8 px-md-16 px-10">
-                        <v-form>
+                        <v-form action = '/login' method = 'post'>
+                        <input type="hidden" name="_token" :value="csrf">
                           <div>
                             <span class="label font-weight-medium">Email</span>
                             <v-text-field
@@ -26,14 +27,17 @@
                             ></v-text-field>
                           </div>
                           <div>
-                            <span class="label font-weight-medium"
-                              >Password</span
-                            >
+                            <span class="label font-weight-medium">
+                              Password
+                              </span>
                             <v-text-field
                               v-model="password"
-                              name="input-10-1"
+                              :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+                              :type="show ? 'text' : 'password'"
                               hint="At least 8 characters"
+                              @click:append="show = !show"
                               outlined
+                              name = "password"
                               dense
                               placeholder="Password"
                             ></v-text-field>
@@ -42,7 +46,7 @@
                             Lupa Password?
                           </div>
                           <div class="pt-5 text-center">
-                            <v-btn color="#a6cb26" dark>Masuk</v-btn>
+                            <v-btn type="submit" color="#a6cb26" dark>Masuk</v-btn>
                           </div>
                         </v-form>
                         <div class="pt-5">
@@ -93,6 +97,11 @@ import Navbar from "../components/Navbar.vue";
 
 export default {
   components: { Navbar, Footer },
+  data() {
+    return {
+      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+      }
+    }
 };
 </script>
 
