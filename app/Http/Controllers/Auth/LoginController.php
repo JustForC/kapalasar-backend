@@ -52,7 +52,7 @@ class LoginController extends Controller
             }
         }
 
-        return 'Login Fail';
+        return redirect('/login');
 
     }
 }
