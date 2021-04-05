@@ -21,7 +21,7 @@ class SuperAdminSeeder extends Seeder
             'email' => 'superadmin@gmail.com',
             'password' => Hash::make('superadmin'),
             'job' => 'Super Admin',
-            'telephone' => '082121234678',
+            'phone' => '082121234678',
             'role_id' => 0,
             'address' => "Jalan Cisaranten",
         ]);

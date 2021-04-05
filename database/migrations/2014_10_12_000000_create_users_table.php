@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('address_detail')->nullable();
             $table->string('phone')->nullable();
             $table->string('referral_code')->nullable();
-            $table->string('activate');
+            $table->string('activate')->nullable();
             $table->foreignId('roles_id')->references('id')->on('roles')->onUpdate('cascade')->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();

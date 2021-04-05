@@ -18,7 +18,7 @@ class Merchant
     public function handle($request, Closure $next)
     {
         if(Auth::check()){
-            if(Auth::user()->role_id == 2){
+            if(Auth::user()->roles->name == 'Merchant'){
                 return $next($request);
             }
 
