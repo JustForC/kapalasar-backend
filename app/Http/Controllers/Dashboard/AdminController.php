@@ -32,7 +32,7 @@ class AdminController extends Controller
     }
 
     public function editForm($id){
-        $admin = User::where('id','=',$id)->get();
+        $admin = User::findOrFail('id','=',$id);
 
         return view('superadmin/edit/admin',['admin' => $admin]);
     }

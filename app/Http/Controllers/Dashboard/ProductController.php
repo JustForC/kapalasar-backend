@@ -58,7 +58,7 @@ class ProductController extends Controller
     }
 
     public function editForm($id){
-        $product = Product::where('id','=',$id)->get();
+        $product = Product::findOrFail('id','=',$id);
         if(Auth::user()->roles->name == "Super Admin"){
             return view('superadmin/edit/product',['product' => $product]);
         }

@@ -33,7 +33,8 @@ class CategoryController extends Controller
     }
 
     public function editForm($id){
-        $Category = Category::where('id','=',$id)->get();
+        $Category = Category::findOrFail('id','=',$id);
+
         if(Auth::user()->roles->name == "Super Admin"){
             return view('superadmin/edit/category',['category' => $category]);
         }
