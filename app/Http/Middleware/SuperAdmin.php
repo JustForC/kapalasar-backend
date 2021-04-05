@@ -18,7 +18,7 @@ class SuperAdmin
     public function handle($request, Closure $next)
     {
         if(Auth::check()){
-            if(Auth::user()->role_id == 0){
+            if(Auth::user()->roles->name == "Super Admin"){
                 return $next($request);
             }
 

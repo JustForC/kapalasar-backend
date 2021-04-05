@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class TypeController extends Controller
 {
     //
-    public function getType(){
+    public function get(){
         $types = Type::get();
         if(Auth::user()->roles->name == "Super Admin"){
             return view('superadmin/type',['types' => $types]);
@@ -18,7 +18,7 @@ class TypeController extends Controller
         }
     }
 
-    public function makeType(Request $request){
+    public function create(Request $request){
         Type::create([
             'name',
         ]);
@@ -26,7 +26,7 @@ class TypeController extends Controller
         return redirect('/type');
     }
 
-    public function editForm($id){
+    public function edit($id){
         $type = Type::findOrFail('id','=',$id);
         if(Auth::user()->roles->name == "Super Admin"){
             return view('superadmin/edit/type',['type' => $type]);

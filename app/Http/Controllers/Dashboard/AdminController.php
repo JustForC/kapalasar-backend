@@ -12,12 +12,12 @@ use App\Models\Role;
 class AdminController extends Controller
 {
     //
-    public function getAdmin(){
+    public function get(){
         $admins = User::with('roles')->findWhere(['name','=','Admin'])->get();
         return view('superadmin/admin',['admins' => $admins]);
     }
 
-    public function createAdmin(Request $request){
+    public function create(Request $request){
         User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -31,7 +31,12 @@ class AdminController extends Controller
         return redirect('/admin');
     }
 
-    public function editForm($id){
+    public function delete($id){
+        User::where('id','=',$id)->delete();
+        return redirect('/admin');
+    }
+
+    public function edit($id){
         $admin = User::findOrFail('id','=',$id);
 
         return view('superadmin/edit/admin',['admin' => $admin]);

@@ -10,12 +10,12 @@ use Hash;
 class MerchantController extends Controller
 {
     //
-    public function getMerchant(){
+    public function get(){
         $merchants = User::with('roles')->findWhere(['name','=','Merchant'])->get();
         return view('superadmin/merchant',['merchants' => $merchants]);
     }
 
-    public function makeMerchant(Request $request){
+    public function create(Request $request){
         User::create([
             'name' => $request->name,
             'address' => $request->address,
@@ -32,7 +32,7 @@ class MerchantController extends Controller
         return redirect('/merchant');
     }
 
-    public function editForm($id){
+    public function edit($id){
         $merchant = User::findOrFail('id','=',$id);
 
         return view('superadmin/edit/merchant',['merchant' => $merchant]);

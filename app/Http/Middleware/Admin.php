@@ -18,7 +18,7 @@ class Admin
     public function handle($request, Closure $next)
     {
         if(Auth::check()){
-            if(Auth::user()->role_id == 2){
+            if(Auth::user()->roles->name == "Admin" || Auth::user()->roles->name == "Super Admin"){
                 return $next($request);
             }
 

@@ -10,7 +10,7 @@ use Auth;
 class CategoryController extends Controller
 {
     //
-    public function getCategory(){
+    public function get(){
         $categories = Category::get();
         if(Auth::user()->roles->name == "Super Admin"){
             return view('superadmin/category',['categories' => $categories]);
@@ -20,19 +20,19 @@ class CategoryController extends Controller
         }
     }
 
-    public function makeCategory(Request $request){
+    public function create(Request $request){
         Category::create([
             'name' => $request->category_name,
         ]);
         return redirect('/category');
     }
 
-    public function deleteCategory($id){
+    public function delete($id){
         Category::where('id','=',$id)->delete();
         return redirect('/category');
     }
 
-    public function editForm($id){
+    public function edit($id){
         $Category = Category::findOrFail('id','=',$id);
 
         if(Auth::user()->roles->name == "Super Admin"){

@@ -11,7 +11,7 @@ use Auth;
 class ProductController extends Controller
 {
     //
-    public function getProduct(){
+    public function get(){
         $products = Product::get();
         if(Auth::user()->roles->name == "Super Admin"){
             return view('superadmin/product',['products' => $products]);
@@ -21,7 +21,7 @@ class ProductController extends Controller
         }
     }
 
-    public function makeProduct(Request $request){
+    public function create(Request $request){
         $image = time().'-'.'.'.$request->product_image->extension();
         $path =  $request->product_image->move(public_path('productimages'),$image);
 
@@ -57,7 +57,7 @@ class ProductController extends Controller
         return redirect('/product');
     }
 
-    public function editForm($id){
+    public function edit($id){
         $product = Product::findOrFail('id','=',$id);
         if(Auth::user()->roles->name == "Super Admin"){
             return view('superadmin/edit/product',['product' => $product]);
