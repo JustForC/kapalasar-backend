@@ -39,5 +39,9 @@ export default {
   }
 };
 </script>
+.white--text {
+  color: #FFFFFF !important;
+  caret-color: #FFFFFF !important;
+}
 
 <style></style>

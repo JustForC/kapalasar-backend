@@ -46,7 +46,7 @@ class AdminProductController extends Controller
         return redirect('/admin/product');
     }
     
-    public function editProduct(){
+    public function editProduct($id){
 
     }
 

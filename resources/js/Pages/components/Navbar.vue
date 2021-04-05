@@ -95,6 +95,20 @@
 
 <script>
 export default {
+  props : [
+    'check',
+    'user,'
+  ],
+  data(){
+    return{
+      isLoggedin : check,
+      nama: user.name,
+      menus: [
+        { icon: "mdi-account", title: "Account", router: "Account" },
+        { icon: "mdi-logout", title: "Keluar" }
+      ]
+    }
+  }
   
 };
 </script>
@@ -103,5 +117,10 @@ export default {
 @import 'vuetify/dist/vuetify.min.css';
 .mdi-card-search::before {
   color: #a6cb26;
+}
+
+.white--text {
+  color: #FFFFFF !important;
+  caret-color: #FFFFFF !important;
 }
 </style>

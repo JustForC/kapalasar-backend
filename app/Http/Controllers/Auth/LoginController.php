@@ -14,6 +14,19 @@ use Auth;
 class LoginController extends Controller
 {
     //
+    public function home(){
+        $check = Auth::check();
+        if($check == true){
+            $user = Auth::user();
+            return Inertia::render('View/Homepage',[
+                'check' => $check,
+                'user' => $user
+            ]);
+        }
+        return Inertia::render('View/Homepage',[
+            'check' => $check,
+        ]);
+    }
     public function loginForm(){
         return Inertia::render('View/Signin');
     }
@@ -35,7 +48,7 @@ class LoginController extends Controller
                 return "Merchant";
             }
             elseif(Auth::user()->role_id == 3){
-                return "User";
+                return redirect('/');
             }
         }
 

@@ -234,4 +234,9 @@ export default {
   border-width: 3px 0 0 0;
   max-width: 50%;
 }
+
+.white--text {
+  color: #FFFFFF !important;
+  caret-color: #FFFFFF !important;
+}
 </style>

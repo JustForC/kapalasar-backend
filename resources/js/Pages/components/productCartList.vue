@@ -137,4 +137,9 @@ export default {
 .title {
   color: #54595f;
 }
+
+.white--text {
+  color: #FFFFFF !important;
+  caret-color: #FFFFFF !important;
+}
 </style>

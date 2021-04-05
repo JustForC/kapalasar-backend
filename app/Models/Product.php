@@ -8,14 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-    protected $fillable= [
-        'product_name',
-        'product_price',
-        'product_cutprice',
-        'product_stock',
-        'product_description',
-        'product_category',
-        'product_image',
-        'product_finalprice',
-    ];
+    protected $guarded = [];
+
+    public function categories(){
+        return $this->belongsTo(Category::class);
+    }
+    public function flash_sales(){
+        return $this->hasMany(FlashSale::class);
+    }
+    public function carts(){
+        return $this->hasMany(Cart::class);
+    }
 }

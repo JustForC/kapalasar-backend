@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\AdminVoucherController;
 use App\Http\Controllers\Admin\AdminHomeController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\Merchant\UserMerchantController;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,8 +32,9 @@ use App\Http\Controllers\Merchant\UserMerchantController;
 // Authentication Route
 
 Route::get('/register',[RegisterController::class, 'registerForm']);
+Route::get('/',[LoginController::class, 'home']);
 Route::post('/register',[RegisterController::class, 'doRegister']);
-Route::get('/login',[LoginController::class, 'loginForm'])->name('login');
+Route::get('/login',[LoginController::class, 'loginForm']);
 Route::post('/login',[LoginController::class, 'doLogin']);
 Route::get('/logout',[LogoutController::class, 'doLogout']);
 
@@ -46,10 +48,12 @@ Route::group(['middleware' => 'admin', 'prefix' => 'admin'],function(){
     Route::get('/product',[AdminProductController::class, 'getProduct']);
     Route::post('/product',[AdminProductController::class, 'makeProduct']);
     Route::post('/product/{id}',[AdminProductController::class, 'deleteProduct']);
+    Route::post('/product/edit/{id}',[AdminProductController::class,'editProduct']);
     // Voucher
     Route::get('/voucher',[AdminProductController::class, 'getVoucher']);
     Route::post('/voucher',[AdminVoucherController::class, 'makeVoucher']);
     Route::post('/voucher/{id}',[AdminProductController::class, 'deleteVoucher']);
+    Route::post('/voucher/edit/{id}',[AdminProductController::class, 'editVoucher']);
 });
 
 // End Admin Route
@@ -63,14 +67,17 @@ Route::group(['middleware' => 'superadmin','prefix' => 'superadmin'],function(){
     Route::get('/admin',[AdminController::class, 'getAdmin']);
     Route::post('/admin',[AdminController::class, 'makeAdmin']);
     Route::post('/admin/{id}',[AdminController::class, 'deleteAdmin']);
+    Route::post('/admin/edit/{id}',[AdminController::class, 'editAdmin']);
     // Produk
     Route::get('/product',[ProductController::class, 'getProduct']);
     Route::post('/product',[ProductController::class, 'makeProduct']);
     Route::post('/product/{id}',[ProductController::class, 'deleteProduct']);
+    Route::post('/product/edit/{id}',[ProductController::class, 'editProduct']);
     // Voucher
     Route::get('/voucher',[VoucherController::class, 'getVoucher']);
     Route::post('/voucher',[VoucherController::class, 'makeVoucher']);
     Route::post('/voucher/{id}',[VoucherController::class, 'deleteVoucher']);
+    Route::post('/voucher/edit/{id}',[VoucherController::class, 'editVoucher']);
     // User
     Route::get('/user',[UserController::class, 'getUser']);
     Route::post('/user/{id}',[UserController::class, 'deleteUser']);
@@ -78,6 +85,7 @@ Route::group(['middleware' => 'superadmin','prefix' => 'superadmin'],function(){
     Route::get('/merchant',[MerchantController::class, 'getMerchant']);
     Route::post('/merchant',[MerchantController::class, 'registerMerchant']);
     Route::post('/merchant/{id}',[MerchantController::class, 'deleteMerchant']);
+    Route::post('/merchant/edit/{id}',[MerchantController::class, 'editMerchant']);
 });
 
 // End Super Admin Route
@@ -93,8 +101,14 @@ Route::group(['middleware' => 'merchant','prefix' => 'merchant'],function(){
 // User Route Without Merchant Code
 
 
-// User Route
+// User Route End
 
 // User Route With Merchant Code
 
-// 
+// User Route With Merchant End
+
+// Tidak Login
+// Route::get('/',function(){
+//     return Inertia::render('View/Homepage');
+// });
+// End Tidak Login

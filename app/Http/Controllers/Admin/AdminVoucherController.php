@@ -66,7 +66,7 @@ class AdminVoucherController extends Controller
         return redirect('/admin/voucher');
     }
 
-    public function editVoucher(){
+    public function editVoucher($id){
 
     }
 

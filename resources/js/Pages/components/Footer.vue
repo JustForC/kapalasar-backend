@@ -57,4 +57,8 @@ export default {};
 
 <style>
 @import 'vuetify/dist/vuetify.min.css';
+.white--text {
+  color: #FFFFFF !important;
+  caret-color: #FFFFFF !important;
+}
 </style>

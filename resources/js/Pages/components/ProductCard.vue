@@ -170,4 +170,8 @@ export default {
 .itemQty {
   width: 45px;
 }
+.white--text {
+  color: #FFFFFF !important;
+  caret-color: #FFFFFF !important;
+}
 </style>
