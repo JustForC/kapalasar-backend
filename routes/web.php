@@ -9,6 +9,7 @@ use App\Http\Controllers\Dashboard\MerchantController;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\TypeController;
 use App\Http\Controllers\Dashboard\VoucherController;
+use App\Http\Controllers\Dashboard\FlashController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,7 @@ use App\Http\Controllers\Dashboard\VoucherController;
 */
 
 Route::group(['middleware' => 'admin'],function(){
-    //voucher
+    // Voucher
     Route::get('/voucher',[VoucherController::class, 'get']);
     Route::post('/voucher',[VoucherController::class, 'create']);
     Route::post('/voucher/{id}',[VoucherController::class, 'delete']);
@@ -46,4 +47,25 @@ Route::group(['middleware' => 'admin'],function(){
     Route::post('/category/{id}',[CategoryController::class, 'delete']);
     Route::get('/category/{id}',[CategoryController::class, 'editForm']);
     Route::post('/category/edit',[CategoryController::class, 'doEdit']);
+    // Flash
+    Route::get('/flash',[FlashController::class, 'get']);
+    Route::post('/flash',[FlashController::class, 'create']);
+    Route::post('/flash/{id}',[FlashController::class, 'delete']);
+    Route::get('/flash/{id}',[FlashController::class, 'editForm']);
+    Route::post('/flash/edit',[FlashController::class, 'doEdit']);
+});
+
+Route::group(['middleware' => 'superadmin'],function(){
+    // Admin
+    Route::get('/admin',[AdminController::class, 'get']);
+    Route::post('/admin',[AdminController::class, 'create']);
+    Route::post('/admin/{id}',[AdminController::class, 'delete']);
+    Route::get('/admin/{id}',[AdminController::class, 'editForm']);
+    Route::post('/admin/edit',[AdminController::class, 'doEdit']);
+    // Merchant
+    Route::get('/merchant',[MerchantController::class, 'get']);
+    Route::post('/merchant',[MerchantController::class, 'create']);
+    Route::post('/merchant/{id}',[MerchantController::class, 'delete']);
+    Route::get('/merchant/{id}',[MerchantController::class, 'editForm']);
+    Route::post('/merchant/edit',[MerchantController::class, 'doEdit']);
 });

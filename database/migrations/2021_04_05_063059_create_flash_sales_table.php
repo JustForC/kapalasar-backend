@@ -17,6 +17,7 @@ class CreateFlashSalesTable extends Migration
             $table->id();
             $table->foreignId('flashes_id')->references('id')->on('flashes')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('products_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('image')->nullable();
             $table->integer('new_price');
             $table->integer('amount')->nullable();
             $table->timestamps();

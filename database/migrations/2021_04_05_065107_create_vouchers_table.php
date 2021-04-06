@@ -20,7 +20,6 @@ class CreateVouchersTable extends Migration
             $table->integer('amount')->nullable();
             $table->integer('value')->nullable();
             $table->integer('percent')->nullable();
-            $table->integer('charge')->nullable();
             $table->dateTime('start')->nullable();
             $table->dateTime('end')->nullable();
             $table->timestamps();
