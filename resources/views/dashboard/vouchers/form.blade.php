@@ -9,32 +9,36 @@
     </div>
     <div class="modal-body">
         <div class="form-group">
-            <label for="name" class="control-label">Title</label>
-            <input id="name" type="text" class="form-control" name="name" value="{{$model->name}}" placeholder="Name">
-        </div>
-        <div class="form-group">
-            <label for="desc" class="control-label">Description</label>
-            <textarea form ="form_modal" id="desc" class="form-control" name="desc" placeholder="Description">{{$model->desc}}</textarea>
-        </div>
-        <div class="form-group">
-            <label for="category" class="control-label">Category</label><br>
-            <select id="category" type="text" class="form-control" name="category">
-                <option value="0" selected="selected" disabled>Select Category</option>
-                
+            <label for="category" class="control-label">Jenis Voucher</label><br>
+            <select id="category" type="text" class="form-control" name="types_id">
+                @foreach($types as $type)
+                <option value="{{$type->id}}" >{{$type->name}}</option>
+                @endforeach
             </select>
         </div>
         <div class="form-group">
-            <label for="date" class="control-label">Date</label>
-            <input id="date" type="date" class="form-control" name="date" value="{{$model->date}}" placeholder="Date">
+            <label for="name" class="control-label">Nama Voucher</label>
+            <input id="name" type="text" class="form-control" name="name" value="{{$model->name}}" placeholder="Name">
         </div>
         <div class="form-group">
-            <label class="control-label">Time</label>
-            <input id="start" type="time" class="form-control" name="start" value="{{$model->start}}" placeholder="Time Start">
-            <input id="end" type="time" class="form-control" name="end" value="{{$model->end}}" placeholder="Time End">
+            <label for="amount" class="control-label">Jumlah Voucher</label>
+            <input id="amount" type="number" class="form-control" name="amount" value="{{$model->amount}}" placeholder="Amount">
         </div>
         <div class="form-group">
-            <label for="image" class="control-label">Image</label>
-            <input id="image" type="file" name="image">
+            <label for="value" class="control-label">Besar Potongan Voucher</label>
+            <input id="value" type="number" class="form-control" name="value" value="{{$model->value}}" placeholder="Value">
+        </div>
+        <div class="form-group">
+            <label for="percent" class="control-label">Persen Potongan Voucher</label>
+            <input id="percent" type="number" class="form-control" name="percent" value="{{$model->percent}}" placeholder="Percent">
+        </div>
+        <div class="form-group">
+            <label for="start" class="control-label">Waktu Mulai</label>
+            <input id="start" type="datetime-local" class="form-control" name="start" value="{{$model->start}}" placeholder="Start">
+        </div>
+        <div class="form-group">
+            <label for="end" class="control-label">Waktu Berakhir</label>
+            <input id="end" type="datetime-local" class="form-control" name="end" value="{{$model->end}}" placeholder="End">
         </div>
     </div>
     <div class="modal-footer">

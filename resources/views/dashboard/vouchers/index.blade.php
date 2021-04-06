@@ -32,9 +32,14 @@
       order: [[ 1, "asc" ]],
       columns: [
         {title: '#', data: 'DT_RowIndex', name: 'DT_RowIndex', orderable:false, width: '7.5%', className: 'dt-center'},
-        {title: 'Name', data: 'name', name: 'name', width: '30%', className: 'dt-head-center'},
-        {title: 'Description', data: 'desc', name: 'desc', width: '30%', className: 'dt-head-center'},
-        {title: 'User', data: 'users.name', name: 'users.name', width: '30%', className: 'dt-head-center'},
+        {title: 'ID', data: 'id', name: 'id', width: '10%', className: 'dt-head-center'},
+        {title: 'Nama', data: 'name', name: 'name', width: '10%', className: 'dt-head-center'},
+        {title: 'Jenis', data: 'types.name', name: 'types.name', width: '10%', className: 'dt-head-center'},
+        {title: 'Jumlah', data: 'amount', name: 'amount', width: '10%', className: 'dt-head-center'},
+        {title: 'Besar Potongan', data: 'value', name: 'value', width: '15%', className: 'dt-head-center'},
+        {title: 'Persen Potongan', data: 'percent', name: 'percent', width: '15%', className: 'dt-head-center'},
+        {title: 'Mulai', data: 'start', name: 'start', width: '15%', className: 'dt-head-center'},
+        {title: 'Berakhir', data: 'end', name: 'end', width: '15%', className: 'dt-head-center'},
         {title: 'Action', data: 'action', name: 'action', width: '12.5%', className: 'dt-center'},
       ],
     });

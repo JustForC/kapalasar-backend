@@ -76,7 +76,7 @@ class VoucherController extends Controller
         //
         $types = Type::get();
         $model = Voucher::findOrFail($id);
-        return view('dashboard/product/form',['model' => $model,'types' => $types]);
+        return view('dashboard/vouchers/form',['model' => $model,'types' => $types]);
     }
 
     /**
@@ -95,7 +95,6 @@ class VoucherController extends Controller
             'amount' => $request->amount,
             'value' => $request->value,
             'percent' => $request->percent,
-            'charge' => $request->charge,
             'start' => $request->start,
             'end' => $request->end,
         ]);
@@ -121,8 +120,8 @@ class VoucherController extends Controller
         return DataTables::of($model)
             ->addColumn('action', function($model){
             return '<div class="btn-group" role="group">
-                        <button type="button" href="'.route('product.edit', $model->id).'" class="btn btn-primary btn-sm modal-show edit" name="Edit '.$model->name.'" data-toggle="modal" data-target="#modal">Edit</button>
-                        <button type="button" href="'.route('product.delete', $model->id).'" class="btn btn-danger btn-sm delete" name="Delete '.$model->name.'">Delete</button>
+                        <button type="button" href="'.route('voucher.edit', $model->id).'" class="btn btn-primary btn-sm modal-show edit" name="Edit '.$model->name.'" data-toggle="modal" data-target="#modal">Edit</button>
+                        <button type="button" href="'.route('voucher.delete', $model->id).'" class="btn btn-danger btn-sm delete" name="Delete '.$model->name.'">Delete</button>
                     </div>';
             })
             ->addColumn('timeline', function($model){
