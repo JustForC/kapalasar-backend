@@ -17,6 +17,7 @@
           <span class="link-title">Dashboard</span>
         </a>
       </li>
+
       <li class="nav-item {{ request()->is('account/*') ? 'active' : '' }}">
         <a class="nav-link" data-toggle="collapse" href="#account" role="button" aria-expanded="{{ request()->is('account/*') ? 'true' : 'false' }}" aria-controls="account">
           <i class="link-icon" data-feather="user"></i>
@@ -37,16 +38,30 @@
           </ul>
         </div>
       </li>
-      <li class="nav-item {{ request()->is('product') ? 'active' : '' }}">
-        <a href="{{ url('product') }}" class="nav-link">
-          <i class="link-icon" data-feather="archive"></i>
-          <span class="link-title">Product</span>
+
+      <!--  -->
+      <li class="nav-item {{ request()->is('product/*') ? 'active' : '' }}">
+        <a class="nav-link" data-toggle="collapse" href="#product" role="button" aria-expanded="{{ request()->is('product/*') ? 'true' : 'false' }}" aria-controls="promotion">
+          <i class="link-icon fas fa-money-bill-wave-alt"></i>
+          <span class="link-title">product</span>
+          <i class="link-arrow" data-feather="chevron-down"></i>
         </a>
+        <div class="collapse " id="product">
+          <ul class="nav sub-menu">
+            <li class="nav-item">
+              <a href="{{ url('/product/category') }}" class="nav-link {{ request()->is('product/category') ? 'active' : '' }}">Category</a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ url('/product/item') }}" class="nav-link {{ request()->is('product/item') ? 'active' : '' }}">Item</a>
+            </li>
+          </ul>
+        </div>
       </li>
-      <li class="nav-item {{ request()->is('advertise') ? 'active' : '' }}">
-        <a href="{{ url('advertise') }}" class="nav-link">
+      <!--  -->
+      <li class="nav-item {{ request()->is('advertisement') ? 'active' : '' }}">
+        <a href="{{ url('advertisement') }}" class="nav-link">
           <i class="link-icon fas fa-ad"></i>
-          <span class="link-title">Advertise</span>
+          <span class="link-title">Advertisement</span>
         </a>
       </li>
       <li class="nav-item {{ request()->is('promotion/*') ? 'active' : '' }}">

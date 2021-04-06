@@ -94,14 +94,33 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         //
+        if($request->product_image == NULL){
+            $product = Product::findOrFail($id);
+
+            $model = Product::findOrFail($id)->update([
+                'name' => $request->name,
+                'categories_id' => $request->categories_id,
+                'unit' => $request->unit,
+                'stock' => $request->stock,
+                'price' => $request->price,
+                'discount_price' => $request->discount_price,
+                'image' => $product->image,
+            ]);
+
+            return response()->json($model);
+        }
+
+        $image = time().'-'.'.'.$request->product_image->extension();
+        $path =  $request->product_image->move(public_path('productimages'),$image);
+
         $model = Product::findOrFail($id)->update([
-            'name' => $request->product_name,
-            'unit' => $request->product_unit,
-            'stock' => $request->product_stock,
-            'price' => $request->product_price,
+            'name' => $request->name,
+            'categories_id' => $request->categories_id,
+            'unit' => $request->unit,
+            'stock' => $request->stock,
+            'price' => $request->price,
             'discount_price' => $request->discount_price,
             'image' => $path,
-            'categories_id' => $request->categories_id,
         ]);
 
         return response()->json($model);

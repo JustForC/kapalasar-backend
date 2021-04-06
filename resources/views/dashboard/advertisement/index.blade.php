@@ -11,8 +11,8 @@
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-baseline mb-4 mb-md-3">
-          <h6 class="card-title mb-0">Kategori</h6>
-          <button class="btn btn-primary modal-show" type="button" href="{{ route('flash.create') }}" name="Tambah Produk Baru" data-toggle="modal" data-target="#modal">+ Add New</button>
+          <h6 class="card-title mb-0">Advertisement</h6>
+          <button class="btn btn-primary modal-show" type="button" href="{{ route('advertisement.create') }}" name="Tambah Produk Baru" data-toggle="modal" data-target="#modal">+ Add New</button>
         </div>
         <div class="table-responsive">
           <table id="table" class="table hover" style="width:100%"></table>
@@ -28,13 +28,13 @@
     $('#table').DataTable({
       responsive: true,
       serverSide: true,
-      ajax: "{{ route('flash.data') }}",
+      ajax: "{{ route('advertisement.data') }}",
       order: [[ 1, "asc" ]],
       columns: [
         {title: '#', data: 'DT_RowIndex', name: 'DT_RowIndex', orderable:false, width: '7.5%', className: 'dt-center'},
-        {title: 'Name', data: 'flashes.name', name: 'flashes.name', width: '30%', className: 'dt-head-center'},
-        {title: 'Nama Produk', data: 'products.name', name: 'products.name', width: '30%', className: 'dt-head-center'},
-        {title: 'Harga Flash', data: 'new_price', name: 'new_price', width: '30%', className: 'dt-head-center'},
+        {title: 'ID Advertisement', data: 'id', name: 'name', width: '30%', className: 'dt-head-center'},
+        {title: 'Nama', data: 'name', name: 'name', width: '30%', className: 'dt-head-center'},
+        {title: 'Letak', data: 'path', name: 'path', width: '30%', className: 'dt-head-center'},
         {title: 'Action', data: 'action', name: 'action', width: '12.5%', className: 'dt-center'},
       ],
     });

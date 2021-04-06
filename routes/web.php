@@ -11,6 +11,7 @@ use App\Http\Controllers\Dashboard\TypeController;
 use App\Http\Controllers\Dashboard\VoucherController;
 use App\Http\Controllers\Dashboard\FlashController;
 use App\Http\Controllers\Dashboard\UserController;
+use App\Http\Controllers\Dashboard\AdvertisementController;
 use App\Http\Controllers\Auth\AuthenticationController;
 
 /*
@@ -57,24 +58,35 @@ Route::middleware('admin')->group(function(){
 
 });
 
-
 Route::prefix('product')->group(function(){
-    Route::get('/', [ProductController::class, 'index'])->name('product.index');
-    Route::get('create', [ProductController::class, 'create'])->name('product.create');
-    Route::post('store', [ProductController::class, 'store'])->name('product.store');
-    Route::get('edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
-    Route::put('update/{id}', [ProductController::class, 'update'])->name('product.update');
-    Route::delete('delete/{id}', [ProductController::class, 'destroy'])->name('product.delete');
-    Route::get('data', [ProductController::class, 'data'])->name('product.data');
+    Route::prefix('item')->group(function(){
+        Route::get('/', [ProductController::class, 'index'])->name('product.index');
+        Route::get('create', [ProductController::class, 'create'])->name('product.create');
+        Route::post('store', [ProductController::class, 'store'])->name('product.store');
+        Route::get('edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
+        Route::put('update/{id}', [ProductController::class, 'update'])->name('product.update');
+        Route::delete('delete/{id}', [ProductController::class, 'destroy'])->name('product.delete');
+        Route::get('data', [ProductController::class, 'data'])->name('product.data');
+    });
+    Route::prefix('category')->group(function(){
+        Route::get('/', [CategoryController::class, 'index'])->name('category.index');
+        Route::get('create', [CategoryController::class, 'create'])->name('category.create');
+        Route::post('store', [CategoryController::class, 'store'])->name('category.store');
+        Route::get('edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
+        Route::put('update/{id}', [CategoryController::class, 'update'])->name('category.update');
+        Route::delete('delete/{id}', [CategoryController::class, 'destroy'])->name('category.delete');
+        Route::get('data', [CategoryController::class, 'data'])->name('category.data');
+    });
 });
-Route::prefix('category')->group(function(){
-    Route::get('/', [CategoryController::class, 'index'])->name('category.index');
-    Route::get('create', [CategoryController::class, 'create'])->name('category.create');
-    Route::post('store', [CategoryController::class, 'store'])->name('category.store');
-    Route::get('edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
-    Route::put('update/{id}', [CategoryController::class, 'update'])->name('category.update');
-    Route::delete('delete/{id}', [CategoryController::class, 'destroy'])->name('category.delete');
-    Route::get('data', [CategoryController::class, 'data'])->name('category.data');
+
+Route::prefix('advertisement')->group(function(){
+    Route::get('/', [AdvertisementController::class, 'index'])->name('advertisement.index');
+    Route::get('create', [AdvertisementController::class, 'create'])->name('advertisement.create');
+    Route::post('store', [AdvertisementController::class, 'store'])->name('advertisement.store');
+    Route::get('edit/{id}', [AdvertisementController::class, 'edit'])->name('advertisement.edit');
+    Route::put('update/{id}', [AdvertisementController::class, 'update'])->name('advertisement.update');
+    Route::delete('delete/{id}', [AdvertisementController::class, 'destroy'])->name('advertisement.delete');
+    Route::get('data', [AdvertisementController::class, 'data'])->name('advertisement.data');
 });
 
 Route::prefix('promotion')->group(function(){
@@ -96,7 +108,7 @@ Route::prefix('promotion')->group(function(){
         Route::delete('delete/{id}', [TypeController::class, 'destroy'])->name('type.delete');
         Route::get('data', [TypeController::class, 'data'])->name('type.data');
     });
-    Route::prefix('flash')->group(function(){
+    Route::prefix('flash_sale')->group(function(){
         Route::get('/', [FlashController::class, 'index'])->name('flash.index');
         Route::get('create', [FlashController::class, 'create'])->name('flash.create');
         Route::post('store', [FlashController::class, 'store'])->name('flash.store');
@@ -107,6 +119,9 @@ Route::prefix('promotion')->group(function(){
     });
 });
 
+
+
+// Bagian laen
 Route::prefix('admin')->group(function(){
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
     Route::get('create', [AdminController::class, 'create'])->name('admin.create');
@@ -133,4 +148,8 @@ Route::prefix('user')->group(function(){
     Route::put('update/{id}', [UserController::class, 'update'])->name('user.update');
     Route::delete('delete/{id}', [UserController::class, 'destroy'])->name('user.delete');
     Route::get('data', [UserController::class, 'data'])->name('user.data');
+});
+
+Route::get('/',function(){
+    return view('/dashboard/index');
 });

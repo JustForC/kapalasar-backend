@@ -22,7 +22,7 @@
         </div>
         <div class="form-group">
             <label for="unit" class="control-label">Description</label>
-            <textarea form ="form_modal" id="unit" class="form-control" name="unit" placeholder="Unit" value = "{{$model->unit}}"></textarea>
+            <textarea form ="form_modal" id="unit" class="form-control" name="unit" placeholder="Unit" value = "{{$model->unit}}">"{{$model->unit}}"</textarea>
         </div>
         <div class="form-group">
             <label for="stock" class="control-label">Stok</label>

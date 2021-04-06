@@ -9,31 +9,28 @@
     </div>
     <div class="modal-body">
         <div class="form-group">
-            <label for="name" class="control-label">Title</label>
+            <label for="name" class="control-label">Nama</label>
             <input id="name" type="text" class="form-control" name="name" value="{{$model->name}}" placeholder="Name">
         </div>
         <div class="form-group">
-            <label for="desc" class="control-label">Description</label>
-            <textarea form ="form_modal" id="desc" class="form-control" name="desc" placeholder="Description">{{$model->desc}}</textarea>
-        </div>
-        <div class="form-group">
-            <label for="category" class="control-label">Category</label><br>
-            <select id="category" type="text" class="form-control" name="category">
-                <option value="0" selected="selected" disabled>Select Category</option>
-                
+            <label for="products_id" class="control-label">Pilih Product</label><br>
+            <select id="products_id" type="text" class="form-control" name="products_id">
+                @foreach($products as $product)
+                <option value="{{$product->id}}">{{$product->name}}</option>
+                @endforeach
             </select>
         </div>
         <div class="form-group">
-            <label for="date" class="control-label">Date</label>
-            <input id="date" type="date" class="form-control" name="date" value="{{$model->date}}" placeholder="Date">
+            <label for="new_price" class="control-label">Harga Flash</label>
+            <input id="new_price" type="number" class="form-control" name="new_price" value="{{$model->new_price}}" placeholder="Harga Flash">
         </div>
         <div class="form-group">
-            <label class="control-label">Time</label>
-            <input id="start" type="time" class="form-control" name="start" value="{{$model->start}}" placeholder="Time Start">
-            <input id="end" type="time" class="form-control" name="end" value="{{$model->end}}" placeholder="Time End">
+            <label class="control-label">Masa Berlaku</label>
+            <input id="start" type="datetime-local" class="form-control" name="start" value="{{$model->start}}" placeholder="Time Start">
+            <input id="end" type="datetime-local" class="form-control" name="end" value="{{$model->end}}" placeholder="Time End">
         </div>
         <div class="form-group">
-            <label for="image" class="control-label">Image</label>
+            <label for="image" class="control-label">Gambar Produk</label>
             <input id="image" type="file" name="image">
         </div>
     </div>
