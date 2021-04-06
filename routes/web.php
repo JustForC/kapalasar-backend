@@ -84,3 +84,7 @@ Route::post('/register',[AuthenticationController::class, 'doRegister']);
 Route::get('/login',[AuthenticationController::class, 'loginForm']);
 Route::post('/login',[AuthenticationController::class, 'doLogin']);
 Route::get('/logout',[AuthenticationController::class, 'doLogout']);
+
+Route::get('/',function(){
+    return view('admin/index');
+});
