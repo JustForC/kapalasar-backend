@@ -38,9 +38,8 @@
         {title: 'Jumlah', data: 'amount', name: 'amount', width: '10%', className: 'dt-head-center'},
         {title: 'Besar Potongan', data: 'value', name: 'value', width: '15%', className: 'dt-head-center'},
         {title: 'Persen Potongan', data: 'percent', name: 'percent', width: '15%', className: 'dt-head-center'},
-        {title: 'Mulai', data: 'start', name: 'start', width: '15%', className: 'dt-head-center'},
-        {title: 'Berakhir', data: 'end', name: 'end', width: '15%', className: 'dt-head-center'},
         {title: 'Action', data: 'action', name: 'action', width: '12.5%', className: 'dt-center'},
+        {title: 'Timeline',data: 'timeline', name: 'timeline', width: '12.5%', className: 'dt-center'},
       ],
     });
 

@@ -11,39 +11,34 @@ use App\Models\Role;
 
 class AdminController extends Controller
 {
-    //
-    public function get(){
-        $admins = User::with('roles')->findWhere(['name','=','Admin'])->get();
-        return view('superadmin/admin',['admins' => $admins]);
+    public function index()
+    {
+        //
+        return view('dashboard/admins/index');
     }
 
-    public function create(Request $request){
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'phone' => $request->phone,
-            'address' => $request->address,
-            'job' => "Admin",
-            'roles_id' => 2,
-        ]);
-        
-        return redirect('/admin');
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+        $model = new User();
+        return view('dashboard/admins/form',['model' => $model]);
     }
 
-    public function delete($id){
-        User::where('id','=',$id)->delete();
-        return redirect('/admin');
-    }
-
-    public function edit($id){
-        $admin = User::findOrFail('id','=',$id);
-
-        return view('superadmin/edit/admin',['admin' => $admin]);
-    }
-
-    public function doEdit(Request $request){
-        User::where('id','=',$request->id)->update([
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+        $model = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
@@ -52,6 +47,83 @@ class AdminController extends Controller
             'roles_id' => 2,
         ]);
 
-        return redirect('/admin');
+        return response()->json($model);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+        $model = User::findOrFail($id);
+        return view('dashboard/admins/form',['model' => $model]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+        $model = User::findOrFail($id)->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'job' => "Admin",
+            'roles_id' => 2,
+        ]);
+
+        return response()->json($model);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+        $model = User::findOrFail($id)->delete();
+        return response()->json($model);
+    }
+
+    public function data(){
+        $model = User::get();
+        return DataTables::of($model)
+            ->addColumn('action', function($model){
+            return '<div class="btn-group" role="group">
+                        <button type="button" href="'.route('admin.edit', $model->id).'" class="btn btn-primary btn-sm modal-show edit" name="Edit '.$model->name.'" data-toggle="modal" data-target="#modal">Edit</button>
+                        <button type="button" href="'.route('admin.delete', $model->id).'" class="btn btn-danger btn-sm delete" name="Delete '.$model->name.'">Delete</button>
+                    </div>';
+            })
+            ->addColumn('timeline', function($model){
+                return date('d M Y', strtotime($model->date)).' '.date('H:i', strtotime($model->start)).' - '.date('H:i', strtotime($model->end));
+            })
+            ->addIndexColumn()
+            ->removeColumn([])
+            ->rawColumns([])
+            ->make(true);
     }
 }

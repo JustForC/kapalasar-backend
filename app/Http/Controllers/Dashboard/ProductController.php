@@ -47,13 +47,13 @@ class ProductController extends Controller
         $path =  $request->product_image->move(public_path('productimages'),$image);
 
         $model = Product::create([
-            'name' => $request->product_name,
-            'unit' => $request->product_unit,
-            'stock' => $request->product_stock,
-            'price' => $request->product_price,
+            'name' => $request->name,
+            'categories_id' => $request->categories_id,
+            'unit' => $request->unit,
+            'stock' => $request->stock,
+            'price' => $request->price,
             'discount_price' => $request->discount_price,
             'image' => $path,
-            'categories_id' => $request->categories_id,
         ]);
 
         return response()->json($model);
@@ -81,7 +81,7 @@ class ProductController extends Controller
         //
         $categories = Category::get();
         $model = Product::findOrFail($id);
-        return view('dashboard/product/form',['model' => $model,'categories' => $categories]);
+        return view('dashboard/products/form',['model' => $model,'categories' => $categories]);
     }
 
     /**
@@ -121,7 +121,7 @@ class ProductController extends Controller
     }
 
     public function data(){
-        $model = Product::get();
+        $model = Product::with('categories')->get();
         return DataTables::of($model)
             ->addColumn('action', function($model){
             return '<div class="btn-group" role="group">

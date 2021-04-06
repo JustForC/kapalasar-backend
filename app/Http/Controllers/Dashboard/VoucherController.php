@@ -116,7 +116,7 @@ class VoucherController extends Controller
     }
 
     public function data(){
-        $model = Voucher::get();
+        $model = Voucher::with('types')->get();
         return DataTables::of($model)
             ->addColumn('action', function($model){
             return '<div class="btn-group" role="group">
