@@ -58,7 +58,10 @@
         <div class="collapse " id="promotion">
           <ul class="nav sub-menu">
             <li class="nav-item">
-              <a href="{{ url('/promotion/voucher') }}" class="nav-link {{ request()->is('promotion/voucher') ? 'active' : '' }}">Voucher</a>
+              <a href="{{ url('/promotion/type') }}" class="nav-link {{ request()->is('promotion/type') ? 'active' : '' }}">Tipe Voucher</a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ url('/promotion/voucher') }}" class="nav-link {{ request()->is('promotion/type') ? 'active' : '' }}">Voucher</a>
             </li>
             <li class="nav-item">
               <a href="{{ url('/promotion/flash_sale') }}" class="nav-link {{ request()->is('promotion/flash_sale') ? 'active' : '' }}">Flash Sale</a>

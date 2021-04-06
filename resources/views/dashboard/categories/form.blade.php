@@ -9,32 +9,8 @@
     </div>
     <div class="modal-body">
         <div class="form-group">
-            <label for="name" class="control-label">Title</label>
+            <label for="name" class="control-label">Jenis Kategori</label>
             <input id="name" type="text" class="form-control" name="name" value="{{$model->name}}" placeholder="Name">
-        </div>
-        <div class="form-group">
-            <label for="desc" class="control-label">Description</label>
-            <textarea form ="form_modal" id="desc" class="form-control" name="desc" placeholder="Description">{{$model->desc}}</textarea>
-        </div>
-        <div class="form-group">
-            <label for="category" class="control-label">Category</label><br>
-            <select id="category" type="text" class="form-control" name="category">
-                <option value="0" selected="selected" disabled>Select Category</option>
-                
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="date" class="control-label">Date</label>
-            <input id="date" type="date" class="form-control" name="date" value="{{$model->date}}" placeholder="Date">
-        </div>
-        <div class="form-group">
-            <label class="control-label">Time</label>
-            <input id="start" type="time" class="form-control" name="start" value="{{$model->start}}" placeholder="Time Start">
-            <input id="end" type="time" class="form-control" name="end" value="{{$model->end}}" placeholder="Time End">
-        </div>
-        <div class="form-group">
-            <label for="image" class="control-label">Image</label>
-            <input id="image" type="file" name="image">
         </div>
     </div>
     <div class="modal-footer">

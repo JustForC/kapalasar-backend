@@ -39,7 +39,7 @@ class CategoryController extends Controller
     {
         //
         $model = Category::create([
-            'name' => $request->category_name,
+            'name' => $request->name,
         ]);
 
         return response()->json($model);
@@ -66,7 +66,7 @@ class CategoryController extends Controller
     {
         //
         $model = Category::findOrFail($id);
-        return view('dashboard/product/form',['model' => $model]);
+        return view('dashboard/categories/form',['model' => $model]);
     }
 
     /**
@@ -80,7 +80,7 @@ class CategoryController extends Controller
     {
         //
         $model = Category::findOrFail($id)->update([
-            'name' => $request->category_name,
+            'name' => $request->name,
         ]);
 
         return response()->json($model);
@@ -104,8 +104,8 @@ class CategoryController extends Controller
         return DataTables::of($model)
             ->addColumn('action', function($model){
             return '<div class="btn-group" role="group">
-                        <button type="button" href="'.route('product.edit', $model->id).'" class="btn btn-primary btn-sm modal-show edit" name="Edit '.$model->name.'" data-toggle="modal" data-target="#modal">Edit</button>
-                        <button type="button" href="'.route('product.delete', $model->id).'" class="btn btn-danger btn-sm delete" name="Delete '.$model->name.'">Delete</button>
+                        <button type="button" href="'.route('category.edit', $model->id).'" class="btn btn-primary btn-sm modal-show edit" name="Edit '.$model->name.'" data-toggle="modal" data-target="#modal">Edit</button>
+                        <button type="button" href="'.route('category.delete', $model->id).'" class="btn btn-danger btn-sm delete" name="Delete '.$model->name.'">Delete</button>
                     </div>';
             })
             ->addColumn('timeline', function($model){

@@ -7,51 +7,40 @@ use Illuminate\Http\Request;
 use App\Models\Voucher;
 use App\Models\Type;
 use Auth;
+use DataTables;
 
 class VoucherController extends Controller
 {
     //
-    public function get(){
-        $vouchers = Voucher::get();
-        if(Auth::user()->roles->name == "Super Admin"){
-            return view('superadmin/voucher',['vouchers' => $vouchers]);
-        }
-        elseif(Auth::user()->roles->name == "Admin"){
-            return view('admin/voucher',['vouchers' => $vouchers]);
-        }
+    public function index()
+    {
+        //
+        return view('dashboard/vouchers/index');
     }
 
-    public function create(Request $request){
-        Voucher::create([
-            'types_id' => $request->types_id,
-            'name' => $request->name,
-            'amount' => $request->amount,
-            'value' => $request->value,
-            'percent' => $request->percent,
-            'charge' => $request->charge,
-            'start' => $request->start,
-            'end' => $request->end,
-        ]);
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+        $types = Type::get();
+        $model = new Voucher();
+        return view('dashboard/vouchers/form',['model' => $model,'types' => $types]);
     }
 
-    public function delete($id){
-        Voucher::where('id','=',$id)->delete();
-        return redirect('/voucher');
-    }
-
-    public function edit($id){
-        $voucher = Voucher::findOrFail('id','=',$id);
-
-        if(Auth::user()->roles->name == "Super Admin"){
-            return view('superadmin/edit/voucher',['voucher' => $voucher]);
-        }
-        elseif(Auth::user()->roles->name == "Admin"){
-            return view('admin/edit/voucher',['voucher' => $voucher]);
-        }
-    }
-
-    public function doEdit(Request $request){
-        Voucher::where('id','=',$request->id)->update([
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+        $model = Voucher::create([
             'types_id' => $request->types_id,
             'name' => $request->name,
             'amount' => $request->amount,
@@ -62,6 +51,86 @@ class VoucherController extends Controller
             'end' => $request->end,
         ]);
 
-        return redirect('/voucher');
+        return response()->json($model);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+        $types = Type::get();
+        $model = Voucher::findOrFail($id);
+        return view('dashboard/product/form',['model' => $model,'types' => $types]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+        $model = Voucher::findOrFail($id)->update([
+            'types_id' => $request->types_id,
+            'name' => $request->name,
+            'amount' => $request->amount,
+            'value' => $request->value,
+            'percent' => $request->percent,
+            'charge' => $request->charge,
+            'start' => $request->start,
+            'end' => $request->end,
+        ]);
+
+        return response()->json($model);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+        $model = Voucher::findOrFail($id)->delete();
+        return response()->json($model);
+    }
+
+    public function data(){
+        $model = Voucher::get();
+        return DataTables::of($model)
+            ->addColumn('action', function($model){
+            return '<div class="btn-group" role="group">
+                        <button type="button" href="'.route('product.edit', $model->id).'" class="btn btn-primary btn-sm modal-show edit" name="Edit '.$model->name.'" data-toggle="modal" data-target="#modal">Edit</button>
+                        <button type="button" href="'.route('product.delete', $model->id).'" class="btn btn-danger btn-sm delete" name="Delete '.$model->name.'">Delete</button>
+                    </div>';
+            })
+            ->addColumn('timeline', function($model){
+                return date('d M Y', strtotime($model->date)).' '.date('H:i', strtotime($model->start)).' - '.date('H:i', strtotime($model->end));
+            })
+            ->addIndexColumn()
+            ->removeColumn([])
+            ->rawColumns([])
+            ->make(true);
     }
 }
