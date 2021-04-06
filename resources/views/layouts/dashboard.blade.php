@@ -40,7 +40,7 @@
     <script src="/assets/plugins/feather-icons/feather.min.js"></script>
     <script src="/assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/assets/js/template.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="/assets/DataTables/DataTables-1.10.23/js/jquery.dataTables.min.js"></script>
     <script src="/assets/DataTables/DataTables-1.10.23/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>

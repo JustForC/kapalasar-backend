@@ -11,8 +11,8 @@
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-baseline mb-4 mb-md-3">
-          <h6 class="card-title mb-0">PRODUK</h6>
-          <button class="btn btn-primary modal-show" type="button" href="" name="Tambah Produk Baru" data-toggle="modal" data-target="#modal">+ Add New</button>
+          <h6 class="card-title mb-0">Kategori</h6>
+          <button class="btn btn-primary modal-show" type="button" href="{{ route('category.create') }}" name="Tambah Produk Baru" data-toggle="modal" data-target="#modal">+ Add New</button>
         </div>
         <div class="table-responsive">
           <table id="table" class="table hover" style="width:100%"></table>
@@ -28,7 +28,7 @@
     $('#table').DataTable({
       responsive: true,
       serverSide: true,
-      ajax: "{{ route('product.data') }}",
+      ajax: "{{ route('category.data') }}",
       order: [[ 1, "asc" ]],
       columns: [
         {title: '#', data: 'DT_RowIndex', name: 'DT_RowIndex', orderable:false, width: '7.5%', className: 'dt-center'},

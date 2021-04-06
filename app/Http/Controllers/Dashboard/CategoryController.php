@@ -6,46 +6,114 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use Auth;
+use DataTables;
 
 class CategoryController extends Controller
 {
     //
-    public function get(){
-        $categories = Category::get();
-        if(Auth::user()->roles->name == "Super Admin"){
-            return view('superadmin/category',['categories' => $categories]);
-        }
-        elseif(Auth::user()->roles->name == "Admin"){
-            return view('admin/category',['categories' => $categories]);
-        }
+    public function index()
+    {
+        //
+        return view('dashboard/categories/index');
     }
 
-    public function create(Request $request){
-        Category::create([
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+        $model = new Category();
+        return view('dashboard/categories/form',['model' => $model]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+        $model = Category::create([
             'name' => $request->category_name,
         ]);
-        return redirect('/category');
+
+        return response()->json($model);
     }
 
-    public function delete($id){
-        Category::where('id','=',$id)->delete();
-        return redirect('/category');
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
     }
 
-    public function edit($id){
-        $Category = Category::findOrFail('id','=',$id);
-
-        if(Auth::user()->roles->name == "Super Admin"){
-            return view('superadmin/edit/category',['category' => $category]);
-        }
-        elseif(Auth::user()->roles->name == "Admin"){
-            return view('admin/edit/category',['category' => $category]);
-        }
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+        $model = Category::findOrFail($id);
+        return view('dashboard/product/form',['model' => $model]);
     }
 
-    public function doEdit(Request $request){
-        Category::where('id','=',$request->category_id)
-                ->update(['name' => $request->category_name]);
-        return redirect('/category');
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+        $model = Category::findOrFail($id)->update([
+            'name' => $request->category_name,
+        ]);
+
+        return response()->json($model);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+        $model = Category::findOrFail($id)->delete();
+        return response()->json($model);
+    }
+
+    public function data(){
+        $model = Category::get();
+        return DataTables::of($model)
+            ->addColumn('action', function($model){
+            return '<div class="btn-group" role="group">
+                        <button type="button" href="'.route('product.edit', $model->id).'" class="btn btn-primary btn-sm modal-show edit" name="Edit '.$model->name.'" data-toggle="modal" data-target="#modal">Edit</button>
+                        <button type="button" href="'.route('product.delete', $model->id).'" class="btn btn-danger btn-sm delete" name="Delete '.$model->name.'">Delete</button>
+                    </div>';
+            })
+            ->addColumn('timeline', function($model){
+                return date('d M Y', strtotime($model->date)).' '.date('H:i', strtotime($model->start)).' - '.date('H:i', strtotime($model->end));
+            })
+            ->addIndexColumn()
+            ->removeColumn([])
+            ->rawColumns([])
+            ->make(true);
     }
 }

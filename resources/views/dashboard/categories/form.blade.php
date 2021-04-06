@@ -1,4 +1,4 @@
-<form id="form_modal" class="form" method="POST" action="{{ $model->exists ? route('event.update', $model->id) : route('event.store') }}" enctype="multipart/form-data">
+<form id="form_modal" class="form" method="POST" action="{{ $model->exists ? route('category.update', $model->id) : route('category.store') }}" enctype="multipart/form-data">
     @csrf {{ method_field($model->exists ? 'PUT' : 'POST') }}
 
     <div class="modal-header">
@@ -20,9 +20,7 @@
             <label for="category" class="control-label">Category</label><br>
             <select id="category" type="text" class="form-control" name="category">
                 <option value="0" selected="selected" disabled>Select Category</option>
-                @foreach($categories as $category)
-                <option value="{{$category->id}}" @if($category->id == $model->categories_id) selected="selected" @endif>{{$category->name}}</option>
-                @endforeach
+                
             </select>
         </div>
         <div class="form-group">
