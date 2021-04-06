@@ -4,18 +4,23 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Checkout;
+use App\Models\User;
+use App\Models\Cost;
 use App\Models\Voucher;
-use App\Models\Type;
-use Auth;
 use DataTables;
 
-class VoucherController extends Controller
+class TransactionController extends Controller
 {
-    //
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         //
-        return view('dashboard/vouchers/index');
+        return view('dashboard/transactions/index');
     }
 
     /**
@@ -26,9 +31,10 @@ class VoucherController extends Controller
     public function create()
     {
         //
-        $types = Type::get();
-        $model = new Voucher();
-        return view('dashboard/vouchers/form',['model' => $model,'types' => $types]);
+        $vouchers = Voucher::get();
+        $users = User::get();
+        $model = new Checkout();
+        return view('dashboard/transactions/form',['model' => $model,'users' => $users,'vouchers'=>$vouchers]);
     }
 
     /**
@@ -40,14 +46,12 @@ class VoucherController extends Controller
     public function store(Request $request)
     {
         //
-        $model = Voucher::create([
-            'types_id' => $request->types_id,
-            'name' => $request->name,
-            'amount' => $request->amount,
-            'value' => $request->value,
-            'percent' => $request->percent,
-            'start' => $request->start,
-            'end' => $request->end,
+        $model = Checkout::create([
+            'users_id' => $request->users_id,
+            'vouchers_id'=> $request->vouchers_id,
+            'total'=> $request->total,
+            'status'=> $request->status,
+
         ]);
 
         return response()->json($model);
@@ -73,9 +77,10 @@ class VoucherController extends Controller
     public function edit($id)
     {
         //
-        $types = Type::get();
-        $model = Voucher::findOrFail($id);
-        return view('dashboard/vouchers/form',['model' => $model,'types' => $types]);
+        $vouchers = Voucher::get();
+        $users = User::get();
+        $model = Checkout::findOrFail($id);
+        return view('dashboard/transactions/form',['model' => $model,'users' => $users,'vouchers'=>$vouchers]);
     }
 
     /**
@@ -88,14 +93,11 @@ class VoucherController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $model = Voucher::findOrFail($id)->update([
-            'types_id' => $request->types_id,
-            'name' => $request->name,
-            'amount' => $request->amount,
-            'value' => $request->value,
-            'percent' => $request->percent,
-            'start' => $request->start,
-            'end' => $request->end,
+        $model = Checkout::findOrFail($id)->update([
+            'users_id' => $request->users_id,
+            'vouchers_id'=> $request->vouchers_id,
+            'total'=> $request->total,
+            'status'=> $request->status,
         ]);
 
         return response()->json($model);
@@ -110,17 +112,19 @@ class VoucherController extends Controller
     public function destroy($id)
     {
         //
-        $model = Voucher::findOrFail($id)->delete();
+        $model = Checkout::findOrFail($id)->delete();
+
         return response()->json($model);
+
     }
 
     public function data(){
-        $model = Voucher::with('types')->get();
+        $model = Checkout::with('users','vouchers')->get();
         return DataTables::of($model)
             ->addColumn('action', function($model){
             return '<div class="btn-group" role="group">
-                        <button type="button" href="'.route('voucher.edit', $model->id).'" class="btn btn-primary btn-sm modal-show edit" name="Edit '.$model->name.'" data-toggle="modal" data-target="#modal">Edit</button>
-                        <button type="button" href="'.route('voucher.delete', $model->id).'" class="btn btn-danger btn-sm delete" name="Delete '.$model->name.'">Delete</button>
+                        <button type="button" href="'.route('transaction.edit', $model->id).'" class="btn btn-primary btn-sm modal-show edit" name="Edit '.$model->name.'" data-toggle="modal" data-target="#modal">Edit</button>
+                        <button type="button" href="'.route('transaction.delete', $model->id).'" class="btn btn-danger btn-sm delete" name="Delete '.$model->name.'">Delete</button>
                     </div>';
             })
             ->addColumn('timeline', function($model){

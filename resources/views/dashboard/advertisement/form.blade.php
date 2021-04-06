@@ -13,12 +13,14 @@
             <input id="name" type="text" class="form-control" name="name" value="{{$model->name}}" placeholder="Name">
         </div>
     </div>
-    <div class="modal-body">
-        <div class="form-group">
-            <label for="path" class="control-label">Posisi Iklan</label>
-            <input id="path" type="text" class="form-control" name="path" value="{{$model->path}}" placeholder="Posisi Iklan">
+    <div class="form-group">
+            <label for="path" class="control-label">Kategori</label><br>
+            <select id="path" type="text" class="form-control" name="path">
+                <option value="Atas">Diatas</option>
+                <option value="Bawah">Dibawah</option>
+                <option value="FlashSale">Flash Sale</option>
+            </select>
         </div>
-    </div>
     <div class="form-group">
             <label for="image" class="control-label">Gambar Produk</label>
             <input id="image" type="file" name="image">

@@ -10,6 +10,8 @@ use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\TypeController;
 use App\Http\Controllers\Dashboard\VoucherController;
 use App\Http\Controllers\Dashboard\FlashController;
+use App\Http\Controllers\Dashboard\TransactionController;
+use App\Http\Controllers\Dashboard\HistoryController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\AdvertisementController;
 use App\Http\Controllers\Auth\AuthenticationController;
@@ -119,6 +121,25 @@ Route::prefix('promotion')->group(function(){
     });
 });
 
+Route::prefix('transaction')->group(function(){
+    Route::get('/', [TransactionController::class, 'index'])->name('transaction.index');
+    Route::get('create', [TransactionController::class, 'create'])->name('transaction.create');
+    Route::post('store', [TransactionController::class, 'store'])->name('transaction.store');
+    Route::get('edit/{id}', [TransactionController::class, 'edit'])->name('transaction.edit');
+    Route::put('update/{id}', [TransactionController::class, 'update'])->name('transaction.update');
+    Route::delete('delete/{id}', [TransactionController::class, 'destroy'])->name('transaction.delete');
+    Route::get('data', [TransactionController::class, 'data'])->name('transaction.data');
+});
+
+Route::prefix('history')->group(function(){
+    Route::get('/', [HistoryController::class, 'index'])->name('history.index');
+    Route::get('create', [HistoryController::class, 'create'])->name('history.create');
+    Route::post('store', [HistoryController::class, 'store'])->name('history.store');
+    Route::get('edit/{id}', [HistoryController::class, 'edit'])->name('history.edit');
+    Route::put('update/{id}', [HistoryController::class, 'update'])->name('history.update');
+    Route::delete('delete/{id}', [HistoryController::class, 'destroy'])->name('history.delete');
+    Route::get('data', [HistoryController::class, 'data'])->name('history.data');
+});
 
 
 // Bagian laen

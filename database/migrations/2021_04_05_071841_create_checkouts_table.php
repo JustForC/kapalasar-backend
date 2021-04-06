@@ -18,10 +18,11 @@ class CreateCheckoutsTable extends Migration
             $table->foreignId('users_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('vouchers_id')->references('id')->on('vouchers')->onUpdate('cascade')->onDelete('cascade');
             $table->bigInteger('total');
-            $table->string('invoice');
-            $table->dateTime('date_invoice');
-            $table->string('receipt');
-            $table->dateTime('date_receipt');
+            $table->integer('status');
+            $table->string('invoice')->nullable();
+            $table->dateTime('date_invoice')->nullable();
+            $table->string('receipt')->nullable();
+            $table->dateTime('date_receipt')->nullable();
             $table->timestamps();
         });
     }
