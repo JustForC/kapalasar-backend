@@ -10,6 +10,8 @@ use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\TypeController;
 use App\Http\Controllers\Dashboard\VoucherController;
 use App\Http\Controllers\Dashboard\FlashController;
+use App\Http\Controllers\Dashboard\UserController;
+use App\Http\Controllers\Auth\AuthenticationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,4 +70,17 @@ Route::group(['middleware' => 'superadmin'],function(){
     Route::post('/merchant/{id}',[MerchantController::class, 'delete']);
     Route::get('/merchant/{id}',[MerchantController::class, 'editForm']);
     Route::post('/merchant/edit',[MerchantController::class, 'doEdit']);
+    // User
+    Route::get('/user',[UserController::class, 'get']);
+    Route::post('/user',[UserController::class, 'create']);
+    Route::post('/user/{id}',[UserController::class, 'delete']);
+    Route::get('/user/{id}',[UserController::class, 'editForm']);
+    Route::post('/user/edit',[UserController::class, 'doEdit']);
 });
+
+// Authentication
+Route::get('/register',[AuthenticationController::class, 'registerForm']);
+Route::post('/register',[AuthenticationController::class, 'doRegister']);
+Route::get('/login',[AuthenticationController::class, 'loginForm']);
+Route::post('/login',[AuthenticationController::class, 'doLogin']);
+Route::get('/logout',[AuthenticationController::class, 'doLogout']);
