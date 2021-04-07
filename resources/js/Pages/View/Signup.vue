@@ -1,4 +1,5 @@
 <template>
+  <v-app>
   <div>
     <navbar />
     <div class="my-3">
@@ -36,14 +37,15 @@
                         Daftar Di Kapalasar
                       </h3>
                       <div class="pt-5">
-                        <v-form action="/register" method="post">
+
+
+                        <!-- <v-form action="/register" method="post"> -->
+                        <form @submit.prevent="submit">
                         <input type="hidden" name="_token" :value="csrf">
                           <div>
-                            <span class="label font-weight-medium"
-                              >Nama Lengkap</span
-                            >
+                            <span class="label font-weight-medium">Nama Lengkap</span>
                             <v-text-field
-                              v-model="name"
+                              v-model="form.name"
                               :rules="[rules.required]"
                               placeholder="Nama Lengkap"
                               name = "name"
@@ -52,7 +54,7 @@
                             ></v-text-field>
                             <span class="label font-weight-medium">Email</span>
                             <v-text-field
-                              v-model="email"
+                              v-model="form.email"
                               :rules="[rules.required, rules.email]"
                               placeholder="Email"
                               name = "email"
@@ -63,85 +65,20 @@
                               >Nomor Telepon</span
                             >
                             <v-text-field
-                              v-model="telepon"
+                              v-model="form.phone"
                               :rules="[rules.required, rules.onlyNum]"
                               placeholder="Nomor Telepon"
-                              name = "telephone"
+                              name = "phone"
                               outlined
                               dense
                             ></v-text-field>
                             <v-row>
-                              <v-col class="">
-                                <span class="label font-weight-medium"
-                                  >Usia</span
-                                >
-                                <v-text-field
-                                  v-model="usia"
-                                  :rules="[rules.required, rules.onlyNum]"
-                                  placeholder="Usia"
-                                  name = "age"
-                                  outlined
-                                  dense
-                                ></v-text-field>
-                              </v-col>
-                              <v-col class="">
-                                <span class="label font-weight-medium"
-                                  >Pekerjaan</span
-                                >
-                                <v-text-field
-                                  v-model="pekerjaan"
-                                  :rules="[rules.required]"
-                                  placeholder="Pekerjaan"
-                                  name = "job"
-                                  outlined
-                                  dense
-                                ></v-text-field>
-                              </v-col>
-                            </v-row>
-                            <span class="label font-weight-medium">Alamat</span>
-                            <v-text-field
-                              v-model="alamat"
-                              :rules="[rules.required]"
-                              placeholder="Alamat"
-                              name = "address"
-                              outlined
-                              dense
-                            ></v-text-field>
-                            <v-row>
-                              <v-col class="">
-                                <span class="label font-weight-medium"
-                                  >Kelurahan</span
-                                >
-                                <v-text-field
-                                  :items="kelurahan"
-                                  v-model="kelurahan"
-                                  placeholder="Kelurahan"
-                                  dense
-                                  name = "district"
-                                  outlined
-                                  :rules="[rules.required]"
-                                ></v-text-field>
-                              </v-col>
-                              <v-col class="">
-                                <span class="label font-weight-medium"
-                                  >Kecamatan</span
-                                >
-                                <v-text-field
-                                  :items="kecamatan"
-                                  v-model="kecamatan"
-                                  placeholder="Kecamatan"
-                                  dense
-                                  name = "subdistrict"
-                                  outlined
-                                  :rules="[rules.required]"
-                                ></v-text-field>
-                              </v-col>
                             </v-row>
                             <span class="label font-weight-medium"
                               >Password</span
                             >
                             <v-text-field
-                              v-model="password"
+                              v-model="form.password"
                               :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
                               :rules="[rules.required, rules.min]"
                               :type="show ? 'text' : 'password'"
@@ -156,7 +93,8 @@
                           <div class="pb-3 text-center">
                             <v-btn type="submit" color="#a6cb26" dark>Daftar</v-btn>
                           </div>
-                        </v-form>
+                        </form>
+                        <!-- </v-form> -->
                         <div class="">
                           Punya akun?
                           <a href="/login">
@@ -175,6 +113,7 @@
     </div>
     <Footer />
   </div>
+  </v-app>
 </template>
 
 <script>
@@ -186,16 +125,13 @@ export default {
   data() {
     return {
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+      form: this.$inertia.form({
+          name: '',
+          email: '',
+          phone: '',
+          password: '',
+      }),
       show: false,
-      name: "",
-      email: "",
-      telepon: "",
-      usia: "",
-      pekerjaan: "",
-      alamat: "",
-      kelurahan: "",
-      kecamatan: "",
-      password: "",
       rules: {
         required: value => !!value || "Harus diisi",
         min: v => v.length >= 8 || "Minimal 8 karakter",
@@ -209,6 +145,13 @@ export default {
         }
       }
     };
+  },
+  methods: {
+      submit() {
+          this.form.post(this.route('register'), {
+              onFinish: () => this.form.reset('password', 'password_confirmation'),
+          })
+      }
   }
 };
 </script>
@@ -233,10 +176,5 @@ export default {
   border-color: #a6cb26;
   border-width: 3px 0 0 0;
   max-width: 50%;
-}
-
-.white--text {
-  color: #FFFFFF !important;
-  caret-color: #FFFFFF !important;
 }
 </style>

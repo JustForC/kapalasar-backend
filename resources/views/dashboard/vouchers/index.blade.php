@@ -32,7 +32,6 @@
       order: [[ 1, "asc" ]],
       columns: [
         {title: '#', data: 'DT_RowIndex', name: 'DT_RowIndex', orderable:false, width: '7.5%', className: 'dt-center'},
-        {title: 'ID', data: 'id', name: 'id', width: '10%', className: 'dt-head-center'},
         {title: 'Nama', data: 'name', name: 'name', width: '10%', className: 'dt-head-center'},
         {title: 'Jenis', data: 'types.name', name: 'types.name', width: '10%', className: 'dt-head-center'},
         {title: 'Jumlah', data: 'amount', name: 'amount', width: '10%', className: 'dt-head-center'},

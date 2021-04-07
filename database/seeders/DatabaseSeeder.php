@@ -31,12 +31,22 @@ class DatabaseSeeder extends Seeder
         ]);
         User::create([
             'name' => 'Super Admin',
-            'email' => 'superadmin@gmail.com',
+            'email' => 'superadmin@kapalasar.id',
             'password' => Hash::make('superadmin'),
-            'job' => 'Super Admin',
-            'phone' => '082121234678',
-            'roles_id' => 1,
-            'address' => "Jalan Cisaranten",
+            'roles_id' => 1
+        ]);
+        User::create([
+            'name' => 'Admin',
+            'email' => 'admin@kapalasar.id',
+            'password' => Hash::make('superadmin'),
+            'roles_id' => 2
+        ]);
+        User::create([
+            'name' => 'Merchant',
+            'email' => 'merchant@kapalasar.id',
+            'password' => Hash::make('superadmin'),
+            'roles_id' => 3,
+            'referral_code' => 'assany'
         ]);
     }
 }

@@ -1,94 +1,138 @@
 <template>
-  <div class="home">
-    <navbar />
-    <v-container class="mt-5" style="background-color:#A6CB26">
-      <div class="jumbotron text-center py-15 ">
-        <h1>Flashsale</h1>
-        <p>
-          Kapalasar.id lahir dan hadir sebagai perantara antara para pedagang di
-          pasar tradisional dengan konsumen yang ada di rumah.
-        </p>
-      </div>
-    </v-container>
-    <!-- Flashsale -->
-    <div>
-      <v-container>
-        <div class="d-flex flex-wrap justify-center">
-          <v-btn
-            v-for="(filter, i) in filters"
-            :key="i"
-            x-large
-            :large="$vuetify.breakpoint.sm ? true : false"
-            class="mr-2 px-1 my-2"
-            @click="filterByKategori(filter.name)"
-            :color="filter.name == current ? '#a6cb26' : ''"
-            :dark="filter.name == current ? true : false"
-          >
-            <v-img :src="filter.src"></v-img>
-            <span class="mx-2">{{ filter.name }}</span>
-          </v-btn>
+  <v-app>
+    <div class="home">
+      <navbar />
+      <v-container class="mt-5" style="background-color:#A6CB26">
+        <div class="jumbotron text-center py-15 ">
+          <h1>Flashsale</h1>
+          <p>
+            Kapalasar.id lahir dan hadir sebagai perantara antara para pedagang di
+            pasar tradisional dengan konsumen yang ada di rumah.
+          </p>
         </div>
       </v-container>
-    </div>
-    <!-- Product -->
-    <v-lazy>
-      <v-container>
-        <v-row justify="center">
-          <v-col
-            cols="6"
-            md="2"
-            v-for="(product, i) in filteredProducts"
-            :key="i"
-            class="ma-md-2 v-lazy  my-3"
-          >
-            <v-row justify="center">
-              <product-card @getTotalPrice="getTotalPrice" :product="product" />
-            </v-row>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-lazy>
-    <!-- Compliance Cookie GDPR edited by Fauzi -->
-    <client-only>
-      <cookie />
-    </client-only>
-    <!-- End of Compliance Cookie GDPR edited by Fauzi -->
-    <Footer />
-    <div v-if="showCart" class="cart" style="z-index:999">
-      <v-container>
-        <v-row class="pa-3">
-          <div>
-            <div class="font-weight-medium">Total Harga</div>
-            <div class="totalHarga font-weight-medium text-h5 align-center">
-              {{ parseRupiah(totalPrice) }}
-            </div>
-          </div>
-          <v-spacer></v-spacer>
-          <div class="d-flex align-center">
-            <v-btn to="/checkout" class="checkout" color="#A6CB26"
-              >Checkout</v-btn
+      <!-- Flashsale -->
+      <div>
+        <v-container>
+          <div class="d-flex flex-wrap justify-center">
+            <v-btn
+              v-for="(filter, i) in filters"
+              :key="i"
+              x-large
+              :large="$vuetify.breakpoint.sm ? true : false"
+              class="mr-2 px-1 my-2"
+              @click="filterByKategori(filter.name)"
+              :color="filter.name == current ? '#a6cb26' : ''"
+              :dark="filter.name == current ? true : false"
             >
+              <v-img :src="filter.src"></v-img>
+              <span class="mx-2">{{ filter.name }}</span>
+            </v-btn>
           </div>
-        </v-row>
-      </v-container>
+        </v-container>
+      </div>
+      <!-- Product -->
+      <v-lazy>
+        <v-container>
+          <v-row justify="center">
+            <v-col
+              cols="6"
+              md="2"
+              v-for="(product, i) in filteredProducts"
+              :key="i"
+              class="ma-md-2 v-lazy  my-3"
+            >
+              <v-row justify="center">
+                <product-card @getTotalPrice="getTotalPrice" :product="product" />
+              </v-row>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-lazy>
+      <!-- Compliance Cookie GDPR edited by Fauzi -->
+      <client-only>
+        <Cookie />
+      </client-only>
+      <!-- End of Compliance Cookie GDPR edited by Fauzi -->
+      <Footer />
+      <div v-if="showCart" class="cart" style="z-index:999">
+        <v-container>
+          <v-row class="pa-3">
+            <div>
+              <div class="font-weight-medium">Total Harga</div>
+              <div class="totalHarga font-weight-medium text-h5 align-center">
+                {{ parseRupiah(totalPrice) }}
+              </div>
+            </div>
+            <v-spacer></v-spacer>
+            <div class="d-flex align-center">
+              <v-btn to="/checkout" class="checkout" color="#A6CB26"
+                >Checkout</v-btn
+              >
+            </div>
+          </v-row>
+        </v-container>
+      </div>
     </div>
-  </div>
+  </v-app>
 </template>
 
 <script>
 // @ is an alias to /src
+import ClientOnly from 'vue-client-only'
 import Navbar from "../components/Navbar.vue";
 import ProductCard from "../components/ProductCard.vue";
 import Footer from "../components/Footer.vue";
-// import { products, filters, slides } from "../dummyData/dummy.js";
-// import cookie from "../components/cookie";
+import { products, filters, slides } from "../dummyData/dummy.js";
+import Cookie from "../components/cookie";
 export default {
   name: "Home",
   components: {
     Navbar,
     ProductCard,
     Footer,
-    cookie
+    Cookie,
+    ClientOnly
+  },
+  data() {
+    return {
+      optionsCarousel: {
+        type: "slide",
+        rewind: true,
+        width: "100%",
+        fixedHeight: this.$vuetify.breakpoint.xs ? 200 : 300,
+        perPage: 1,
+        gap: "1rem",
+        autoplay: true,
+        padding: {
+          right: this.$vuetify.breakpoint.xs ? "" : "20rem",
+          left: this.$vuetify.breakpoint.xs ? "" : "20rem"
+        },
+        cover: true,
+        start: 2,
+        autoWidth: true,
+        heightRatio: 0.3
+      },
+      optionsFlashsale: {
+        width: "90%",
+        gap: "1rem",
+        height: 300,
+        perPage: this.$vuetify.breakpoint.xs ? 1 : 4,
+        perMove: 1,
+        pagination: false,
+        autoWidth: true,
+        heightRatio: 0.3
+      },
+      slides,
+      filters,
+      products,
+      totalPrice: 0,
+      showCart: false,
+      notFlashsaleProducts: [],
+      flashSaleProducts: [],
+      filteredProducts: [],
+      current: "semua"
+    };
   },
   methods: {
     parseRupiah(strMoney) {
@@ -185,9 +229,5 @@ export default {
   -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
-}
-.white--text {
-  color: #FFFFFF !important;
-  caret-color: #FFFFFF !important;
 }
 </style>

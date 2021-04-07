@@ -1,19 +1,19 @@
 <template>
   <div class="navbar">
-    <v-app-bar color="FAFAFA" flat max-height="120" height="100">
+    <v-app-bar flat max-height="120" height="100">
       <v-row justify="center">
-        <v-col md="3" to="/">
+        <v-col md="3">
           <div>
-            <!-- <router-link to="/"> -->
+            <inertia-link href="/">
               <v-img
                 src="../assets/kapalasar-1024x250.png"
                 max-width="180"
                 class="mx-auto"
               ></v-img>
-            <!-- </router-link> -->
+            </inertia-link>
           </div>
         </v-col>
-        <v-col md="6" class="text-center" name = 'Homepage'>
+        <v-col md="5" lg="6" class="text-center" v-if="true" :load="log(user)">
           <div class="align-center">
             <v-text-field
               outlined
@@ -31,7 +31,7 @@
         </v-col>
         <!-- <v-col md="6" v-else></v-col> -->
         <v-col md="3">
-          <div v-if="isLoggedin">
+          <div v-if="check">
             <v-menu offset-y>
               <template v-slot:activator="{ on, attrs }">
                 <v-card
@@ -44,12 +44,11 @@
                 >
                   <v-list-item-avatar
                     tile
-                    size="35"
-                    color="grey"
+                    size="25"
                     class="mx-2"
                   ></v-list-item-avatar>
-                  <v-card-subtitle class="d-inline px-1" dark>{{
-                    nama
+                  <v-card-subtitle class="d-inline px-1" dark >{{
+                    user.name
                   }}</v-card-subtitle>
                   <v-card-actions class="d-inline pa-1">
                     <v-btn icon small>
@@ -76,16 +75,16 @@
             </v-menu>
           </div>
           <div v-else class="button text-center ma-1">
-          <a href="/login">
-            <v-btn class="mr-2" outlined color="#A6CB26" pa-1 to="/login">
+          <inertia-link href="/login">
+            <v-btn class="mr-2" outlined color="#A6CB26" pa-1>
             Masuk
             </v-btn>
-          </a>
-          <a href="/register">
-            <v-btn color="#A6CB26" dark depressed pa-1 to="/register">
+          </inertia-link>
+          <inertia-link href="/register">
+            <v-btn color="#A6CB26" dark depressed pa-1>
             Daftar
             </v-btn>
-          </a>
+          </inertia-link>
           </div>
         </v-col>
       </v-row>
@@ -95,32 +94,25 @@
 
 <script>
 export default {
-  props : [
-    'check',
-    'user,'
-  ],
-  data(){
-    return{
-      isLoggedin : check,
-      nama: user.name,
+  methods: {
+    log(user) {
+      console.log(user)
+    }
+  },
+  props: ['check', 'user'],
+  data() {
+    return {
       menus: [
         { icon: "mdi-account", title: "Account", router: "Account" },
         { icon: "mdi-logout", title: "Keluar" }
       ]
     }
   }
-  
 };
 </script>
 
 <style>
-@import 'vuetify/dist/vuetify.min.css';
 .mdi-card-search::before {
   color: #a6cb26;
-}
-
-.white--text {
-  color: #FFFFFF !important;
-  caret-color: #FFFFFF !important;
 }
 </style>

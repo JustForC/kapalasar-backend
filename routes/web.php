@@ -14,51 +14,25 @@ use App\Http\Controllers\Dashboard\TransactionController;
 use App\Http\Controllers\Dashboard\HistoryController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\AdvertisementController;
-use App\Http\Controllers\Auth\AuthenticationController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\HomeController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-// Route::group(['middleware' => 'superadmin'],function(){
-//     // Admin
-//     Route::get('/admin',[AdminController::class, 'get']);
-//     Route::post('/admin',[AdminController::class, 'create']);
-//     Route::post('/admin/{id}',[AdminController::class, 'delete']);
-//     Route::get('/admin/{id}',[AdminController::class, 'editForm']);
-//     Route::post('/admin/edit',[AdminController::class, 'doEdit']);
-//     // Merchant
-//     Route::get('/merchant',[MerchantController::class, 'get']);
-//     Route::post('/merchant',[MerchantController::class, 'create']);
-//     Route::post('/merchant/{id}',[MerchantController::class, 'delete']);
-//     Route::get('/merchant/{id}',[MerchantController::class, 'editForm']);
-//     Route::post('/merchant/edit',[MerchantController::class, 'doEdit']);
-//     // User
-//     Route::get('/user',[UserController::class, 'get']);
-//     Route::post('/user',[UserController::class, 'create']);
-//     Route::post('/user/{id}',[UserController::class, 'delete']);
-//     Route::get('/user/{id}',[UserController::class, 'editForm']);
-//     Route::post('/user/edit',[UserController::class, 'doEdit']);
-// });
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('checkout', [HomeController::class, 'checkout'])->name('checkout');
+Route::get('flash_sale', [HomeController::class, 'flash_sale'])->name('flash_sale');
 
 // Authentication
-Route::get('/register',[AuthenticationController::class, 'registerForm']);
-Route::post('/register',[AuthenticationController::class, 'doRegister']);
-Route::get('/login',[AuthenticationController::class, 'loginForm']);
-Route::post('/login',[AuthenticationController::class, 'doLogin']);
-Route::get('/logout',[AuthenticationController::class, 'doLogout']);
+Route::get('register', [RegisterController::class, 'show']);
+Route::post('register', [RegisterController::class, 'register'])->name('register');
+Route::get('login', [LoginController::class, 'show']);
+Route::post('login', [LoginController::class, 'login'])->name('login');
+Route::get('logout', [LogoutController::class, 'logout']);
 
 
-Route::middleware('admin')->group(function(){
-
-});
+// Route::middleware('admin')->group(function(){
+// });
 
 Route::prefix('product')->group(function(){
     Route::prefix('item')->group(function(){
@@ -173,6 +147,4 @@ Route::prefix('account')->group(function(){
     });
 });
 
-Route::get('/',function(){
-    return view('/dashboard/index');
-});
+Route::get('/{code}', [HomeController::class, 'code'])->name('code');

@@ -1,7 +1,7 @@
 <nav class="sidebar">
   <div class="sidebar-header">
     <a href="#" class="sidebar-brand">
-      <img src="{{asset('assets/kapalasar-1024x250.png')}}" alt="logo" width="122.5" height="30">
+      <img src="{{ asset('kapalasar.png') }}" alt="logo" width="122.5" height="30">
     </a>
     <div class="sidebar-toggler not-active">
       <span></span>
@@ -17,13 +17,14 @@
           <span class="link-title">Dashboard</span>
         </a>
       </li>
+      @if(auth()->user()->roles->name == 'Super Admin')
       <li class="nav-item {{ request()->is('account/*') ? 'active' : '' }}">
         <a class="nav-link" data-toggle="collapse" href="#account" role="button" aria-expanded="{{ request()->is('account/*') ? 'true' : 'false' }}" aria-controls="account">
           <i class="link-icon" data-feather="user"></i>
           <span class="link-title">Account</span>
           <i class="link-arrow" data-feather="chevron-down"></i>
         </a>
-        <div class="collapse" id="account">
+        <div class="collapse {{ request()->is('account/*') ? 'show' : '' }}" id="account">
           <ul class="nav sub-menu">
             <li class="nav-item">
               <a href="{{ url('/account/admin') }}" class="nav-link {{ request()->is('account/admin') ? 'active' : '' }}">Admin</a>
@@ -37,14 +38,15 @@
           </ul>
         </div>
       </li>
-      <!--  -->
+      @endif
+      @if(auth()->user()->roles->name == 'Super Admin' || auth()->user()->roles->name == 'Admin')
       <li class="nav-item {{ request()->is('product/*') ? 'active' : '' }}">
         <a class="nav-link" data-toggle="collapse" href="#product" role="button" aria-expanded="{{ request()->is('product/*') ? 'true' : 'false' }}" aria-controls="product">
           <i class="link-icon" data-feather="archive"></i>
           <span class="link-title">Produk</span>
           <i class="link-arrow" data-feather="chevron-down"></i>
         </a>
-        <div class="collapse " id="product">
+        <div class="collapse {{ request()->is('product/*') ? 'show' : '' }}" id="product">
           <ul class="nav sub-menu">
             <li class="nav-item">
               <a href="{{ url('/product/category') }}" class="nav-link {{ request()->is('product/category') ? 'active' : '' }}">Category</a>
@@ -55,7 +57,6 @@
           </ul>
         </div>
       </li>
-      <!--  -->
       <li class="nav-item {{ request()->is('advertisement') ? 'active' : '' }}">
         <a href="{{ url('advertisement') }}" class="nav-link">
           <i class="link-icon fas fa-ad"></i>
@@ -68,13 +69,13 @@
           <span class="link-title">Promotion</span>
           <i class="link-arrow" data-feather="chevron-down"></i>
         </a>
-        <div class="collapse " id="promotion">
+        <div class="collapse {{ request()->is('promotion/*') ? 'show' : '' }}" id="promotion">
           <ul class="nav sub-menu">
             <li class="nav-item">
               <a href="{{ url('/promotion/type') }}" class="nav-link {{ request()->is('promotion/type') ? 'active' : '' }}">Tipe Voucher</a>
             </li>
             <li class="nav-item">
-              <a href="{{ url('/promotion/voucher') }}" class="nav-link {{ request()->is('promotion/type') ? 'active' : '' }}">Voucher</a>
+              <a href="{{ url('/promotion/voucher') }}" class="nav-link {{ request()->is('promotion/voucher') ? 'active' : '' }}">Voucher</a>
             </li>
             <li class="nav-item">
               <a href="{{ url('/promotion/flash_sale') }}" class="nav-link {{ request()->is('promotion/flash_sale') ? 'active' : '' }}">Flash Sale</a>
@@ -94,6 +95,7 @@
           <span class="link-title">History</span>
         </a>
       </li>
+      @endif
     </ul>
   </div>
 </nav>

@@ -1,14 +1,15 @@
 <template>
+  <v-app>
   <div>
-    <navbar />
+    <Navbar/>
     <div class="my-3">
       <v-container>
         <v-card>
           <v-img src="../assets/pasar.svg" max-height="721" width="100%">
             <v-container fluid class="fill-height pa-0">
               <v-row class="fill-height">
-                <v-col cols="12" md="7" class="bg-form">
-                  <v-container class="py-md-16">
+                <v-col md="6" class="bg-form">
+                  <v-container class="">
                     <div class="pa-md-16 py-5">
                       <h3 class="title text-md-h3 text-h4 text-center">
                         Masuk ke akunmu
@@ -40,7 +41,8 @@
                               name = "password"
                               dense
                               placeholder="Password"
-                            ></v-text-field>
+                              
+                            ><v-icon></v-icon></v-text-field>
                           </div>
                           <div class="font-weight-medium grey--text">
                             Lupa Password?
@@ -59,7 +61,7 @@
                     </div>
                   </v-container>
                 </v-col>
-                <v-col cols="5" class="bg-msg d-none d-md-block">
+                <v-col md="6" class="bg-msg d-none d-md-block">
                   <v-container class="fill-height">
                     <div class="px-14">
                       <h4 class="text-h4 white--text ">
@@ -89,6 +91,7 @@
     </div>
     <Footer />
   </div>
+  </v-app>
 </template>
 
 <script>
@@ -99,6 +102,9 @@ export default {
   components: { Navbar, Footer },
   data() {
     return {
+      show: false,
+      email: "",
+      password: "",
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       }
     }
@@ -106,7 +112,6 @@ export default {
 </script>
 
 <style scoped>
-@import 'vuetify/dist/vuetify.min.css';
 .title {
   color: #a6cb26;
 }
@@ -126,10 +131,5 @@ export default {
   border-color: #a6cb26;
   border-width: 3px 0 0 0;
   max-width: 50%;
-}
-
-.white--text {
-  color: #FFFFFF !important;
-  caret-color: #FFFFFF !important;
 }
 </style>

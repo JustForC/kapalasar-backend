@@ -28,16 +28,13 @@
     $('#table').DataTable({
       responsive: true,
       serverSide: true,
-      ajax: "{{ route('user.data') }}",
+      ajax: "{{ route('admin.data') }}",
       order: [[ 1, "asc" ]],
       columns: [
         {title: '#', data: 'DT_RowIndex', name: 'DT_RowIndex', orderable:false, width: '7.5%', className: 'dt-center'},
-        {title: 'ID', data: 'id', name: 'id', width: '30%', className: 'dt-head-center'},
         {title: 'Nama', data: 'name', name: 'name', width: '30%', className: 'dt-head-center'},
-        {title: 'Address', data: 'address', name: 'address', width: '30%', className: 'dt-head-center'},
-        {title: 'Phone', data: 'phone', name: 'phone', width: '30%', className: 'dt-head-center'},
         {title: 'Email', data: 'email', name: 'email', width: '30%', className: 'dt-head-center'},
-        // {title: 'Role', data: 'roles.name', name: 'roles.name', width: '30%', className: 'dt-head-center'},
+        {title: 'Role', data: 'roles.name', name: 'roles.name', width: '30%', className: 'dt-head-center'},
         {title: 'Action', data: 'action', name: 'action', width: '12.5%', className: 'dt-center'},
       ],
     });

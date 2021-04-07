@@ -32,7 +32,6 @@
       order: [[ 1, "asc" ]],
       columns: [
         {title: '#', data: 'DT_RowIndex', name: 'DT_RowIndex', orderable:false, width: '7.5%', className: 'dt-center'},
-        {title: 'ID Kategori', data: 'id', name: 'name', width: '30%', className: 'dt-head-center'},
         {title: 'Jenis Kategori', data: 'name', name: 'name', width: '30%', className: 'dt-head-center'},
         {title: 'Action', data: 'action', name: 'action', width: '12.5%', className: 'dt-center'},
       ],

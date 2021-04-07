@@ -25,7 +25,7 @@
   --gray-lightest: #e6e9ed;
   --black: #000000;
   --first: #a6cb26;
-  --secound: #33680E;
+  --second: #33680E;
   --third: #F99F39;
   /* --primary: #727cf5; */
   /* --secondary: #7987a1; */
@@ -3273,7 +3273,7 @@ input[type=button].btn-block {
 
 .dropdown-menu {
   position: absolute;
-  top: 100%;
+  top: 80%;
   left: 0;
   z-index: 1000;
   display: none;
@@ -5240,13 +5240,13 @@ input[type=button].btn-block {
   padding: 0.5rem 0.75rem;
   margin-left: -1px;
   line-height: 1.25;
-  color: #007bff;
+  color: #33680E;
   background-color: #fff;
   border: 1px solid #dee2e6;
 }
 .page-link:hover {
   z-index: 2;
-  color: #0056b3;
+  color: #33680E;
   text-decoration: none;
   background-color: #e9ecef;
   border-color: #dee2e6;
@@ -5269,8 +5269,8 @@ input[type=button].btn-block {
 .page-item.active .page-link {
   z-index: 3;
   color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
+  background-color: #a6cb26;
+  border-color: #a6cb26;
 }
 .page-item.disabled .page-link {
   color: #6c757d;
@@ -19930,7 +19930,7 @@ address p {
   margin-top: 2px;
 }
 .navbar .navbar-content .navbar-nav .nav-item.nav-profile .dropdown-menu .dropdown-body .profile-nav .nav-item:hover .nav-link {
-  color: #3764f8;
+  color: #a6cb26;
 }
 .navbar .navbar-content .navbar-nav .nav-item.nav-profile .dropdown-menu .dropdown-body button svg {
   width: 15px;
@@ -24998,4 +24998,17 @@ div.tagsinput span.tag {
   float: right;
 }
 
-/*# sourceMappingURL=dashboard.css.map*/
+.block {
+  position: fixed;
+  display: block;
+  z-index: 1051;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.hidden {
+  visibility: hidden;
+}
+
+/*# sourceMappingURL=app.css.map*/

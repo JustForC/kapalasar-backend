@@ -14,7 +14,6 @@ class AdminController extends Controller
 {
     public function index()
     {
-        //
         return view('dashboard/admins/index');
     }
 
@@ -25,9 +24,11 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
         $model = new User();
-        return view('dashboard/admins/form',['model' => $model]);
+        $roles = Role::get()->reject(function($roles){
+            if($roles->name=='Merchant' || $roles->name=='User' ) return true;
+        });
+        return view('dashboard/admins/form',['model' => $model, 'roles' => $roles]);
     }
 
     /**
@@ -38,15 +39,11 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $model = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'phone' => $request->phone,
-            'address' => $request->address,
             'password' => Hash::make($request->password),
-            'job' => "Admin",
-            'roles_id' => 2,
+            'roles_id' => $request->role
         ]);
 
         return response()->json($model);
@@ -71,9 +68,11 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        //
         $model = User::findOrFail($id);
-        return view('dashboard/admins/form',['model' => $model]);
+        $roles = Role::get()->reject(function($roles){
+            if($roles->name=='Merchant' || $roles->name=='User' ) return true;
+        });
+        return view('dashboard/admins/form',['model' => $model, 'roles' => $roles]);
     }
 
     /**
@@ -85,15 +84,11 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
         $model = User::findOrFail($id)->update([
             'name' => $request->name,
             'email' => $request->email,
-            'phone' => $request->phone,
-            'address' => $request->address,
             'password' => Hash::make($request->password),
-            'job' => "Admin",
-            'roles_id' => 2,
+            'roles_id' => $request->role
         ]);
 
         return response()->json($model);
@@ -107,13 +102,12 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        //
         $model = User::findOrFail($id)->delete();
         return response()->json($model);
     }
 
     public function data(){
-        $model = User::with('roles')->where('roles_id','=',2)->get();
+        $model = User::where('roles_id', 1)->orWhere('roles_id', 2)->with('roles')->get();
         return DataTables::of($model)
             ->addColumn('action', function($model){
             return '<div class="btn-group" role="group">

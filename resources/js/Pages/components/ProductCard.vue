@@ -84,7 +84,11 @@ export default {
       // const newItem = JSON.parse(localStorage.getItem("cart"));
       // this.itemQty = newItem ? newItem : [];
       // this.itemQty.push(item);
+
+      // Pake
       this.$store.commit("cart/ADD", item);
+
+
       // localStorage.setItem("cart", JSON.stringify(this.itemQty));
 
       // const state = this.$store.state.cart.listCarts;

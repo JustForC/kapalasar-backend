@@ -120,7 +120,7 @@ class HistoryController extends Controller
     }
 
     public function data(){
-        $model = Checkout::with('users','vouchers')->where('status','=',3)->get();
+        $model = Checkout::with('users','vouchers')->where('status', 3)->get();
         return DataTables::of($model)
             ->addColumn('action', function($model){
             return '<div class="btn-group" role="group">

@@ -33,10 +33,6 @@
             <input id="address" type="text" class="form-control" name="address" value="{{$model->address}}" placeholder="Adress">
         </div>
         <div class="form-group">
-            <label for="address_detail" class="control-label">Address Detail</label>
-            <input id="address_detail" type="text" class="form-control" name="address_detail" value="{{$model->address}}" placeholder="Adress Detail">
-        </div>
-        <div class="form-group">
             <label for="phone" class="control-label">Phone</label>
             <input id="phone" type="text" class="form-control" name="phone" value="{{$model->phone}}" placeholder="Phone">
         </div>
