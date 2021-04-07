@@ -8,6 +8,7 @@ use Hash;
 use Auth;
 use App\Models\User;
 use App\Models\Role;
+use DataTables;
 
 
 class UserController extends Controller
@@ -111,7 +112,7 @@ class UserController extends Controller
     }
 
     public function data(){
-        $model = User::with('roles')->findWhere(['name','=','User'])->get();
+        $model = User::with('roles')->where('roles_id','=',4)->get();
         return DataTables::of($model)
             ->addColumn('action', function($model){
             return '<div class="btn-group" role="group">

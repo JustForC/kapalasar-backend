@@ -8,6 +8,7 @@ use Hash;
 use Auth;
 use App\Models\User;
 use App\Models\Role;
+use DataTables;
 
 class AdminController extends Controller
 {
@@ -43,6 +44,7 @@ class AdminController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'address' => $request->address,
+            'password' => Hash::make($request->password),
             'job' => "Admin",
             'roles_id' => 2,
         ]);
@@ -89,6 +91,7 @@ class AdminController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'address' => $request->address,
+            'password' => Hash::make($request->password),
             'job' => "Admin",
             'roles_id' => 2,
         ]);
@@ -110,7 +113,7 @@ class AdminController extends Controller
     }
 
     public function data(){
-        $model = User::get();
+        $model = User::with('roles')->where('roles_id','=',2)->get();
         return DataTables::of($model)
             ->addColumn('action', function($model){
             return '<div class="btn-group" role="group">

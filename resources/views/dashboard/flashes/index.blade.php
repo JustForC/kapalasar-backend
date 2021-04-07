@@ -11,8 +11,8 @@
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-baseline mb-4 mb-md-3">
-          <h6 class="card-title mb-0">Kategori</h6>
-          <button class="btn btn-primary modal-show" type="button" href="{{ route('flash.create') }}" name="Tambah Produk Baru" data-toggle="modal" data-target="#modal">+ Add New</button>
+          <h6 class="card-title mb-0">Flash Sales</h6>
+          <button class="btn btn-primary modal-show" type="button" href="{{ route('flash.create') }}" name="Tambahkan Flash Sale" data-toggle="modal" data-target="#modal">+ Add New</button>
         </div>
         <div class="table-responsive">
           <table id="table" class="table hover" style="width:100%"></table>

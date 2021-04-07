@@ -94,6 +94,22 @@ class FlashController extends Controller
     public function update(Request $request, $id)
     {
         //
+        if($request->image == NULL){
+            $flash = Flash::findOrFail($id);
+
+            $model = Flash::findOrFail($id)->update([
+                'flashes_id' => $request->flashes_id,
+                'product_id' => $request->product_id,
+                'image' => $flash->image,
+                'new_price' => $request->price,
+                'amount' => $request->amount,
+            ]);
+
+            return response()->json($model);
+        }
+        $image = time().'-'.'.'.$request->image->extension();
+        $path =  $request->image->move(public_path('flashimage'),$image);
+
         $model = Flash::findOrFail($id)->update([
             'flashes_id' => $request->flashes_id,
             'product_id' => $request->product_id,

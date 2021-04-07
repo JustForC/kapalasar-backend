@@ -143,32 +143,34 @@ Route::prefix('history')->group(function(){
 
 
 // Bagian laen
-Route::prefix('admin')->group(function(){
-    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
-    Route::get('create', [AdminController::class, 'create'])->name('admin.create');
-    Route::post('store', [AdminController::class, 'store'])->name('admin.store');
-    Route::get('edit/{id}', [AdminController::class, 'edit'])->name('admin.edit');
-    Route::put('update/{id}', [AdminController::class, 'update'])->name('admin.update');
-    Route::delete('delete/{id}', [AdminController::class, 'destroy'])->name('admin.delete');
-    Route::get('data', [AdminController::class, 'data'])->name('admin.data');
-});
-Route::prefix('merchant')->group(function(){
-    Route::get('/', [MerchantController::class, 'index'])->name('merchant.index');
-    Route::get('create', [MerchantController::class, 'create'])->name('merchant.create');
-    Route::post('store', [MerchantController::class, 'store'])->name('merchant.store');
-    Route::get('edit/{id}', [MerchantController::class, 'edit'])->name('merchant.edit');
-    Route::put('update/{id}', [MerchantController::class, 'update'])->name('merchant.update');
-    Route::delete('delete/{id}', [MerchantController::class, 'destroy'])->name('merchant.delete');
-    Route::get('data', [MerchantController::class, 'data'])->name('merchant.data');
-});
-Route::prefix('user')->group(function(){
-    Route::get('/', [UserController::class, 'index'])->name('user.index');
-    Route::get('create', [UserController::class, 'create'])->name('user.create');
-    Route::post('store', [UserController::class, 'store'])->name('user.store');
-    Route::get('edit/{id}', [UserController::class, 'edit'])->name('user.edit');
-    Route::put('update/{id}', [UserController::class, 'update'])->name('user.update');
-    Route::delete('delete/{id}', [UserController::class, 'destroy'])->name('user.delete');
-    Route::get('data', [UserController::class, 'data'])->name('user.data');
+Route::prefix('account')->group(function(){
+    Route::prefix('admin')->group(function(){
+        Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+        Route::get('create', [AdminController::class, 'create'])->name('admin.create');
+        Route::post('store', [AdminController::class, 'store'])->name('admin.store');
+        Route::get('edit/{id}', [AdminController::class, 'edit'])->name('admin.edit');
+        Route::put('update/{id}', [AdminController::class, 'update'])->name('admin.update');
+        Route::delete('delete/{id}', [AdminController::class, 'destroy'])->name('admin.delete');
+        Route::get('data', [AdminController::class, 'data'])->name('admin.data');
+    });
+    Route::prefix('merchant')->group(function(){
+        Route::get('/', [MerchantController::class, 'index'])->name('merchant.index');
+        Route::get('create', [MerchantController::class, 'create'])->name('merchant.create');
+        Route::post('store', [MerchantController::class, 'store'])->name('merchant.store');
+        Route::get('edit/{id}', [MerchantController::class, 'edit'])->name('merchant.edit');
+        Route::put('update/{id}', [MerchantController::class, 'update'])->name('merchant.update');
+        Route::delete('delete/{id}', [MerchantController::class, 'destroy'])->name('merchant.delete');
+        Route::get('data', [MerchantController::class, 'data'])->name('merchant.data');
+    });
+    Route::prefix('user')->group(function(){
+        Route::get('/', [UserController::class, 'index'])->name('user.index');
+        Route::get('create', [UserController::class, 'create'])->name('user.create');
+        Route::post('store', [UserController::class, 'store'])->name('user.store');
+        Route::get('edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+        Route::put('update/{id}', [UserController::class, 'update'])->name('user.update');
+        Route::delete('delete/{id}', [UserController::class, 'destroy'])->name('user.delete');
+        Route::get('data', [UserController::class, 'data'])->name('user.data');
+    });
 });
 
 Route::get('/',function(){

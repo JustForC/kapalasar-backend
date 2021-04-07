@@ -1,7 +1,7 @@
 <nav class="sidebar">
   <div class="sidebar-header">
     <a href="#" class="sidebar-brand">
-      <img src="/kapalasar.png" alt="logo" width="122.5" height="30">
+      <img src="{{asset('assets/kapalasar-1024x250.png')}}" alt="logo" width="122.5" height="30">
     </a>
     <div class="sidebar-toggler not-active">
       <span></span>
@@ -17,7 +17,6 @@
           <span class="link-title">Dashboard</span>
         </a>
       </li>
-
       <li class="nav-item {{ request()->is('account/*') ? 'active' : '' }}">
         <a class="nav-link" data-toggle="collapse" href="#account" role="button" aria-expanded="{{ request()->is('account/*') ? 'true' : 'false' }}" aria-controls="account">
           <i class="link-icon" data-feather="user"></i>
@@ -38,12 +37,11 @@
           </ul>
         </div>
       </li>
-
       <!--  -->
       <li class="nav-item {{ request()->is('product/*') ? 'active' : '' }}">
-        <a class="nav-link" data-toggle="collapse" href="#product" role="button" aria-expanded="{{ request()->is('product/*') ? 'true' : 'false' }}" aria-controls="promotion">
-          <i class="link-icon fas fa-money-bill-wave-alt"></i>
-          <span class="link-title">product</span>
+        <a class="nav-link" data-toggle="collapse" href="#product" role="button" aria-expanded="{{ request()->is('product/*') ? 'true' : 'false' }}" aria-controls="product">
+          <i class="link-icon" data-feather="archive"></i>
+          <span class="link-title">Produk</span>
           <i class="link-arrow" data-feather="chevron-down"></i>
         </a>
         <div class="collapse " id="product">

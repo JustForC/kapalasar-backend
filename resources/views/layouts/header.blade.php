@@ -6,7 +6,7 @@
       <ul class="navbar-nav">
         <li class="nav-item dropdown nav-profile">
           <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Ferdian Maulana
+            Nothing
             <i class="link-arrow" data-feather="chevron-down"></i>
           </a>
           <div class="dropdown-menu" aria-labelledby="profileDropdown">

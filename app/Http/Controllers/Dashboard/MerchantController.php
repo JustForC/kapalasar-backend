@@ -42,7 +42,7 @@ class MerchantController extends Controller
             'name' => $request->name,
             'address' => $request->address,
             'address_detail' => $request->address_detail,
-            'refferal_code' => $request->refferal_code,
+            'referral_code' => $request->referral_code,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'age' => $request->age,
@@ -92,7 +92,7 @@ class MerchantController extends Controller
             'name' => $request->name,
             'address' => $request->address,
             'address_detail' => $request->address_detail,
-            'refferal_code' => $request->refferal_code,
+            'referral_code' => $request->referral_code,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'age' => $request->age,
@@ -118,7 +118,7 @@ class MerchantController extends Controller
     }
 
     public function data(){
-        $model = User::get();
+        $model = User::with('roles')->where('roles_id','=',3)->get();
         return DataTables::of($model)
             ->addColumn('action', function($model){
             return '<div class="btn-group" role="group">
