@@ -12,7 +12,7 @@
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-baseline mb-4 mb-md-3">
           <h6 class="card-title mb-0">Advertisement</h6>
-          <button class="btn btn-primary modal-show" type="button" href="{{ route('advertisement.create') }}" name="Tambah Iklan" data-toggle="modal" data-target="#modal">+ Add New</button>
+          <button class="btn btn-primary modal-show" type="button" href="{{ route('ads.create') }}" name="Tambah Iklan" data-toggle="modal" data-target="#modal">+ Add New</button>
         </div>
         <div class="table-responsive">
           <table id="table" class="table hover" style="width:100%"></table>
@@ -28,7 +28,7 @@
     $('#table').DataTable({
       responsive: true,
       serverSide: true,
-      ajax: "{{ route('advertisement.data') }}",
+      ajax: "{{ route('ads.data') }}",
       order: [[ 1, "asc" ]],
       columns: [
         {title: '#', data: 'DT_RowIndex', name: 'DT_RowIndex', orderable:false, width: '7.5%', className: 'dt-center'},

@@ -1,4 +1,4 @@
-<form id="form_modal" class="form" method="POST" action="{{ $model->exists ? route('advertisement.update', $model->id) : route('advertisement.store') }}" enctype="multipart/form-data">
+<form id="form_modal" class="form" method="POST" action="{{ $model->exists ? route('ads.update', $model->id) : route('ads.store') }}" enctype="multipart/form-data">
     @csrf {{ method_field($model->exists ? 'PUT' : 'POST') }}
 
     <div class="modal-header">
@@ -14,7 +14,7 @@
         </div>
     </div>
     <div class="form-group">
-            <label for="path" class="control-label">Kategori</label><br>
+            <label for="path" class="control-label">Letak Iklan</label><br>
             <select id="path" type="text" class="form-control" name="path">
                 <option value="Atas">Diatas</option>
                 <option value="Bawah">Dibawah</option>

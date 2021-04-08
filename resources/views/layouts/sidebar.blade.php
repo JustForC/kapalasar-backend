@@ -57,8 +57,8 @@
           </ul>
         </div>
       </li>
-      <li class="nav-item {{ request()->is('advertisement') ? 'active' : '' }}">
-        <a href="{{ url('advertisement') }}" class="nav-link">
+      <li class="nav-item {{ request()->is('ads') ? 'active' : '' }}">
+        <a href="{{ url('ads') }}" class="nav-link">
           <i class="link-icon fas fa-ad"></i>
           <span class="link-title">Advertisement</span>
         </a>
@@ -93,6 +93,12 @@
         <a href="{{ url('history') }}" class="nav-link">
           <i class="link-icon fas fa-history"></i>
           <span class="link-title">History</span>
+        </a>
+      </li>
+      <li class="nav-item {{ request()->is('mail') ? 'active' : '' }}">
+        <a href="{{ url('mail') }}" class="nav-link">
+          <i class="link-icon fas fa-ad"></i>
+          <span class="link-title">Mail</span>
         </a>
       </li>
       @endif

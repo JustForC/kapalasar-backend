@@ -13,7 +13,7 @@ class AdvertisementController extends Controller
         public function index()
         {
             //
-            return view('dashboard/advertisement/index');
+            return view('dashboard/advertisements/index');
         }
     
         /**
@@ -25,7 +25,7 @@ class AdvertisementController extends Controller
         {
             //
             $model = new Advertisement();
-            return view('dashboard/advertisement/form',['model' => $model]);
+            return view('dashboard/advertisements/form',['model' => $model]);
         }
     
         /**
@@ -70,7 +70,7 @@ class AdvertisementController extends Controller
         {
             //
             $model = Advertisement::findOrFail($id);
-            return view('dashboard/advertisement/form',['model' => $model]);
+            return view('dashboard/advertisements/form',['model' => $model]);
         }
     
         /**
@@ -125,8 +125,8 @@ class AdvertisementController extends Controller
             return DataTables::of($model)
                 ->addColumn('action', function($model){
                 return '<div class="btn-group" role="group">
-                            <button type="button" href="'.route('advertisement.edit', $model->id).'" class="btn btn-primary btn-sm modal-show edit" name="Edit '.$model->name.'" data-toggle="modal" data-target="#modal">Edit</button>
-                            <button type="button" href="'.route('advertisement.delete', $model->id).'" class="btn btn-danger btn-sm delete" name="Delete '.$model->name.'">Delete</button>
+                            <button type="button" href="'.route('ads.edit', $model->id).'" class="btn btn-primary btn-sm modal-show edit" name="Edit '.$model->name.'" data-toggle="modal" data-target="#modal">Edit</button>
+                            <button type="button" href="'.route('ads.delete', $model->id).'" class="btn btn-danger btn-sm delete" name="Delete '.$model->name.'">Delete</button>
                         </div>';
                 })
                 ->addColumn('timeline', function($model){
