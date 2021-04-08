@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Controllers\SkeletonController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 use App\Http\Controllers\Dashboard\AdminController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\MerchantController;
@@ -30,7 +28,6 @@ Route::post('register', [RegisterController::class, 'register'])->name('register
 Route::get('login', [LoginController::class, 'show']);
 Route::post('login', [LoginController::class, 'login'])->name('login');
 Route::get('logout', [LogoutController::class, 'logout']);
-
 
 Route::middleware('admin')->group(function(){
     Route::prefix('product')->group(function(){
@@ -122,8 +119,6 @@ Route::middleware('admin')->group(function(){
         Route::get('data', [HistoryController::class, 'data'])->name('history.data');
     });
 });
-
-
 
 // Bagian laen
 Route::middleware('superadmin')->group(function(){

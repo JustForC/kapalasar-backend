@@ -3,9 +3,11 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Hash;
+use Faker\Factory as Faker;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Category;
+use App\Models\Product;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,37 +18,95 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-        Role::create([
+        $faker = Faker::create('id_ID');
+        Role::insert([
             'name' => "Super Admin"
         ]);
-        Role::create([
+        Role::insert([
             'name' => "Admin"
         ]);
-        Role::create([
+        Role::insert([
             'name' => "Merchant"
         ]);
-        Role::create([
+        Role::insert([
             'name' => "User"
         ]);
-        User::create([
+        User::insert([
             'name' => 'Super Admin',
             'email' => 'superadmin@kapalasar.id',
-            'password' => Hash::make('superadmin'),
+            'password' => bcrypt('superadmin'),
             'roles_id' => 1
         ]);
-        User::create([
+        User::insert([
             'name' => 'Admin',
             'email' => 'admin@kapalasar.id',
-            'password' => Hash::make('superadmin'),
+            'password' => bcrypt('superadmin'),
             'roles_id' => 2
         ]);
-        User::create([
+        User::insert([
             'name' => 'Merchant',
             'email' => 'merchant@kapalasar.id',
-            'password' => Hash::make('superadmin'),
+            'password' => bcrypt('superadmin'),
             'roles_id' => 3,
             'referral_code' => 'assany'
         ]);
+        Category::insert([
+            'name' => 'Semua',
+            'image' => '/upload/category/semua.png'
+        ]);
+        Category::insert([
+            'name' => 'Promo',
+            'image' => '/upload/category/promo.png'
+        ]);
+        Category::insert([
+            'name' => 'Buah',
+            'image' => '/upload/category/buah.png'
+        ]);
+        Category::insert([
+            'name' => 'Daging',
+            'image' => '/upload/category/daging.png'
+        ]);
+        Category::insert([
+            'name' => 'Sayur',
+            'image' => '/upload/category/sayur.png'
+        ]);
+        Category::insert([
+            'name' => 'Bumbu',
+            'image' => '/upload/category/bumbu.png'
+        ]);
+        for($i = 1; $i <= 40; $i++){
+            Product::insert([
+                'name' => 'Sayur '.$i,
+                'unit' => $i,
+                'stock' => 100,
+                'price' => '10000',
+                'image' => '/upload/product/sayur.png',
+                'categories_id' => 5
+            ]);
+            Product::insert([
+                'name' => 'Daging '.$i,
+                'unit' => $i,
+                'stock' => 100,
+                'price' => '10000',
+                'image' => '/upload/product/daging.png',
+                'categories_id' => 4
+            ]);
+            Product::insert([
+                'name' => 'Buah '.$i,
+                'unit' => $i,
+                'stock' => 100,
+                'price' => '10000',
+                'image' => '/upload/product/buah.png',
+                'categories_id' => 3
+            ]);
+            Product::insert([
+                'name' => 'Bumbu '.$i,
+                'unit' => $i,
+                'stock' => 100,
+                'price' => '10000',
+                'image' => '/upload/product/bumbu.png',
+                'categories_id' => 6
+            ]);
+    	}
     }
 }

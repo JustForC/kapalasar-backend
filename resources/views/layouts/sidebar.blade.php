@@ -43,7 +43,7 @@
       <li class="nav-item {{ request()->is('product/*') ? 'active' : '' }}">
         <a class="nav-link" data-toggle="collapse" href="#product" role="button" aria-expanded="{{ request()->is('product/*') ? 'true' : 'false' }}" aria-controls="product">
           <i class="link-icon" data-feather="archive"></i>
-          <span class="link-title">Produk</span>
+          <span class="link-title">Product</span>
           <i class="link-arrow" data-feather="chevron-down"></i>
         </a>
         <div class="collapse {{ request()->is('product/*') ? 'show' : '' }}" id="product">
