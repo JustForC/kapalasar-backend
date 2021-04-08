@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\User;
+use App\Models\Checkout;
+use App\Models\Voucher;
 
 class HomeController extends Controller
 {
@@ -18,7 +20,8 @@ class HomeController extends Controller
                     'user' => $user
                 ]);
             }
-            return view('/dashboard/index');
+            $transactions = Checkout::with('users','vouchers')->orderBy('updated_at')->take(5);
+            return view('/dashboard/index',['transactions' => $transactions]);
         }
         $user = new User;
         return Inertia::render('View/Homepage', [

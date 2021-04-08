@@ -15,6 +15,8 @@ use App\Http\Controllers\Dashboard\HistoryController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\AdvertisementController;
 use App\Http\Controllers\Dashboard\MailController;
+use App\Http\Controllers\Dashboard\UserMailController;
+use App\Http\Controllers\Dashboard\MailHistoryController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -63,15 +65,7 @@ Route::middleware('admin')->group(function(){
         Route::delete('delete/{id}', [AdvertisementController::class, 'destroy'])->name('ads.delete');
         Route::get('data', [AdvertisementController::class, 'data'])->name('ads.data');
     });
-    
-    Route::prefix('mail')->group(function(){
-        Route::get('/', [MailController::class, 'index'])->name('mail.index');
-        Route::get('create', [MailController::class, 'create'])->name('mail.create');
-        Route::post('store', [MailController::class, 'store'])->name('mail.store');
-        Route::put('update/{id}', [MailController::class, 'update'])->name('mail.update');
-        Route::get('data', [MailController::class, 'data'])->name('mail.data');
-    });
-    
+     
     Route::prefix('promotion')->group(function(){
         Route::prefix('voucher')->group(function(){
             Route::get('/', [VoucherController::class, 'index'])->name('voucher.index');
@@ -120,6 +114,26 @@ Route::middleware('admin')->group(function(){
         Route::put('update/{id}', [HistoryController::class, 'update'])->name('history.update');
         Route::delete('delete/{id}', [HistoryController::class, 'destroy'])->name('history.delete');
         Route::get('data', [HistoryController::class, 'data'])->name('history.data');
+    });
+    
+    Route::prefix('mail')->group(function(){
+        Route::prefix('usermail')->group(function(){
+            Route::get('/', [UserMailController::class, 'index'])->name('usermail.index');
+            Route::post('send', [UserMailController::class, 'send'])->name('usermail.send');
+        });
+        Route::prefix('blastmail')->group(function(){
+            Route::get('/', [MailController::class, 'index'])->name('blastmail.index');
+            Route::get('send', [MailController::class, 'send'])->name('blastmail.send');
+        });
+        Route::prefix('history')->group(function(){
+            Route::get('/', [MailHistoryController::class, 'index'])->name('mailhistory.index');
+            Route::get('create', [MailHistoryController::class, 'create'])->name('mailhistory.create');
+            Route::post('store', [MailHistoryController::class, 'store'])->name('mailhistory.store');
+            Route::get('edit/{id}', [MailHistoryController::class, 'edit'])->name('mailhistory.edit');
+            Route::put('update/{id}', [MailHistoryController::class, 'update'])->name('mailhistory.update');
+            Route::delete('delete/{id}', [MailHistoryController::class, 'destroy'])->name('mailhistory.delete');
+            Route::get('data', [MailHistoryController::class, 'data'])->name('mailhistory.data');
+        });
     });
 });
 

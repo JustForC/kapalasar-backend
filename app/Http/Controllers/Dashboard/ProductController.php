@@ -44,7 +44,7 @@ class ProductController extends Controller
     {
         //
         $image = time().'-'.'.'.$request->product_image->extension();
-        $path =  $request->product_image->move(public_path('productimages'),$image);
+        $path =  $request->product_image->move(public_path('Upload/Product'),$image);
 
         $model = Product::create([
             'name' => $request->name,
@@ -53,7 +53,7 @@ class ProductController extends Controller
             'stock' => $request->stock,
             'price' => $request->price,
             'discount_price' => $request->discount_price,
-            'image' => $path,
+            'image' => $path->getOrignalPath(),
         ]);
 
         return response()->json($model);
@@ -111,7 +111,7 @@ class ProductController extends Controller
         }
 
         $image = time().'-'.'.'.$request->product_image->extension();
-        $path =  $request->product_image->move(public_path('productimages'),$image);
+        $path =  $request->product_image->move(public_path('Upload/Product'),$image);
 
         $model = Product::findOrFail($id)->update([
             'name' => $request->name,
@@ -120,7 +120,7 @@ class ProductController extends Controller
             'stock' => $request->stock,
             'price' => $request->price,
             'discount_price' => $request->discount_price,
-            'image' => $path,
+            'image' => $path->getOriginalPath(),
         ]);
 
         return response()->json($model);

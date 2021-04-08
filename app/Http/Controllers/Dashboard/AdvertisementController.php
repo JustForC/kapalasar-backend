@@ -38,12 +38,12 @@ class AdvertisementController extends Controller
         {
             //
             $image = time().'-'.'.'.$request->image->extension();
-            $path =  $request->image->move(public_path('advertisementimage'),$image);
+            $path =  $request->image->move(public_path('Upload/Ads'),$image);
 
             $model = Advertisement::create([
                 'name' => $request->name,
                 'path' => $request->path,
-                'image' => $path,
+                'image' => $path->getOriginalPath(),
             ]);
     
             return response()->json($model);
@@ -96,12 +96,12 @@ class AdvertisementController extends Controller
             }
 
             $image = time().'-'.'.'.$request->image->extension();
-            $path =  $request->image->move(public_path('advertisementimage'),$image);
+            $path =  $request->image->move(public_path('Upload/Ads'),$image);
 
             $model = Advertisement::findOrFail($id)->update([
                 'name' => $request->name,
                 'path' => $request->path,
-                'image' => $path,
+                'image' => $path->getOriginalPath(),
             ]);
     
             return response()->json($model);

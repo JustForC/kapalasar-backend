@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title','Product')
+@section('title','User')
 
 @push('css')
 @endpush

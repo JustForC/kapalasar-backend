@@ -37,7 +37,7 @@
             <input id="phone" type="text" class="form-control" name="phone" value="{{$model->phone}}" placeholder="Phone">
         </div>
         <div class="form-group">
-            <label for="password" class="control-label">Umur</label>
+            <label for="password" class="control-label">Password</label>
             <input id="password" type="password" class="form-control" name="password" value="{{$model->password}}" placeholder="Passowrd">
         </div>
     </div>

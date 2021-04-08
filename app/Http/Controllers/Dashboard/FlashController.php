@@ -41,7 +41,7 @@ class FlashController extends Controller
     {
         //
         $image = time().'-'.'.'.$request->image->extension();
-        $path =  $request->image->move(public_path('flashimage'),$image);
+        $path =  $request->image->move(public_path('Upload/Flash'),$image);
         $flash = Flash::create([
             'name' => $request->name,
             'start' => $request->start,
@@ -51,7 +51,7 @@ class FlashController extends Controller
         $model = FlashSale::create([
             'flashes_id' => $flash->id,
             'products_id' => $request->products_id,
-            'image' => $path,
+            'image' => $path->getOriginalPath(),
             'new_price' => $request->new_price,
             'amount' => $request->amount,
         ]);
@@ -108,12 +108,12 @@ class FlashController extends Controller
             return response()->json($model);
         }
         $image = time().'-'.'.'.$request->image->extension();
-        $path =  $request->image->move(public_path('flashimage'),$image);
+        $path =  $request->image->move(public_path('Upload/Flash'),$image);
 
         $model = Flash::findOrFail($id)->update([
             'flashes_id' => $request->flashes_id,
             'product_id' => $request->product_id,
-            'image' => $path,
+            'image' => $path->getOriginalPath(),
             'new_price' => $request->price,
             'amount' => $request->amount,
         ]);

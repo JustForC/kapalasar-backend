@@ -38,8 +38,12 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
+        $image = time().'-'.'.'.$request->image->extension();
+        $path =  $request->image->move(public_path('Upload/Category'),$image);
+
         $model = Category::create([
             'name' => $request->name,
+            'image' => $path->getOriginalPath(),
         ]);
 
         return response()->json($model);
@@ -79,8 +83,23 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         //
+        if($request->image == NULL){
+            $image = Category::findOrFail($id);
+
+            $model = Category::findOrFail($id)->update([
+                'name' => $request->name,
+                'image' => $image->image,
+            ]);
+            
+            return response()->json($model);
+        }
+        
+        $image = time().'-'.'.'.$request->image->extension();
+        $path =  $request->image->move(public_path('Upload/Category'),$image);
+
         $model = Category::findOrFail($id)->update([
             'name' => $request->name,
+            'image' => $path->getOriginalPath(),
         ]);
 
         return response()->json($model);

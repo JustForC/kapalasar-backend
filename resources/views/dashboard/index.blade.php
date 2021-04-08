@@ -12,10 +12,34 @@
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-baseline mb-4 mb-md-3">
           <h6 class="card-title mb-0">RIWAYAT TRANSAKSI</h6>
-          {{-- <button class="btn btn-primary modal-show" type="button" href="" name="Tambah Produk Baru" data-toggle="modal" data-target="#modal">+ Add New</button> --}}
         </div>
         <div class="table-responsive">
-          <table id="table" class="table hover" style="width:100%"></table>
+          <table id="table" class="table hover" style="width:100%">
+            <tr>
+              <td>ID</td>
+              <td>Nama</td>
+              <td>Status</td>
+              <td>Voucher</td>
+              <td>Total</td>
+              <td>Invoice</td>
+              <td>Tanggal Invoice</td>
+              <td>Receipt</td>
+              <td>Tanggal Receipt</td>
+            </tr>
+            @foreach($transactions as $transaction)
+            <tr>
+              <td>$transaction</td>
+              <td>$transaction->users->name</td>
+              <td>$transaction->status</td>
+              <td>$transaction->vouchers->name</td>
+              <td>$transaction->total</td>
+              <td>$transaction->invoice</td>
+              <td>$transaction->invoice_date</td>
+              <td>$transaction->receipt</td>
+              <td>$transaction->receipt_date</td>
+            </tr>
+            @endforeach
+          </table>
         </div>
       </div>
     </div>

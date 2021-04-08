@@ -48,5 +48,17 @@ class DatabaseSeeder extends Seeder
             'roles_id' => 3,
             'referral_code' => 'assany'
         ]);
+        User::create([
+            'name' => 'User 1',
+            'email' => 'user1@kapalasar.id',
+            'password' => Hash::make('superadmin'),
+            'roles_id' => 4,
+        ]);
+        User::create([
+            'name' => 'User 2',
+            'email' => 'user2@kapalasar.id',
+            'password' => Hash::make('superadmin'),
+            'roles_id' => 4,
+        ]);
     }
 }

@@ -12,6 +12,11 @@
             <label for="name" class="control-label">Jenis Kategori</label>
             <input id="name" type="text" class="form-control" name="name" value="{{$model->name}}" placeholder="Name">
         </div>
+
+        <div class="form-group">
+            <label for="image" class="control-label">Logo Kategori</label>
+            <input id="image" type="file" name="image">
+        </div>
     </div>
     <div class="modal-footer">
         <button type="submit" class="btn btn-primary" id="modal-save"></button>

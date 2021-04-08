@@ -1,6 +1,6 @@
 <nav class="sidebar">
   <div class="sidebar-header">
-    <a href="#" class="sidebar-brand">
+    <a href="{{route('home')}}" class="sidebar-brand">
       <img src="{{ asset('kapalasar.png') }}" alt="logo" width="122.5" height="30">
     </a>
     <div class="sidebar-toggler not-active">
@@ -95,11 +95,22 @@
           <span class="link-title">History</span>
         </a>
       </li>
-      <li class="nav-item {{ request()->is('mail') ? 'active' : '' }}">
-        <a href="{{ url('mail') }}" class="nav-link">
-          <i class="link-icon fas fa-ad"></i>
+      <li class="nav-item {{ request()->is('mail/*') ? 'active' : '' }}">
+        <a class="nav-link" data-toggle="collapse" href="#mail" role="button" aria-expanded="{{ request()->is('mail/*') ? 'true' : 'false' }}" aria-controls="mail">
+          <i class="link-icon fas fa-envelope"></i>
           <span class="link-title">Mail</span>
+          <i class="link-arrow" data-feather="chevron-down"></i>
         </a>
+        <div class="collapse {{ request()->is('mail/*') ? 'show' : '' }}" id="mail">
+          <ul class="nav sub-menu">
+            <li class="nav-item">
+              <a href="{{ url('/mail/usermail') }}" class="nav-link {{ request()->is('mail/usermail') ? 'active' : '' }}">Mail User</a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ url('/mail/blastmail') }}" class="nav-link {{ request()->is('mail/blastmail') ? 'active' : '' }}">Blast Mail</a>
+            </li>
+          </ul>
+        </div>
       </li>
       @endif
     </ul>
