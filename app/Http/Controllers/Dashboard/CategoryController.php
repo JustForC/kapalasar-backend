@@ -5,42 +5,30 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
-use Auth;
 use DataTables;
 
 class CategoryController extends Controller
 {
-    //
     public function index()
     {
-        //
         return view('dashboard/categories/index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
         $model = new Category();
         return view('dashboard/categories/form',['model' => $model]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
+<<<<<<< HEAD
         //
         $image = time().'-'.'.'.$request->image->extension();
         $path =  $request->image->move(public_path('Upload/Category'),$image);
 
+=======
+>>>>>>> 842080ba91d74fe0376e5785e270ebd4639dda15
         $model = Category::create([
             'name' => $request->name,
             'image' => $path->getOriginalPath(),
@@ -49,39 +37,15 @@ class CategoryController extends Controller
         return response()->json($model);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
         $model = Category::findOrFail($id);
         return view('dashboard/categories/form',['model' => $model]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
+<<<<<<< HEAD
         //
         if($request->image == NULL){
             $image = Category::findOrFail($id);
@@ -97,23 +61,17 @@ class CategoryController extends Controller
         $image = time().'-'.'.'.$request->image->extension();
         $path =  $request->image->move(public_path('Upload/Category'),$image);
 
+=======
+>>>>>>> 842080ba91d74fe0376e5785e270ebd4639dda15
         $model = Category::findOrFail($id)->update([
             'name' => $request->name,
             'image' => $path->getOriginalPath(),
         ]);
-
         return response()->json($model);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
         $model = Category::findOrFail($id)->delete();
         return response()->json($model);
     }

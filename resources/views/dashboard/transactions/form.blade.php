@@ -11,9 +11,10 @@
         <div class="form-group">
             <label for="status" class="control-label">Status</label><br>
             <select id="status" type="number" class="form-control" name="status">
-                <option value='1'>Baru Masuk</option>
-                <option value='2'>Sudah Konfirmasi</option>
-                <option value='3'> Sudah Selesai</option>
+                <option value='1'>Dipesan</option>
+                <option value='2'>Selesai</option>
+                <option value='3'>Refund</option>
+                <option value='4'>Tidak Selesai</option>
             </select>
         </div>
         <div class="form-group">

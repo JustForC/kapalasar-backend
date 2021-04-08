@@ -10,42 +10,27 @@ use DataTables;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
         return view('dashboard/products/index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
         $categories = Category::get();
         $model = new Product();
         return view('dashboard/products/form',['model' => $model,'categories' => $categories]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
         $image = time().'-'.'.'.$request->product_image->extension();
+<<<<<<< HEAD
         $path =  $request->product_image->move(public_path('Upload/Product'),$image);
 
+=======
+        $path =  $request->product_image->move(public_path('productimages'),$image);
+>>>>>>> 842080ba91d74fe0376e5785e270ebd4639dda15
         $model = Product::create([
             'name' => $request->name,
             'categories_id' => $request->categories_id,
@@ -59,41 +44,15 @@ class ProductController extends Controller
         return response()->json($model);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
         $categories = Category::get();
         $model = Product::findOrFail($id);
         return view('dashboard/products/form',['model' => $model,'categories' => $categories]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
         if($request->product_image == NULL){
             $product = Product::findOrFail($id);
 
@@ -106,7 +65,6 @@ class ProductController extends Controller
                 'discount_price' => $request->discount_price,
                 'image' => $product->image,
             ]);
-
             return response()->json($model);
         }
 
@@ -126,15 +84,8 @@ class ProductController extends Controller
         return response()->json($model);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
         $model = Product::findOrFail($id)->delete();
         return response()->json($model);
     }

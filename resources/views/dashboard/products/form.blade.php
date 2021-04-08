@@ -37,7 +37,7 @@
             <input id="discount_price" type="discount_price" class="form-control" name="discount_price" value="{{$model->discount_price}}" placeholder="Discount_Price">
         </div>
         <div class="form-group">
-            <label for="product_image" class="control-label">Gambar Produk</label>
+            <label for="product_image" class="control-label">Gambar Produk</label><br/>
             <input id="product_image" type="file" name="product_image">
         </div>
     </div>
