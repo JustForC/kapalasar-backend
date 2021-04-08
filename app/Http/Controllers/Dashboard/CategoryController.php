@@ -22,13 +22,10 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-<<<<<<< HEAD
         //
         $image = time().'-'.'.'.$request->image->extension();
         $path =  $request->image->move(public_path('Upload/Category'),$image);
 
-=======
->>>>>>> 842080ba91d74fe0376e5785e270ebd4639dda15
         $model = Category::create([
             'name' => $request->name,
             'image' => $path->getOriginalPath(),
@@ -45,7 +42,6 @@ class CategoryController extends Controller
 
     public function update(Request $request, $id)
     {
-<<<<<<< HEAD
         //
         if($request->image == NULL){
             $image = Category::findOrFail($id);
@@ -61,8 +57,6 @@ class CategoryController extends Controller
         $image = time().'-'.'.'.$request->image->extension();
         $path =  $request->image->move(public_path('Upload/Category'),$image);
 
-=======
->>>>>>> 842080ba91d74fe0376e5785e270ebd4639dda15
         $model = Category::findOrFail($id)->update([
             'name' => $request->name,
             'image' => $path->getOriginalPath(),

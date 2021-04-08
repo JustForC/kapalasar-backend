@@ -25,12 +25,8 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $image = time().'-'.'.'.$request->product_image->extension();
-<<<<<<< HEAD
         $path =  $request->product_image->move(public_path('Upload/Product'),$image);
 
-=======
-        $path =  $request->product_image->move(public_path('productimages'),$image);
->>>>>>> 842080ba91d74fe0376e5785e270ebd4639dda15
         $model = Product::create([
             'name' => $request->name,
             'categories_id' => $request->categories_id,
