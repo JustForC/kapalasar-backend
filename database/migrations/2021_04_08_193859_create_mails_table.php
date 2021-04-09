@@ -17,7 +17,7 @@ class CreateMailsTable extends Migration
             $table->id();
             $table->string('target');
             $table->string('subject');
-            $table->longText('context');
+            $table->longText('content');
             $table->timestamps();
         });
     }

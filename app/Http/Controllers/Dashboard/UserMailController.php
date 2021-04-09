@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use App\Models\Mail;
 
 class UserMailController extends Controller
 {
@@ -24,21 +27,27 @@ class UserMailController extends Controller
      */
     public function send(Request $request)
     {
-        //
-        // $model = User::create([
-        //     'name' => $request->name,
-        //     'email' => $request->email,
-        //     'password' => Hash::make($request->password),
-        //     'phone' => $request->phone,
-        //     'address' => $request->address,
-        //     'roles_id' => 4,
-        // ]);
-
-        // return response()->json($model);
-        $image = time().'-'.'.'.$request->image->extension();
-        $path =  $request->image->move(public_path('Upload/Ads'),$image);
         $user = User::find($request->user_id);
-        var_dump($path->getRealPath());
+        $mail = new PHPMailer(true);     // Passing `true` enables exceptions
+            $mail->SMTPDebug = 0;
+            $mail->isSMTP();
+            $mail->Host = \config('newmailer.host');             //  smtp host
+            $mail->SMTPAuth = true;
+            $mail->Username = \config('newmailer.username');   //  sender username
+            $mail->Password = \config('newmailer.password');       // sender password
+            $mail->SMTPSecure = \config('newmailer.encryption');                  // encryption - ssl/tls
+            $mail->Port = \config('newmailer.port');                          // port - 587/465
+            $mail->addAddress($user->email);
+            $mail->Subject = $request->subject;
+            $mail->Body    = $request->content;
+            $mail->isHTML(true);
+
+        Mail::create([
+            'target' => 'Nama = '.$user->name.' Email '.$user->email,
+            'subject' => $request->subject,
+            'content' => $request->content,
+        ]);
+
     }
 
 }

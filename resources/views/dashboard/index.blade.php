@@ -28,7 +28,7 @@
             </tr>
             @foreach($transactions as $transaction)
             <tr>
-              <td>$transaction</td>
+              <td>$transaction->id</td>
               <td>$transaction->users->name</td>
               <td>$transaction->status</td>
               <td>$transaction->vouchers->name</td>

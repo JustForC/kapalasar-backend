@@ -108,5 +108,11 @@ class DatabaseSeeder extends Seeder
                 'categories_id' => 6
             ]);
     	}
+        User::insert([
+            'name' => 'Ghema Allan',
+            'email' => 'ghemaallan@gmail.com',
+            'password' => bcrypt('superadmin'),
+            'roles_id' => 4,
+        ]);
     }
 }

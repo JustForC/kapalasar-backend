@@ -120,7 +120,7 @@ Route::middleware('admin')->group(function(){
         });
         Route::prefix('blastmail')->group(function(){
             Route::get('/', [MailController::class, 'index'])->name('blastmail.index');
-            Route::get('send', [MailController::class, 'send'])->name('blastmail.send');
+            Route::post('send', [MailController::class, 'send'])->name('blastmail.send');
         });
         Route::prefix('history')->group(function(){
             Route::get('/', [MailHistoryController::class, 'index'])->name('mailhistory.index');
