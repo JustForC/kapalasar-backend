@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('merchant.layouts.dashboard')
 
 @section('title','Dashboard')
 

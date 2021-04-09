@@ -37,6 +37,10 @@ class TypeController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'name' => ['required'],
+        ]);
+
         $model = Type::create([
             'name'=> $request->name,
         ]);

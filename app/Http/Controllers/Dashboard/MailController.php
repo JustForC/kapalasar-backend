@@ -20,6 +20,10 @@ class MailController extends Controller
     public function send(Request $request)
     {
         //
+        $this->validate($request, [
+            'subject' => ['required'],
+            'content' => ['required'],
+        ]);
         $users = User::with('roles')->where('roles_id','=',4)->get();
         foreach($users as $user){
             Mails::sendMail($user->email,$request->subject,$request->content);

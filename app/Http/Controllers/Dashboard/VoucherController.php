@@ -40,6 +40,11 @@ class VoucherController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'types_id' => ['required'],
+            'name' => ['required'],
+        ]);
+
         $model = Voucher::create([
             'types_id' => $request->types_id,
             'name' => $request->name,

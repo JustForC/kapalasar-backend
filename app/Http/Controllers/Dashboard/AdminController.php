@@ -39,6 +39,14 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
+
+        $this->validate($request, [
+            'name' => ['required'],
+            'email' => ['required'],
+            'password' => ['required'],
+            'role' => ['required']
+        ]);
+
         $model = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -68,6 +76,7 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
+        
         $model = User::findOrFail($id);
         $roles = Role::get()->reject(function($roles){
             if($roles->name=='Merchant' || $roles->name=='User' ) return true;
@@ -84,6 +93,12 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validator = Validator::make([
+            'name'=> ['required'],
+            'email' => ['required'],
+            'password' => ['required'],
+        ]);
+
         $model = User::findOrFail($id)->update([
             'name' => $request->name,
             'email' => $request->email,

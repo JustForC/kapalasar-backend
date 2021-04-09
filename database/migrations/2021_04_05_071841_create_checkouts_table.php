@@ -15,12 +15,19 @@ class CreateCheckoutsTable extends Migration
     {
         Schema::create('checkouts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('vouchers_id')->references('id')->on('vouchers')->onUpdate('cascade')->onDelete('cascade');
+            // Pembeli
+            $table->foreignId('users_id')->nullable()->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('name');
+            // Voucher
+            // $table->foreignId('vouchers_id')->nullable()->references('id')->on('vouchers')->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('type');
+            $table->string('discount');
+            // penjual / referal code
+            $table->foreignId('merchant_id')->nullable()->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->bigInteger('total');
             $table->integer('status');
-            $table->string('invoice')->nullable();
-            $table->dateTime('date_invoice')->nullable();
+            // $table->string('invoice')->nullable();
+            // $table->dateTime('date_invoice')->nullable();
             $table->string('receipt')->nullable();
             $table->dateTime('date_receipt')->nullable();
             $table->timestamps();

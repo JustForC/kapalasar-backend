@@ -47,6 +47,13 @@ class HistoryController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'users_id' => ['required'],
+            'vouchers_id' => ['required'],
+            'total' => ['required'],
+            'status' => ['required'],
+        ]);
+
         $model = Checkout::create([
             'users_id' => $request->users_id,
             'vouchers_id'=> $request->vouchers_id,

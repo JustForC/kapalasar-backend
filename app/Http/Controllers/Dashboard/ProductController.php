@@ -24,6 +24,15 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name' => ['required'],
+            'categories_id' => ['required'],
+            'unit' => ['required'],
+            'stock' => ['required'],
+            'price' => ['required'],
+            'path' => ['required'],
+        ]);
+
         $image = time().'-'.'.'.$request->product_image->extension();
         $path =  $request->product_image->move(public_path('upload/product'),$image);
 

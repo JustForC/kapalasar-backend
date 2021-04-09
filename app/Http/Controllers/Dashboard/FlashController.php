@@ -40,6 +40,15 @@ class FlashController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'name' => ['required'],
+            'new_price' => ['required'],
+            'image' => ['required'],
+            'name' => ['required'],
+            'end' => ['required'],
+            'amount' => ['required'],
+        ]);
+
         $image = time().'-'.'.'.$request->image->extension();
         $path =  $request->image->move(public_path('upload/flash'),$image);
         $flash = Flash::create([

@@ -1,4 +1,4 @@
-<form id="form_modal" class="form" method="POST" action="{{ $model->exists ? route('admin.update', $model->id) : route('admin.store') }}" enctype="multipart/form-data">
+<form id="form_modal" class="form" method="POST" action="{{ $model->exists ? route('user.update', $model->id) : route('user.store') }}" enctype="multipart/form-data">
     @csrf {{ method_field($model->exists ? 'PUT' : 'POST') }}
 
     <div class="modal-header">

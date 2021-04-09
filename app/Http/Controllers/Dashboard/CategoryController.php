@@ -23,6 +23,11 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'name' => ['required'],
+            'image' => ['required'],
+        ]);
+
         $image = time().'-'.'.'.$request->image->extension();
         $path =  $request->image->move(public_path('upload/category'),$image);
 
@@ -43,6 +48,7 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         //
+
         if($request->image == NULL){
             $image = Category::findOrFail($id);
 

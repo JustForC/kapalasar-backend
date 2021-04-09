@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Role;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Checkout;
 
 class DatabaseSeeder extends Seeder
 {
@@ -108,6 +109,7 @@ class DatabaseSeeder extends Seeder
                 'categories_id' => 6
             ]);
     	}
+        
         User::insert([
             'name' => 'Ghema Allan',
             'email' => 'ghemaallan@gmail.com',

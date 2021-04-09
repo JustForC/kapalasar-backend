@@ -28,6 +28,12 @@ class UserMailController extends Controller
      */
     public function send(Request $request)
     {
+        $this->validate($request, [
+            'user_id' => ['required'],
+            'subject' => ['required'],
+            'content' => ['required'],
+        ]);
+
         $user = User::find($request->user_id);
         Mails::sendMail($user->email,$request->subject,$request->content);
 

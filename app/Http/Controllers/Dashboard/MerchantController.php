@@ -38,6 +38,17 @@ class MerchantController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'name' => ['required'],
+            'address' => ['required'],
+            'address_detail' => ['required'],
+            'referral_code' => ['required'],
+            'email' => ['required'],
+            'password' => ['required'],
+            'age' => ['required'],
+            'phone' => ['required'],
+            'job' => ['required'],
+        ]);
         $model = User::create([
             'name' => $request->name,
             'address' => $request->address,

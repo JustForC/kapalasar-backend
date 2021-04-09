@@ -35,7 +35,10 @@
         </div>
         <div class="form-group">
             <label for="content" class="control-label">Isi Email</label>
-            <textarea form ="form_modal" id="contenct" class="form-control" name="content" placeholder="Content" rows="20"></textarea>
+            <textarea id="content" form ="form_modal" class="form-control" name="content" placeholder="Content" rows="20"></textarea>
+            <script>
+                    CKEDITOR.replace( 'content' );
+            </script>
         </div>
     </div>
     <div class="modal-footer">
@@ -72,6 +75,7 @@
     //     }
     //   });
     // });
+    
 
     $('body').on('submit','.form', function(event){
       event.preventDefault();
@@ -124,6 +128,10 @@
         }
       });
     });
+
+    CKEDITOR.replace( 'content' );
+
+    
 
     // $('body').on('click', '.delete', function (event) {
     //   event.preventDefault();

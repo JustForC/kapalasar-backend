@@ -40,16 +40,25 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
-        $model = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'phone' => $request->phone,
-            'address' => $request->address,
-            'roles_id' => 4,
-        ]);
+        var_dump($request->all());
+        // $this->validate($request, [
+        //     'name' => ['required'],
+        //     'email' => ['required'],
+        //     'password' => ['required'],
+        //     'phone' => ['required'],
+        //     'address' => ['required'],
+        // ]);
 
-        return response()->json($model);
+        // $model = User::create([
+        //     'name' => $request->name,
+        //     'email' => $request->email,
+        //     'password' => Hash::make($request->password),
+        //     'phone' => $request->phone,
+        //     'address' => $request->address,
+        //     'roles_id' => 4,
+        // ]);
+
+        // return response()->json($model);
     }
 
     /**
