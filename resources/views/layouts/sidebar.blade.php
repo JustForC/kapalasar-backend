@@ -109,6 +109,9 @@
             <li class="nav-item">
               <a href="{{ url('/mail/blastmail') }}" class="nav-link {{ request()->is('mail/blastmail') ? 'active' : '' }}">Blast Mail</a>
             </li>
+            <li class="nav-item">
+              <a href="{{ url('/mail/history') }}" class="nav-link {{ request()->is('mail/history') ? 'active' : '' }}">Mail Sent</a>
+            </li>
           </ul>
         </div>
       </li>
