@@ -24,7 +24,7 @@ class CategoryController extends Controller
     {
         //
         $image = time().'-'.'.'.$request->image->extension();
-        $path =  $request->image->move(public_path('Upload/Category'),$image);
+        $path =  $request->image->move(public_path('upload/category'),$image);
 
         $model = Category::create([
             'name' => $request->name,
@@ -55,7 +55,7 @@ class CategoryController extends Controller
         }
         
         $image = time().'-'.'.'.$request->image->extension();
-        $path =  $request->image->move(public_path('Upload/Category'),$image);
+        $path =  $request->image->move(public_path('upload/category'),$image);
 
         $model = Category::findOrFail($id)->update([
             'name' => $request->name,

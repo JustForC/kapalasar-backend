@@ -25,7 +25,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $image = time().'-'.'.'.$request->product_image->extension();
-        $path =  $request->product_image->move(public_path('Upload/Product'),$image);
+        $path =  $request->product_image->move(public_path('upload/product'),$image);
 
         $model = Product::create([
             'name' => $request->name,
@@ -65,7 +65,7 @@ class ProductController extends Controller
         }
 
         $image = time().'-'.'.'.$request->product_image->extension();
-        $path =  $request->product_image->move(public_path('Upload/Product'),$image);
+        $path =  $request->product_image->move(public_path('upload/product'),$image);
 
         $model = Product::findOrFail($id)->update([
             'name' => $request->name,

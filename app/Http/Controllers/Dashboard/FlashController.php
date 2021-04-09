@@ -41,7 +41,7 @@ class FlashController extends Controller
     {
         //
         $image = time().'-'.'.'.$request->image->extension();
-        $path =  $request->image->move(public_path('Upload/Flash'),$image);
+        $path =  $request->image->move(public_path('upload/flash'),$image);
         $flash = Flash::create([
             'name' => $request->name,
             'start' => $request->start,
@@ -108,7 +108,7 @@ class FlashController extends Controller
             return response()->json($model);
         }
         $image = time().'-'.'.'.$request->image->extension();
-        $path =  $request->image->move(public_path('Upload/Flash'),$image);
+        $path =  $request->image->move(public_path('upload/flash'),$image);
 
         $model = Flash::findOrFail($id)->update([
             'flashes_id' => $request->flashes_id,
