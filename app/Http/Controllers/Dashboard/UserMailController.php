@@ -8,6 +8,7 @@ use App\Models\User;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use App\Models\Mail;
+use App\Helpers\Mails;
 
 class UserMailController extends Controller
 {
@@ -28,19 +29,7 @@ class UserMailController extends Controller
     public function send(Request $request)
     {
         $user = User::find($request->user_id);
-        $mail = new PHPMailer(true);     // Passing `true` enables exceptions
-            $mail->SMTPDebug = 0;
-            $mail->isSMTP();
-            $mail->Host = \config('newmailer.host');             //  smtp host
-            $mail->SMTPAuth = true;
-            $mail->Username = \config('newmailer.username');   //  sender username
-            $mail->Password = \config('newmailer.password');       // sender password
-            $mail->SMTPSecure = \config('newmailer.encryption');                  // encryption - ssl/tls
-            $mail->Port = \config('newmailer.port');                          // port - 587/465
-            $mail->addAddress($user->email);
-            $mail->Subject = $request->subject;
-            $mail->Body    = $request->content;
-            $mail->isHTML(true);
+        Mails::sendMail($user->email,$request->subject,$request->content);
 
         Mail::create([
             'target' => 'Nama = '.$user->name.' Email '.$user->email,

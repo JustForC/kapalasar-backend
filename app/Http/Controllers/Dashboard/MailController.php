@@ -5,9 +5,8 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 use App\Models\Mail;
+use App\Helpers\Mails;
 
 class MailController extends Controller
 {
@@ -21,6 +20,11 @@ class MailController extends Controller
     public function send(Request $request)
     {
         //
+        $users = User::with('roles')->where('roles_id','=',4)->get();
+        foreach($users as $user){
+            Mails::sendMail($user->email,$request->subject,$request->content);
+        }
+
         Mail::create([
             'target' => 'Semua User',
             'subject' => $request->subject,
