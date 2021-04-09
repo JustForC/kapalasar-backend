@@ -59,13 +59,13 @@
       </li>
       <li class="nav-item {{ request()->is('ads') ? 'active' : '' }}">
         <a href="{{ url('ads') }}" class="nav-link">
-          <i class="link-icon fas fa-ad"></i>
+          <i class="link-icon far fa-ad"></i>
           <span class="link-title">Advertisement</span>
         </a>
       </li>
       <li class="nav-item {{ request()->is('promotion/*') ? 'active' : '' }}">
         <a class="nav-link" data-toggle="collapse" href="#promotion" role="button" aria-expanded="{{ request()->is('promotion/*') ? 'true' : 'false' }}" aria-controls="promotion">
-          <i class="link-icon fas fa-money-bill-wave-alt"></i>
+          <i class="link-icon far fa-money-bill-wave-alt"></i>
           <span class="link-title">Promotion</span>
           <i class="link-arrow" data-feather="chevron-down"></i>
         </a>
@@ -85,7 +85,7 @@
       </li>
       <li class="nav-item {{ request()->is('transaction') ? 'active' : '' }}">
         <a href="{{ url('transaction') }}" class="nav-link">
-          <i class="link-icon fas fa-shopping-cart"></i>
+          <i class="link-icon" data-feather="shopping-cart"></i>
           <span class="link-title">Transaction </span>
         </a>
       </li>
@@ -97,7 +97,7 @@
       </li>
       <li class="nav-item {{ request()->is('mail/*') ? 'active' : '' }}">
         <a class="nav-link" data-toggle="collapse" href="#mail" role="button" aria-expanded="{{ request()->is('mail/*') ? 'true' : 'false' }}" aria-controls="mail">
-          <i class="link-icon fas fa-envelope"></i>
+          <i class="link-icon" data-feather="mail"></i>
           <span class="link-title">Mail</span>
           <i class="link-arrow" data-feather="chevron-down"></i>
         </a>
