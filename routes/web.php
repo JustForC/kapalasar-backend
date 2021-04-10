@@ -14,6 +14,7 @@ use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\AdvertisementController;
 use App\Http\Controllers\Dashboard\MailController;
 use App\Http\Controllers\Dashboard\UserMailController;
+use App\Http\Controllers\Dashboard\CatalogController;
 use App\Http\Controllers\Dashboard\MailHistoryController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
@@ -173,6 +174,21 @@ Route::middleware('superadmin')->group(function(){
     });
 });
 
+
+Route::prefix('catalog')->group(function(){
+    Route::middleware('admin')->group(function(){
+        Route::get('create', [CatalogController::class, 'create'])->name('catalog.create');
+        Route::post('store', [CatalogController::class, 'store'])->name('catalog.store');
+        Route::delete('delete/{id}', [CatalogController::class, 'destroy'])->name('catalog.delete');
+        Route::get('data', [CatalogController::class, 'data'])->name('catalog.data');
+    });
+    Route::get('/', [CatalogController::class, 'index'])->name('catalog.index');
+    Route::post('download',[CatalogController::class,'download'])->name('catalog.download');
+});
+
+
+
+//
 Route::prefix('{code}')->group(function(){
     Route::get('/', [CodeController::class, 'index'])->name('code.index');
     Route::get('flash_sale', [CodeController::class, 'flash_sale'])->name('code.flash_sale');
@@ -190,3 +206,5 @@ Route::prefix('{code}')->group(function(){
     Route::post('login', [CodeController::class, 'login'])->name('code.login');
     Route::get('logout', [CodeController::class, 'logout'])->name('code.logout');
 });
+
+

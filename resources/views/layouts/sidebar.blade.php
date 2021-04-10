@@ -116,6 +116,12 @@
         </div>
       </li>
       @endif
+      <li class="nav-item {{ request()->is('catalog') ? 'active' : '' }}">
+        <a href="{{ url('catalog') }}" class="nav-link">
+          <i class="link-icon" data-feather="file"></i>
+          <span class="link-title">Catalog </span>
+        </a>
+      </li>
     </ul>
   </div>
 </nav>
