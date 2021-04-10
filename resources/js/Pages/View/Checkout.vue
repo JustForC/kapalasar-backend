@@ -273,7 +273,7 @@
 <script>
 import Navbar from "../components/Navbar.vue";
 import Footer from "../components/Footer.vue";
-import ProductCartList from "../components/ProductCartList";
+import ProductCartList from "../components/productCartList";
 import { Inertia } from '@inertiajs/inertia';
 
 export default {
