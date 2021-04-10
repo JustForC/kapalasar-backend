@@ -18,6 +18,7 @@
 </head>
 <body>
     <div class="block hidden"></div>
+    @include('layouts/modal')
     <div class="main-wrapper" id="app">
         @include('layouts.sidebar')
         <div class="page-wrapper">
@@ -28,7 +29,6 @@
         @include('layouts.footer')
         </div>
     </div>
-    @include('layouts/modal')
 
     <form id="logout-form" action="{{ url('/logout') }}" method="POST">@csrf</form>
     <script src="/js/dashboard.js"></script>
