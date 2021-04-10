@@ -52,6 +52,11 @@
                               outlined
                               dense
                             ></v-text-field>
+                            <!-- <div v-if="form.errors.name">{{ form.errors.name }}</div>
+                            <v-alert
+                              v-if="form.errors.name"
+                            >{{form.errors.name}}
+                            </v-alert> -->
                             <span class="label font-weight-medium">Email</span>
                             <v-text-field
                               v-model="form.email"
@@ -61,6 +66,10 @@
                               outlined
                               dense
                             ></v-text-field>
+                            <!-- <v-alert
+                              v-if="form.errors.email"
+                            >asdsada{{form.errors.email}}
+                            </v-alert> -->
                             <span class="label font-weight-medium"
                               >Nomor Telepon</span
                             >
@@ -122,6 +131,14 @@ import Navbar from "../components/Navbar.vue";
 
 export default {
   components: { Navbar, Footer },
+  props: {
+    name: String,
+    email: String,
+    phone: String,
+    password: String,
+    // errors: Object
+  },
+  props: ['errors'],
   data() {
     return {
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
@@ -147,12 +164,17 @@ export default {
     };
   },
   methods: {
-      submit() {
-          this.form.post(this.route('register'), {
-              onFinish: () => this.form.reset('password', 'password_confirmation'),
-          })
-      }
-  }
+    submit() {
+      this.form.post(this.route('register'), {
+        preserveScroll: true,
+      });
+      // console.log(this.form.errors);
+      // console.log(this.props.form.errors);
+    }
+  },
+  // mounted() {
+  //   console.log(this.name);
+  // }
 };
 </script>
 

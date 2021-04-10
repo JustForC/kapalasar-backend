@@ -17,6 +17,6 @@ class Checkout extends Model
         return $this->belongsTo(Voucher::class);
     }
     public function costs(){
-        return $this->hasMany(Cost::class);
+        return $this->hasMany(Cost::class, 'checkouts_id', 'id');
     }
 }

@@ -188,5 +188,5 @@ Route::prefix('{code}')->group(function(){
     Route::post('register', [CodeController::class, 'register'])->name('code.register');
     Route::get('login', [CodeController::class, 'loginShow'])->name('code.loginShow');
     Route::post('login', [CodeController::class, 'login'])->name('code.login');
-    Route::get('logout', [CodeController::class, 'logout'])->name('code.');
+    Route::get('logout', [CodeController::class, 'logout'])->name('code.logout');
 });

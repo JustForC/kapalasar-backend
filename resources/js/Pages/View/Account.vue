@@ -103,7 +103,7 @@
             </v-card>
             <v-container>
               <div v-for="(item, i) in dataTransaction" :key="i">
-                <transaction-list :transaction="item" :num="i" />
+                <TransactionList :transaction="item" :num="i" />
               </div>
             </v-container>
           </v-card>
@@ -164,11 +164,13 @@ export default {
       // this.dataTransaction = this.$store.state.transaction.listSuccessTransactions;
       const transactionData = this.$store.state.transaction
         .listSuccessTransactions;
+      
 
       let dataProduct = [];
       let totalPrice = 0;
 
       // this.real_products.forEach(product => {
+
       //   transactionData.forEach(transaction => {
       //     totalPrice = transaction.totalPrice;
       //     transaction.cart.forEach(cart => {
@@ -182,10 +184,10 @@ export default {
       //     });
       //   });
       // });
-      this.dataTransaction.push({
+      // this.dataTransaction.push({
         // dataProduct,
-        totalPrice: totalPrice
-      });
+        // totalPrice: totalPrice
+      // });
     }
   },
   mounted() {

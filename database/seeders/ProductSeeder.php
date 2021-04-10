@@ -14,6 +14,40 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
+        Category::insert([
+            'name' => 'Buah',
+            'image' => '/upload/category/buah.png'
+        ]);
+        Category::insert([
+            'name' => 'Sayur',
+            'image' => '/upload/category/sayur.png'
+        ]);
+        Category::insert([
+            'name' => 'Daging',
+            'image' => '/upload/category/daging.png'
+        ]);
+        Category::insert([
+            'name' => 'Yoghurt',
+            'image' => '/upload/category/yoghurt.png'
+        ]);
+        Category::insert([
+            'name' => 'Ladanglima',
+            'image' => '/upload/category/ladanglima.png'
+        ]);
+        Category::insert([
+            'name' => 'Gula Merah',
+            'image' => '/upload/category/gulamerah.png'
+        ]);
+        Category::insert([
+            'name' => 'Bumbu Giling',
+            'image' => '/upload/category/bumbugiling.png'
+        ]);
+        Category::insert([
+            'name' => 'Olahan Kacang Kedelai',
+            'image' => '/upload/category/olahankacangkedelai.png'
+        ]);
+
+
         DB::table('products')->insert([
             [
             'name'=>'anggur-plain',

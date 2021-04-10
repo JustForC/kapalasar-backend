@@ -412,11 +412,23 @@ class CodeController extends Controller
                 'password' => $request->password,
             ];
             if(Auth()->guard()->attempt($credentials)){
-                return redirect('/');
+                return redirect()->route('code.home', $code);
             }
             return redirect()->back()->withInput($request->only('email', 'password', 'remember'))->withErrors([
                 'password' => 'Password salah',
             ]);
+        }
+        else{
+            abort(404);
+        }
+    }
+
+    public function logout($code)
+    {
+        $referral = User::where('referral_code', $code)->first();
+        if($referral){
+            Auth::logout();
+            return redirect()->route('code.home', $code);
         }
         else{
             abort(404);

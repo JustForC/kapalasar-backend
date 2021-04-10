@@ -91,7 +91,7 @@ class DatabaseSeeder extends Seeder
             'image' => '/upload/category/sayur.png'
         ]);
         Category::insert([
-            'name' => 'Daging',
+            'name' => 'Daging dan Ikan',
             'image' => '/upload/category/daging.png'
         ]);
         Category::insert([
@@ -149,7 +149,7 @@ class DatabaseSeeder extends Seeder
             'start' => '22:00',
             'end' => '22:30'
         ]);
-        $this->call(ProductSeeder::class);
+        $this->call(ProductSeeder1::class);
         // for($i = 1; $i <= 20; $i++){
         //     Product::insert([
         //         'name' => 'Sayur '.$i,

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
+// use Illuminate\Support\Facades\Session;
 use App\Models\User;
 
 class RegisterController extends Controller
@@ -30,6 +31,19 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
+        // $request->validateWithBag('registerURL', [
+        //     'email' => ['required', 'email', 'unique:users,email'],
+        //     'password' => ['required', 'min:8'],
+        //     'name' => ['required'],
+        //     'phone' => ['required']
+        // ]);
+        // Inertia::share([
+        //     'errors' => function () {
+        //         return Session::get('errors')
+        //             ? Session::get('errors')->getBag('default')->getMessages()
+        //             : (object) [];
+        //     },
+        // ]);
         //Error messages
         $messages = [
             'name.required' => 'Nama tidak boleh kosong',
