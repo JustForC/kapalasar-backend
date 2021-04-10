@@ -58,14 +58,6 @@ class RegisterController extends Controller
                 'phone' => $request->phone,
                 'email' => $request->email,
                 'password' => bcrypt($request->password),
-                // 'zip' => $request->zip,
-                // 'province' => $request->province,
-                // 'district' => $request->district,
-                // 'subdistrict' => $request->subdistrict,
-                // 'village' => $request->village,
-                // 'hamlet' => $request->hamlet,
-                // 'neighbourhood' => $request->neighbourhood,
-                // 'address' => $request->address,
                 'roles_id' => 4
             ]);
             Auth::login($user);

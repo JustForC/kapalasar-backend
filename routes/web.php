@@ -19,6 +19,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CodeController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('flash_sale', [HomeController::class, 'flash_sale'])->name('flash_sale');
@@ -172,6 +173,20 @@ Route::middleware('superadmin')->group(function(){
     });
 });
 
-Route::get('/{code}', [HomeController::class, 'code'])->name('code');
+Route::prefix('{code}')->group(function(){
+    Route::get('/', [CodeController::class, 'index'])->name('code.index');
+    Route::get('flash_sale', [CodeController::class, 'flash_sale'])->name('code.flash_sale');
+    Route::get('account', [CodeController::class, 'account'])->name('code.account');
 
-Route::get('/coba/cek',[HomeController::Class,'cek']);
+    Route::get('checkout', [CodeController::class, 'checkout'])->name('code.checkout');
+    Route::get('payment', [CodeController::class, 'payment'])->name('code.payment');
+
+    Route::post('finish', [CodeController::class, 'finish'])->name('code.finish');
+
+    // Authentication
+    Route::get('register', [CodeController::class, 'registerShow'])->name('code.registerShow');
+    Route::post('register', [CodeController::class, 'register'])->name('code.register');
+    Route::get('login', [CodeController::class, 'loginShow'])->name('code.loginShow');
+    Route::post('login', [CodeController::class, 'login'])->name('code.login');
+    Route::get('logout', [CodeController::class, 'logout'])->name('code.');
+});
