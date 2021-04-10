@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <div class="home">
-      <navbar />
+     <Navbar :check="check" :user="user"/>
       <v-container class="mt-5" style="background-color:#A6CB26">
         <div class="jumbotron text-center py-15 ">
           <h1>Flashsale</h1>
@@ -38,23 +38,20 @@
           <v-row justify="center">
             <v-col
               cols="6"
-              md="2"
+              sm="4"
+              md="3"
+              lg="2"
               v-for="(product, i) in filteredProducts"
               :key="i"
-              class="ma-md-2 v-lazy  my-3"
+              class="ma-lg-2 v-lazy my-3"
             >
               <v-row justify="center">
-                <product-card @getTotalPrice="getTotalPrice" :product="product" />
+                <ProductCardFlash @getTotalPrice="getTotalPrice" :product="product" />
               </v-row>
             </v-col>
           </v-row>
         </v-container>
       </v-lazy>
-      <!-- Compliance Cookie GDPR edited by Fauzi -->
-      <client-only>
-        <Cookie />
-      </client-only>
-      <!-- End of Compliance Cookie GDPR edited by Fauzi -->
       <Footer />
       <div v-if="showCart" class="cart" style="z-index:999">
         <v-container>
@@ -67,9 +64,11 @@
             </div>
             <v-spacer></v-spacer>
             <div class="d-flex align-center">
-              <v-btn to="/checkout" class="checkout" color="#A6CB26"
-                >Checkout</v-btn
-              >
+              <inertia-link href="/checkout">
+              <v-btn class="checkout" color="#A6CB26">
+                Checkout
+              </v-btn>
+              </inertia-link>
             </div>
           </v-row>
         </v-container>
@@ -82,18 +81,23 @@
 // @ is an alias to /src
 import ClientOnly from 'vue-client-only'
 import Navbar from "../components/Navbar.vue";
-import ProductCard from "../components/ProductCard.vue";
+import ProductCardFlash from "../components/ProductCardFlash.vue";
 import Footer from "../components/Footer.vue";
-import { products, filters, slides } from "../dummyData/dummy.js";
+import { filters, products, slides } from "../dummyData/dummy.js";
 import Cookie from "../components/cookie";
 export default {
   name: "Home",
   components: {
     Navbar,
-    ProductCard,
+    ProductCardFlash,
     Footer,
     Cookie,
     ClientOnly
+  },
+  props: {
+    check: Boolean,
+    user: Object,
+    real_products: Array
   },
   data() {
     return {
@@ -126,7 +130,6 @@ export default {
       },
       slides,
       filters,
-      products,
       totalPrice: 0,
       showCart: false,
       notFlashsaleProducts: [],
@@ -136,6 +139,11 @@ export default {
     };
   },
   methods: {
+    // Carousel Resize based on Screen Size
+    onResize () {
+        this.windowSize = { x: window.innerWidth, y: window.innerHeight }
+      },
+    // End of Carousel Resize based on Screen Size
     parseRupiah(strMoney) {
       return parseInt(strMoney).toLocaleString("id", {
         style: "currency",
@@ -160,40 +168,48 @@ export default {
       }
     },
     filterFlashSale() {
-      this.flashSaleProducts = products.filter(product => product.flashSale);
+      // this.flashSaleProducts = products.filter(product => product.flashSale);
+      this.flashSaleProducts = this.real_products.map(products => {
+          return products.products;
+      })      
     },
     filterNotFlashSale() {
-      this.notFlashsaleProducts = products.filter(
-        product => !product.flashSale
-      );
+      // this.notFlashsaleProducts = products.filter(
+      //   product => !product.flashSale
+      // );
+      this.notFlashsaleProducts = this.real_products.map(products => {
+          return products.products;
+      })
+      // console.log(this.notFlashsaleProducts);
       this.filteredProducts = this.notFlashsaleProducts;
+      console.log(this.filteredProducts);
     },
     filterByKategori(by) {
       this.current = by;
       if (this.current === "sayur") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.kategori === "sayuran"
+          product => product.categories_id === 2
         );
       } else if (this.current === "buah") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.kategori === "buah"
+          product => product.categories_id === 1
         );
       } else if (this.current === "daging") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.kategori === "daging"
+          product => product.categories_id === 3
         );
       } else if (this.current === "bumbu") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.kategori === "bumbu"
+          product => product.categories_id === 7
         );
       } else if (this.current === "promo") {
-        this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.hargaCoret
-        );
+        this.filteredProducts = this.notFlashsaleProducts.filter(function(item){
+          return item.price !== null;
+        });
       } else {
         this.filteredProducts = this.notFlashsaleProducts;
       }
-    }
+    },
   },
   created() {
     this.filterFlashSale();
@@ -201,6 +217,8 @@ export default {
   },
   mounted() {
     this.changeShowCart();
+        // console.log(this.real_products[0].products);
+
   }
 };
 </script>
