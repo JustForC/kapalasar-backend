@@ -47,7 +47,7 @@ class AdvertisementController extends Controller
             $model = Advertisement::create([
                 'name' => $request->name,
                 'path' => $request->path,
-                'image' => $path->getPath(),
+                'image' => '/upload/ads/'.$path->getFileName(),
             ]);
     
             return response()->json($model);
@@ -106,7 +106,7 @@ class AdvertisementController extends Controller
             $model = Advertisement::findOrFail($id)->update([
                 'name' => $request->name,
                 'path' => $request->path,
-                'image' => $path->getPath(),
+                'image' => '/upload/ads/'.$path->getFileName(),
             ]);
     
             return response()->json($model);

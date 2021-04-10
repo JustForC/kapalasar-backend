@@ -34,8 +34,8 @@ class ProductController extends Controller
         ]);
 
         $image = time().'-'.'.'.$request->product_image->extension();
-        $path =  $request->product_image->move(public_path('upload/product'),$image);
-
+        $path =  $request->product_image->move(public_path('/upload/product'),$image);
+        
         $model = Product::create([
             'name' => $request->name,
             'categories_id' => $request->categories_id,
@@ -43,9 +43,9 @@ class ProductController extends Controller
             'stock' => $request->stock,
             'price' => $request->price,
             'discount_price' => $request->discount_price,
-            'image' => $path->getPath(),
+            'image' => '/upload/product/'.$path->getFileName(),
         ]);
-
+        var_dump($path);
         return response()->json($model);
     }
 
@@ -83,7 +83,7 @@ class ProductController extends Controller
             'stock' => $request->stock,
             'price' => $request->price,
             'discount_price' => $request->discount_price,
-            'image' => $path->getPath(),
+            'image' => '/upload/product/'.$path->getFileName(),
         ]);
 
         return response()->json($model);

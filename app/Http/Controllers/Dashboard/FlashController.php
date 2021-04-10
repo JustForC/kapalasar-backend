@@ -60,7 +60,7 @@ class FlashController extends Controller
         $model = FlashSale::create([
             'flashes_id' => $flash->id,
             'products_id' => $request->products_id,
-            'image' => $path->getPath(),
+            'image' => '/upload/flash/'.$path->getFileName(),
             'new_price' => $request->new_price,
         ]);
 
@@ -89,7 +89,7 @@ class FlashController extends Controller
         //
         $products = Product::get();
         $model = FlashSale::findOrFail($id);
-        return view('dashboard/product/form',['model' => $model,'products' => $products]);
+        return view('dashboard/flash/form',['model' => $model,'products' => $products]);
     }
 
     /**
@@ -121,7 +121,7 @@ class FlashController extends Controller
         $model = Flash::findOrFail($id)->update([
             'flashes_id' => $request->flashes_id,
             'product_id' => $request->product_id,
-            'image' => $path->getPath(),
+            'image' => '/upload/flash/'.$path->getFileName(),
             'new_price' => $request->price,
             'amount' => $request->amount,
         ]);
