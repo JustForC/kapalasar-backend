@@ -184,17 +184,19 @@ export const products = [
   export const filters = [
     { src: require("../assets/Semua.png"), name: "semua" },
     { src: require("../assets/Buah.png"), name: "buah" },
-    { src: require("../assets/Daging.png"), name: "daging" },
     { src: require("../assets/Sayur.png"), name: "sayur" },
+    { src: require("../assets/Daging.png"), name: "daging dan ikan" },
+    { src: require("../assets/Bumbu.png"), name: "bumbu" },
+    { src: require("../assets/Bumbu.png"), name: "bumbu" },
     { src: require("../assets/Bumbu.png"), name: "bumbu" },
     { src: require("../assets/promo.png"), name: "promo" }
   ];
   
   export const slides = [
-    { src: "https://picsum.photos/800/800" },
-    { src: "https://picsum.photos/800/800" },
-    { src: "https://picsum.photos/800/800" },
-    { src: "https://picsum.photos/800/800" }
+    { src: require("../assets/Banner-1.jpg") },
+    { src: require("../assets/Banner-2.jpg") },
+    { src: require("../assets/Banner-3.jpg") },
+    { src: require("../assets/Banner-4.jpg") }
   ];
   
   export const vouchers = [

@@ -42,14 +42,19 @@
                         :rules="[rules.required]"
                         placeholder="Nama Lengkap"
                         outlined
+                        disabled
                         dense
                       ></v-text-field>
+                      <!-- <div class="mt-md-3 mt-1 text-subtitle-1">
+                        {{ user.telepon }}
+                      </div> -->
                       <span class="label font-weight-medium">Email</span>
                       <v-text-field
                         v-model="user.email"
                         :rules="[rules.required, rules.email]"
                         placeholder="Email"
                         outlined
+                        disabled
                         dense
                       ></v-text-field>
                       <span class="label font-weight-medium"
@@ -60,6 +65,7 @@
                         :rules="[rules.required, rules.onlyNum]"
                         placeholder="Nomor Telepon"
                         outlined
+                        disabled
                         dense
                       ></v-text-field>
                       <span class="label font-weight-medium">Alamat</span>
@@ -68,6 +74,7 @@
                         :rules="[rules.required]"
                         placeholder="Alamat"
                         outlined
+                        disabled
                         dense
                       ></v-text-field>
                       <!-- <span class="label font-weight-medium">Password</span>
@@ -162,15 +169,15 @@ export default {
   methods: {
     getTransactionData() {
       // this.dataTransaction = this.$store.state.transaction.listSuccessTransactions;
-      const transactionData = this.$store.state.transaction
-        .listSuccessTransactions;
+      // const transactionData = this.$store.state.transaction
+      //   .listSuccessTransactions;
       
+      // dateTransaction = this.checkouts;
 
       let dataProduct = [];
       let totalPrice = 0;
 
-      // this.real_products.forEach(product => {
-
+      // products.forEach(product => {
       //   transactionData.forEach(transaction => {
       //     totalPrice = transaction.totalPrice;
       //     transaction.cart.forEach(cart => {
@@ -184,10 +191,55 @@ export default {
       //     });
       //   });
       // });
+
+      this.real_products.forEach(product => {
+        this.checkouts.forEach(transaction => {
+          totalPrice = transaction.price;
+          transaction.costs.forEach(cart => {
+            if(cart.product == product.name) {
+              const list = {
+                qty: cart.amount,
+                  ...product
+              };
+              // dataProduct.push
+            }
+          })
+        })
+      })
+      // this.checkouts.forEach(
+      //   transaction => {
+      //     totalPrice = transaction.total;
+      //     transaction.costs.forEach(
+      //       cart => {
+      //         if(cart.id == transaction.id){
+      //           const list = {
+      //             qty: cart.qty,
+      //             // ...product
+      //           };
+      //         }
+      //       })
+      //   });
+
       // this.dataTransaction.push({
-        // dataProduct,
-        // totalPrice: totalPrice
+      //   dataProduct,
+      //   totalPrice: totalPrice
       // });
+
+//   transactionData.forEach(
+        // transaction => {
+      //     totalPrice = transaction.totalPrice;
+      //     transaction.cart.forEach(cart => {
+      //       if (cart.id == product.id) {
+      //         const list = {
+      //           qty: cart.qty,
+      //           ...product
+      //         };
+      //         dataProduct.push(list);
+      //       }
+      //     });
+      //   });
+      // });
+
     }
   },
   mounted() {
