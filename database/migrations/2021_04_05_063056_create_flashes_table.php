@@ -16,8 +16,8 @@ class CreateFlashesTable extends Migration
         Schema::create('flashes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->dateTime('start');
-            $table->dateTime('end');
+            $table->time('start');
+            $table->time('end');
             $table->timestamps();
         });
     }

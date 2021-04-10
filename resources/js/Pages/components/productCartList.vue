@@ -4,10 +4,10 @@
       <v-row class="mt-3">
         <div>
           <v-card-title class="title font-weight-medium text-subtitle-1 pa-1">
-            {{ listCart.productName }}
+            {{ listCart.name }}
           </v-card-title>
           <v-card-subtitle class="black--text text-subtitle-2 py-2 px-1">
-            {{ parseRupiah(listCart.hargaBaru) }}
+            {{ parseRupiah(listCart.new_price) }}
           </v-card-subtitle>
         </div>
         <v-spacer></v-spacer>
@@ -18,7 +18,7 @@
             x-small
             color="#A6CB26"
             :disabled="disabledMin"
-            @click="minQty(listCart.id, listCart.hargaBaru)"
+            @click="minQty(listCart.id, listCart.new_price)"
           >
             <v-icon color="white">mdi-minus</v-icon>
           </v-btn>
@@ -31,7 +31,7 @@
             x-small
             color="#A6CB26"
             :disabled="disabledPlus"
-            @click="addQty(listCart.id, 10, listCart.hargaBaru)"
+            @click="addQty(listCart.id, 10, listCart.new_price)"
           >
             <v-icon color="white">mdi-plus</v-icon>
           </v-btn>
@@ -48,8 +48,11 @@ export default {
     return {
       checkedVal: "",
       disabledMin: false,
-      disablePlus: false
+      disabledPlus: false,
     };
+  },
+  mounted() {
+    console.log(this.listCart);
   },
   methods: {
     parseRupiah(strMoney) {
@@ -68,7 +71,7 @@ export default {
             this.$set(item, "qty", newQty);
             this.disabledMin = false;
           } else {
-            this.DisablePlus = true;
+            this.DisabledPlus = true;
           }
         }
       });

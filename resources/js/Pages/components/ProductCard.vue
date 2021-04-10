@@ -3,17 +3,17 @@
     <v-card elevation="1" max-width="200" max-height="300">
       <v-img :src="product.image" height="150" max-width="200"></v-img>
       <v-card-title class="text-subtitle-2 font-weight-medium">{{
-        product.productName
+        product.name
       }}</v-card-title>
       <v-card-subtitle class="text-caption pb-1">{{
-        product.description
+        product.unit
       }}</v-card-subtitle>
       <v-card-text class="pb-0">
         <div class="amber--text font-weight-medium">
-          {{ parseRupiah(product.hargaBaru) }}
+          {{ parseRupiah(product.new_price) }}
         </div>
         <div class="grey--text text-decoration-line-through text-caption">
-          {{ parseRupiah(product.hargaCoret) }}
+          {{ parseRupiah(product.price) }}
         </div>
       </v-card-text>
       <div class="px-4 pt-1 pb-4">
@@ -27,7 +27,7 @@
             x-small
             dark
             color="#A6CB26"
-            @click="minQty(product.id, product.hargaBaru)"
+            @click="minQty(product.id, product.new_price)"
           >
             <v-icon>mdi-minus</v-icon>
           </v-btn>
@@ -40,7 +40,7 @@
             x-small
             dark
             color="#A6CB26"
-            @click="addQty(product.id, product.stock, product.hargaBaru)"
+            @click="addQty(product.id, product.stock, product.new_price)"
           >
             <v-icon>mdi-plus</v-icon>
           </v-btn>
@@ -70,6 +70,7 @@ export default {
   },
   methods: {
     parseRupiah(strMoney) {
+      if(strMoney == null) return '';
       return parseInt(strMoney).toLocaleString("id", {
         style: "currency",
         currency: "IDR"
@@ -93,7 +94,7 @@ export default {
 
       // const state = this.$store.state.cart.listCarts;
       // console.log(`itemQty: ${JSON.stringify(state)}`);
-      this.calculatePrice(this.product.hargaBaru);
+      this.calculatePrice(this.product.new_price);
     },
     addQty(idx, stock, harga) {
       const state = this.$store.state.cart.listCarts;

@@ -21,8 +21,13 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\HomeController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('checkout', [HomeController::class, 'checkout'])->name('checkout');
 Route::get('flash_sale', [HomeController::class, 'flash_sale'])->name('flash_sale');
+Route::get('account', [HomeController::class, 'account'])->name('account');
+
+Route::get('checkout', [HomeController::class, 'checkout'])->name('checkout');
+Route::get('payment', [HomeController::class, 'payment'])->name('payment');
+
+Route::post('finish', [HomeController::class, 'finish'])->name('finish');
 
 // Authentication
 Route::get('register', [RegisterController::class, 'show']);

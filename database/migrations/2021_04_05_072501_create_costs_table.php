@@ -16,6 +16,7 @@ class CreateCostsTable extends Migration
         Schema::create('costs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('checkouts_id')->references('id')->on('checkouts')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('products_id')->nullable()->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade');
             $table->string('product')->nullable();
             $table->integer('amount')->nullable();
             $table->integer('price')->nullable();

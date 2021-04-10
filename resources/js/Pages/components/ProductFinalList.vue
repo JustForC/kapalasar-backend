@@ -7,13 +7,13 @@
         </div>
         <div>
           <v-card-title class="font-weight-medium text-subtitle-1 pt-0">
-            {{ listFinalCart.productName }}
+            {{ listFinalCart.name }}
           </v-card-title>
           <v-card-subtitle class="text-subtitle-2 py-0">
             {{ listFinalCart.description }}
           </v-card-subtitle>
           <v-card-subtitle class="text-subtitle-2 py-0">
-            {{ parseRupiah(listFinalCart.hargaBaru) }}
+            {{ parseRupiah(listFinalCart.new_price) }}
           </v-card-subtitle>
         </div>
         <v-spacer></v-spacer>
@@ -39,9 +39,5 @@ export default {
   }
 };
 </script>
-.white--text {
-  color: #FFFFFF !important;
-  caret-color: #FFFFFF !important;
-}
 
 <style></style>
