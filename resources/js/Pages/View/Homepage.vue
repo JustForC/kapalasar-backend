@@ -38,7 +38,7 @@
           <div class="d-flex justify-center align-center">
             <splide :options="optionsFlashsale">
               <splide-slide v-for="(product, i) in flashSaleProducts" :key="i">
-                <product-card @getTotalPrice="getTotalPrice" :product="product" />
+                <ProductCard @getTotalPrice="getTotalPrice" :product="product" />
               </splide-slide>
             </splide>
           </div>
@@ -87,6 +87,15 @@
           </v-row>
         </v-container>
       </v-lazy>
+      <div class="carousel d-flex justify-center align-center">
+        <splide :options="optionsCarousel">
+          <splide-slide v-for="(slide, i) in slides" :key="i">
+            <div class="rounded">
+              <v-img class="responsive" :src="slide.src" />
+            </div>
+          </splide-slide>
+        </splide>
+      </div>
 
       <!-- <client-only>
         <Cookie />
@@ -117,13 +126,12 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import Navbar from "../components/Navbar.vue";
 import ProductCard from "../components/ProductCard.vue";
 import Footer from "../components/Footer.vue";
-import { products, filters, slides } from "../dummyData/dummy.js";
+import { filters, slides } from "../dummyData/dummy.js";
 import cookie from "../components/cookie";
 export default {
   name: "Home",
@@ -138,6 +146,7 @@ export default {
   props: {
     check: Boolean,
     user: Object,
+    real_products: Array
   },
   data() {
     return {
@@ -170,7 +179,6 @@ export default {
       },
       slides,
       filters,
-      products,
       totalPrice: 0,
       showCart: false,
       notFlashsaleProducts: [],
@@ -204,36 +212,38 @@ export default {
       }
     },
     filterFlashSale() {
-      this.flashSaleProducts = products.filter(product => product.flashSale);
+      // this.flashSaleProducts = products.filter(product => product.flashSale);
+      this.flashSaleProducts = this.real_products;      
     },
     filterNotFlashSale() {
-      this.notFlashsaleProducts = products.filter(
-        product => !product.flashSale
-      );
+      // this.notFlashsaleProducts = products.filter(
+      //   product => !product.flashSale
+      // );
+      this.notFlashsaleProducts = this.real_products;
       this.filteredProducts = this.notFlashsaleProducts;
     },
     filterByKategori(by) {
       this.current = by;
       if (this.current === "sayur") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.kategori === "sayuran"
+          product => product.categories.name === "Sayur"
         );
       } else if (this.current === "buah") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.kategori === "buah"
+          product => product.categories.name === "Buah"
         );
       } else if (this.current === "daging") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.kategori === "daging"
+          product => product.categories.name === "Daging"
         );
       } else if (this.current === "bumbu") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.kategori === "bumbu"
+          product => product.categories.name === "Bumbu"
         );
       } else if (this.current === "promo") {
-        this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.hargaCoret
-        );
+        this.filteredProducts = this.notFlashsaleProducts.filter(function(item){
+          return item.price !== null;
+        });
       } else {
         this.filteredProducts = this.notFlashsaleProducts;
       }
@@ -245,6 +255,7 @@ export default {
   },
   mounted() {
     this.changeShowCart();
+    // console.log(this.real_products);
   }
 };
 </script>

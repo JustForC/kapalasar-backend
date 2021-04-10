@@ -18,12 +18,15 @@ class CreateCheckoutsTable extends Migration
             // Pembeli
             $table->foreignId('users_id')->nullable()->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
+            $table->string('phone');
+            $table->string('address');
             // Voucher
             // $table->foreignId('vouchers_id')->nullable()->references('id')->on('vouchers')->onUpdate('cascade')->onDelete('cascade');
-            $table->integer('type');
-            $table->string('discount');
+            $table->integer('type')->nullable();
+            $table->string('discount')->nullable();
             // penjual / referal code
-            $table->foreignId('merchant_id')->nullable()->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('merchants_id')->nullable()->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+
             $table->bigInteger('total');
             $table->integer('status');
             // $table->string('invoice')->nullable();

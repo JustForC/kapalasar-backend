@@ -2,7 +2,7 @@
   <div class="navbar">
     <v-app-bar flat max-height="120" height="100">
       <v-row justify="center">
-        <v-col md="3">
+        <v-col sm="5" md="4" lg="3">
           <div>
             <inertia-link href="/">
               <v-img
@@ -13,8 +13,8 @@
             </inertia-link>
           </div>
         </v-col>
-        <v-col md="5" lg="6" class="text-center" v-if="true" :load="log(user)">
-          <div class="align-center">
+        <v-col sm="2" md="4" lg="6" class="text-center" v-if="true" :load="log(user)">
+          <!-- <div class="align-center">
             <v-text-field
               outlined
               label="Search"
@@ -27,10 +27,10 @@
               ma-1
             >
             </v-text-field>
-          </div>
+          </div> -->
         </v-col>
         <!-- <v-col md="6" v-else></v-col> -->
-        <v-col md="3">
+        <v-col sm="5" md="4" lg="3">
           <div v-if="check">
             <v-menu offset-y>
               <template v-slot:activator="{ on, attrs }">
@@ -44,10 +44,10 @@
                 >
                   <v-list-item-avatar
                     tile
-                    size="25"
-                    class="mx-2"
+                    size="0.1"
+                    class="py-3"
                   ></v-list-item-avatar>
-                  <v-card-subtitle class="d-inline px-1" dark >{{
+                  <v-card-subtitle class="d-inline" dark >{{
                     user.name
                   }}</v-card-subtitle>
                   <v-card-actions class="d-inline pa-1">
@@ -63,13 +63,15 @@
                 <v-list-item
                   v-for="menu in menus"
                   :key="menu.title"
-                  link
-                  :to="menu.router"
                 >
-                  <v-list-item-icon>
-                    <v-icon>{{ menu.icon }}</v-icon>
-                  </v-list-item-icon>
-                  <v-list-item-title>{{ menu.title }}</v-list-item-title>
+                  <inertia-link :href="menu.router" class="black--text" style="text-decoration: none;">
+                      <!-- <v-list-item-icon> -->
+                        <v-icon class="mr-3 py-3">{{ menu.icon }}</v-icon>
+                      <!-- </v-list-item-icon> -->
+                      <!-- <v-list-item-title> -->
+                        {{ menu.title }}
+                      <!-- </v-list-item-title> -->
+                  </inertia-link>
                 </v-list-item>
               </v-list>
             </v-menu>
@@ -96,15 +98,15 @@
 export default {
   methods: {
     log(user) {
-      console.log(user)
+      // console.log(user)
     }
   },
   props: ['check', 'user'],
   data() {
     return {
       menus: [
-        { icon: "mdi-account", title: "Account", router: "Account" },
-        { icon: "mdi-logout", title: "Keluar" }
+        { icon: "mdi-account", title: "Account", router: "/account" },
+        { icon: "mdi-logout", title: "Keluar", router:"/logout" }
       ]
     }
   }

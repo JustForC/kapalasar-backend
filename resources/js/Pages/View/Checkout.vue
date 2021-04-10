@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <div>
-      <Navbar />
+      <Navbar :check="check" :user="user"/>
       <div>
         <v-container>
           <v-card color="#a6cb26">
@@ -11,6 +11,60 @@
               >
             </v-container>
           </v-card>
+
+          <!-- Data User (Logged In) -->
+          <v-alert
+            class="my-5"
+            border="top"
+            colored-border
+            color="#F99F39"
+            elevation="2"
+            v-if="check"
+          >
+            <v-container>
+              <span
+                class="label text-h6 font-weight-medium"
+                style="color: #54595f"
+                >Informasi Pembeli</span
+              >
+              <div class="mx-md-16 mt-md-10 mt-2">
+                <div>
+                  <div class="label font-weight-regular">Nama</div>
+                  <!-- <v-divider></v-divider> -->
+                  <v-text-field
+                    placeholder="Masukan Nama Anda"
+                    single-line
+                    outlined
+                    dense
+                    v-model="user.name"
+                  ></v-text-field>
+                </div>
+                <div>
+                  <div class="label font-weight-regular">No Telepon</div>
+                  <!-- <v-divider></v-divider> -->
+                  <v-text-field
+                    placeholder="Masukan No Telepon Anda"
+                    single-line
+                    outlined
+                    dense
+                    v-model="user.phone"
+                  ></v-text-field>
+                </div>
+                <div>
+                  <div class="label font-weight-regular">Alamat</div>
+                  <!-- <v-divider></v-divider> -->
+                  <v-textarea
+                    placeholder="Masukan Alamat Anda"
+                    outlined
+                    rows="3"
+                    auto-grow
+                    v-model="user.address"
+                  ></v-textarea>
+                </div>
+              </div>
+            </v-container>
+          </v-alert>
+
           <!-- Form Data User -->
           <v-alert
             class="my-5"
@@ -18,8 +72,8 @@
             colored-border
             color="#F99F39"
             elevation="2"
+            v-else
           >
-            <!-- v-if="!isLoggedin" -->
             <v-container>
               <span
                 class="label text-h6 font-weight-medium"
@@ -62,54 +116,7 @@
               </div>
             </v-container>
           </v-alert>
-          <!-- Data User (Logged In) -->
-          <v-alert
-            class="my-5"
-            border="top"
-            colored-border
-            color="#F99F39"
-            elevation="2"
-          >
-          <!-- v-else -->
-            <v-container>
-              <span
-                class="label text-h6 font-weight-medium"
-                style="color: #54595f"
-                >Informasi Pembeli</span
-              >
-              <div class="mx-md-16 mt-md-10 mt-2">
-                <div>
-                  <div class="label font-weight-regular">Nama</div>
-                  <div>
-                    <v-divider></v-divider>
-                  </div>
-                </div>
-                <div class="mt-md-3 mt-1 text-subtitle-1">
-                  <!-- {{ user.name }} -->
-                </div>
-                <div class="mt-md-4 mt-2">
-                  <div class="label font-weight-regular">
-                    Nomor Telepon
-                  </div>
-                  <div>
-                    <v-divider></v-divider>
-                  </div>
-                </div>
-                <div class="mt-md-3 mt-1 text-subtitle-1">
-                  <!-- {{ user.telepon }} -->
-                </div>
-                <div class="mt-md-4 mt-2">
-                  <div class="label font-weight-regular">Alamat</div>
-                  <div>
-                    <v-divider></v-divider>
-                  </div>
-                </div>
-                <div class="mt-md-3 mt-1 text-subtitle-1">
-                  <!-- {{ user.alamat }} -->
-                </div>
-              </div>
-            </v-container>
-          </v-alert>
+
           <!-- Voucher -->
           <v-alert
             class="my-5"
@@ -124,8 +131,9 @@
                 style="color: #54595f"
                 >Voucher</span
               >
-              <!-- v-if="!Object.keys(voucherInUse).length" -->
-              <v-row class="pt-3" >
+              <!--  -->
+              <div class="mx-md-16 mt-2">
+              <v-row class="pt-3" v-if="!Object.keys(voucherInUse).length">
                 <v-col cols="8" md="6">
                   <v-text-field
                     placeholder="Kode Voucher"
@@ -136,13 +144,13 @@
                   ></v-text-field>
                 </v-col>
                 <v-col cols="4" md="6">
-                  <v-btn color="#a6cb26" dark >
+                  <v-btn color="#a6cb26" dark @click="cekVoucher">
                     Pakai
                   </v-btn>
                 </v-col>
               </v-row>
               <!-- v-else -->
-              <v-row>
+              <v-row v-else>
                 <v-col cols="12" md="6" class="mt-5">
                   <v-sheet color="white" elevation="1" rounded>
                     <v-row align="center" justify="center">
@@ -154,13 +162,13 @@
                       <v-col cols="8" class="text-body2 font-weight-medium">
                         <div>
                           Anda Mendapat Potongan Sebesar
-                          <!-- <span class="mr-2">{{
+                          <span class="mr-2">{{
                             parseRupiah(voucherInUse.disc)
-                          }}</span> -->
+                          }}</span>
                         </div>
                         <div class="text-caption">
                           Voucher " <span>
-                            <!-- {{ voucherInUse.name }} -->
+                            {{ voucherInUse.name }}
                             </span> " aktif
                         </div>
                       </v-col>
@@ -175,6 +183,7 @@
                   </v-sheet>
                 </v-col>
               </v-row>
+              </div>
             </v-container>
           </v-alert>
           <!-- List Cart -->
@@ -211,7 +220,7 @@
                     </v-col>
                   </v-row>
                 </div>
-                <div >
+                <div v-for="(product, i) in listCart" :key="i">
                   <v-row>
                     <v-col cols="2" md="1">
                       <v-checkbox
@@ -232,25 +241,25 @@
                 </div>
               </div>
               <div class="mt-6 mx-md-16">
-                <v-row class="mx-1" >
+                <v-row class="mx-1" v-if="Object.keys(voucherInUse).length">
                   <div class="label text-subtitle-1">Potongan Harga</div>
                   <v-spacer></v-spacer>
                   <div class="totalPrice text-subtitle-1">
-                    <!-- {{ parseRupiah(voucherInUse.disc) }} -->
+                    {{ parseRupiah(voucherInUse.disc) }}
                   </div>
                 </v-row>
                 <v-row class="mx-1">
                   <div class="label text-h6">Total Belanja</div>
                   <v-spacer></v-spacer>
                   <div class="totalPrice text-h6">
-                    <!-- {{ parseRupiah(totalPrice) }} -->
+                    {{ parseRupiah(totalPrice) }}
                   </div>
                 </v-row>
               </div>
             </v-container>
           </v-alert>
           <div class="text-center">
-            <v-btn color="#a6cb26" dark >
+            <v-btn color="#a6cb26" dark @click="addBuyerInfo">
               Lanjut Pembayaran
             </v-btn>
           </div>
@@ -264,8 +273,8 @@
 <script>
 import Navbar from "../components/Navbar.vue";
 import Footer from "../components/Footer.vue";
-import ProductCartList from "../components/productCartList";
-import { products, vouchers, user } from "../dummyData/dummy.js";
+import ProductCartList from "../components/ProductCartList";
+import { Inertia } from '@inertiajs/inertia';
 
 export default {
   components: {
@@ -273,13 +282,15 @@ export default {
     Footer,
     ProductCartList
   },
+  props: {
+    check: Boolean,
+    user: Object,
+    real_products: Array,
+    real_vouchers: Array
+  },
   data() {
     return {
-      products,
       product: [],
-      vouchers,
-      user,
-      isLoggedin: true,
       voucher: "",
       voucherInUse: {},
       nama: "",
@@ -322,42 +333,48 @@ export default {
       window.scrollTo(0, 0);
     },
     addBuyerInfo() {
-      if (!this.isLoggedin) {
+      if (!this.check) {
         const data = {
-          nama: this.nama,
-          telepon: this.telepon,
-          alamat: this.alamat
+          name: this.nama,
+          phone: this.phone,
+          address: this.address
         };
+        // Validasi Mana ???
         this.$store.commit("user/ADD", data);
         console.log(this.$store.state.user.userInfo);
-
-        this.$router.push("/payment");
+        Inertia.visit('/payment');
       } else {
         const data = {
-          nama: user.name,
-          telepon: user.telepon,
-          alamat: user.alamat
+          name: this.user.name,
+          phone: this.user.phone,
+          address: this.user.address
         };
+        // Validasi mana ??
         this.$store.commit("user/ADD", data);
         console.log(this.$store.state.user.userInfo);
+        Inertia.visit('/payment');
+        // this.form.post(this.route('register'), {
+        //     onFinish: () => this.form.reset('password', 'password_confirmation'),
+        // });
 
-        this.$router.push("/payment");
+        // this.$router.push("/payment");
       }
     },
     getProductList() {
       const state = this.$store.state.cart.listCarts;
-      products.forEach(
+      this.real_products.forEach(
         product => {state.forEach(item => {
           if (item.id == product.id) {
             const cart = {
               qty: item.qty,
               ...product
             };
+            // console.log(cart);
             this.listCart.push(cart);
           }
         });
       });
-      console.log(product);
+      // console.log(product);
     },
     getTotalPrice(id) {
       if (this.checkedVal.includes(id))
@@ -373,7 +390,7 @@ export default {
 
       const state = this.$store.state.cart.listCarts;
 
-      let newFullList = products.filter(item => {
+      let newFullList = this.real_products.filter(item => {
         return temp.includes(item.id);
       });
 
@@ -387,7 +404,7 @@ export default {
       let totalPrice = 0;
 
       this.fixedListCart.forEach(item => {
-        totalPrice += item.qty * item.hargaBaru;
+        totalPrice += item.qty * item.new_price;
       });
 
       this.$store.commit("cart/SET_TOTAL_PRICE", totalPrice);
@@ -396,11 +413,12 @@ export default {
       this.useVoucher();
     },
     cekVoucher() {
-      vouchers.forEach(voucher => {
+      this.real_vouchers.forEach(voucher => {
         if (voucher.name == this.voucher) {
           const useVoucher = {
             name: this.voucher,
-            disc: voucher.discount
+            disc: voucher.discount,
+            type: voucher.types_id
           };
           this.voucherInUse = useVoucher;
           this.$store.commit("voucher/ADD", this.voucherInUse);
@@ -413,7 +431,15 @@ export default {
     useVoucher() {
       const voucher = this.$store.state.voucher.voucher;
       if (Object.keys(voucher).length) {
-        this.totalPrice -= voucher.disc;
+        console.log(Object(voucher))
+        if(voucher.type == 1){
+        }
+        if(voucher.type == 2){
+          this.totalPrice -= voucher.disc;
+        }
+        if(voucher.type == 3){
+          this.totalPrice = this.totalPrice * (100-voucher.disc) / 100;
+        }
         this.$store.commit("cart/SET_TOTAL_PRICE", this.totalPrice);
         this.totalPrice = this.$store.state.cart.totalPrice;
       }
@@ -430,6 +456,7 @@ export default {
   mounted() {
     this.scrollToTop();
     this.getProductList();
+    console.log(this.real_vouchers);
   },
   watch: {
     checkedVal() {

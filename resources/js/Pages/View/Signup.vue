@@ -1,7 +1,7 @@
 <template>
   <v-app>
   <div>
-    <navbar />
+    <Navbar />
     <div class="my-3">
       <v-container>
         <v-card>

@@ -18,8 +18,7 @@ class CreateVouchersTable extends Migration
             $table->foreignId('types_id')->references('id')->on('types')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
             $table->integer('amount')->nullable();
-            $table->integer('value')->nullable();
-            $table->integer('percent')->nullable();
+            $table->integer('discount')->nullable();
             $table->dateTime('start')->nullable();
             $table->dateTime('end')->nullable();
             $table->timestamps();
