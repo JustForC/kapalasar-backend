@@ -355,16 +355,6 @@ class HomeController extends Controller
         $user = new User;
         // $flash_sale_prod = Product::with('categories')->get();
         $flash_sale_prod = FlashSale::with('products')->get();
-        foreach($flash_sale_prod as $product){
-            if($product->discount_price){
-                $product->new_price = $product->discount_price;
-                $product->price = $product->price;
-            }
-            else{
-                $product->new_price = $product->price;
-                $product->price = null;
-            }
-        }
         return Inertia::render('View/Flashsale', [
             'check' => $check,
             'user' => null,

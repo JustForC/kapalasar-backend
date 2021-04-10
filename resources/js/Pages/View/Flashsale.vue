@@ -26,7 +26,11 @@
               :color="filter.name == current ? '#a6cb26' : ''"
               :dark="filter.name == current ? true : false"
             >
-              <v-img :src="filter.src"></v-img>
+              <v-img 
+              max-height="25"
+              max-width="25"
+              :src="filter.src"
+              ></v-img>
               <span class="mx-2">{{ filter.name }}</span>
             </v-btn>
           </div>
@@ -46,7 +50,7 @@
               class="ma-lg-2 v-lazy my-3"
             >
               <v-row justify="center">
-                <ProductCardFlash @getTotalPrice="getTotalPrice" :product="product" />
+                <ProductCardFlash @getTotalPrice="getTotalPrice" :product="product" :newPrice="newPrice" />
               </v-row>
             </v-col>
           </v-row>
@@ -83,7 +87,7 @@ import ClientOnly from 'vue-client-only'
 import Navbar from "../components/Navbar.vue";
 import ProductCardFlash from "../components/ProductCardFlash.vue";
 import Footer from "../components/Footer.vue";
-import { filters, products, slides } from "../dummyData/dummy.js";
+import { filters, slides } from "../dummyData/dummy.js";
 import Cookie from "../components/cookie";
 export default {
   name: "Home",
@@ -128,6 +132,7 @@ export default {
         autoWidth: true,
         heightRatio: 0.3
       },
+      newPrice: [],
       slides,
       filters,
       totalPrice: 0,
@@ -169,7 +174,10 @@ export default {
     },
     filterFlashSale() {
       // this.flashSaleProducts = products.filter(product => product.flashSale);
+      // this.newPrice = this.real_products.new_price;
       this.flashSaleProducts = this.real_products.map(products => {
+        // console.log(products.newPrice);
+          // newPrice = products.new_price;
           return products.products;
       })      
     },
@@ -180,9 +188,13 @@ export default {
       this.notFlashsaleProducts = this.real_products.map(products => {
           return products.products;
       })
+      this.newPrice = this.real_products.map(products => {
+          return products.new_price;
+      })
       // console.log(this.notFlashsaleProducts);
       this.filteredProducts = this.notFlashsaleProducts;
-      console.log(this.filteredProducts);
+      // console.log(this.filteredProducts);
+      console.log(this.newPrice);
     },
     filterByKategori(by) {
       this.current = by;
@@ -194,13 +206,29 @@ export default {
         this.filteredProducts = this.notFlashsaleProducts.filter(
           product => product.categories_id === 1
         );
-      } else if (this.current === "daging") {
+      } else if (this.current === "daging dan ikan") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
           product => product.categories_id === 3
         );
-      } else if (this.current === "bumbu") {
+      } else if (this.current === "yoghurt") {
+        this.filteredProducts = this.notFlashsaleProducts.filter(
+          product => product.categories_id === 4
+        );
+      } else if (this.current === "ladanglima") {
+        this.filteredProducts = this.notFlashsaleProducts.filter(
+          product => product.categories_id === 5
+        );
+      } else if (this.current === "gula merah") {
+        this.filteredProducts = this.notFlashsaleProducts.filter(
+          product => product.categories_id === 6
+        );
+      } else if (this.current === "bumbu giling") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
           product => product.categories_id === 7
+        );
+      } else if (this.current === "olahan kacang kedelai") {
+        this.filteredProducts = this.notFlashsaleProducts.filter(
+          product => product.categories_id === 8
         );
       } else if (this.current === "promo") {
         this.filteredProducts = this.notFlashsaleProducts.filter(function(item){

@@ -27,6 +27,7 @@
                 style="color: #54595f"
                 >Informasi Pembeli</span
               >
+              <v-form ref="form">
               <div class="mx-md-16 mt-md-10 mt-2">
                 <div>
                   <div class="label font-weight-regular">Nama</div>
@@ -36,6 +37,7 @@
                     single-line
                     outlined
                     dense
+                    :rules="[rules.required]"
                     v-model="user.name"
                   ></v-text-field>
                 </div>
@@ -47,6 +49,7 @@
                     single-line
                     outlined
                     dense
+                    :rules="[rules.required]"
                     v-model="user.phone"
                   ></v-text-field>
                 </div>
@@ -58,10 +61,12 @@
                     outlined
                     rows="3"
                     auto-grow
+                    :rules="[rules.required]"
                     v-model="user.address"
                   ></v-textarea>
                 </div>
               </div>
+              </v-form>
             </v-container>
           </v-alert>
 
@@ -81,7 +86,7 @@
                 >Informasi Pembeli</span
               >
               <div class="mx-md-16 mt-md-10 mt-2">
-                <v-form>
+                <v-form ref="form">
                   <div>
                     <span class="label font-weight-bold">Nama</span>
                     <v-text-field
@@ -89,6 +94,7 @@
                       single-line
                       outlined
                       dense
+                      :rules="[rules.required]"
                       v-model="nama"
                     ></v-text-field>
                   </div>
@@ -99,6 +105,7 @@
                       outlined
                       single-line
                       dense
+                      :rules="[rules.required]"
                       v-model="phone"
                     ></v-text-field>
                   </div>
@@ -109,6 +116,7 @@
                       outlined
                       rows="2"
                       auto-grow
+                      :rules="[rules.required]"
                       v-model="address"
                     ></v-textarea>
                   </div>
@@ -299,7 +307,10 @@ export default {
       checkedVal: [],
       listCart: [],
       fixedListCart: [],
-      totalPrice: 0
+      totalPrice: 0,
+      rules: {
+        required: value => !!value || "Harus diisi",
+      }
     };
   },
   computed: {
@@ -333,31 +344,41 @@ export default {
       window.scrollTo(0, 0);
     },
     addBuyerInfo() {
+      this.$refs.form.validate()
+      const tempState = this.$store.state.cart.tempCart;
       if (!this.check) {
-        const data = {
-          name: this.nama,
-          phone: this.phone,
-          address: this.address
-        };
-        // Validasi Mana ???
-        this.$store.commit("user/ADD", data);
-        console.log(this.$store.state.user.userInfo);
-        Inertia.visit('/payment');
+        if(tempState !== '' || tempState !== null){
+          // Validasi pilih product
+        }
+        else{
+          // console.log(this.nama, this.phone, this.address)
+          if(this.nama !== '' || this.phone !== '' || this.address !== ''){
+            const data = {
+              name: this.nama,
+              phone: this.phone,
+              address: this.address
+            };
+            this.$store.commit("user/ADD", data);
+            // console.log(this.$store.state.user.userInfo);
+            Inertia.visit('/payment');
+          }
+        }
       } else {
-        const data = {
-          name: this.user.name,
-          phone: this.user.phone,
-          address: this.user.address
-        };
-        // Validasi mana ??
-        this.$store.commit("user/ADD", data);
-        console.log(this.$store.state.user.userInfo);
-        Inertia.visit('/payment');
-        // this.form.post(this.route('register'), {
-        //     onFinish: () => this.form.reset('password', 'password_confirmation'),
-        // });
-
-        // this.$router.push("/payment");
+        if(tempState !== '' || tempState !== null){
+          // Validasi pilih product
+        }
+        else{
+          if(this.nama !== '' || this.phone !== '' || this.address !== ''){
+            const data = {
+              name: this.user.name,
+              phone: this.user.phone,
+              address: this.user.address
+            };
+            this.$store.commit("user/ADD", data);
+            console.log(this.$store.state.user.userInfo);
+            Inertia.visit('/payment');
+          }
+        }
       }
     },
     getProductList() {
@@ -433,6 +454,7 @@ export default {
       if (Object.keys(voucher).length) {
         console.log(Object(voucher))
         if(voucher.type == 1){
+          // Free Ongkir
         }
         if(voucher.type == 2){
           this.totalPrice -= voucher.disc;

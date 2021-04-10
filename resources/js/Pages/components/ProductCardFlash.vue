@@ -10,7 +10,7 @@
       }}</v-card-subtitle>
       <v-card-text class="pb-0">
         <div class="amber--text font-weight-medium">
-          {{ parseRupiah(product.price) }}
+          {{ parseRupiah(newPrice) }}
         </div>
         <div class="grey--text text-decoration-line-through text-caption">
           {{ parseRupiah(product.price) }}
@@ -62,7 +62,7 @@
 <script>
 export default {
   name: "ProductCardFlash",
-  props: ["product"],
+  props: ["product", "newPrice"],
   data() {
     return {
       // isBtnBeliClicked: false

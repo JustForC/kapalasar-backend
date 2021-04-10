@@ -437,13 +437,29 @@ export default {
         this.filteredProducts = this.notFlashsaleProducts.filter(
           product => product.categories.name === "Buah"
         );
-      } else if (this.current === "daging") {
+      } else if (this.current === "daging dan ikan") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories.name === "Daging"
+          product => product.categories.name === "Daging dan Ikan"
         );
-      } else if (this.current === "bumbu") {
+      } else if (this.current === "yoghurt") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories.name === "Bumbu"
+          product => product.categories.name === "Yoghurt"
+        );
+      } else if (this.current === "ladanglima") {
+        this.filteredProducts = this.notFlashsaleProducts.filter(
+          product => product.categories.name === "Ladanglima"
+        );
+      } else if (this.current === "gula merah") {
+        this.filteredProducts = this.notFlashsaleProducts.filter(
+          product => product.categories.name === "Gula Merah"
+        );
+      } else if (this.current === "bumbu giling") {
+        this.filteredProducts = this.notFlashsaleProducts.filter(
+          product => product.categories.name === "Bumbu Giling"
+        );
+      } else if (this.current === "olahan kacang kedelai") {
+        this.filteredProducts = this.notFlashsaleProducts.filter(
+          product => product.categories.name === "Olahan Kacang Kedelai"
         );
       } else if (this.current === "promo") {
         this.filteredProducts = this.notFlashsaleProducts.filter(function(item){
