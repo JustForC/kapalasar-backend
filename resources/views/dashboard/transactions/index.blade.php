@@ -33,7 +33,7 @@
       columns: [
         {title: '#', data: 'DT_RowIndex', name: 'DT_RowIndex', orderable:false, width: '7.5%', className: 'dt-center'},
         {title: 'ID', data: 'id', name: 'id', width: '30%', className: 'dt-head-center'},
-        {title: 'Nama', data: 'users.name', name: 'users.name', width: '30%', className: 'dt-head-center'},
+        {title: 'Nama', data: 'name', name: 'name', width: '30%', className: 'dt-head-center'},
         {title: 'Status', data: 'status', name: 'status', width: '30%', className: 'dt-head-center'},
         {title: 'Tipe Potongan', data: 'type', name: 'type', width: '30%', className: 'dt-head-center'},
         {title: 'Jumlah Potongan', data: 'discount', name: 'discount', width: '30%', className: 'dt-head-center'},

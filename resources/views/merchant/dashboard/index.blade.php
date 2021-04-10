@@ -83,16 +83,33 @@
     var ctx = document.getElementById('myChart').getContext('2d');
     var ctx = $('#myChart');
     var ctx = 'myChart';
-
+    var januari = {!! json_encode($januari) !!};
+    var februari = {!! json_encode($februari) !!};
+    var maret = {!! json_encode($maret) !!};
+    var april = {!! json_encode($april) !!};
+    var mei = {!! json_encode($mei) !!};
+    var juni = {!! json_encode($juni) !!};
+    var juli = {!! json_encode($juli) !!};
+    var agustus = {!! json_encode($agustus) !!};
+    var september = {!! json_encode($september) !!};
+    var oktober = {!! json_encode($oktober) !!};
+    var november = {!! json_encode($november) !!};
+    var desember = {!! json_encode($desember) !!};
     var ctx = document.getElementById('myChart');
     var myChart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun','Jul','Aug','Sept','Okt','Nov','Des'],
         datasets: [{
             label: 'Penjualan Perbulan',
-            data: [9, 3, 5, 1, 0, 0],
+            data: [januari, februari, maret, april, mei, juni, juli, agustus, september, oktober, november, desember],
             backgroundColor: [
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
                 'rgba(75, 192, 192, 0.2)',
                 'rgba(75, 192, 192, 0.2)',
                 'rgba(75, 192, 192, 0.2)',
@@ -101,6 +118,12 @@
                 'rgba(75, 192, 192, 0.2)',
             ],
             borderColor: [
+                'rgba(75, 192, 192, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(75, 192, 192, 1)',
                 'rgba(75, 192, 192, 1)',
                 'rgba(75, 192, 192, 1)',
                 'rgba(75, 192, 192, 1)',
