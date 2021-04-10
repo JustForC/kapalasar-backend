@@ -44,11 +44,10 @@ class AdvertisementController extends Controller
             ]);
             $image = time().'-'.'.'.$request->image->extension();
             $path =  $request->image->move(public_path('upload/ads'),$image);
-
             $model = Advertisement::create([
                 'name' => $request->name,
                 'path' => $request->path,
-                'image' => $path->getOriginalPath(),
+                'image' => $path->getPath(),
             ]);
     
             return response()->json($model);
@@ -107,7 +106,7 @@ class AdvertisementController extends Controller
             $model = Advertisement::findOrFail($id)->update([
                 'name' => $request->name,
                 'path' => $request->path,
-                'image' => $path->getOriginalPath(),
+                'image' => $path->getPath(),
             ]);
     
             return response()->json($model);

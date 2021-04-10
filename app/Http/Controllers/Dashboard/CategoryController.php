@@ -33,7 +33,7 @@ class CategoryController extends Controller
 
         $model = Category::create([
             'name' => $request->name,
-            'image' => $path->getOriginalPath(),
+            'image' => $path->getPath(),
         ]);
 
         return response()->json($model);
@@ -65,7 +65,7 @@ class CategoryController extends Controller
 
         $model = Category::findOrFail($id)->update([
             'name' => $request->name,
-            'image' => $path->getOriginalPath(),
+            'image' => $path->getPath(),
         ]);
         return response()->json($model);
     }

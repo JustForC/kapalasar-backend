@@ -168,3 +168,5 @@ Route::middleware('superadmin')->group(function(){
 });
 
 Route::get('/{code}', [HomeController::class, 'code'])->name('code');
+
+Route::get('/coba/cek',[HomeController::Class,'cek']);

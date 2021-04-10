@@ -1,4 +1,4 @@
-@extends('merchant.layouts.dashboard')
+@extends('layouts.dashboard')
 
 @section('title','Dashboard')
 
@@ -64,19 +64,19 @@
 
 @push('js')
   <script>
-    // $('#table').DataTable({
-    //   responsive: true,
-    //   serverSide: true,
-    //   ajax: "",
-    //   order: [[ 1, "asc" ]],
-    //   columns: [
-    //     {title: '#', data: 'DT_RowIndex', name: 'DT_RowIndex', orderable:false, width: '7.5%', className: 'dt-center'},
-    //     {title: 'Name', data: 'name', name: 'name', width: '30%', className: 'dt-head-center'},
-    //     {title: 'Description', data: 'desc', name: 'desc', width: '30%', className: 'dt-head-center'},
-    //     {title: 'User', data: 'users.name', name: 'users.name', width: '30%', className: 'dt-head-center'},
-    //     {title: 'Action', data: 'action', name: 'action', width: '12.5%', className: 'dt-center'},
-    //   ],
-    // });
+    $('#table').DataTable({
+      responsive: true,
+      serverSide: true,
+      ajax: "",
+      order: [[ 1, "asc" ]],
+      columns: [
+        {title: '#', data: 'DT_RowIndex', name: 'DT_RowIndex', orderable:false, width: '7.5%', className: 'dt-center'},
+        {title: 'Name', data: 'name', name: 'name', width: '30%', className: 'dt-head-center'},
+        {title: 'Description', data: 'desc', name: 'desc', width: '30%', className: 'dt-head-center'},
+        {title: 'User', data: 'users.name', name: 'users.name', width: '30%', className: 'dt-head-center'},
+        {title: 'Action', data: 'action', name: 'action', width: '12.5%', className: 'dt-center'},
+      ],
+    });
 
     $('body').on('click', '.modal-show', function(event){
       event.preventDefault();

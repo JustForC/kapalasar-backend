@@ -29,6 +29,10 @@
             <label for="content" class="control-label">Isi Email</label>
             <textarea form ="form_modal" id="content" class="form-control" name="content" placeholder="Content" rows="20"></textarea>
         </div>
+        <div class="form-group">
+            <label for="attachment" class="control-label">Attachment</label>
+            <input id="attachment" type="file" name="attachment[]" multiple="multiple">
+        </div>
     </div>
     <div class="modal-footer">
         <button type="submit" class="btn btn-primary" id="modal-save">Kirim</button>

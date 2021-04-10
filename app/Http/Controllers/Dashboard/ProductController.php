@@ -43,7 +43,7 @@ class ProductController extends Controller
             'stock' => $request->stock,
             'price' => $request->price,
             'discount_price' => $request->discount_price,
-            'image' => $path->getOrignalPath(),
+            'image' => $path->getPath(),
         ]);
 
         return response()->json($model);
@@ -83,7 +83,7 @@ class ProductController extends Controller
             'stock' => $request->stock,
             'price' => $request->price,
             'discount_price' => $request->discount_price,
-            'image' => $path->getOriginalPath(),
+            'image' => $path->getPath(),
         ]);
 
         return response()->json($model);

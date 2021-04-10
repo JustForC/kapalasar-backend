@@ -60,7 +60,7 @@ class FlashController extends Controller
         $model = FlashSale::create([
             'flashes_id' => $flash->id,
             'products_id' => $request->products_id,
-            'image' => $path->getOriginalPath(),
+            'image' => $path->getPath(),
             'new_price' => $request->new_price,
             'amount' => $request->amount,
         ]);
@@ -122,7 +122,7 @@ class FlashController extends Controller
         $model = Flash::findOrFail($id)->update([
             'flashes_id' => $request->flashes_id,
             'product_id' => $request->product_id,
-            'image' => $path->getOriginalPath(),
+            'image' => $path->getPath(),
             'new_price' => $request->price,
             'amount' => $request->amount,
         ]);

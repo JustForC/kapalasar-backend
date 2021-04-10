@@ -35,7 +35,8 @@ class UserMailController extends Controller
         ]);
 
         $user = User::find($request->user_id);
-        Mails::sendMail($user->email,$request->subject,$request->content);
+        
+        Mails::sendMailAttached($user->email,$request->subject,$request->content);
 
         Mail::create([
             'target' => 'Nama = '.$user->name.' Email '.$user->email,

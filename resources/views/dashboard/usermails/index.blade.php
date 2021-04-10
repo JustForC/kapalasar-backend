@@ -36,9 +36,10 @@
         <div class="form-group">
             <label for="content" class="control-label">Isi Email</label>
             <textarea id="content" form ="form_modal" class="form-control" name="content" placeholder="Content" rows="20"></textarea>
-            <script>
-                    CKEDITOR.replace( 'content' );
-            </script>
+        </div>
+        <div class="form-group">
+            <label for="attachment" class="control-label">Attachment</label>
+            <input id="attachment" type="file" name="attachment[]" multiple="multiple">
         </div>
     </div>
     <div class="modal-footer">

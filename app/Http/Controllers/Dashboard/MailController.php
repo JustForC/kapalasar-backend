@@ -25,8 +25,9 @@ class MailController extends Controller
             'content' => ['required'],
         ]);
         $users = User::with('roles')->where('roles_id','=',4)->get();
+
         foreach($users as $user){
-            Mails::sendMail($user->email,$request->subject,$request->content);
+            Mails::sendMailAttached($user->email,$request->subject,$request->content);
         }
 
         Mail::create([
