@@ -37,6 +37,7 @@
             $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
         });
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
     <script src="/assets/plugins/feather-icons/feather.min.js"></script>
     <script src="/assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>

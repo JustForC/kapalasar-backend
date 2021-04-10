@@ -39,6 +39,7 @@
         {title: 'Jumlah Potongan', data: 'discount', name: 'discount', width: '30%', className: 'dt-head-center'},
         {title: 'Total', data: 'total', name: 'total', width: '30%', className: 'dt-head-center'},
         {title: 'Receipt', data: 'receipt', name: 'receipt', width: '30%', className: 'dt-head-center'},
+        {title: 'Penjual', data: 'merchants_id', name: 'merchants_id', width: '30%', className: 'dt-head-center'},
         {title: 'Tanggal Receipt', data: 'date_receipt', name: 'date_receipt', width: '30%', className: 'dt-head-center'},
         {title: 'Action', data: 'action', name: 'action', width: '12.5%', className: 'dt-center'},
       ],

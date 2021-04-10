@@ -53,8 +53,8 @@
           <h6 class="card-title mb-0">GRAFIK TRANSAKSI</h6>
           {{-- <button class="btn btn-primary modal-show" type="button" href="" name="Tambah Produk Baru" data-toggle="modal" data-target="#modal">+ Add New</button> --}}
         </div>
-        <div class="table-responsive">
-          <table id="table" class="table hover" style="width:100%"></table>
+        <div>
+          <canvas id = "myChart" width="400" height="200"> </canvas>
         </div>
       </div>
     </div>
@@ -77,6 +77,46 @@
     //     {title: 'Action', data: 'action', name: 'action', width: '12.5%', className: 'dt-center'},
     //   ],
     // });
+    var ctx = document.getElementById('myChart');
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var ctx = $('#myChart');
+    var ctx = 'myChart';
+
+    var ctx = document.getElementById('myChart');
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
+        datasets: [{
+            label: 'Penjualan Perbulan',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+            ],
+            borderColor: [
+                'rgba(75, 192, 192, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(75, 192, 192, 1)',
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+    });
 
     $('body').on('click', '.modal-show', function(event){
       event.preventDefault();

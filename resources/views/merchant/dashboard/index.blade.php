@@ -53,8 +53,8 @@
           <h6 class="card-title mb-0">GRAFIK TRANSAKSI</h6>
           {{-- <button class="btn btn-primary modal-show" type="button" href="" name="Tambah Produk Baru" data-toggle="modal" data-target="#modal">+ Add New</button> --}}
         </div>
-        <div class="table-responsive">
-          <table id="table" class="table hover" style="width:100%"></table>
+        <div>
+          <canvas id = "myChart" width="400" height="200"> </canvas>
         </div>
       </div>
     </div>
@@ -64,18 +64,60 @@
 
 @push('js')
   <script>
-    $('#table').DataTable({
-      responsive: true,
-      serverSide: true,
-      ajax: "",
-      order: [[ 1, "asc" ]],
-      columns: [
-        {title: '#', data: 'DT_RowIndex', name: 'DT_RowIndex', orderable:false, width: '7.5%', className: 'dt-center'},
-        {title: 'Name', data: 'name', name: 'name', width: '30%', className: 'dt-head-center'},
-        {title: 'Description', data: 'desc', name: 'desc', width: '30%', className: 'dt-head-center'},
-        {title: 'User', data: 'users.name', name: 'users.name', width: '30%', className: 'dt-head-center'},
-        {title: 'Action', data: 'action', name: 'action', width: '12.5%', className: 'dt-center'},
-      ],
+
+    // $('#table').DataTable({
+    //   responsive: true,
+    //   serverSide: true,
+    //   ajax: "",
+    //   order: [[ 1, "asc" ]],
+    //   columns: [
+    //     {title: '#', data: 'DT_RowIndex', name: 'DT_RowIndex', orderable:false, width: '7.5%', className: 'dt-center'},
+    //     {title: 'Name', data: 'name', name: 'name', width: '30%', className: 'dt-head-center'},
+    //     {title: 'Description', data: 'desc', name: 'desc', width: '30%', className: 'dt-head-center'},
+    //     {title: 'User', data: 'users.name', name: 'users.name', width: '30%', className: 'dt-head-center'},
+    //     {title: 'Action', data: 'action', name: 'action', width: '12.5%', className: 'dt-center'},
+    //   ],
+    // });
+
+    var ctx = document.getElementById('myChart');
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var ctx = $('#myChart');
+    var ctx = 'myChart';
+
+    var ctx = document.getElementById('myChart');
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
+        datasets: [{
+            label: 'Penjualan Perbulan',
+            data: [9, 3, 5, 1, 0, 0],
+            backgroundColor: [
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+            ],
+            borderColor: [
+                'rgba(75, 192, 192, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(75, 192, 192, 1)',
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
     });
 
     $('body').on('click', '.modal-show', function(event){

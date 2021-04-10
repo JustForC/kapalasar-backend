@@ -37,7 +37,7 @@ class HomeController extends Controller
             }
             elseif(Auth()->user()->roles->name == 'Merchant'){
                 $user = Auth()->user();
-                $transactions = Checkout::with('users','vouchers')->where('referral_code','=',Auth()->user()->referral_code)->get();
+                $transactions = Checkout::with('users','vouchers')->where('merchants_id','=',Auth()->user()->referral_code)->get();
                 return view('/merchant/dashboard/index',['transactions' => $transactions]);
             }
             $transactions = Checkout::with('users','vouchers')->orderBy('updated_at')->take(5);
