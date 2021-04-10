@@ -49,8 +49,7 @@ class VoucherController extends Controller
             'types_id' => $request->types_id,
             'name' => $request->name,
             'amount' => $request->amount,
-            'value' => $request->value,
-            'percent' => $request->percent,
+            'discount' => $request->value,
             'start' => $request->start,
             'end' => $request->end,
         ]);
