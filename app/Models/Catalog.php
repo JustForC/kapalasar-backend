@@ -9,5 +9,5 @@ class Catalog extends Model
 {
     use HasFactory;
 
-    protected $guard = [];
+    protected $guarded = [];
 }
