@@ -77,10 +77,9 @@ class TransactionController extends Controller
     public function edit($id)
     {
         //
-        $vouchers = Voucher::get();
         $users = User::get();
         $model = Checkout::findOrFail($id);
-        return view('dashboard/transactions/form',['model' => $model,'users' => $users,'vouchers'=>$vouchers]);
+        return view('dashboard/transactions/form',['model' => $model]);
     }
 
     /**
@@ -94,9 +93,6 @@ class TransactionController extends Controller
     {
         //
         $model = Checkout::findOrFail($id)->update([
-            'users_id' => $request->users_id,
-            'vouchers_id'=> $request->vouchers_id,
-            'total'=> $request->total,
             'status'=> $request->status,
         ]);
 

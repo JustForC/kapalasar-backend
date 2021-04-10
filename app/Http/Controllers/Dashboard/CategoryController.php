@@ -48,6 +48,9 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request, [
+            'name' => ['required'],
+        ]);
 
         if($request->image == NULL){
             $image = Category::findOrFail($id);
