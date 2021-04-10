@@ -127,13 +127,14 @@
       <!-- Product -->
       <v-lazy>
         <v-container>
+          <!-- Product Page 1-->
           <v-row justify="center">
             <v-col
               cols="6"
               sm="4"
               md="3"
               lg="2"
-              v-for="(product, i) in filteredProducts"
+              v-for="(product, i) in filteredProducts.slice(0,8)"
               :key="i"
               class="ma-lg-2 v-lazy my-3"
             >
@@ -142,8 +143,117 @@
               </v-row>
             </v-col>
           </v-row>
-        </v-container>
-      </v-lazy>
+          <!-- End of Product Page 1-->
+          <!-- Banner Page 1-->
+            <div class="carousel d-flex justify-center align-center">
+              <v-carousel
+                v-if="windowSize.x > 600" 
+                cycle
+                :show-arrows="false"
+                hide-delimiter-background
+                delimiter-icon="mdi-circle"
+                :options="optionsCarousel">
+                <v-carousel-item v-for="(slide, i) in slides" :key="i">
+                  <div class="rounded">
+                    <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
+                    <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slide.src" />
+                    <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
+                    <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
+                  </div>
+                </v-carousel-item>
+              </v-carousel>
+              <!-- Conditional Rendering < 600px -->
+              <v-carousel
+                v-else 
+                cycle
+                :show-arrows="false"
+                hide-delimiter-background
+                delimiter-icon="mdi-circle"
+                height="150" :options="optionsCarousel">
+                <v-carousel-item v-for="(slide, i) in slides" :key="i">
+                  <div class="rounded">
+                    <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
+                    <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slide.src" />
+                    <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
+                    <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
+                  </div>
+                </v-carousel-item>
+              </v-carousel>
+            </div>
+            <!-- End Banner Page 1-->
+            <!-- Product Page 2-->
+            <v-row justify="center">
+              <v-col
+                cols="6"
+                sm="4"
+                md="3"
+                lg="2"
+                v-for="(product, i) in filteredProducts.slice(9,18)"
+                :key="i"
+                class="ma-lg-2 v-lazy my-3"
+              >
+                <v-row justify="center">
+                  <ProductCard @getTotalPrice="getTotalPrice" :product="product" />
+                </v-row>
+              </v-col>
+            </v-row>
+          <!-- End of Product Page 2-->
+          <!-- Banner Page 2-->
+            <div class="carousel d-flex justify-center align-center">
+              <v-carousel
+                v-if="windowSize.x > 600" 
+                cycle
+                :show-arrows="false"
+                hide-delimiter-background
+                delimiter-icon="mdi-circle"
+                :options="optionsCarousel">
+                <v-carousel-item v-for="(slide, i) in slides" :key="i">
+                  <div class="rounded">
+                    <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
+                    <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slide.src" />
+                    <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
+                    <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
+                  </div>
+                </v-carousel-item>
+              </v-carousel>
+              <!-- Conditional Rendering < 600px -->
+              <v-carousel
+                v-else 
+                cycle
+                :show-arrows="false"
+                hide-delimiter-background
+                delimiter-icon="mdi-circle"
+                height="150" :options="optionsCarousel">
+                <v-carousel-item v-for="(slide, i) in slides" :key="i">
+                  <div class="rounded">
+                    <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
+                    <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slide.src" />
+                    <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
+                    <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
+                  </div>
+                </v-carousel-item>
+              </v-carousel>
+            </div>
+            <!-- End Banner Page 2-->
+            <!-- Product Page 3-->
+                <v-row justify="center">
+                  <v-col
+                    cols="6"
+                    sm="4"
+                    md="3"
+                    lg="2"
+                    v-for="(product, i) in filteredProducts.slice(19,27)"
+                    :key="i"
+                    class="ma-lg-2 v-lazy my-3"
+                  >
+                    <v-row justify="center">
+                      <ProductCard @getTotalPrice="getTotalPrice" :product="product" />
+                    </v-row>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-lazy>
+            <!-- End Product Page 3-->
       <!-- Carousel -->
       <div class="carousel d-flex justify-center align-center">
         <v-carousel
