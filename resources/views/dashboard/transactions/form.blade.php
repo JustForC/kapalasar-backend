@@ -17,10 +17,13 @@
                 <option value='4'>Tidak Selesai</option>
             </select>
         </div>
+        @if($model->total == NULL)
         <div class="form-group">
             <label for="total" class="control-label">Total</label>
             <input id="total" type="number" class="form-control" name="total" value="{{$model->total}}" placeholder="Name">
         </div>
+        @endif
+        @if($model->total == NULL)
         <div class="form-group">
             <label for="vouchers_id" class="control-label">Voucher</label><br>
             <select id="vouchers_id" type="text" class="form-control" name="vouchers_id">
@@ -29,6 +32,8 @@
                 @endforeach
             </select>
         </div>
+        @endif
+        @if($model->users_id == NULL)
         <div class="form-group">
             <label for="users_id" class="control-label">User</label><br>
             <select id="users_id" type="text" class="form-control" name="users_id">
@@ -37,6 +42,10 @@
                 @endforeach
             </select>
         </div>
+        @endif
+        @if($model->users_id != NULL)
+        <input type="hidden" value = "{{$model->users_id}}" name = "users_id">
+        @endif
     </div>
     <div class="modal-footer">
         <button type="submit" class="btn btn-primary" id="modal-save"></button>

@@ -58,6 +58,14 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'name' => ['required'],
+            'categories_id' => ['required'],
+            'unit' => ['required'],
+            'stock' => ['required'],
+            'price' => ['required'],
+        ]);
+
         if($request->product_image == NULL){
             $product = Product::findOrFail($id);
 

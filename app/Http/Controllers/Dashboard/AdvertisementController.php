@@ -42,6 +42,7 @@ class AdvertisementController extends Controller
                 'path' => ['required'],
                 'image' => ['required'],
             ]);
+            
             $image = time().'-'.'.'.$request->image->extension();
             $path =  $request->image->move(public_path('upload/ads'),$image);
             $model = Advertisement::create([
@@ -87,6 +88,10 @@ class AdvertisementController extends Controller
         public function update(Request $request, $id)
         {
             //
+            $this->validate($request, [
+                'name' => ['required'],
+                'path' => ['required'],
+            ]);
 
             if($request->image == NULL){
                 $advertisement = Advertisement::findOrFail($id);

@@ -82,6 +82,10 @@ class TypeController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request, [
+            'name' => ['required'],
+        ]);
+        
         $model = Type::findOrFail($id)->update([
             'name'=> $request->name,
         ]);

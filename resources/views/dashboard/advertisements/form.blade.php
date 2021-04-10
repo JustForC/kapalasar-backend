@@ -12,7 +12,6 @@
             <label for="name" class="control-label">Nama Iklan</label>
             <input id="name" type="text" class="form-control" name="name" value="{{$model->name}}" placeholder="Name">
         </div>
-    </div>
     <div class="form-group">
             <label for="path" class="control-label">Letak Iklan</label><br>
             <select id="path" type="text" class="form-control" name="path">
@@ -24,7 +23,8 @@
     <div class="form-group">
             <label for="image" class="control-label">Gambar Produk</label>
             <input id="image" type="file" name="image">
-        </div>
+    </div>
+    </div>
     <div class="modal-footer">
         <button type="submit" class="btn btn-primary" id="modal-save"></button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal" id="modal-close"></button>

@@ -92,12 +92,16 @@ class VoucherController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request, [
+            'types_id' => ['required'],
+            'name' => ['required'],
+        ]);
+
         $model = Voucher::findOrFail($id)->update([
             'types_id' => $request->types_id,
             'name' => $request->name,
             'amount' => $request->amount,
-            'value' => $request->value,
-            'percent' => $request->percent,
+            'discount' => $request->value,
             'start' => $request->start,
             'end' => $request->end,
         ]);
