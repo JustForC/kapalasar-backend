@@ -183,12 +183,14 @@ export const products = [
   
   export const filters = [
     { src: require("../assets/Semua.png"), name: "semua" },
-    { src: require("../assets/Buah.png"), name: "buah" },
-    { src: require("../assets/Sayur.png"), name: "sayur" },
+    { src: require("../assets/buah.jpg"), name: "buah" },
+    { src: require("../assets/sayur.jpg"), name: "sayur" },
     { src: require("../assets/Daging.png"), name: "daging dan ikan" },
-    { src: require("../assets/Bumbu.png"), name: "bumbu" },
-    { src: require("../assets/Bumbu.png"), name: "bumbu" },
-    { src: require("../assets/Bumbu.png"), name: "bumbu" },
+    { src: require("../assets/yoghurt.jpg"), name: "yoghurt" },
+    { src: require("../assets/ladanglima.jpg"), name: "ladanglima" },
+    { src: require("../assets/gulamerah.jpg"), name: "gula merah" },
+    { src: require("../assets/bumbugiling.jpg"), name: "bumbu giling" },
+    { src: require("../assets/olahankacangkedelai.jpg"), name: "olahan kacang kedelai" },
     { src: require("../assets/promo.png"), name: "promo" }
   ];
   

@@ -25,6 +25,16 @@
                               placeholder="Email"
                               outlined
                               dense
+                              :error-messages="$page.errors.email[0]"
+                              v-if="$page.errors.email"
+                            ></v-text-field>
+                            <v-text-field
+                              v-model="email"
+                              name="email"
+                              placeholder="Email"
+                              outlined
+                              dense
+                              v-else
                             ></v-text-field>
                           </div>
                           <div>
@@ -41,7 +51,20 @@
                               name = "password"
                               dense
                               placeholder="Password"
-                              
+                              :error-messages="$page.errors.password[0]"
+                              v-if="$page.errors.password"
+                            ><v-icon></v-icon></v-text-field>
+                            <v-text-field
+                              v-model="password"
+                              :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+                              :type="show ? 'text' : 'password'"
+                              hint="At least 8 characters"
+                              @click:append="show = !show"
+                              outlined
+                              name = "password"
+                              dense
+                              placeholder="Password"
+                              v-else
                             ><v-icon></v-icon></v-text-field>
                           </div>
                           <div class="font-weight-medium grey--text">
