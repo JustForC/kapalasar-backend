@@ -255,13 +255,13 @@ export default {
     },
     finishPayment() {
       const cart = this.$store.state.cart.listCarts;
-      // this.$store.commit("cart/REPLACE", []);
+      this.$store.commit("cart/REPLACE", []);
 
       const totalPrice = this.$store.state.cart.totalPrice;
-      // this.$store.commit("cart/SET_TOTAL_PRICE", 0);
+      this.$store.commit("cart/SET_TOTAL_PRICE", 0);
 
       const userData = this.$store.state.user.userInfo;
-      // this.$store.commit("user/ADD", []);
+      this.$store.commit("user/ADD", []);
 
       // const transaction = {
       //   cart: cart,
