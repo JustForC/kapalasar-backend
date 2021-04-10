@@ -1,7 +1,7 @@
 <template>
   <div class="product card">
-    <v-card elevation="1" max-width="200" max-height="300">
-      <v-img :src="product.image" height="150" max-width="200"></v-img>
+    <v-card elevation="1" max-width="175" max-height="260">
+      <v-img :src="product.image" height="130" max-width="175"></v-img>
       <v-card-title class="text-subtitle-2 font-weight-medium">{{
         product.name
       }}</v-card-title>

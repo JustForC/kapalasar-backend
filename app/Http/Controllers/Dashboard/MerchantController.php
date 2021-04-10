@@ -46,6 +46,7 @@ class MerchantController extends Controller
             'password' => ['required'],
             'phone' => ['required'],
         ]);
+
         $model = User::create([
             'name' => $request->name,
             'address' => $request->address,
@@ -96,6 +97,15 @@ class MerchantController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request, [
+            'name' => ['required'],
+            'address' => ['required'],
+            'referral_code' => ['required'],
+            'email' => ['required'],
+            'password' => ['required'],
+            'phone' => ['required'],
+        ]);
+
         $model = User::findOrFail($id)->update([
             'name' => $request->name,
             'address' => $request->address,

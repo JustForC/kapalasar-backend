@@ -93,10 +93,11 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validator = Validator::make([
-            'name'=> ['required'],
+        $this->validate($request, [
+            'name' => ['required'],
             'email' => ['required'],
             'password' => ['required'],
+            'role' => ['required']
         ]);
 
         $model = User::findOrFail($id)->update([

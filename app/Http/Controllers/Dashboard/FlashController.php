@@ -39,16 +39,35 @@ class FlashController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $this->validate($request, [
             'name' => ['required'],
             'start' => ['required'],
             'end' => ['required'],
-            'image' => ['required'],
             'products_id' => ['required'],
             'new_price' => ['required'],
         ]);
+        
+        //Kalo gak masukin gambar
+        if($request->image == NULL){
+            $product = Product::find($products_id);
 
+            $flash = Flash::create([
+                'name' => $request->name,
+                'start' => $request->start,
+                'end' => $request->end,
+            ]);
+    
+            $model = FlashSale::create([
+                'flashes_id' => $flash->id,
+                'products_id' => $request->products_id,
+                'image' => $product->image,
+                'new_price' => $request->new_price,
+            ]);
+
+            return response()->json($model);
+        }
+        
+        //Kalo masukin gambar
         $image = time().'-'.'.'.$request->image->extension();
         $path =  $request->image->move(public_path('upload/flash'),$image);
         $flash = Flash::create([
@@ -102,6 +121,7 @@ class FlashController extends Controller
     public function update(Request $request, $id)
     {
         //
+        
         if($request->image == NULL){
             $flash = Flash::findOrFail($id);
 
@@ -118,12 +138,11 @@ class FlashController extends Controller
         $image = time().'-'.'.'.$request->image->extension();
         $path =  $request->image->move(public_path('upload/flash'),$image);
 
-        $model = Flash::findOrFail($id)->update([
-            'flashes_id' => $request->flashes_id,
-            'product_id' => $request->product_id,
+        $model = FlashSale::findOrFail($id)->update([
+            'flashes_id' => $flash->id,
+            'products_id' => $request->products_id,
             'image' => '/upload/flash/'.$path->getFileName(),
-            'new_price' => $request->price,
-            'amount' => $request->amount,
+            'new_price' => $request->new_price,
         ]);
 
         return response()->json($model);

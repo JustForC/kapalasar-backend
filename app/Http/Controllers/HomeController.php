@@ -41,7 +41,71 @@ class HomeController extends Controller
                 return view('/merchant/dashboard/index',['transactions' => $transactions]);
             }
             $transactions = Checkout::with('users','vouchers')->orderBy('updated_at')->take(5);
-            return view('/dashboard/index',['transactions' => $transactions]);
+            $checkouts = Checkout::get();
+            $januari = 0;
+            $februari = 0;
+            $maret = 0;
+            $april = 0;
+            $mei = 0;
+            $juni = 0;
+            $juli = 0;
+            $agustus = 0;
+            $september = 0;
+            $oktober = 0;
+            $november = 0;
+            $desember = 0;
+            foreach($checkouts as $check){
+                if($check->created_at->format('M') == 'Jan'){
+                    $januari = $januari + 1;
+                }
+                elseif($check->created_at->format('M') == 'Feb'){
+                    $februari = $februari + 1;
+                }
+                elseif($check->created_at->format('M') == 'Mar'){
+                    $maret = $maret + 1;
+                }
+                elseif($check->created_at->format('M') == 'Apr'){
+                    $april = $april + 1;
+                }
+                elseif($check->created_at->format('M') == 'May'){
+                    $mei = $mei + 1;
+                }
+                elseif($check->created_at->format('M') == 'Jun'){
+                    $juni = $juni + 1;
+                }
+                elseif($check->created_at->format('M') == 'Jul'){
+                    $juli = $juli + 1;
+                }
+                elseif($check->created_at->format('M') == 'Aug'){
+                    $aug = $aug + 1;
+                }
+                elseif($check->created_at->format('M') == 'Sep'){
+                    $september = $september + 1;
+                }
+                elseif($check->created_at->format('M') == 'Oct'){
+                    $oktober = $oktober + 1;
+                }
+                elseif($check->created_at->format('M') == 'Nov'){
+                    $november = $november + 1;
+                }
+                elseif($check->created_at->format('M') == 'Dec'){
+                    $desember = $desember + 1;
+                }
+            }
+            return view('/dashboard/index',['transactions' => $transactions,
+            'januari' => $januari,
+            'februari' => $februari,
+            'maret' => $maret,
+            'april' => $april,
+            'mei' => $mei,
+            'juni' => $juni,
+            'juli' => $juli,
+            'agustus' => $agustus,
+            'september' => $september,
+            'oktober' => $oktober,
+            'november' => $november,
+            'desember' => $desember,
+            ]);
         }
         $user = new User;
         $products = Product::with('categories')->get();
@@ -283,4 +347,32 @@ class HomeController extends Controller
             'user' => null
         ]);
     }
+
+    public function code($code)
+    {
+        $referral = User::where('referral_code', $code)->first();
+        if($referral){
+            $check = Auth()->check();
+            if($check){
+                if(Auth()->user()->roles->name == 'User'){
+                    $user = Auth()->user();
+                    return Inertia::render('View/Homepage', [
+                        'check' => true,
+                        'user' => $user
+                    ]);
+                }
+                else if(Auth()->user()->roles->name == 'Super Admin'){
+                    return view('/dashboard/index');
+                }
+            }
+            $user = new User;
+            return Inertia::render('View/Homepage', [
+                'check' => $check,
+                'user' => null
+            ]);
+        }
+        abort(404);
+    }
+
+
 }

@@ -1,16 +1,38 @@
 <template>
   <v-app>
     <div class="home">
+      <v-row justify="center">
+      <v-dialog v-model="dialog" persistent max-width="500">
+        <v-card>
+          <v-card-title class="headline font-weight-bold">
+                <v-icon class="mr-1" color="orange darken-2">mdi-sale</v-icon> PROMO HARI INI!
+          </v-card-title>
+          <v-img else class="responsive" :contain="true" src="https://medanincode.com/img/thumb/vue/if.png" />
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn class="font-weight-bold" color="green darken-1" text @click="dialog = false">
+              BELANJA SEKARANG!
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-row>
       <Navbar :check="check" :user="user"/>
       <!-- Carousel -->
       <div class="carousel d-flex justify-center align-center">
-        <splide :options="optionsCarousel">
-          <splide-slide v-for="(slide, i) in slides" :key="i">
+        <v-carousel 
+          cycle
+          :show-arrows="false"
+          hide-delimiter-background
+          delimiter-icon="mdi-circle"
+          height="300" :options="optionsCarousel">
+          <v-carousel-item v-for="(slide, i) in slides" :key="i">
             <div class="rounded">
-              <v-img class="responsive" :src="slide.src" />
+              <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="1.72" :src="slide.src" />
+              <v-img else class="responsive" :contain="true" :src="slide.src" />
             </div>
-          </splide-slide>
-        </splide>
+          </v-carousel-item>
+        </v-carousel>
       </div>
 
       <!-- Flash Sale -->
@@ -27,9 +49,9 @@
               class="d-flex flex-wrap flashsale-text"
               style="width:100%;justify-content:space-between;cursor:pointer "
             >
-              <span class="white--text ml-4 text-h5">Flash Sale</span>
+              <span class="white--text ml-4 text-h5 font-weight-bold">Flash Sale</span>
               <inertia-link href="/flash_sale">
-                <span class="white--text ml-4 text-h5">Lihat Selengkapnya</span>
+                <v-btn class="white--text ml-4 subtitle-2" outlined>Lihat Selengkapnya</v-btn>
               </inertia-link>
               <!-- <router-link style="text-decoration:none" to="/flashsale"> -->
               <!-- </router-link> -->
@@ -47,25 +69,40 @@
       <!-- Filter -->
       <div>
         <v-container>
-          <div>
-            <span class="text-h6">Filter</span>
-          </div>
           <div class="d-flex flex-wrap justify-center">
             <v-btn
               v-for="(filter, i) in filters"
               :key="i"
-              x-large
               :large="$vuetify.breakpoint.sm ? true : false"
               class="mr-2 px-1 my-2"
               @click="filterByKategori(filter.name)"
               :color="filter.name == current ? '#a6cb26' : ''"
               :dark="filter.name == current ? true : false"
             >
-              <v-img :src="filter.src"></v-img>
+              <v-img 
+              max-height="15"
+              max-width="20"
+              :src="filter.src"></v-img>
               <span class="mx-2">{{ filter.name }}</span>
             </v-btn>
           </div>
+          <v-card-text>
+          <v-toolbar
+            flat
+            color="transparent"
+          >
+            <v-text-field
+              v-model="search"
+              v-on:change="filterbySearch"
+              append-icon="mdi-magnify"
+              label="Pencarian"
+              single-line
+              color="green"
+            ></v-text-field>
+          </v-toolbar>
+        </v-card-text>
         </v-container>
+        
       </div>
       <!-- Product -->
       <v-lazy>
@@ -87,14 +124,16 @@
           </v-row>
         </v-container>
       </v-lazy>
+      <!-- Carousel -->
       <div class="carousel d-flex justify-center align-center">
-        <splide :options="optionsCarousel">
-          <splide-slide v-for="(slide, i) in slides" :key="i">
+        <v-carousel cycle hide-delimiters :options="optionsCarousel">
+          <v-carousel-item v-for="(slide, i) in slides" :key="i">
             <div class="rounded">
-              <v-img class="responsive" :src="slide.src" />
+              <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="1.72" :src="slide.src" />
+              <v-img else class="responsive" :contain="true" :src="slide.src" />
             </div>
-          </splide-slide>
-        </splide>
+          </v-carousel-item>
+        </v-carousel>
       </div>
 
       <!-- <client-only>
@@ -170,12 +209,12 @@ export default {
       optionsFlashsale: {
         width: "90%",
         gap: "1rem",
-        height: 300,
-        perPage: this.$vuetify.breakpoint.xs ? 1 : 4,
+        height: 290,
+        perPage: this.$vuetify.breakpoint.xs ? 3 : 4,
         perMove: 1,
         pagination: false,
         autoWidth: true,
-        heightRatio: 0.3
+        heightRatio: 1.5
       },
       slides,
       filters,
@@ -184,10 +223,21 @@ export default {
       notFlashsaleProducts: [],
       flashSaleProducts: [],
       filteredProducts: [],
-      current: "semua"
+      current: "semua",
+      windowSize: {
+        x: 0,
+        y: 0,
+      },
+      dialog: true,
+      search: ''
     };
   },
   methods: {
+    // Carousel Resize based on Screen Size
+    onResize () {
+        this.windowSize = { x: window.innerWidth, y: window.innerHeight }
+      },
+    // End of Carousel Resize based on Screen Size
     parseRupiah(strMoney) {
       return parseInt(strMoney).toLocaleString("id", {
         style: "currency",
@@ -247,15 +297,23 @@ export default {
       } else {
         this.filteredProducts = this.notFlashsaleProducts;
       }
+    },
+    // Search Products Filter
+    filterbySearch(search) {
+      this.filteredProducts = this.notFlashsaleProducts.filter(
+          product => product.name.includes(search)
+        );
     }
+    // End of Search Products Filter
   },
   created() {
     this.filterFlashSale();
     this.filterNotFlashSale();
   },
   mounted() {
-    this.changeShowCart();
-    // console.log(this.real_products);
+    this.changeShowCart(); 
+    this.onResize();
+    // console.log(this.notFlashsaleProducts[21].name);
   }
 };
 </script>
