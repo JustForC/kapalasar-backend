@@ -42,11 +42,11 @@ class FlashController extends Controller
         //
         $this->validate($request, [
             'name' => ['required'],
-            'new_price' => ['required'],
-            'image' => ['required'],
-            'name' => ['required'],
+            'start' => ['required'],
             'end' => ['required'],
-            'amount' => ['required'],
+            'image' => ['required'],
+            'products_id' => ['required'],
+            'new_price' => ['required'],
         ]);
 
         $image = time().'-'.'.'.$request->image->extension();
@@ -62,7 +62,6 @@ class FlashController extends Controller
             'products_id' => $request->products_id,
             'image' => $path->getPath(),
             'new_price' => $request->new_price,
-            'amount' => $request->amount,
         ]);
 
         return response()->json($model);
