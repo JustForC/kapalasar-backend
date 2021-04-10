@@ -178,8 +178,6 @@ class HomeController extends Controller
                 'address' => $request->address,
                 'total' => $request->price,
                 'status' => 1,
-                'type' => 0,
-                'discount' => 0
             ]);
             foreach($request->cart as $cart){
                 $product = Product::find($cart['id']);
@@ -201,10 +199,36 @@ class HomeController extends Controller
                 }
             }
             return redirect()->route('home')->with('checkout', $checkout);;
-
         }
-        
-        dd($request);
+
+        $checkout = Checkout::create([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'total' => $request->price,
+            'status' => 1,
+        ]);
+        foreach($request->cart as $cart){
+            $product = Product::find($cart['id']);
+            if($product->discount_price){
+                $cost = Cost::create([
+                    'checkouts_id' => $checkout->id,
+                    'product' => $product->name,
+                    'amount' => $cart['qty'],
+                    'price' => $product->discount_price
+                ]);
+            }
+            else{
+                $cost = Cost::create([
+                    'checkouts_id' => $checkout->id,
+                    'product' => $product->name,
+                    'amount' => $cart['qty'],
+                    'price' => $product->price
+                ]);
+            }
+        }
+        return redirect()->route('home')->with('checkout', $checkout);;
+
     }
 
     public function account()
