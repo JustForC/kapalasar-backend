@@ -30,7 +30,7 @@ class ProductController extends Controller
             'unit' => ['required'],
             'stock' => ['required'],
             'price' => ['required'],
-            'path' => ['required'],
+            'product_image' => ['required'],
         ]);
 
         $image = time().'-'.'.'.$request->product_image->extension();
