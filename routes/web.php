@@ -183,7 +183,7 @@ Route::prefix('catalog')->group(function(){
         Route::post('store', [CatalogController::class, 'store'])->name('catalog.store');
         Route::delete('delete/{id}', [CatalogController::class, 'destroy'])->name('catalog.delete');
     });
-    Route::post('download/{id}',[CatalogController::class,'download'])->name('catalog.download');
+    Route::get('download/{id}',[CatalogController::class,'download'])->name('catalog.download');
     Route::get('data', [CatalogController::class, 'data'])->name('catalog.data');
     Route::get('/', [CatalogController::class, 'index'])->name('catalog.index');
 });
