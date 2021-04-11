@@ -379,13 +379,13 @@ export default {
             this.$store.commit("user/ADD", data);
             // console.log(this.$store.state.user.userInfo);
             // Inertia.visit('/payment');
-            const carts = this.$store.state.cart.listCarts;
-            let data = new FormData();
-            data.append('_token', this.csrf);
-            console.log(carts);
-            carts.forEach(cart => {
+            // const carts = this.$store.state.cart.listCarts;
+            // let data = new FormData();
+            // data.append('_token', this.csrf);
+            // console.log(carts);
+            // carts.forEach(cart => {
 
-            })
+            // })
           }
         }
         else{

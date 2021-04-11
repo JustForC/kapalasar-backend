@@ -287,9 +287,9 @@ export default {
       //   data.append('cartQty['+i+']', cart.qty);
       // })
       // data.append('cart', cart);
-      data.append('price', totalPrice);
-      data.append('image', this.selectedFile);
-      Inertia.post('/finish', data);
+      // data.append('price', totalPrice);
+      // data.append('image', this.selectedFile);
+      // Inertia.post('/finish', data);
 
       // Inertia.post('/finish', {
       //   // headers: {'Content-Type': 'multipart/form-data'},
