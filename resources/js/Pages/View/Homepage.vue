@@ -152,10 +152,10 @@
                 hide-delimiter-background
                 delimiter-icon="mdi-circle"
                 :options="optionsCarousel">
-                <v-carousel-item v-for="(slide, i) in slides" :key="i">
+                <v-carousel-item>
                   <div class="rounded">
-                    <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
-                    <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slide.src" />
+                    <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slides[1].src" />
+                    <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slides[1].src" />
                     <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
                     <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
                   </div>
@@ -169,10 +169,10 @@
                 hide-delimiter-background
                 delimiter-icon="mdi-circle"
                 height="150" :options="optionsCarousel">
-                <v-carousel-item v-for="(slide, i) in slides" :key="i">
+                <v-carousel-item>
                   <div class="rounded">
-                    <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
-                    <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slide.src" />
+                    <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slides[1].src" />
+                    <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slides[1].src" />
                     <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
                     <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
                   </div>
@@ -206,10 +206,10 @@
                 hide-delimiter-background
                 delimiter-icon="mdi-circle"
                 :options="optionsCarousel">
-                <v-carousel-item v-for="(slide, i) in slides" :key="i">
+                <v-carousel-item>
                   <div class="rounded">
-                    <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
-                    <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slide.src" />
+                    <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slides[2].src" />
+                    <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slides[2].src" />
                     <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
                     <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
                   </div>
@@ -223,10 +223,10 @@
                 hide-delimiter-background
                 delimiter-icon="mdi-circle"
                 height="150" :options="optionsCarousel">
-                <v-carousel-item v-for="(slide, i) in slides" :key="i">
+                <v-carousel-item>
                   <div class="rounded">
-                    <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
-                    <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slide.src" />
+                    <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slides[2].src" />
+                    <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slides[2].src" />
                     <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
                     <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
                   </div>
@@ -255,40 +255,40 @@
             <!-- End Product Page 3-->
       <!-- Carousel -->
       <div class="carousel d-flex justify-center align-center">
-        <v-carousel
-          v-if="windowSize.x > 600" 
-          cycle
-          :show-arrows="false"
-          hide-delimiter-background
-          delimiter-icon="mdi-circle"
-          :options="optionsCarousel">
-          <v-carousel-item v-for="(slide, i) in slides" :key="i">
-            <div class="rounded">
-              <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
-              <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slide.src" />
-              <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
-              <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
+              <v-carousel
+                v-if="windowSize.x > 600" 
+                cycle
+                :show-arrows="false"
+                hide-delimiter-background
+                delimiter-icon="mdi-circle"
+                :options="optionsCarousel">
+                <v-carousel-item>
+                  <div class="rounded">
+                    <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slides[3].src" />
+                    <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slides[3].src" />
+                    <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
+                    <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
+                  </div>
+                </v-carousel-item>
+              </v-carousel>
+              <!-- Conditional Rendering < 600px -->
+              <v-carousel
+                v-else 
+                cycle
+                :show-arrows="false"
+                hide-delimiter-background
+                delimiter-icon="mdi-circle"
+                height="150" :options="optionsCarousel">
+                <v-carousel-item>
+                  <div class="rounded">
+                    <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slides[3].src" />
+                    <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slides[3].src" />
+                    <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
+                    <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
+                  </div>
+                </v-carousel-item>
+              </v-carousel>
             </div>
-          </v-carousel-item>
-        </v-carousel>
-        <!-- Conditional Rendering < 600px -->
-        <v-carousel
-          v-else 
-          cycle
-          :show-arrows="false"
-          hide-delimiter-background
-          delimiter-icon="mdi-circle"
-          height="150" :options="optionsCarousel">
-          <v-carousel-item v-for="(slide, i) in slides" :key="i">
-            <div class="rounded">
-              <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
-              <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slide.src" />
-              <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
-              <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
-            </div>
-          </v-carousel-item>
-        </v-carousel>
-      </div>
 
       <!-- <client-only>
         <Cookie />
