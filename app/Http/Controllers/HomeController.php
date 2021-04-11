@@ -309,15 +309,16 @@ class HomeController extends Controller
             ]);
             $user = Auth()->user();
 
-            if($request->voucher){
+            if($request->voucher == 'undefined'){
+                $voucherId = null;
+                $voucherDisc = null;
+            }
+            else{
                 $voucher = Voucher::find($request->voucher);
                 $voucherId = $voucher->id;
                 $voucherDisc = $voucher->discount;
             }
-            else{
-                $voucherId = null;
-                $voucherDisc = null;
-            }
+
             $image = time().'.'.$request->image->extension();
             $path =  $request->image->move(public_path('/upload/checkout'),$image);
             $checkout = Checkout::create([
@@ -364,15 +365,16 @@ class HomeController extends Controller
             return redirect()->route('home')->with('checkout', $checkout);;
         }
 
-        if($request->voucher){
+        if($request->voucher == 'undefined'){
+            $voucherId = null;
+            $voucherDisc = null;
+        }
+        else{
             $voucher = Voucher::find($request->voucher);
             $voucherId = $voucher->id;
             $voucherDisc = $voucher->discount;
         }
-        else{
-            $voucherId = null;
-            $voucherDisc = null;
-        }
+
         $image = time().'.'.$request->image->extension();
         $path =  $request->image->move(public_path('/upload/checkout'),$image);
         $checkout = Checkout::create([
@@ -456,16 +458,6 @@ class HomeController extends Controller
             if(Auth()->user()->roles->name == 'User'){
                 $user = Auth()->user();
                 $flash_sale_prod = FlashSale::with('products')->get();
-                foreach($flash_sale_prod as $product){
-                    if($product->discount_price){
-                        $product->new_price = $product->discount_price;
-                        $product->price = $product->price;
-                    }
-                    else{
-                        $product->new_price = $product->price;
-                        $product->price = null;
-                    }
-                }
                 return Inertia::render('View/Flashsale', [
                     'check' => $check,
                     'user' => $user,
