@@ -12,6 +12,7 @@ use App\Models\Flash;
 use App\Models\FlashSale;
 use App\Models\Type;
 use App\Models\Voucher;
+use App\Models\Checkout;
 use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
@@ -240,6 +241,20 @@ class DatabaseSeeder extends Seeder
                 ]);
                 $k+=3;
             }
+        }
+
+        for($i = 1; $i <= 10; $i++){
+            Checkout::create([
+                'users_id' => 2,
+                'name' => "Ghema Allan Ferdiansyah",
+                'phone' => "082121234678",
+                'address' => "Jalan CIjotang",
+                'type' => 1,
+                'discount' => 1000,
+                'merchants_id' => 3,
+                'total' => 2500,
+                'status' => 2,
+            ]);
         }
     }
 }

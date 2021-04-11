@@ -15,28 +15,30 @@
         </div>
         <div class="table-responsive">
           <table id="table" class="table hover" style="width:100%">
-            <tr>
-              <td>ID</td>
+          <tr>
+              <td>#</td>
               <td>Nama</td>
-              <td>Status</td>
-              <td>Voucher</td>
+              <td>Alamat</td>
+              <td>No. Telephone</td>
+              <td>Discount</td>
+              <td>ID Merchant</td>
               <td>Total</td>
-              <td>Invoice</td>
-              <td>Tanggal Invoice</td>
+              <td>Status</td>
               <td>Receipt</td>
               <td>Tanggal Receipt</td>
             </tr>
-            @foreach($transactions as $transaction)
+            @foreach($transactions as $index => $t)
             <tr>
-              <td>$transaction->id</td>
-              <td>$transaction->users->name</td>
-              <td>$transaction->status</td>
-              <td>$transaction->vouchers->name</td>
-              <td>$transaction->total</td>
-              <td>$transaction->invoice</td>
-              <td>$transaction->invoice_date</td>
-              <td>$transaction->receipt</td>
-              <td>$transaction->receipt_date</td>
+              <td>{{$index+1}}</td>
+              <td>{{$t->name}}</td>
+              <td>{{$t->address}}</td>
+              <td>{{$t->phone}}</td>
+              <td>{{$t->discount}}</td>
+              <td>{{$t->merchants_id}}</td>
+              <td>{{$t->total}}</td>
+              <td>{{$t->status}}</td>
+              <td>{{$t->receipt}}</td>
+              <td>{{$t->date_receipt}}</td>
             </tr>
             @endforeach
           </table>
