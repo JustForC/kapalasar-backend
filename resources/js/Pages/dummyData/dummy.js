@@ -183,12 +183,17 @@ export const products = [
   
   export const filters = [
     { src: require("../assets/Semua.png"), name: "semua" },
-    { src: require("../assets/Buah.png"), name: "buah" },
-    { src: require("../assets/Sayur.png"), name: "sayur" },
-    { src: require("../assets/Daging.png"), name: "daging dan ikan" },
-    { src: require("../assets/Bumbu.png"), name: "bumbu" },
-    { src: require("../assets/Bumbu.png"), name: "bumbu" },
-    { src: require("../assets/Bumbu.png"), name: "bumbu" },
+    { src: require("../assets/buah.jpg"), name: "buah" },
+    { src: require("../assets/sayur.jpg"), name: "sayur" },
+    { src: require("../assets/Daging.png"), name: "daging" },
+    { src: require("../assets/Daging.png"), name: "ikan" },
+    { src: require("../assets/Daging.png"), name: "seafood" },
+    { src: require("../assets/ladanglima.jpg"), name: "kapalasar organik" },
+    { src: require("../assets/gulamerah.jpg"), name: "bumbu" },
+    { src: require("../assets/bumbugiling.jpg"), name: "bumbu giling" },
+    { src: require("../assets/olahankacangkedelai.jpg"), name: "olahan kedelai" },
+    { src: require("../assets/olahankacangkedelai.jpg"), name: "siap masak" },
+    { src: require("../assets/olahankacangkedelai.jpg"), name: "siap makan" },
     { src: require("../assets/promo.png"), name: "promo" }
   ];
   

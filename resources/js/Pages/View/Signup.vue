@@ -38,8 +38,6 @@
                       </h3>
                       <div class="pt-5">
 
-
-                        <!-- <v-form action="/register" method="post"> -->
                         <form @submit.prevent="submit">
                         <input type="hidden" name="_token" :value="csrf">
                           <div>
@@ -51,12 +49,19 @@
                               name = "name"
                               outlined
                               dense
+                              :error-messages="$page.errors.name[0]"
+                              v-if="$page.errors.name"
                             ></v-text-field>
-                            <!-- <div v-if="form.errors.name">{{ form.errors.name }}</div>
-                            <v-alert
-                              v-if="form.errors.name"
-                            >{{form.errors.name}}
-                            </v-alert> -->
+                            <v-text-field
+                              v-model="form.name"
+                              :rules="[rules.required]"
+                              placeholder="Nama Lengkap"
+                              name = "name"
+                              outlined
+                              dense
+                              v-else
+                            ></v-text-field>
+
                             <span class="label font-weight-medium">Email</span>
                             <v-text-field
                               v-model="form.email"
@@ -65,11 +70,19 @@
                               name = "email"
                               outlined
                               dense
+                              :error-messages="$page.errors.email[0]"
+                              v-if="$page.errors.email"
                             ></v-text-field>
-                            <!-- <v-alert
-                              v-if="form.errors.email"
-                            >asdsada{{form.errors.email}}
-                            </v-alert> -->
+                            <v-text-field
+                              v-model="form.email"
+                              :rules="[rules.required, rules.email]"
+                              placeholder="Email"
+                              name = "email"
+                              outlined
+                              dense
+                              v-else
+                            ></v-text-field>
+
                             <span class="label font-weight-medium"
                               >Nomor Telepon</span
                             >
@@ -80,9 +93,19 @@
                               name = "phone"
                               outlined
                               dense
+                              :error-messages="$page.errors.phone[0]"
+                              v-if="$page.errors.phone"
                             ></v-text-field>
-                            <v-row>
-                            </v-row>
+                            <v-text-field
+                              v-model="form.phone"
+                              :rules="[rules.required, rules.onlyNum]"
+                              placeholder="Nomor Telepon"
+                              name = "phone"
+                              outlined
+                              dense
+                              v-else
+                            ></v-text-field>
+
                             <span class="label font-weight-medium"
                               >Password</span
                             >
@@ -97,6 +120,21 @@
                               name = "password"
                               dense
                               placeholder="Password"
+                              :error-messages="$page.errors.password[0]"
+                              v-if="$page.errors.password"
+                            ></v-text-field>
+                            <v-text-field
+                              v-model="form.password"
+                              :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+                              :rules="[rules.required, rules.min]"
+                              :type="show ? 'text' : 'password'"
+                              hint="At least 8 characters"
+                              @click:append="show = !show"
+                              outlined
+                              name = "password"
+                              dense
+                              placeholder="Password"
+                              v-else
                             ></v-text-field>
                           </div>
                           <div class="pb-3 text-center">

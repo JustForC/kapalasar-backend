@@ -1,24 +1,24 @@
 <template>
   <div class="product card">
     <v-card elevation="1" max-width="175" max-height="360">
-      <v-img :src="product.image" height="130" max-width="175"></v-img>
+      <v-img :src="product.products.image" height="130" max-width="175"></v-img>
       <v-card-title class="text-subtitle-2 font-weight-medium">{{
-        product.name
+        product.products.name
       }}</v-card-title>
       <v-card-subtitle class="text-caption pb-1">{{
-        product.unit
+        product.products.unit
       }}</v-card-subtitle>
       <v-card-text class="pb-0">
         <div class="amber--text font-weight-medium">
-          {{ parseRupiah(product.price) }}
+          {{ parseRupiah(product.new_price) }}
         </div>
         <div class="grey--text text-decoration-line-through text-caption">
-          {{ parseRupiah(product.price) }}
+          {{ parseRupiah(product.products.price) }}
         </div>
       </v-card-text>
       <div class="px-4 pt-1 pb-4">
         <div
-          v-if="getClickedBtn(product.id)"
+          v-if="getClickedBtn(product.products.id)"
           class="d-flex justify-center text-center"
         >
           <v-btn
@@ -27,12 +27,12 @@
             x-small
             dark
             color="#A6CB26"
-            @click="minQty(product.id, product.price)"
+            @click="minQty(product.products.id, product.products.price)"
           >
             <v-icon>mdi-minus</v-icon>
           </v-btn>
           <div class="itemQty d-flex justify-center align-center">
-            {{ getQtyById(product.id) }}
+            {{ getQtyById(product.products.id) }}
           </div>
           <v-btn
             elevation="0"
@@ -40,7 +40,7 @@
             x-small
             dark
             color="#A6CB26"
-            @click="addQty(product.id, product.stock, product.price)"
+            @click="addQty(product.products.id, product.products.stock, product.products.price)"
           >
             <v-icon>mdi-plus</v-icon>
           </v-btn>
@@ -51,7 +51,7 @@
           color="#A6CB26"
           dark
           block
-          @click="showItemQty(product.id)"
+          @click="showItemQty(product.products.id)"
           >Beli</v-btn
         >
       </div>
@@ -62,7 +62,7 @@
 <script>
 export default {
   name: "ProductCardFlash",
-  props: ["product"],
+  props: ["product", "newPrice"],
   data() {
     return {
       // isBtnBeliClicked: false

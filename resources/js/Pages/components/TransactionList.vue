@@ -58,18 +58,18 @@
                           <v-card-title
                             class="font-weight-medium text-subtitle-1 pt-0"
                           >
-                            {{ item.productName }}
+                            {{ item.product }}
                           </v-card-title>
+                          <!-- <v-card-subtitle class="text-subtitle-2 py-0">
+                            {{ item.unit }}
+                          </v-card-subtitle> -->
                           <v-card-subtitle class="text-subtitle-2 py-0">
-                            {{ item.description }}
-                          </v-card-subtitle>
-                          <v-card-subtitle class="text-subtitle-2 py-0">
-                            {{ parseRupiah(item.hargaBaru) }}
+                            {{ parseRupiah(item.price) }}
                           </v-card-subtitle>
                         </div>
                         <v-spacer></v-spacer>
                         <div>
-                        {{ item.qty }}
+                        {{ item.amount }}
                         </div>
                       </v-row>
                     </v-card>
@@ -97,7 +97,7 @@
                       </div>
                     </div>
                     <div class="mt-md-3 mt-1 text-subtitle-1">
-                      {{ userData.nama }}
+                      {{ transaction.dataUser.name }}
                     </div>
                     <div class="mt-md-4 mt-2">
                       <div class="label font-weight-regular">
@@ -108,7 +108,7 @@
                       </div>
                     </div>
                     <div class="mt-md-3 mt-1 text-subtitle-1">
-                      {{ userData.Telepon }}
+                      {{ transaction.dataUser.phone }}
                     </div>
                     <div class="mt-md-4 mt-2">
                       <div class="label font-weight-regular">Alamat</div>
@@ -117,7 +117,7 @@
                       </div>
                     </div>
                     <div class="mt-md-3 mt-1 text-subtitle-1">
-                      {{ userData.alamat }}
+                      {{ transaction.dataUser.address }}
                     </div>
                   </div>
                 </v-container>
@@ -155,7 +155,7 @@ export default {
   },
   mounted() {
     this.getUserData();
-    console.log(this.transaction, this.num);
+    // console.log(this.transaction, this.num);
   }
 };
 </script>

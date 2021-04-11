@@ -52,7 +52,7 @@ export default {
     };
   },
   mounted() {
-    console.log(this.listCart);
+    // console.log(this.listCart);
   },
   methods: {
     parseRupiah(strMoney) {
@@ -65,7 +65,7 @@ export default {
       const state = this.$store.state.cart.listCarts;
       state.forEach(item => {
         if (item.id == idx) {
-          console.log(item);
+          // console.log(item);
           if (item.qty < stock) {
             const newQty = item.qty + 1;
             this.$set(item, "qty", newQty);

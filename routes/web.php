@@ -22,6 +22,8 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CodeController;
 
+Route::get('/send-notification', [HomeController::class, 'index']);
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('flash_sale', [HomeController::class, 'flash_sale'])->name('flash_sale');
 Route::get('account', [HomeController::class, 'account'])->name('account');

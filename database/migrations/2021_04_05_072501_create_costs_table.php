@@ -18,8 +18,9 @@ class CreateCostsTable extends Migration
             $table->foreignId('checkouts_id')->references('id')->on('checkouts')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('products_id')->nullable()->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade');
             $table->string('product')->nullable();
-            $table->integer('amount')->nullable();
             $table->integer('price')->nullable();
+            $table->integer('amount')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

@@ -10,6 +10,10 @@ use App\Models\Voucher;
 use App\Models\Checkout;
 use App\Models\Cost;
 use App\Models\FlashSale;
+
+use Notification;
+use App\Notifications\PWANotification;
+
 class HomeController extends Controller
 {
     public function index()
@@ -301,15 +305,41 @@ class HomeController extends Controller
                 'address' => $request->address
             ]);
             $user = Auth()->user();
+
+            if($request->voucher){
+                $voucher = Voucher::find($request->voucher);
+                $voucherId = $voucher->id;
+                $voucherDisc = $voucher->discount;
+            }
+            else{
+                $voucherId = null;
+                $voucherDisc = null;
+            }
+            $image = time().'.'.$request->image->extension();
+            $path =  $request->image->move(public_path('/upload/checkout'),$image);
             $checkout = Checkout::create([
                 'users_id' => $user->id,
                 'name' => $request->name,
                 'phone' => $request->phone,
                 'address' => $request->address,
                 'total' => $request->price,
+                'type' => $voucherId,
+                'discount' => $voucherDisc,
+                'image' => '/upload/checkout/'.$path->getFileName(),
                 'status' => 1,
             ]);
-            foreach($request->cart as $cart){
+
+            $i = 1;
+            foreach($request->cartId as $cartId){
+                $carts[$i]['id'] = $cartId;
+                $i++;
+            }
+            $i = 1;
+            foreach($request->cartQty as $cartQty){
+                $carts[$i]['qty'] = $cartQty;
+                $i++;
+            }
+            foreach($carts as $cart){
                 $product = Product::find($cart['id']);
                 if($product->discount_price){
                     $cost = Cost::create([
@@ -331,14 +361,39 @@ class HomeController extends Controller
             return redirect()->route('home')->with('checkout', $checkout);;
         }
 
+        if($request->voucher){
+            $voucher = Voucher::find($request->voucher);
+            $voucherId = $voucher->id;
+            $voucherDisc = $voucher->discount;
+        }
+        else{
+            $voucherId = null;
+            $voucherDisc = null;
+        }
+        $image = time().'.'.$request->image->extension();
+        $path =  $request->image->move(public_path('/upload/checkout'),$image);
         $checkout = Checkout::create([
             'name' => $request->name,
             'phone' => $request->phone,
             'address' => $request->address,
             'total' => $request->price,
+            'type' => $voucherId,
+            'discount' => $voucherDisc,
+            'image' => '/upload/checkout/'.$path->getFileName(),
             'status' => 1,
         ]);
-        foreach($request->cart as $cart){
+
+        $i = 1;
+        foreach($request->cartId as $cartId){
+            $carts[$i]['id'] = $cartId;
+            $i++;
+        }
+        $i = 1;
+        foreach($request->cartQty as $cartQty){
+            $carts[$i]['qty'] = $cartQty;
+            $i++;
+        }
+        foreach($carts as $cart){
             $product = Product::find($cart['id']);
             if($product->discount_price){
                 $cost = Cost::create([
@@ -378,7 +433,7 @@ class HomeController extends Controller
                         $product->price = null;
                     }
                 }
-                $checkouts = Checkout::where('users_id', $user->id)->first();
+                $checkouts = Checkout::with('costs')->where('users_id', $user->id)->get();
                 return Inertia::render('View/Account', [
                     'check' => true,
                     'user' => $user,
@@ -421,16 +476,6 @@ class HomeController extends Controller
         $user = new User;
         // $flash_sale_prod = Product::with('categories')->get();
         $flash_sale_prod = FlashSale::with('products')->get();
-        foreach($flash_sale_prod as $product){
-            if($product->discount_price){
-                $product->new_price = $product->discount_price;
-                $product->price = $product->price;
-            }
-            else{
-                $product->new_price = $product->price;
-                $product->price = null;
-            }
-        }
         return Inertia::render('View/Flashsale', [
             'check' => $check,
             'user' => null,

@@ -79,10 +79,6 @@ class DatabaseSeeder extends Seeder
             'name' => 'PTGPERSEN',
             'discount' => 10
         ]);
-        // Category::insert([
-        //     'name' => 'Semua',
-        //     'image' => '/upload/category/semua.png'
-        // ]);
         Category::insert([
             'name' => 'Buah',
             'image' => '/upload/category/buah.png'
@@ -92,19 +88,23 @@ class DatabaseSeeder extends Seeder
             'image' => '/upload/category/sayur.png'
         ]);
         Category::insert([
-            'name' => 'Daging dan Ikan',
+            'name' => 'Daging',
             'image' => '/upload/category/daging.png'
         ]);
         Category::insert([
-            'name' => 'Yoghurt',
-            'image' => '/upload/category/yoghurt.png'
+            'name' => 'Ikan',
+            'image' => '/upload/category/daging.png'
         ]);
         Category::insert([
-            'name' => 'Ladanglima',
+            'name' => 'Seafood',
+            'image' => '/upload/category/daging.png'
+        ]);
+        Category::insert([
+            'name' => 'Kapalasar Organik',
             'image' => '/upload/category/ladanglima.png'
         ]);
         Category::insert([
-            'name' => 'Gula Merah',
+            'name' => 'Bumbu',
             'image' => '/upload/category/gulamerah.png'
         ]);
         Category::insert([
@@ -112,7 +112,15 @@ class DatabaseSeeder extends Seeder
             'image' => '/upload/category/bumbugiling.png'
         ]);
         Category::insert([
-            'name' => 'Olahan Kacang Kedelai',
+            'name' => 'Olahan Kedelai',
+            'image' => '/upload/category/olahankacangkedelai.png'
+        ]);
+        Category::insert([
+            'name' => 'Siap Masak',
+            'image' => '/upload/category/olahankacangkedelai.png'
+        ]);
+        Category::insert([
+            'name' => 'Siap Makan',
             'image' => '/upload/category/olahankacangkedelai.png'
         ]);
         Flash::insert([

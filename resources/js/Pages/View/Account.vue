@@ -109,7 +109,7 @@
               </v-container>
             </v-card>
             <v-container>
-              <div v-for="(item, i) in dataTransaction" :key="i">
+              <div v-for="(item, i) in dataTransactions" :key="i">
                 <TransactionList :transaction="item" :num="i" />
               </div>
             </v-container>
@@ -163,7 +163,9 @@ export default {
           return pattern.test(value) || "Harus Angka";
         }
       },
-      dataTransaction: []
+      dataTransactions: [],
+      dataCosts: [],
+      Transactions: []
     };
   },
   methods: {
@@ -174,9 +176,42 @@ export default {
       
       // dateTransaction = this.checkouts;
 
-      let dataProduct = [];
-      let totalPrice = 0;
+      // let dataProduct = [];
+      // let totalPrice = 0;
+      // this.dataTransactions = this.checkouts.map(checkout => {
+      //   return checkout;
+      // })
+      // this.dataCosts = this.checkouts.map(checkout => {
+      //   return checkout.costs;
+      // })
+      this.dataTransactions = this.checkouts.map(checkout => {
+        return {
+          'totalPrice': checkout.total,
+          'dataProduct': checkout.costs,
+          'dataUser': checkout
+        }
+      })
+      // console.log(this.Transactions);
+      // this.dataTransaction = this.checkouts.map(checkouts => {
+      //   totalPrice = checkouts.total
+      //   checkouts.costs.map(cost => {
+      //     // console.log(cost);
+      //     this.real_products.forEach(product => {
+      //       // console.log(product);
+      //       if(product.id == cost.id){
 
+      //         const list = {
+      //           qty: cost.amount,
+      //           ...product
+      //         };
+      //         return totalPrice;
+      //         console.log(list);
+      //         dataProduct.push(list);
+      //       }
+      //     })
+      //   })
+      // })
+      // console.log(this.dataTransaction, this.dataProduct);
       // products.forEach(product => {
       //   transactionData.forEach(transaction => {
       //     totalPrice = transaction.totalPrice;
@@ -192,53 +227,6 @@ export default {
       //   });
       // });
 
-      this.real_products.forEach(product => {
-        this.checkouts.forEach(transaction => {
-          totalPrice = transaction.price;
-          transaction.costs.forEach(cart => {
-            if(cart.product == product.name) {
-              const list = {
-                qty: cart.amount,
-                  ...product
-              };
-              // dataProduct.push
-            }
-          })
-        })
-      })
-      // this.checkouts.forEach(
-      //   transaction => {
-      //     totalPrice = transaction.total;
-      //     transaction.costs.forEach(
-      //       cart => {
-      //         if(cart.id == transaction.id){
-      //           const list = {
-      //             qty: cart.qty,
-      //             // ...product
-      //           };
-      //         }
-      //       })
-      //   });
-
-      // this.dataTransaction.push({
-      //   dataProduct,
-      //   totalPrice: totalPrice
-      // });
-
-//   transactionData.forEach(
-        // transaction => {
-      //     totalPrice = transaction.totalPrice;
-      //     transaction.cart.forEach(cart => {
-      //       if (cart.id == product.id) {
-      //         const list = {
-      //           qty: cart.qty,
-      //           ...product
-      //         };
-      //         dataProduct.push(list);
-      //       }
-      //     });
-      //   });
-      // });
 
     }
   },
