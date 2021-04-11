@@ -50,7 +50,7 @@
               class="ma-lg-2 v-lazy my-3"
             >
               <v-row justify="center">
-                <ProductCardFlash @getTotalPrice="getTotalPrice" :product="product" :newPrice="newPrice" />
+                <ProductCardFlash @getTotalPrice="getTotalPrice" :product="product" />
               </v-row>
             </v-col>
           </v-row>
@@ -132,7 +132,6 @@ export default {
         autoWidth: true,
         heightRatio: 0.3
       },
-      newPrice: [],
       slides,
       filters,
       totalPrice: 0,
@@ -179,56 +178,52 @@ export default {
         // console.log(products.newPrice);
           // newPrice = products.new_price;
           return products.products;
-      })      
+      })
     },
     filterNotFlashSale() {
       // this.notFlashsaleProducts = products.filter(
       //   product => !product.flashSale
       // );
       this.notFlashsaleProducts = this.real_products.map(products => {
-          return products.products;
-      })
-      this.newPrice = this.real_products.map(products => {
-          return products.new_price;
+          return products;
       })
       // console.log(this.notFlashsaleProducts);
       this.filteredProducts = this.notFlashsaleProducts;
       // console.log(this.filteredProducts);
-      console.log(this.newPrice);
     },
     filterByKategori(by) {
       this.current = by;
       if (this.current === "sayur") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories_id === 2
+          product => product.products.categories_id === 2
         );
       } else if (this.current === "buah") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories_id === 1
+          product => product.products.categories_id === 1
         );
       } else if (this.current === "daging dan ikan") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories_id === 3
+          product => product.products.categories_id === 3
         );
       } else if (this.current === "yoghurt") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories_id === 4
+          product => product.products.categories_id === 4
         );
       } else if (this.current === "ladanglima") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories_id === 5
+          product => product.products.categories_id === 5
         );
       } else if (this.current === "gula merah") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories_id === 6
+          product => product.products.categories_id === 6
         );
       } else if (this.current === "bumbu giling") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories_id === 7
+          product => product.products.categories_id === 7
         );
       } else if (this.current === "olahan kacang kedelai") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories_id === 8
+          product => product.products.categories_id === 8
         );
       } else if (this.current === "promo") {
         this.filteredProducts = this.notFlashsaleProducts.filter(function(item){
