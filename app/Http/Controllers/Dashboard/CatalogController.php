@@ -40,9 +40,9 @@ class CatalogController extends Controller
         return response()->json($model);
     }
 
-    public function download(Request $request)
+    public function download($id)
     {
-        $model = Catalog::findOrFail($request->id);
+        $model = Catalog::findOrFail($id);
         $filePath = public_path($model->path);
         $headers = ['Content-Type: application/pdf'];
         $fileName = time().'.pdf';
@@ -59,9 +59,17 @@ class CatalogController extends Controller
         $model = Catalog::get();
         return DataTables::of($model)
             ->addColumn('action', function($model){
-            return '<div class="btn-group" role="group">
-                        <button type="button" href="'.route('catalog.delete', $model->id).'" class="btn btn-danger btn-sm delete" name="Delete '.$model->name.'">Delete</button>
-                    </div>';
+            if(auth()->user()->roles->name == "Super Admin" || auth()->user()->roles->name == "Admin"){
+                return '<div class="btn-group" role="group">
+                            <button type="button" href="'.route('catalog.delete', $model->id).'" class="btn btn-danger btn-sm delete" name="Delete '.$model->name.'">Delete</button>
+                            <button type="button" href="'.route('catalog.download', $model->id).'" class="btn btn-primary btn-sm download" name="Download '.$model->name.'">Download</button>
+                        </div>';
+            }
+            elseif(auth()->user()->roles->name == "Merchant"){
+                return '<div class="btn-group" role="group">
+                            <button type="button" href="'.route('catalog.download', $model->id).'" class="btn btn-primary btn-sm download" name="Download '.$model->name.'">Download</button>
+                        </div>';
+            }
             })
             ->addColumn('timeline', function($model){
                 return date('d M Y', strtotime($model->date)).' '.date('H:i', strtotime($model->start)).' - '.date('H:i', strtotime($model->end));

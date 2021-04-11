@@ -10,10 +10,12 @@
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
-        @if(Auth::user()->roles->name == "Super Admin" || Auth::user()->roles->name == "Admin")
+        @if(auth()->user()->roles->name == "Super Admin" || auth()->user()->roles->name == "Admin" || auth()->user()->roles->name == "Merchant")
         <div class="d-flex justify-content-between align-items-baseline mb-4 mb-md-3">
           <h6 class="card-title mb-0">Catalog</h6>
+          @if(auth()->user()->roles->name != "Merchant")
           <button class="btn btn-primary modal-show" type="button" href="{{ route('catalog.create') }}" name="Tambah Kategori Produk" data-toggle="modal" data-target="#modal">+ Add New</button>
+          @endif
         </div>
         <div class="table-responsive">  
           <table id="table" class="table hover" style="width:100%"></table>
@@ -24,31 +26,6 @@
         <div>
         </div>
       </div>
-      @if(Auth::user()->roles->name == "Super Admin" || Auth::user()->roles->name == "Admin" || Auth::user()->roles->name == "Merchant")
-      <div class="card-body">
-        <div class="d-flex justify-content-between align-items-baseline mb-4 mb-md-3">
-          <h6 class="card-title mb-0">Download Catalog</h6>
-        </div>
-        <form method="POST" action="{{route('catalog.download')}}" enctype="multipart/form-data">
-            @csrf
-            <div class="modal-header">
-            </div>
-            <div class="modal-body">
-              <div class="form-group">
-                <label for="id" class="control-label">Pilih Catalog</label><br>
-                  <select id="id" type="text" class="form-control" name="id">
-                      @foreach($catalogs as $catalog)
-                      <option value="{{$catalog->id}}">{{$catalog->name}}</option>
-                      @endforeach
-                  </select>
-              </div>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Download</button>
-            </div>
-        </form>
-      </div>
-      @endif
     </div>
   </div>
 </div>
@@ -63,6 +40,7 @@
       order: [[ 1, "asc" ]],
       columns: [
         {title: '#', data: 'DT_RowIndex', name: 'DT_RowIndex', orderable:false, width: '7.5%', className: 'dt-center'},
+        {title: 'ID', data: 'id', name: 'id', width: '30%', className: 'dt-head-center'},
         {title: 'Nama Catalog', data: 'name', name: 'name', width: '30%', className: 'dt-head-center'},
         {title: 'Action', data: 'action', name: 'action', width: '12.5%', className: 'dt-center'},
       ],
@@ -84,6 +62,7 @@
         }
       });
     });
+
 
     $('body').on('submit','.form', function(event){
       event.preventDefault();
@@ -137,9 +116,9 @@
       });
     });
 
+
     $('body').on('click', '.delete', function (event) {
       event.preventDefault();
-
       var me = $(this),
           url = me.attr('href'),
           name = me.attr('name');
@@ -193,5 +172,13 @@
         }
       });
     });
+
+    $('body').on('click', '.download', function (event) {
+      var me = $(this),
+          url = me.attr('href'),
+          name = me.attr('name');
+      $.ajax(url);
+    });
+    
   </script>
 @endpush
