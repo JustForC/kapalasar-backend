@@ -124,40 +124,40 @@ class DatabaseSeeder extends Seeder
             'image' => '/upload/category/olahankacangkedelai.png'
         ]);
         Flash::insert([
-            'name' => '00:00 - 00:30',
+            'name' => '00:00 - 23:59',
             'start' => '00:00',
-            'end' => '00:30'
+            'end' => '23:59'
         ]);
-        Flash::insert([
-            'name' => '08:00 - 08:30',
-            'start' => '08:00',
-            'end' => '08:30'
-        ]);
-        Flash::insert([
-            'name' => '12:00 - 12:30',
-            'start' => '12:00',
-            'end' => '12:30'
-        ]);
-        Flash::insert([
-            'name' => '15:00 - 15:30',
-            'start' => '15:00',
-            'end' => '15:30'
-        ]);
-        Flash::insert([
-            'name' => '18:00 - 18:30',
-            'start' => '18:00',
-            'end' => '18:30'
-        ]);
-        Flash::insert([
-            'name' => '20:00 - 20:30',
-            'start' => '20:00',
-            'end' => '20:30'
-        ]);
-        Flash::insert([
-            'name' => '22:00 - 22:30',
-            'start' => '22:00',
-            'end' => '22:30'
-        ]);
+        // Flash::insert([
+        //     'name' => '08:00 - 08:30',
+        //     'start' => '08:00',
+        //     'end' => '08:30'
+        // ]);
+        // Flash::insert([
+        //     'name' => '12:00 - 12:30',
+        //     'start' => '12:00',
+        //     'end' => '12:30'
+        // ]);
+        // Flash::insert([
+        //     'name' => '15:00 - 15:30',
+        //     'start' => '15:00',
+        //     'end' => '15:30'
+        // ]);
+        // Flash::insert([
+        //     'name' => '18:00 - 18:30',
+        //     'start' => '18:00',
+        //     'end' => '18:30'
+        // ]);
+        // Flash::insert([
+        //     'name' => '20:00 - 20:30',
+        //     'start' => '20:00',
+        //     'end' => '20:30'
+        // ]);
+        // Flash::insert([
+        //     'name' => '22:00 - 22:30',
+        //     'start' => '22:00',
+        //     'end' => '22:30'
+        // ]);
         $this->call(ProductSeeder1::class);
         // for($i = 1; $i <= 20; $i++){
         //     Product::insert([
@@ -231,30 +231,28 @@ class DatabaseSeeder extends Seeder
         //         'categories_id' => 5
         //     ]);
         // }
-        $k = 1;
-        for($i = 1; $i <= 5; $i++){
-            for($j = 1; $j <= 5; $j++){
-                FlashSale::insert([
-                    'flashes_id' => $i,
-                    'products_id' => $k,
-                    'new_price' => 5000
-                ]);
-                $k+=3;
-            }
+        $j = 1;
+        for($i = 1; $i <= 9; $i++){
+            FlashSale::insert([
+                'flashes_id' => 1,
+                'products_id' => $j,
+                'new_price' => 5000
+            ]);
+            $j+=3;
         }
 
-        for($i = 1; $i <= 10; $i++){
-            Checkout::create([
-                'users_id' => 2,
-                'name' => "Ghema Allan Ferdiansyah",
-                'phone' => "082121234678",
-                'address' => "Jalan CIjotang",
-                'type' => 1,
-                'discount' => 1000,
-                'merchants_id' => 3,
-                'total' => 2500,
-                'status' => 2,
-            ]);
-        }
+        // for($i = 1; $i <= 10; $i++){
+        //     Checkout::create([
+        //         'users_id' => 2,
+        //         'name' => "Ghema Allan Ferdiansyah",
+        //         'phone' => "082121234678",
+        //         'address' => "Jalan CIjotang",
+        //         'type' => 1,
+        //         'discount' => 1000,
+        //         'merchants_id' => 3,
+        //         'total' => 2500,
+        //         'status' => 2,
+        //     ]);
+        // }
     }
 }
