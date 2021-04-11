@@ -11,10 +11,10 @@
         <div class="form-group">
             <label for="status" class="control-label">Status</label><br>
             <select id="status" type="number" class="form-control" name="status">
-                <option value='1'>Dipesan</option>
-                <option value='2'>Selesai</option>
-                <option value='3'>Refund</option>
-                <option value='4'>Tidak Selesai</option>
+                <option name="status" value=1>Dipesan</option>
+                <option name="status" value=2>Selesai</option>
+                <option name="status" value=3>Refund</option>
+                <option name="status" value=4>Tidak Selesai</option>
             </select>
         </div>
         @if($model->total == NULL)

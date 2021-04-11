@@ -77,7 +77,6 @@ class TransactionController extends Controller
     public function edit($id)
     {
         //
-        $users = User::get();
         $model = Checkout::findOrFail($id);
         return view('dashboard/transactions/form',['model' => $model]);
     }
@@ -115,7 +114,7 @@ class TransactionController extends Controller
     }
 
     public function data(){
-        $model = Checkout::with('users','vouchers')->where('status', 1)->orWhere('status', 2)->get();
+        $model = Checkout::with('users','vouchers')->where('status', 1)->orWhere('status', 3)->orWhere('status', 4)->get();
         return DataTables::of($model)
             ->addColumn('action', function($model){
             return '<div class="btn-group" role="group">
