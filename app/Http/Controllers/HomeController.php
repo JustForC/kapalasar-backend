@@ -10,6 +10,7 @@ use App\Models\Voucher;
 use App\Models\Checkout;
 use App\Models\Cost;
 use App\Models\FlashSale;
+use App\Models\Advertisement;
 
 use Notification;
 use App\Notifications\PWANotification;
@@ -178,6 +179,7 @@ class HomeController extends Controller
             ]);
         }
         $user = new User;
+        $banners = Advertisement::get();
         $products = Product::with('categories')->get();
         foreach($products as $product){
             if($product->discount_price){
@@ -192,7 +194,8 @@ class HomeController extends Controller
         return Inertia::render('View/Homepage', [
             'check' => $check,
             'user' => null,
-            'real_products' => $products
+            'real_products' => $products,
+            'banners' => $banners
         ]);
     }
 
@@ -480,6 +483,44 @@ class HomeController extends Controller
             'check' => $check,
             'user' => null,
             'real_products' => $flash_sale_prod
+        ]);
+    }
+
+    public function banner($slug)
+    {
+        $check = Auth()->check();
+        if($check){
+            if(Auth()->user()->roles->name == 'User'){
+                $user = Auth()->user();
+                $flash_sale_prod = FlashSale::with('products')->get();
+                foreach($flash_sale_prod as $product){
+                    if($product->discount_price){
+                        $product->new_price = $product->discount_price;
+                        $product->price = $product->price;
+                    }
+                    else{
+                        $product->new_price = $product->price;
+                        $product->price = null;
+                    }
+                }
+                return Inertia::render('View/Flashsale', [
+                    'check' => $check,
+                    'user' => $user,
+                    'real_products' => $flash_sale_prod
+                ]);
+            }
+            else if(Auth()->user()->roles->name == 'Super Admin'){
+                return 'super admin';
+            }
+        }
+        $user = new User;
+        // $flash_sale_prod = Product::with('categories')->get();
+        $flash_sale_prod = Advertisement::where('path', $slug)->with('products')->first();
+        // dd($flash_sale_prod);
+        return Inertia::render('View/Banner', [
+            'check' => $check,
+            'user' => null,
+            'real_products' => $flash_sale_prod->products
         ]);
     }
 

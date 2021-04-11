@@ -13,4 +13,7 @@ class Advertisement extends Model
     public function banners(){
         return $this->hasMany(Banner::class);
     }
+    public function products(){
+    	return $this->belongsToMany(Product::class, 'banners', 'advertisements_id', 'products_id');
+    }
 }
