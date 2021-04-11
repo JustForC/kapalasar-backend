@@ -57,8 +57,8 @@
           </ul>
         </div>
       </li>
-      <li class="nav-item {{ request()->is('ads') ? 'active' : '' }}">
-        <a href="{{ url('ads') }}" class="nav-link">
+      <li class="nav-item {{ request()->is('banner') ? 'active' : '' }}">
+        <a href="{{ url('banner') }}" class="nav-link">
           <i class="link-icon far fa-ad"></i>
           <span class="link-title">Advertisement</span>
         </a>

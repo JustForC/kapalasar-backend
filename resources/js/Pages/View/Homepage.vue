@@ -27,13 +27,13 @@
           hide-delimiter-background
           delimiter-icon="mdi-circle"
           :options="optionsCarousel">
-          <v-carousel-item v-for="(slide, i) in slides" :key="i">
-            <div class="rounded">
-              <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
-              <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slide.src" />
+          <v-carousel-item v-for="(slide, i) in banners" :key="i">
+            <a class="rounded" :href="route('banner', slide.path)">
+              <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.image" />
+              <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slide.image" />
               <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
               <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
-            </div>
+            </a>
           </v-carousel-item>
         </v-carousel>
         <!-- Conditional Rendering < 600px -->
@@ -339,7 +339,8 @@ export default {
   props: {
     check: Boolean,
     user: Object,
-    real_products: Array
+    real_products: Array,
+    banners: Array
   },
   data() {
     return {

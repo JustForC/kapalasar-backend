@@ -22,4 +22,7 @@ class Product extends Model
     public function banners(){
         return $this->hasMany(Banner::class);
     }
+    public function advertisements(){
+    	return $this->belongsToMany(Advertisement::class, 'banners', 'products_id', 'advertisements_id');
+    }
 }
