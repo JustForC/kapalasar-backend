@@ -121,8 +121,7 @@
             ></v-text-field>
           </v-toolbar>
         </v-card-text>
-        </v-container>
-        
+        </v-container>        
       </div>
       <!-- Product -->
       <v-lazy>

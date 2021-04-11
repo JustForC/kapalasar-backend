@@ -1,9 +1,25 @@
 <template>
   <v-app>
     <div class="home">
+      <v-row justify="center">
+      <v-dialog v-model="dialog" persistent max-width="500">
+        <v-card>
+          <v-card-title class="headline font-weight-bold">
+                <v-icon class="mr-1" color="orange darken-2">mdi-sale</v-icon> PROMO HARI INI!
+          </v-card-title>
+          <v-img else class="responsive" :contain="true" src="https://medanincode.com/img/thumb/vue/if.png" />
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn class="font-weight-bold" color="green darken-1" text @click="dialog = false">
+              BELANJA SEKARANG!
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-row>
       <Navbar :code="code" :check="check" :user="user"/>
       <!-- Carousel -->
-      <div class="carousel d-flex justify-center align-center">
+      <!-- <div class="carousel d-flex justify-center align-center">
         <splide :options="optionsCarousel">
           <splide-slide v-for="(slide, i) in slides" :key="i">
             <div class="rounded">
@@ -11,8 +27,43 @@
             </div>
           </splide-slide>
         </splide>
+      </div> -->
+      <!-- Carousel -->
+      <div class="carousel d-flex justify-center align-center">
+        <v-carousel
+          v-if="windowSize.x > 600" 
+          cycle
+          :show-arrows="false"
+          hide-delimiter-background
+          delimiter-icon="mdi-circle"
+          :options="optionsCarousel">
+          <v-carousel-item v-for="(slide, i) in slides" :key="i">
+            <div class="rounded">
+              <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
+              <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slide.src" />
+              <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
+              <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
+            </div>
+          </v-carousel-item>
+        </v-carousel>
+        <!-- Conditional Rendering < 600px -->
+        <v-carousel
+          v-else 
+          cycle
+          :show-arrows="false"
+          hide-delimiter-background
+          delimiter-icon="mdi-circle"
+          height="150" :options="optionsCarousel">
+          <v-carousel-item v-for="(slide, i) in slides" :key="i">
+            <div class="rounded">
+              <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
+              <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slide.src" />
+              <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
+              <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
+            </div>
+          </v-carousel-item>
+        </v-carousel>
       </div>
-
       <!-- Flash Sale -->
       <div class="flashSale">
         <v-container>
@@ -27,9 +78,9 @@
               class="d-flex flex-wrap flashsale-text"
               style="width:100%;justify-content:space-between;cursor:pointer "
             >
-              <span class="white--text ml-4 text-h5">Flash Sale</span>
+              <span class="white--text ml-4 text-h5 font-weight-bold">Flash Sale</span>
               <inertia-link href="/flash_sale">
-                <span class="white--text ml-4 text-h5">Lihat Selengkapnya</span>
+                <v-btn class="white--text ml-4 subtitle-2" outlined>Lihat Selengkapnya</v-btn>
               </inertia-link>
               <!-- <router-link style="text-decoration:none" to="/flashsale"> -->
               <!-- </router-link> -->
@@ -47,9 +98,6 @@
       <!-- Filter -->
       <div>
         <v-container>
-          <div>
-            <span class="text-h6">Filter</span>
-          </div>
           <div class="d-flex flex-wrap justify-center">
             <v-btn
               v-for="(filter, i) in filters"
@@ -61,22 +109,41 @@
               :color="filter.name == current ? '#a6cb26' : ''"
               :dark="filter.name == current ? true : false"
             >
-              <v-img :src="filter.src"></v-img>
+              <v-img 
+              max-height="15"
+              max-width="20"
+              :src="filter.src"></v-img>
               <span class="mx-2">{{ filter.name }}</span>
             </v-btn>
           </div>
+          <v-card-text>
+          <v-toolbar
+            flat
+            color="transparent"
+          >
+            <v-text-field
+              v-model="search"
+              v-on:change="filterbySearch"
+              append-icon="mdi-magnify"
+              label="Pencarian"
+              single-line
+              color="green"
+            ></v-text-field>
+          </v-toolbar>
+        </v-card-text>
         </v-container>
       </div>
       <!-- Product -->
       <v-lazy>
         <v-container>
+          <!-- Product Page 1-->
           <v-row justify="center">
             <v-col
               cols="6"
               sm="4"
               md="3"
               lg="2"
-              v-for="(product, i) in filteredProducts"
+              v-for="(product, i) in filteredProducts.slice(0,8)"
               :key="i"
               class="ma-lg-2 v-lazy my-3"
             >
@@ -85,9 +152,118 @@
               </v-row>
             </v-col>
           </v-row>
-        </v-container>
-      </v-lazy>
-      <div class="carousel d-flex justify-center align-center">
+          <!-- End of Product Page 1-->
+          <!-- Banner Page 1-->
+            <div class="carousel d-flex justify-center align-center">
+              <v-carousel
+                v-if="windowSize.x > 600" 
+                cycle
+                :show-arrows="false"
+                hide-delimiter-background
+                delimiter-icon="mdi-circle"
+                :options="optionsCarousel">
+                <v-carousel-item v-for="(slide, i) in slides" :key="i">
+                  <div class="rounded">
+                    <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
+                    <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slide.src" />
+                    <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
+                    <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
+                  </div>
+                </v-carousel-item>
+              </v-carousel>
+              <!-- Conditional Rendering < 600px -->
+              <v-carousel
+                v-else 
+                cycle
+                :show-arrows="false"
+                hide-delimiter-background
+                delimiter-icon="mdi-circle"
+                height="150" :options="optionsCarousel">
+                <v-carousel-item v-for="(slide, i) in slides" :key="i">
+                  <div class="rounded">
+                    <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
+                    <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slide.src" />
+                    <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
+                    <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
+                  </div>
+                </v-carousel-item>
+              </v-carousel>
+            </div>
+            <!-- End Banner Page 1-->
+            <!-- Product Page 2-->
+            <v-row justify="center">
+              <v-col
+                cols="6"
+                sm="4"
+                md="3"
+                lg="2"
+                v-for="(product, i) in filteredProducts.slice(9,18)"
+                :key="i"
+                class="ma-lg-2 v-lazy my-3"
+              >
+                <v-row justify="center">
+                  <ProductCard @getTotalPrice="getTotalPrice" :product="product" />
+                </v-row>
+              </v-col>
+            </v-row>
+          <!-- End of Product Page 2-->
+          <!-- Banner Page 2-->
+            <div class="carousel d-flex justify-center align-center">
+              <v-carousel
+                v-if="windowSize.x > 600" 
+                cycle
+                :show-arrows="false"
+                hide-delimiter-background
+                delimiter-icon="mdi-circle"
+                :options="optionsCarousel">
+                <v-carousel-item v-for="(slide, i) in slides" :key="i">
+                  <div class="rounded">
+                    <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
+                    <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slide.src" />
+                    <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
+                    <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
+                  </div>
+                </v-carousel-item>
+              </v-carousel>
+              <!-- Conditional Rendering < 600px -->
+              <v-carousel
+                v-else 
+                cycle
+                :show-arrows="false"
+                hide-delimiter-background
+                delimiter-icon="mdi-circle"
+                height="150" :options="optionsCarousel">
+                <v-carousel-item v-for="(slide, i) in slides" :key="i">
+                  <div class="rounded">
+                    <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
+                    <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slide.src" />
+                    <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
+                    <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
+                  </div>
+                </v-carousel-item>
+              </v-carousel>
+            </div>
+            <!-- End Banner Page 2-->
+            <!-- Product Page 3-->
+                <v-row justify="center">
+                  <v-col
+                    cols="6"
+                    sm="4"
+                    md="3"
+                    lg="2"
+                    v-for="(product, i) in filteredProducts.slice(19,27)"
+                    :key="i"
+                    class="ma-lg-2 v-lazy my-3"
+                  >
+                    <v-row justify="center">
+                      <ProductCard @getTotalPrice="getTotalPrice" :product="product" />
+                    </v-row>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-lazy>
+            <!-- End Product Page 3-->
+      <!-- <div class="carousel d-flex justify-center align-center">
         <splide :options="optionsCarousel">
           <splide-slide v-for="(slide, i) in slides" :key="i">
             <div class="rounded">
@@ -95,8 +271,43 @@
             </div>
           </splide-slide>
         </splide>
+      </div> -->
+      <!-- Carousel -->
+      <div class="carousel d-flex justify-center align-center">
+        <v-carousel
+          v-if="windowSize.x > 600" 
+          cycle
+          :show-arrows="false"
+          hide-delimiter-background
+          delimiter-icon="mdi-circle"
+          :options="optionsCarousel">
+          <v-carousel-item v-for="(slide, i) in slides" :key="i">
+            <div class="rounded">
+              <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
+              <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slide.src" />
+              <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
+              <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
+            </div>
+          </v-carousel-item>
+        </v-carousel>
+        <!-- Conditional Rendering < 600px -->
+        <v-carousel
+          v-else 
+          cycle
+          :show-arrows="false"
+          hide-delimiter-background
+          delimiter-icon="mdi-circle"
+          height="150" :options="optionsCarousel">
+          <v-carousel-item v-for="(slide, i) in slides" :key="i">
+            <div class="rounded">
+              <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
+              <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slide.src" />
+              <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
+              <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
+            </div>
+          </v-carousel-item>
+        </v-carousel>
       </div>
-
       <!-- <client-only>
         <Cookie />
       </client-only> -->
@@ -128,14 +339,11 @@
 <script>
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
-
 import Navbar from "./Components/Navbar.vue";
 import Footer from "../components/Footer.vue";
 import ProductCard from "../components/ProductCard.vue";
 import cookie from "../components/cookie";
-
 import { filters, slides } from "../dummyData/dummy.js";
-
 export default {
   name: "Home",
   components: {
@@ -174,12 +382,12 @@ export default {
       optionsFlashsale: {
         width: "90%",
         gap: "1rem",
-        height: 300,
-        perPage: this.$vuetify.breakpoint.xs ? 1 : 4,
+        height: 290,
+        perPage: this.$vuetify.breakpoint.xs ? 3 : 4,
         perMove: 1,
         pagination: false,
         autoWidth: true,
-        heightRatio: 0.3
+        heightRatio: 1.5
       },
       slides,
       filters,
@@ -188,10 +396,21 @@ export default {
       notFlashsaleProducts: [],
       flashSaleProducts: [],
       filteredProducts: [],
-      current: "semua"
+      current: "semua",
+      windowSize: {
+        x: 0,
+        y: 0,
+      },
+      dialog: true,
+      search: ''
     };
   },
   methods: {
+    // Carousel Resize based on Screen Size
+    onResize () {
+        this.windowSize = { x: window.innerWidth, y: window.innerHeight }
+      },
+    // End of Carousel Resize based on Screen Size
     parseRupiah(strMoney) {
       return parseInt(strMoney).toLocaleString("id", {
         style: "currency",
@@ -236,13 +455,29 @@ export default {
         this.filteredProducts = this.notFlashsaleProducts.filter(
           product => product.categories.name === "Buah"
         );
-      } else if (this.current === "daging") {
+      } else if (this.current === "daging dan ikan") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories.name === "Daging"
+          product => product.categories.name === "Daging dan Ikan"
         );
-      } else if (this.current === "bumbu") {
+      } else if (this.current === "yoghurt") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories.name === "Bumbu"
+          product => product.categories.name === "Yoghurt"
+        );
+      } else if (this.current === "ladanglima") {
+        this.filteredProducts = this.notFlashsaleProducts.filter(
+          product => product.categories.name === "Ladanglima"
+        );
+      } else if (this.current === "gula merah") {
+        this.filteredProducts = this.notFlashsaleProducts.filter(
+          product => product.categories.name === "Gula Merah"
+        );
+      } else if (this.current === "bumbu giling") {
+        this.filteredProducts = this.notFlashsaleProducts.filter(
+          product => product.categories.name === "Bumbu Giling"
+        );
+      } else if (this.current === "olahan kacang kedelai") {
+        this.filteredProducts = this.notFlashsaleProducts.filter(
+          product => product.categories.name === "Olahan Kacang Kedelai"
         );
       } else if (this.current === "promo") {
         this.filteredProducts = this.notFlashsaleProducts.filter(function(item){
@@ -251,7 +486,14 @@ export default {
       } else {
         this.filteredProducts = this.notFlashsaleProducts;
       }
+    },
+    // Search Products Filter
+    filterbySearch(search) {
+      this.filteredProducts = this.notFlashsaleProducts.filter(
+          product => product.name.includes(search)
+        );
     }
+    // End of Search Products Filter
   },
   created() {
     this.filterFlashSale();
@@ -259,6 +501,8 @@ export default {
   },
   mounted() {
     this.changeShowCart();
+    this.onResize();
+
     // console.log(this.real_products);
   }
 };
