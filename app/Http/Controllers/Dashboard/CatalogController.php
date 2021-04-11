@@ -62,12 +62,12 @@ class CatalogController extends Controller
             if(auth()->user()->roles->name == "Super Admin" || auth()->user()->roles->name == "Admin"){
                 return '<div class="btn-group" role="group">
                             <button type="button" href="'.route('catalog.delete', $model->id).'" class="btn btn-danger btn-sm delete" name="Delete '.$model->name.'">Delete</button>
-                            <button type="button" href="'.route('catalog.download', $model->id).'" class="btn btn-primary btn-sm download" name="Download '.$model->name.'">Download</button>
+                            <a href="'.route('catalog.download', $model->id).'"><button type="button" class="btn btn-primary btn-sm download" name="Download '.$model->name.'">Download</button></a>
                         </div>';
             }
             elseif(auth()->user()->roles->name == "Merchant"){
                 return '<div class="btn-group" role="group">
-                            <button type="button" href="'.route('catalog.download', $model->id).'" class="btn btn-primary btn-sm download" name="Download '.$model->name.'">Download</button>
+                            <a href="'.route('catalog.download', $model->id).'"><button type="button" class="btn btn-primary btn-sm download" name="Download '.$model->name.'">Download</button></a>
                         </div>';
             }
             })

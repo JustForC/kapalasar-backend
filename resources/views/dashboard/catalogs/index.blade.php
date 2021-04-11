@@ -172,13 +172,5 @@
         }
       });
     });
-
-    $('body').on('click', '.download', function (event) {
-      var me = $(this),
-          url = me.attr('href'),
-          name = me.attr('name');
-      $.ajax(url);
-    });
-    
   </script>
 @endpush
