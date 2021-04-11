@@ -9,4 +9,8 @@ class Advertisement extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function banners(){
+        return $this->hasMany(Banner::class);
+    }
 }

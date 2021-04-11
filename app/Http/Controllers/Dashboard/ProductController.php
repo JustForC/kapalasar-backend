@@ -107,10 +107,13 @@ class ProductController extends Controller
         $model = Product::with('categories')->get();
         return DataTables::of($model)
             ->addColumn('action', function($model){
-            return '<div class="btn-group" role="group">
-                        <button type="button" href="'.route('product.edit', $model->id).'" class="btn btn-primary btn-sm modal-show edit" name="Edit '.$model->name.'" data-toggle="modal" data-target="#modal">Edit</button>
-                        <button type="button" href="'.route('product.delete', $model->id).'" class="btn btn-danger btn-sm delete" name="Delete '.$model->name.'">Delete</button>
-                    </div>';
+                if(auth()->user()->roles->name == 'Super Admin' || auth()->user()->roles->name == 'Admin'){
+
+                    return '<div class="btn-group" role="group">
+                                <button type="button" href="'.route('product.edit', $model->id).'" class="btn btn-primary btn-sm modal-show edit" name="Edit '.$model->name.'" data-toggle="modal" data-target="#modal">Edit</button>
+                                <button type="button" href="'.route('product.delete', $model->id).'" class="btn btn-danger btn-sm delete" name="Delete '.$model->name.'">Delete</button>
+                            </div>';
+                }
             })
             ->addColumn('timeline', function($model){
                 return date('d M Y', strtotime($model->date)).' '.date('H:i', strtotime($model->start)).' - '.date('H:i', strtotime($model->end));

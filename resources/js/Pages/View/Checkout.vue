@@ -411,8 +411,8 @@ export default {
         else{
         }
       } else {
-        if(tempState !== '' || tempState !== null){
-          if(this.nama !== '' || this.phone !== '' || this.address !== ''){
+        if(Object.keys(tempState).length){
+          if(Object.keys(this.user.name).length || Object.keys(this.user.phone).length || Object.keys(this.user.address).length){
             const data = {
               name: this.user.name,
               phone: this.user.phone,
