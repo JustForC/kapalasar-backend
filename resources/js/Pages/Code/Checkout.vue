@@ -242,11 +242,36 @@
               </div>
               <div class="mt-6 mx-md-16">
                 <v-row class="mx-1" v-if="Object.keys(voucherInUse).length">
-                  <div class="label text-subtitle-1">Potongan Harga</div>
+                  <div class="label text-subtitle-1">Biaya Ongkir</div>
+                  <v-spacer></v-spacer>
+                  <div class="totalPrice text-subtitle-1" v-if="voucherInUse.type===1">
+                    {{ parseRupiah('0') }}
+                  </div>
+                  <div class="totalPrice text-subtitle-1" v-else>
+                    {{ parseRupiah('10000') }}
+                  </div>
+                </v-row>
+                <v-row class="mx-1" v-else>
+                  <div class="label text-subtitle-1">Biaya Ongkir</div>
                   <v-spacer></v-spacer>
                   <div class="totalPrice text-subtitle-1">
-                    {{ parseRupiah(voucherInUse.disc) }}
+                    {{ parseRupiah('10000') }}
                   </div>
+                </v-row>
+                <v-row class="mx-1" v-if="Object.keys(voucherInUse).length">
+                  <!-- <div v-if="voucherInUse.type===1"> -->
+                  <!-- </div> -->
+                  <!-- <div v-else> -->
+                    <div class="label text-subtitle-1" v-if="voucherInUse.type===1"></div>
+                    <div class="label text-subtitle-1" v-else>Potongan Harga</div>
+                    <v-spacer></v-spacer>
+                    <div class="totalPrice text-subtitle-1" v-if="voucherInUse.type===2">
+                      {{ parseRupiah(voucherInUse.disc) }}
+                    </div>
+                    <div class="totalPrice text-subtitle-1" v-if="voucherInUse.type===3">
+                      {{ voucherInUse.disc }}%
+                    </div>
+                  <!-- </div> -->
                 </v-row>
                 <v-row class="mx-1">
                   <div class="label text-h6">Total Belanja</div>
@@ -403,7 +428,7 @@ export default {
         };
       });
 
-      let totalPrice = 0;
+      let totalPrice = 10000;
 
       this.fixedListCart.forEach(item => {
         totalPrice += item.qty * item.new_price;
