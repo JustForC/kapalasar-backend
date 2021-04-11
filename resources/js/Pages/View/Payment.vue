@@ -222,13 +222,11 @@ export default {
               qty: item.qty,
               ...product
             };
-            // console.log(cart);
 
             tempState.forEach(item => {
               if (item == cart.id) {
                 this.listFinalCart.push(cart);
               }
-              // console.log(this.listFinalCart);
             });
           }
         });

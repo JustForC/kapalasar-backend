@@ -313,7 +313,6 @@ class HomeController extends Controller
                     }
                 }
                 $checkouts = Checkout::with('costs')->where('users_id', $user->id)->get();
-                // dd($checkouts);
                 return Inertia::render('View/Account', [
                     'check' => true,
                     'user' => $user,

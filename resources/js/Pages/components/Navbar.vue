@@ -24,7 +24,7 @@
             </inertia-link>
           </div>
         </v-col>
-        <v-col v-show="windowSize.x > 600" sm="2" md="4" lg="6" class="text-center" v-if="true" :load="log(user)">
+        <v-col v-show="windowSize.x > 600" sm="2" md="4" lg="6" class="text-center">
           <!-- <div class="align-center">
             <v-text-field
               outlined
@@ -108,9 +108,6 @@
 <script>
 export default {
   methods: {
-    log(user) {
-      // console.log(user)
-    },
     onResize () {
         this.windowSize = { x: window.innerWidth, y: window.innerHeight }
       },
