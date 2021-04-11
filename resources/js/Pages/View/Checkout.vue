@@ -328,7 +328,7 @@ export default {
       checkedVal: [],
       listCart: [],
       fixedListCart: [],
-      totalPrice: 0,
+      totalPrice: 10000,
       rules: {
         required: value => !!value || "Harus diisi",
       }
@@ -378,7 +378,14 @@ export default {
             };
             this.$store.commit("user/ADD", data);
             // console.log(this.$store.state.user.userInfo);
-            Inertia.visit('/payment');
+            // Inertia.visit('/payment');
+            const carts = this.$store.state.cart.listCarts;
+            let data = new FormData();
+            data.append('_token', this.csrf);
+            console.log(carts);
+            carts.forEach(cart => {
+
+            })
           }
         }
         else{
@@ -442,7 +449,7 @@ export default {
         };
       });
 
-      let totalPrice = 0;
+      let totalPrice = 10000;
 
       this.fixedListCart.forEach(item => {
         totalPrice += item.qty * item.new_price;
@@ -452,6 +459,10 @@ export default {
 
       this.totalPrice = this.$store.state.cart.totalPrice;
       this.useVoucher();
+    },
+    getVoucher() {
+      const voucher = this.$store.state.voucher.voucher;
+      this.voucherInUse = voucher;
     },
     cekVoucher() {
       this.real_vouchers.forEach(voucher => {
@@ -506,7 +517,7 @@ export default {
   mounted() {
     this.scrollToTop();
     this.getProductList();
-    // console.log(this.real_vouchers);
+    this.getVoucher();
   },
   watch: {
     checkedVal() {

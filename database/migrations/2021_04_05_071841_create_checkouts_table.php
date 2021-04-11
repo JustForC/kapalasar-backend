@@ -29,6 +29,7 @@ class CreateCheckoutsTable extends Migration
 
             $table->bigInteger('total');
             $table->integer('status');
+            $table->string('image');
             // $table->string('invoice')->nullable();
             // $table->dateTime('date_invoice')->nullable();
             $table->string('receipt')->nullable();

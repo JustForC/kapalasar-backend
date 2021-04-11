@@ -214,6 +214,9 @@ export default {
     getProductList() {
       const state = this.$store.state.cart.listCarts;
       const tempState = this.$store.state.cart.tempCart;
+      if(!Object.keys(tempState).length){
+        Inertia.visit('/checkout');
+      }
 
       this.real_products.forEach(product => {
         state.forEach(item => {
@@ -252,14 +255,18 @@ export default {
 
     },
     finishPayment() {
-      const cart = this.$store.state.cart.listCarts;
-      this.$store.commit("cart/REPLACE", []);
+      console.log(this.selectedFile);
+      console.log(this.isSelecting);
+
+      const carts = this.$store.state.cart.listCarts;
+      console.log(carts);
+      // this.$store.commit("cart/REPLACE", []);
 
       const totalPrice = this.$store.state.cart.totalPrice;
-      this.$store.commit("cart/SET_TOTAL_PRICE", 0);
+      // this.$store.commit("cart/SET_TOTAL_PRICE", 0);
 
       const userData = this.$store.state.user.userInfo;
-      this.$store.commit("user/ADD", []);
+      // this.$store.commit("user/ADD", []);
 
       // const transaction = {
       //   cart: cart,
@@ -269,15 +276,33 @@ export default {
 
       // this.$store.commit("transaction/ADD", transaction);
 
-      Inertia.post('/finish', {
-        method: 'post',
-        _token: this.csrf,
-        name: userData.name,
-        phone: userData.phone,
-        address: userData.address,
-        cart: cart,
-        price: totalPrice,
-      });
+      // let data = new FormData();
+      // data.append('_token', this.csrf);
+      // data.append('name', userData.name);
+      // data.append('phone', userData.phone);
+      // data.append('address', userData.address);
+      
+      // carts.forEach(cart,i => {
+      //   data.append('cartId['+i+']', cart.id);
+      //   data.append('cartQty['+i+']', cart.qty);
+      // })
+      // data.append('cart', cart);
+      data.append('price', totalPrice);
+      data.append('image', this.selectedFile);
+      Inertia.post('/finish', data);
+
+      // Inertia.post('/finish', {
+      //   // headers: {'Content-Type': 'multipart/form-data'},
+      //   method: 'post',
+      //   // forceFormData: true,
+      //   _token: this.csrf,
+      //   name: userData.name,
+      //   phone: userData.phone,
+      //   address: userData.address,
+      //   cart: cart,
+      //   price: totalPrice,
+      //   image: this.selectedFile,
+      // });
       // Inertia.visit('/');
       // this.$router.push("/");
     }
