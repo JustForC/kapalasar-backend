@@ -10,6 +10,10 @@ use App\Models\Voucher;
 use App\Models\Checkout;
 use App\Models\Cost;
 use App\Models\FlashSale;
+
+use Notification;
+use App\Notifications\PWANotification;
+
 class HomeController extends Controller
 {
     public function index()

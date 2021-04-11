@@ -13,31 +13,31 @@ return [
         'status_bar'=> 'black',
         'icons' => [
             '72x72' => [
-                'path' => '/images/icons/icon-72x72.png',
+                'path' => '/images/icons/icon-72x72.jpg',
                 'purpose' => 'any'
             ],
             '96x96' => [
-                'path' => '/images/icons/icon-96x96.png',
+                'path' => '/images/icons/icon-96x96.jpg',
                 'purpose' => 'any'
             ],
             '128x128' => [
-                'path' => '/images/icons/icon-128x128.png',
+                'path' => '/images/icons/icon-128x128.jpg',
                 'purpose' => 'any'
             ],
             '144x144' => [
-                'path' => '/images/icons/icon-144x144.png',
+                'path' => '/images/icons/icon-144x144.jpg',
                 'purpose' => 'any'
             ],
             '152x152' => [
-                'path' => '/images/icons/icon-152x152.png',
+                'path' => '/images/icons/icon-152x152.jpg',
                 'purpose' => 'any'
             ],
             '192x192' => [
-                'path' => '/images/icons/icon-192x192.png',
+                'path' => '/images/icons/icon-192x192.jpg',
                 'purpose' => 'any'
             ],
             '384x384' => [
-                'path' => '/images/icons/icon-384x384.png',
+                'path' => '/images/icons/icon-384x384.jpg',
                 'purpose' => 'any'
             ],
             '512x512' => [
@@ -63,7 +63,7 @@ return [
                 'description' => 'Belanja sekarang',
                 'url' => '/',
                 'icons' => [
-                    "src" => "/images/icons/icon-72x72.png",
+                    "src" => "/images/icons/icon-72x72.jpg",
                     "purpose" => "any"
                 ]
             ],
