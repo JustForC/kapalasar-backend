@@ -255,7 +255,17 @@
                 </div>
               </div>
               <div class="mt-6 mx-md-16">
-                <v-row class="mx-1">
+                <v-row class="mx-1" v-if="Object.keys(voucherInUse).length">
+                  <div class="label text-subtitle-1">Biaya Ongkir</div>
+                  <v-spacer></v-spacer>
+                  <div class="totalPrice text-subtitle-1" v-if="voucherInUse.type===1">
+                    {{ parseRupiah('0') }}
+                  </div>
+                  <div class="totalPrice text-subtitle-1" v-else>
+                    {{ parseRupiah('10000') }}
+                  </div>
+                </v-row>
+                <v-row class="mx-1" v-else>
                   <div class="label text-subtitle-1">Biaya Ongkir</div>
                   <v-spacer></v-spacer>
                   <div class="totalPrice text-subtitle-1">
@@ -378,12 +388,22 @@ export default {
             };
             this.$store.commit("user/ADD", data);
             // console.log(this.$store.state.user.userInfo);
-            // Inertia.visit('/payment');
-            // const carts = this.$store.state.cart.listCarts;
-            // let data = new FormData();
-            // data.append('_token', this.csrf);
+            Inertia.visit('/payment');
+
+
+
+            let coba = new FormData();
+            coba.append('_token', this.csrf);
+            const carts = this.$store.state.cart.listCarts;
+            let i = 1;
+            carts.forEach(cart => {
+              coba.append('cartId['+i+']', cart.id);
+              coba.append('cartQty['+i+']', cart.qty);
+              console.log(cart);
+            })
+            console.log(coba.cartId);
+
             // console.log(carts);
-            // carts.forEach(cart => {
 
             // })
           }
@@ -485,7 +505,7 @@ export default {
       if (Object.keys(voucher).length) {
         // console.log(Object(voucher))
         if(voucher.type == 1){
-          // Free Ongkir
+          this.totalPrice -= 10000;
         }
         if(voucher.type == 2){
           this.totalPrice -= voucher.disc;
@@ -500,7 +520,7 @@ export default {
     cancelVoucher() {
       const voucher = this.$store.state.voucher.voucher;
         if(voucher.type == 1){
-          // Free Ongkir
+          this.totalPrice += 10000;
         }
         if(voucher.type == 2){
           this.totalPrice += voucher.disc;

@@ -239,15 +239,41 @@ class HomeController extends Controller
                 'address' => $request->address
             ]);
             $user = Auth()->user();
+
+            if($request->voucher){
+                $voucher = Voucher::find($request->voucher);
+                $voucherId = $voucher->id;
+                $voucherDisc = $voucher->discount;
+            }
+            else{
+                $voucherId = null;
+                $voucherDisc = null;
+            }
+            $image = time().'.'.$request->image->extension();
+            $path =  $request->image->move(public_path('/upload/checkout'),$image);
             $checkout = Checkout::create([
                 'users_id' => $user->id,
                 'name' => $request->name,
                 'phone' => $request->phone,
                 'address' => $request->address,
                 'total' => $request->price,
+                'type' => $voucherId,
+                'discount' => $voucherDisc,
+                'image' => '/upload/checkout/'.$path->getFileName(),
                 'status' => 1,
             ]);
-            foreach($request->cart as $cart){
+
+            $i = 1;
+            foreach($request->cartId as $cartId){
+                $carts[$i]['id'] = $cartId;
+                $i++;
+            }
+            $i = 1;
+            foreach($request->cartQty as $cartQty){
+                $carts[$i]['qty'] = $cartQty;
+                $i++;
+            }
+            foreach($carts as $cart){
                 $product = Product::find($cart['id']);
                 if($product->discount_price){
                     $cost = Cost::create([
@@ -269,14 +295,39 @@ class HomeController extends Controller
             return redirect()->route('home')->with('checkout', $checkout);;
         }
 
+        if($request->voucher){
+            $voucher = Voucher::find($request->voucher);
+            $voucherId = $voucher->id;
+            $voucherDisc = $voucher->discount;
+        }
+        else{
+            $voucherId = null;
+            $voucherDisc = null;
+        }
+        $image = time().'.'.$request->image->extension();
+        $path =  $request->image->move(public_path('/upload/checkout'),$image);
         $checkout = Checkout::create([
             'name' => $request->name,
             'phone' => $request->phone,
             'address' => $request->address,
             'total' => $request->price,
+            'type' => $voucherId,
+            'discount' => $voucherDisc,
+            'image' => '/upload/checkout/'.$path->getFileName(),
             'status' => 1,
         ]);
-        foreach($request->cart as $cart){
+
+        $i = 1;
+        foreach($request->cartId as $cartId){
+            $carts[$i]['id'] = $cartId;
+            $i++;
+        }
+        $i = 1;
+        foreach($request->cartQty as $cartQty){
+            $carts[$i]['qty'] = $cartQty;
+            $i++;
+        }
+        foreach($carts as $cart){
             $product = Product::find($cart['id']);
             if($product->discount_price){
                 $cost = Cost::create([

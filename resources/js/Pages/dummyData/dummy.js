@@ -185,12 +185,15 @@ export const products = [
     { src: require("../assets/Semua.png"), name: "semua" },
     { src: require("../assets/buah.jpg"), name: "buah" },
     { src: require("../assets/sayur.jpg"), name: "sayur" },
-    { src: require("../assets/Daging.png"), name: "daging dan ikan" },
-    { src: require("../assets/yoghurt.jpg"), name: "yoghurt" },
-    { src: require("../assets/ladanglima.jpg"), name: "ladanglima" },
-    { src: require("../assets/gulamerah.jpg"), name: "gula merah" },
+    { src: require("../assets/Daging.png"), name: "daging" },
+    { src: require("../assets/Daging.png"), name: "ikan" },
+    { src: require("../assets/Daging.png"), name: "seafood" },
+    { src: require("../assets/ladanglima.jpg"), name: "kapalasar organik" },
+    { src: require("../assets/gulamerah.jpg"), name: "bumbu" },
     { src: require("../assets/bumbugiling.jpg"), name: "bumbu giling" },
-    { src: require("../assets/olahankacangkedelai.jpg"), name: "olahan kacang kedelai" },
+    { src: require("../assets/olahankacangkedelai.jpg"), name: "olahan kedelai" },
+    { src: require("../assets/olahankacangkedelai.jpg"), name: "siap masak" },
+    { src: require("../assets/olahankacangkedelai.jpg"), name: "siap makan" },
     { src: require("../assets/promo.png"), name: "promo" }
   ];
   

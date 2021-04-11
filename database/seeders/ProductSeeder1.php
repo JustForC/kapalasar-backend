@@ -557,7 +557,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/500gr',
             'stock' => 10,
                 'image'=>'/upload/product/daging/cumi-dua.jpg',
-                'categories_id'=>3,
+                'categories_id'=>5,
             ],
             [
                 'name'=>'Cumi Sotong',
@@ -565,7 +565,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/500gr',
             'stock' => 10,
                 'image'=>'/upload/product/daging/cumi-satu.jpg',
-                'categories_id'=>3,
+                'categories_id'=>5,
             ],
             [
                 'name'=>'Cumi-Cumi Kecil',
@@ -573,7 +573,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/500gr',
             'stock' => 10,
                 'image'=>'/upload/product/daging/cumi-tiga.jpg',
-                'categories_id'=>3,
+                'categories_id'=>5,
             ],
             // [
             //     'name'=>'daging-sapi-dua-plain',
@@ -661,7 +661,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/500gr',
             'stock' => 10,
                 'image'=>'/upload/product/daging/gurame.jpg',
-                'categories_id'=>3,
+                'categories_id'=>4,
             ],
             [
                 'name'=>'Hati Sapi',
@@ -701,7 +701,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/500gr',
             'stock' => 10,
                 'image'=>'/upload/product/daging/ikan-mas.jpg',
-                'categories_id'=>3,
+                'categories_id'=>4,
             ],
             [
                 'name'=>'Ikan Kakap Merah',
@@ -709,7 +709,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/500gr',
             'stock' => 10,
                 'image'=>'/upload/product/daging/kakap-merah.jpg',
-                'categories_id'=>3,
+                'categories_id'=>4,
             ],
             [
                 'name'=>'Ikan Kembung Biasa',
@@ -717,7 +717,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/500gr',
             'stock' => 10,
                 'image'=>'/upload/product/daging/kembung.jpg',
-                'categories_id'=>3,
+                'categories_id'=>4,
             ],
             [
                 'name'=>'Ikan Kembung Banjar',
@@ -725,7 +725,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/500gr',
             'stock' => 10,
                 'image'=>'/upload/product/daging/kembung.jpg',
-                'categories_id'=>3,
+                'categories_id'=>4,
             ],
             // [
             //     'name'=>'kulit',
@@ -741,7 +741,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/500gr',
             'stock' => 10,
                 'image'=>'/upload/product/daging/lele.jpg',
-                'categories_id'=>3,
+                'categories_id'=>4,
             ],
             [
                 'name'=>'Ikan Lele Kecil',
@@ -749,7 +749,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/500gr',
             'stock' => 10,
                 'image'=>'/upload/product/daging/lele.jpg',
-                'categories_id'=>3,
+                'categories_id'=>4,
             ],
             [
                 'name'=>'Ikan Nila Merah',
@@ -757,7 +757,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/500gr',
             'stock' => 10,
                 'image'=>'/upload/product/daging/nila-merah.jpg',
-                'categories_id'=>3,
+                'categories_id'=>4,
             ],
             [
                 'name'=>'Ikan Nila',
@@ -765,7 +765,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/500gr',
             'stock' => 10,
                 'image'=>'/upload/product/daging/nila.jpg',
-                'categories_id'=>3,
+                'categories_id'=>4,
             ],
             [
                 'name'=>'Asin Peda Merah',
@@ -773,7 +773,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/250gr',
             'stock' => 10,
                 'image'=>'/upload/product/daging/peda-merah.jpg',
-                'categories_id'=>3,
+                'categories_id'=>4,
             ],
             [
                 'name'=>'Pindang Tongkol',
@@ -781,7 +781,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/250gr',
             'stock' => 10,
                 'image'=>'/upload/product/daging/pindang-tongkol.jpg',
-                'categories_id'=>3,
+                'categories_id'=>4,
             ],
             [
                 'name'=>'Ikan Sarden',
@@ -789,7 +789,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/500gr',
             'stock' => 10,
                 'image'=>'/upload/product/daging/sarden.jpg',
-                'categories_id'=>3,
+                'categories_id'=>4,
             ],
             // [
             //     'name'=>'steak-dua-plain',
@@ -845,7 +845,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/250gr',
             'stock' => 10,
                 'image'=>'/upload/product/daging/teri-putih-medan.jpg',
-                'categories_id'=>3,
+                'categories_id'=>4,
             ],
             [
                 'name'=>'Ikan Tongkol',
@@ -853,7 +853,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/500gr',
             'stock' => 10,
                 'image'=>'/upload/product/daging/tongkol.jpg',
-                'categories_id'=>3,
+                'categories_id'=>4,
             ],
             [
                 'name'=>'Ikan Tuna (Sliced)',
@@ -861,7 +861,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/500gr',
             'stock' => 10,
                 'image'=>'/upload/product/daging/tuna-sliced.jpg',
-                'categories_id'=>3,
+                'categories_id'=>4,
             ],
             [
                 'name'=>'Udang Peci Besar',
@@ -869,7 +869,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/500gr',
             'stock' => 10,
                 'image'=>'/upload/product/daging/udang.jpg',
-                'categories_id'=>3,
+                'categories_id'=>5,
             ],
             [
                 'name'=>'Udang Peci Sedang',
@@ -877,7 +877,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/500gr',
             'stock' => 10,
                 'image'=>'/upload/product/daging/udang.jpg',
-                'categories_id'=>3,
+                'categories_id'=>5,
             ],
             [
                 'name'=>'Udang Peci Kecil',
@@ -885,7 +885,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/500gr',
             'stock' => 10,
                 'image'=>'/upload/product/daging/udang.jpg',
-                'categories_id'=>3,
+                'categories_id'=>5,
             ],
             // [
             //     'name'=>'yoghurt2',
@@ -925,7 +925,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/180gr',
             'stock' => 10,
                 'image'=>'/upload/product/ladanglima/blackmond.jpg',
-                'categories_id'=>5,
+                'categories_id'=>6,
             ],
             [
                 'name'=>'Blackthins',
@@ -933,7 +933,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/100gr',
             'stock' => 10,
                 'image'=>'/upload/product/ladanglima/blackthins.jpg',
-                'categories_id'=>5,
+                'categories_id'=>6,
             ],
             // [
             //     'name'=>'mie-basil-besar-kecil',
@@ -949,7 +949,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/150gr',
             'stock' => 10,
                 'image'=>'/upload/product/ladanglima/mie-basil-besar.jpg',
-                'categories_id'=>5,
+                'categories_id'=>6,
             ],
             [
                 'name'=>'Mie Basil n Garlic (/1org)',
@@ -957,7 +957,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/76gr',
             'stock' => 10,
                 'image'=>'/upload/product/ladanglima/mie-basil.jpg',
-                'categories_id'=>5,
+                'categories_id'=>6,
             ],
             [
                 'name'=>'Mie Beet (/1org)',
@@ -965,7 +965,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/76gr',
             'stock' => 10,
                 'image'=>'/upload/product/ladanglima/mie-bit.jpg',
-                'categories_id'=>5,
+                'categories_id'=>6,
             ],
             [
                 'name'=>'Mie Kale (/1org)',
@@ -973,7 +973,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/76gr',
             'stock' => 10,
                 'image'=>'/upload/product/ladanglima/mie-kale-leave-kecil.jpg',
-                'categories_id'=>5,
+                'categories_id'=>6,
             ],
             // [
             //     'name'=>'mie-kale-leaves-besar-kecil',
@@ -989,7 +989,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/150gr',
             'stock' => 10,
                 'image'=>'/upload/product/ladanglima/mie-kale-leaves.jpg',
-                'categories_id'=>5,
+                'categories_id'=>6,
             ],
             [
                 'name'=>'Mie Bayam Merah',
@@ -997,7 +997,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/150gr',
             'stock' => 10,
                 'image'=>'/upload/product/ladanglima/mie-red-spinach.jpg',
-                'categories_id'=>5,
+                'categories_id'=>6,
             ],
             // [
             //     'name'=>'mie-tomat-besar-kecil',
@@ -1013,7 +1013,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/150gr',
             'stock' => 10,
                 'image'=>'/upload/product/ladanglima/mie-tomat-besar.jpg',
-                'categories_id'=>5,
+                'categories_id'=>6,
             ],
             [
                 'name'=>'Mie Tomat (/1org)',
@@ -1021,7 +1021,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '76gr',
             'stock' => 10,
                 'image'=>'/upload/product/ladanglima/mie-tomat-kecil.jpg',
-                'categories_id'=>5,
+                'categories_id'=>6,
             ],
             [
                 'name'=>'Pasta Bolognese',
@@ -1029,7 +1029,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/155gr',
             'stock' => 10,
                 'image'=>'/upload/product/ladanglima/pasta-bolognese.jpg',
-                'categories_id'=>5,
+                'categories_id'=>6,
             ],
             [
                 'name'=>'Pasta Fusili',
@@ -1037,7 +1037,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/100gr',
             'stock' => 10,
                 'image'=>'/upload/product/ladanglima/pasta-fucini.jpg',
-                'categories_id'=>5,
+                'categories_id'=>6,
             ],
             [
                 'name'=>'Pasta Mac n Cheese',
@@ -1045,7 +1045,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/155gr',
             'stock' => 10,
                 'image'=>'/upload/product/ladanglima/pasta-macncheese.jpg',
-                'categories_id'=>5,
+                'categories_id'=>6,
             ],
             [
                 'name'=>'Tepung Bumbu',
@@ -1053,7 +1053,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/150gr',
             'stock' => 10,
                 'image'=>'/upload/product/ladanglima/tepung-bumbu-serbaguna.jpg',
-                'categories_id'=>5,
+                'categories_id'=>6,
             ],
             [
                 'name'=>'Tepung Casava',
@@ -1061,7 +1061,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/500gr',
             'stock' => 10,
                 'image'=>'/upload/product/ladanglima/tepung-mocaf.jpg',
-                'categories_id'=>5,
+                'categories_id'=>6,
             ],
             [
                 'name'=>'Pancake Mix',
@@ -1069,7 +1069,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/220gr',
             'stock' => 10,
                 'image'=>'/upload/product/ladanglima/tepung-pancake.jpg',
-                'categories_id'=>5,
+                'categories_id'=>6,
             ],
             // [
             //     'name'=>'gula-merah',
@@ -1093,7 +1093,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/Pack',
             'stock' => 10,
                 'image'=>'/upload/product/bumbugiling/jahe.jpg',
-                'categories_id'=>7,
+                'categories_id'=>8,
             ],
             [
                 'name'=>'Bumbu BW Merah Basah',
@@ -1101,7 +1101,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/Pack',
             'stock' => 10,
                 'image'=>'/upload/product/bumbugiling/bawang-merah.jpg',
-                'categories_id'=>7,
+                'categories_id'=>8,
             ],
             [
                 'name'=>'Bumbu BW Putih Basah',
@@ -1109,7 +1109,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/Pack',
             'stock' => 10,
                 'image'=>'/upload/product/bumbugiling/bawang-putih.jpg',
-                'categories_id'=>7,
+                'categories_id'=>8,
             ],
             [
                 'name'=>'Bumbu Cabe Merah Basah',
@@ -1117,7 +1117,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/Pack',
             'stock' => 10,
                 'image'=>'/upload/product/bumbugiling/cabe-merah.jpg',
-                'categories_id'=>7,
+                'categories_id'=>8,
             ],
             [
                 'name'=>'Bumbu Kemiri Basah',
@@ -1125,7 +1125,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/Pack',
             'stock' => 10,
                 'image'=>'/upload/product/bumbugiling/kemiri-basah.jpg',
-                'categories_id'=>7,
+                'categories_id'=>8,
             ],
             [
                 'name'=>'Bumbu Kemiri Kering',
@@ -1133,7 +1133,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/Pack',
             'stock' => 10,
                 'image'=>'/upload/product/bumbugiling/kemiri-kering.jpg',
-                'categories_id'=>7,
+                'categories_id'=>8,
             ],
             [
                 'name'=>'Bumbu Kunyit Basah',
@@ -1141,7 +1141,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/Pack',
             'stock' => 10,
                 'image'=>'/upload/product/bumbugiling/kunyit.jpg',
-                'categories_id'=>7,
+                'categories_id'=>8,
             ],
             [
                 'name'=>'Bumbu Laos Basah',
@@ -1149,7 +1149,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/Pack',
             'stock' => 10,
                 'image'=>'/upload/product/bumbugiling/laos.jpg',
-                'categories_id'=>7,
+                'categories_id'=>8,
             ],
             [
                 'name'=>'Oncom Super',
@@ -1157,7 +1157,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/pc',
             'stock' => 10,
                 'image'=>'/upload/product/olahankacangkedelai/oncom.jpg',
-                'categories_id'=>8,
+                'categories_id'=>9,
             ],
             [
                 'name'=>'Oncom Biasa',
@@ -1165,7 +1165,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/pc',
             'stock' => 10,
                 'image'=>'/upload/product/olahankacangkedelai/oncom.jpg',
-                'categories_id'=>8,
+                'categories_id'=>9,
             ],
             [
                 'name'=>'Tahu Kuning Besar',
@@ -1173,7 +1173,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/10pcs',
             'stock' => 10,
                 'image'=>'/upload/product/olahankacangkedelai/tahu-kuning.jpg',
-                'categories_id'=>8,
+                'categories_id'=>9,
             ],
             [
                 'name'=>'Tahu Kuning Kecil',
@@ -1181,7 +1181,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/10pcs',
             'stock' => 10,
                 'image'=>'/upload/product/olahankacangkedelai/tahu-kuning.jpg',
-                'categories_id'=>8,
+                'categories_id'=>9,
             ],
             [
                 'name'=>'Tahu Putih Besar',
@@ -1189,7 +1189,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/10pcs',
             'stock' => 10,
                 'image'=>'/upload/product/olahankacangkedelai/tahu-putih.jpg',
-                'categories_id'=>8,
+                'categories_id'=>9,
             ],
             [
                 'name'=>'Tahu Putih Kecil',
@@ -1197,7 +1197,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/10pcs',
             'stock' => 10,
                 'image'=>'/upload/product/olahankacangkedelai/tahu-putih.jpg',
-                'categories_id'=>8,
+                'categories_id'=>9,
             ],
             [
                 'name'=>'Tempe Kecil',
@@ -1205,7 +1205,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/pc',
             'stock' => 10,
                 'image'=>'/upload/product/olahankacangkedelai/tempe.jpg',
-                'categories_id'=>8,
+                'categories_id'=>9,
             ],
             [
                 'name'=>'Tempe Sedang',
@@ -1213,7 +1213,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/pc',
             'stock' => 10,
                 'image'=>'/upload/product/olahankacangkedelai/tempe.jpg',
-                'categories_id'=>8,
+                'categories_id'=>9,
             ],
             [
                 'name'=>'Tempe Besar',
@@ -1221,7 +1221,7 @@ class ProductSeeder1 extends Seeder
                 'unit' => '/pc',
             'stock' => 10,
                 'image'=>'/upload/product/olahankacangkedelai/tempe.jpg',
-                'categories_id'=>8,
+                'categories_id'=>9,
             ],
         ]);
     }

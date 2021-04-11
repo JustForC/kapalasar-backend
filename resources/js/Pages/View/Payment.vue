@@ -262,6 +262,8 @@ export default {
       console.log(carts);
       // this.$store.commit("cart/REPLACE", []);
 
+      const voucher = this.$store.state.voucher.voucher;
+
       const totalPrice = this.$store.state.cart.totalPrice;
       // this.$store.commit("cart/SET_TOTAL_PRICE", 0);
 
@@ -276,20 +278,23 @@ export default {
 
       // this.$store.commit("transaction/ADD", transaction);
 
-      // let data = new FormData();
-      // data.append('_token', this.csrf);
-      // data.append('name', userData.name);
-      // data.append('phone', userData.phone);
-      // data.append('address', userData.address);
-      
-      // carts.forEach(cart,i => {
-      //   data.append('cartId['+i+']', cart.id);
-      //   data.append('cartQty['+i+']', cart.qty);
-      // })
-      // data.append('cart', cart);
-      // data.append('price', totalPrice);
-      // data.append('image', this.selectedFile);
-      // Inertia.post('/finish', data);
+      let data = new FormData();
+      data.append('_token', this.csrf);
+      data.append('name', userData.name);
+      data.append('phone', userData.phone);
+      data.append('address', userData.address);
+
+      let i = 1;
+      carts.forEach(cart => {
+        data.append('cartId['+i+']', cart.id);
+        data.append('cartQty['+i+']', cart.qty);
+        console.log(cart);
+        i++;
+      })
+      data.append('voucher', voucher.type);
+      data.append('price', totalPrice);
+      data.append('image', this.selectedFile);
+      Inertia.post('/finish', data);
 
       // Inertia.post('/finish', {
       //   // headers: {'Content-Type': 'multipart/form-data'},
