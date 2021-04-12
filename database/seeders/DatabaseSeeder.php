@@ -27,24 +27,29 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Advertisement::insert([
+            'name' => 'Pop Up',
+            'path' => Str::slug('Pop Up', '-'),
+            'image' => 'https://media.istockphoto.com/vectors/welcome-lettering-handwritten-modern-calligraphy-brush-painted-for-vector-id1019556854?b=1&k=6&m=1019556854&s=612x612&w=0&h=sgboeSVq1EXsXMDXcqYVbkac54K06TCg1itipvCzUd8='
+        ]);
+        Advertisement::insert([
             'name' => 'Banner 1',
             'path' => Str::slug('Banner 1', '-'),
-            'image' => 'images/banner/Banner-1.jpg'
+            'image' => '/images/banner/Banner-1.jpg'
         ]);
         Advertisement::insert([
             'name' => 'Banner 2',
             'path' => Str::slug('Banner 2', '-'),
-            'image' => 'images/banner/Banner-2.jpg'
+            'image' => '/images/banner/Banner-2.jpg'
         ]);
         Advertisement::insert([
             'name' => 'Banner 3',
             'path' => Str::slug('Banner 3', '-'),
-            'image' => 'images/banner/Banner-3.jpg'
+            'image' => '/images/banner/Banner-3.jpg'
         ]);
         Advertisement::insert([
             'name' => 'Banner 4',
             'path' => Str::slug('Banner 4', '-'),
-            'image' => 'images/banner/Banner-4.jpg'
+            'image' => '/images/banner/Banner-4.jpg'
         ]);
         $faker = Faker::create('id_ID');
         Role::insert([

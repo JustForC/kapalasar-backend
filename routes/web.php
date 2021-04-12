@@ -28,7 +28,7 @@ Route::get('/send-notification', [HomeController::class, 'index']);
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('flash_sale', [HomeController::class, 'flash_sale'])->name('flash_sale');
 Route::get('account', [HomeController::class, 'account'])->name('account');
-Route::get('banner/{slug}', [HomeController::class, 'banner'])->name('banner');
+Route::get('package/{slug}', [HomeController::class, 'banner'])->name('banner');
 
 Route::get('checkout', [HomeController::class, 'checkout'])->name('checkout');
 Route::get('payment', [HomeController::class, 'payment'])->name('payment');

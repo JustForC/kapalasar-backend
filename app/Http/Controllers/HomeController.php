@@ -24,6 +24,10 @@ class HomeController extends Controller
             if(Auth()->user()->roles->name == 'User'){
                 $user = Auth()->user();
                 $products = Product::with('categories')->get();
+                $banners = Advertisement::get()->reject(function($query){
+                    if($query->id == 1) return true;
+                });
+                $popUp = Advertisement::find(1);
                 foreach($products as $product){
                     if($product->discount_price){
                         $product->new_price = $product->discount_price;
@@ -37,7 +41,9 @@ class HomeController extends Controller
                 return Inertia::render('View/Homepage', [
                     'check' => true,
                     'user' => $user,
-                    'real_products' => $products
+                    'real_products' => $products,
+                    'banners' => $banners,
+                    'popUp' => $popUp
                 ]);
             }
             elseif(Auth()->user()->roles->name == 'Merchant'){
@@ -179,7 +185,10 @@ class HomeController extends Controller
             ]);
         }
         $user = new User;
-        $banners = Advertisement::get();
+        $banners = Advertisement::get()->reject(function($query){
+            if($query->id == 1) return true;
+        });
+        $popUp = Advertisement::find(1);
         $products = Product::with('categories')->get();
         foreach($products as $product){
             if($product->discount_price){
@@ -195,7 +204,8 @@ class HomeController extends Controller
             'check' => $check,
             'user' => null,
             'real_products' => $products,
-            'banners' => $banners
+            'banners' => $banners,
+            'popUp' => $popUp
         ]);
     }
 
