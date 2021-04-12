@@ -25,6 +25,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CodeController;
 use App\Http\Controllers\PushNotificationController;
 
+
 Route::get('/send-notification', [PushNotificationController::class, 'send']);
 
 Route::get('/', [HomeController::class, 'index'])->name('home');

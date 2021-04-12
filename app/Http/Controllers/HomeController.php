@@ -566,5 +566,17 @@ class HomeController extends Controller
         abort(404);
     }
 
+    public function cekDateTime(){
+        $date = Carbon::now()->timezone('Asia/Phnom_Penh');
+        $voucher = Voucher::find(6);
+        $start = new Carbon($voucher->start);
+        $end = new Carbon($voucher->end);
+
+        if(Carbon::now()->timezone('Asia/Phnom_Penh') < $end && Carbon::now()->timezone('Asia/Phnom_Penh') > $start){
+            return "Dalam Timeline";
+        }
+
+        return "Tidak dalam timeline";
+    }
 
 }
