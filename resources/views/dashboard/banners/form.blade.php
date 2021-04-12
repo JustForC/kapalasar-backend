@@ -17,11 +17,22 @@
             <input id="name" type="text" class="form-control" name="name" value="{{$model->name}}" placeholder="Nama Iklan">
         </div>
         <div class="form-group">
+            <label for="tnc" class="control-label">TNC</label>
+            <textarea id="tnc" form ="form_modal" class="form-control" name="tnc" placeholder="TNC" rows="20"></textarea>
+        </div>
+        <div class="form-group">
             <label for="products" class="control-label">Produk Terkait</label><br>
             <select multiple id="products" type="text" class="form-control" name="products[]">
                 @foreach ($products as $product)
                     <option value="{{$product->id}}" {{ $model->exists ? (in_array($product->id, $model->selected) ? 'selected="selected"' : null) : null }}>{{$product->name}}</option>
                 @endforeach
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="status" class="control-label">Status</label><br>
+            <select id="status" type="text" class="form-control" name="status">
+                    <option value=0>Tidak Aktif</option>
+                    <option value=1>Aktif</option>
             </select>
         </div>
         <div class="form-group">
@@ -40,5 +51,7 @@
             theme: "classic",
             width: "resolve"
         })
+
+        CKEDITOR.replace( 'tnc' );
     </script>
 </form>
