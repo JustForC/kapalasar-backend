@@ -50,7 +50,7 @@
               class="ma-lg-2 v-lazy my-3"
             >
               <v-row justify="center">
-                <ProductCard @getTotalPrice="getTotalPrice" :product="product" />
+                <ProductCard @getTotalPrice="getTotalPrice" :product="product" :all_products="all_products" />
               </v-row>
             </v-col>
           </v-row>
@@ -101,7 +101,7 @@ export default {
   props: {
     check: Boolean,
     user: Object,
-    real_products: Array
+    all_products: Array
   },
   data() {
     return {
@@ -172,70 +172,57 @@ export default {
       }
     },
     filterFlashSale() {
-      // this.flashSaleProducts = products.filter(product => product.flashSale);
-      // this.newPrice = this.real_products.new_price;
-      this.flashSaleProducts = this.real_products.map(products => {
-        // console.log(products.newPrice);
-          // newPrice = products.new_price;
-          return products.products;
-      })
+      // this.flashSaleProducts = this.all_products.filter(product => product.flash_sale);
     },
     filterNotFlashSale() {
-      // this.notFlashsaleProducts = products.filter(
-      //   product => !product.flashSale
-      // );
-      this.notFlashsaleProducts = this.real_products.map(products => {
-          return products;
-      })
-      // console.log(this.notFlashsaleProducts);
+      this.notFlashsaleProducts = this.all_products.filter(product => product.flash_sale);
       this.filteredProducts = this.notFlashsaleProducts;
-      // console.log(this.filteredProducts);
     },
     filterByKategori(by) {
       this.current = by;
       if (this.current === "sayur") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.products.categories_id === 2
+          product => product.category === "Sayuran"
         );
       } else if (this.current === "buah") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.products.categories_id === 1
+          product => product.category === "Buah"
         );
       } else if (this.current === "daging") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.products.categories_id === 3
+          product => product.category === "Daging"
         );
       } else if (this.current === "ikan") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.products.categories_id === 4
+          product => product.category === "Ikan"
         );
       } else if (this.current === "seafood") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.products.categories_id === 5
+          product => product.category === "Seafood"
         );
       } else if (this.current === "kapalasar organik") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.products.categories_id === 6
+          product => product.category === "Kapalasar Organik"
         );
       } else if (this.current === "bumbu") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.products.categories_id === 7
+          product => product.category === "Bumbu"
         );
       } else if (this.current === "bumbu giling") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.products.categories_id === 8
+          product => product.category === "Bumbu Giling"
         );
       } else if (this.current === "olahan kedelai") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.products.categories_id === 9
+          product => product.category === "Olahan Kedelai"
         );
       } else if (this.current === "siap masak") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.products.categories_id === 10
+          product => product.category === "Siap Masak"
         );
       } else if (this.current === "siap makan") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.products.categories_id === 11
+          product => product.category === "Siap Makan"
         );
       } else if (this.current === "promo") {
         this.filteredProducts = this.notFlashsaleProducts.filter(function(item){
@@ -249,6 +236,8 @@ export default {
   created() {
     this.filterFlashSale();
     this.filterNotFlashSale();
+    this.$store.commit("cart/REPLACE", []);
+    this.$store.commit("cart/SET_TOTAL_PRICE", 0);
   },
   mounted() {
     this.changeShowCart();

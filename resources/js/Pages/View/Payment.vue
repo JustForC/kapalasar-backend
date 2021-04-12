@@ -183,8 +183,8 @@ export default {
   props: {
     check: Boolean,
     user: Object,
-    real_products: Array,
-    real_vouchers: Array
+    real_vouchers: Array,
+    all_products: Array
   },
   data() {
     return {
@@ -218,7 +218,7 @@ export default {
         Inertia.visit('/checkout');
       }
 
-      this.real_products.forEach(product => {
+      this.all_products.forEach(product => {
         state.forEach(item => {
           if (item.id == product.id) {
             const cart = {

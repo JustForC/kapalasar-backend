@@ -3,7 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use DB;
+use Illuminate\Support\Facades\DB;
+use App\Models\FlashSale;
 
 class ProductSeeder1 extends Seeder
 {
@@ -14,58 +15,58 @@ class ProductSeeder1 extends Seeder
      */
     public function run()
     {
-        Category::insert([
-            'name' => 'Sayuran',
-            'image' => '/upload/category/sayuran.jpeg'
-        ]);
-        Category::insert([
-            'name' => 'Buah',
-            'image' => '/upload/category/buah.jpeg'
-        ]);
-        Category::insert([
-            'name' => 'Buah Premium',
-            'image' => '/upload/category/buah-premium.jpeg'
-        ]);
-        Category::insert([
-            'name' => 'Bumbu',
-            'image' => '/upload/category/bumbu.jpeg'
-        ]);
-        Category::insert([
-            'name' => 'Bumbu Giling',
-            'image' => '/upload/category/bumbu-giling.jpeg'
-        ]);
-        Category::insert([
-            'name' => 'Olahan Kedelai',
-            'image' => '/upload/category/olahan-kedelai.jpeg'
-        ]);
-        Category::insert([
-            'name' => 'Daging dan Ikan',
-            'image' => '/upload/category/daging-ikan.jpeg'
-        ]);
-        Category::insert([
-            'name' => 'Seafood',
-            'image' => '/upload/category/seafood.jpeg'
-        ]);
-        Category::insert([
-            'name' => 'Olahan Ikan',
-            'image' => '/upload/category/olahan-ikan.jpeg'
-        ]);
-        Category::insert([
-            'name' => 'Kapalasar Organik X Ladang Lima',
-            'image' => '/upload/category/kapalasar-organik-ladang-lima.jpeg'
-        ]);
-        Category::insert([
-            'name' => 'Frozen Food',
-            'image' => '/upload/category/frozen-food.jpeg'
-        ]);
-        Category::insert([
-            'name' => 'Paket Siap Masak',
-            'image' => '/upload/category/siap-masak.jpeg'
-        ]);
-        Category::insert([
-            'name' => 'Paket Siap Makan',
-            'image' => '/upload/category/siap-makan.jpeg'
-        ]);
+        // Category::insert([
+        //     'name' => 'Sayuran',
+        //     'image' => '/upload/category/sayuran.jpeg'
+        // ]);
+        // Category::insert([
+        //     'name' => 'Buah',
+        //     'image' => '/upload/category/buah.jpeg'
+        // ]);
+        // Category::insert([
+        //     'name' => 'Buah Premium',
+        //     'image' => '/upload/category/buah-premium.jpeg'
+        // ]);
+        // Category::insert([
+        //     'name' => 'Bumbu',
+        //     'image' => '/upload/category/bumbu.jpeg'
+        // ]);
+        // Category::insert([
+        //     'name' => 'Bumbu Giling',
+        //     'image' => '/upload/category/bumbu-giling.jpeg'
+        // ]);
+        // Category::insert([
+        //     'name' => 'Olahan Kedelai',
+        //     'image' => '/upload/category/olahan-kedelai.jpeg'
+        // ]);
+        // Category::insert([
+        //     'name' => 'Daging dan Ikan',
+        //     'image' => '/upload/category/daging-ikan.jpeg'
+        // ]);
+        // Category::insert([
+        //     'name' => 'Seafood',
+        //     'image' => '/upload/category/seafood.jpeg'
+        // ]);
+        // Category::insert([
+        //     'name' => 'Olahan Ikan',
+        //     'image' => '/upload/category/olahan-ikan.jpeg'
+        // ]);
+        // Category::insert([
+        //     'name' => 'Kapalasar Organik X Ladang Lima',
+        //     'image' => '/upload/category/kapalasar-organik-ladang-lima.jpeg'
+        // ]);
+        // Category::insert([
+        //     'name' => 'Frozen Food',
+        //     'image' => '/upload/category/frozen-food.jpeg'
+        // ]);
+        // Category::insert([
+        //     'name' => 'Paket Siap Masak',
+        //     'image' => '/upload/category/siap-masak.jpeg'
+        // ]);
+        // Category::insert([
+        //     'name' => 'Paket Siap Makan',
+        //     'image' => '/upload/category/siap-makan.jpeg'
+        // ]);
 
 
         $i = 1;
@@ -1149,6 +1150,20 @@ class ProductSeeder1 extends Seeder
                 'categories_id'=>9,
         ]);
         $i = $i + 1;
+
+        $j = 1;
+        for($k = 1; $k <= 9; $k++){
+            FlashSale::insert([
+                'uniq' => $i,
+                'flashes_id' => 1,
+                'products_id' => $j,
+                'new_price' => 5000
+            ]);
+            $j+=3;
+            $i++;
+        }
+
+
 
         // // 
         // DB::table('products')->insert([

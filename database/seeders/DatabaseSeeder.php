@@ -9,7 +9,6 @@ use App\Models\Role;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Flash;
-use App\Models\FlashSale;
 use App\Models\Type;
 use App\Models\Voucher;
 use App\Models\Checkout;
@@ -200,7 +199,7 @@ class DatabaseSeeder extends Seeder
         //     'end' => '22:30'
         // ]);
 
-        // $this->call(ProductSeeder1::class);
+        $this->call(ProductSeeder1::class);
 
         // for($i = 1; $i <= 20; $i++){
         //     Product::insert([
@@ -274,15 +273,6 @@ class DatabaseSeeder extends Seeder
         //         'categories_id' => 5
         //     ]);
         // }
-        $j = 1;
-        for($i = 1; $i <= 9; $i++){
-            FlashSale::insert([
-                'flashes_id' => 1,
-                'products_id' => $j,
-                'new_price' => 5000
-            ]);
-            $j+=3;
-        }
 
         // for($i = 1; $i <= 10; $i++){
         //     Checkout::create([
