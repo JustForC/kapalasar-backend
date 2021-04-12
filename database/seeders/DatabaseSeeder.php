@@ -199,7 +199,9 @@ class DatabaseSeeder extends Seeder
         //     'start' => '22:00',
         //     'end' => '22:30'
         // ]);
-        $this->call(ProductSeeder1::class);
+
+        // $this->call(ProductSeeder1::class);
+
         // for($i = 1; $i <= 20; $i++){
         //     Product::insert([
         //         'name' => 'Sayur '.$i,

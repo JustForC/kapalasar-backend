@@ -6,12 +6,16 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\FlashSale;
 use DataTables;
 
 class ProductController extends Controller
 {
     public function index()
     {
+        $cek = Product::orderBy('id', 'desc')->first();
+        $cek2 = FlashSale::orderBy('id', 'desc')->first();
+        dd($cek, $cek2);
         return view('dashboard/products/index');
     }
 
@@ -35,7 +39,7 @@ class ProductController extends Controller
 
         $image = time().'-'.'.'.$request->product_image->extension();
         $path =  $request->product_image->move(public_path('/upload/product'),$image);
-        
+
         $model = Product::create([
             'name' => $request->name,
             'categories_id' => $request->categories_id,

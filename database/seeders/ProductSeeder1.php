@@ -14,6 +14,59 @@ class ProductSeeder1 extends Seeder
      */
     public function run()
     {
+        Category::insert([
+            'name' => 'Sayuran',
+            'image' => '/upload/category/sayuran.jpeg'
+        ]);
+        Category::insert([
+            'name' => 'Buah',
+            'image' => '/upload/category/buah.jpeg'
+        ]);
+        Category::insert([
+            'name' => 'Buah Premium',
+            'image' => '/upload/category/buah-premium.jpeg'
+        ]);
+        Category::insert([
+            'name' => 'Bumbu',
+            'image' => '/upload/category/bumbu.jpeg'
+        ]);
+        Category::insert([
+            'name' => 'Bumbu Giling',
+            'image' => '/upload/category/bumbu-giling.jpeg'
+        ]);
+        Category::insert([
+            'name' => 'Olahan Kedelai',
+            'image' => '/upload/category/olahan-kedelai.jpeg'
+        ]);
+        Category::insert([
+            'name' => 'Daging dan Ikan',
+            'image' => '/upload/category/daging-ikan.jpeg'
+        ]);
+        Category::insert([
+            'name' => 'Seafood',
+            'image' => '/upload/category/seafood.jpeg'
+        ]);
+        Category::insert([
+            'name' => 'Olahan Ikan',
+            'image' => '/upload/category/olahan-ikan.jpeg'
+        ]);
+        Category::insert([
+            'name' => 'Kapalasar Organik X Ladang Lima',
+            'image' => '/upload/category/kapalasar-organik-ladang-lima.jpeg'
+        ]);
+        Category::insert([
+            'name' => 'Frozen Food',
+            'image' => '/upload/category/frozen-food.jpeg'
+        ]);
+        Category::insert([
+            'name' => 'Paket Siap Masak',
+            'image' => '/upload/category/siap-masak.jpeg'
+        ]);
+        Category::insert([
+            'name' => 'Paket Siap Makan',
+            'image' => '/upload/category/siap-makan.jpeg'
+        ]);
+
         DB::table('products')->insert([
             // [
             //     'name'=>'anggur',
@@ -22,8 +75,9 @@ class ProductSeeder1 extends Seeder
             // 'stock' => 10,
             //     'image'=>'/upload/product/buah/anggur.jpg',
             //     'categories_id'=>1,
-            // ],
+            // ]
             [
+                'uniq'=>1,
                 'name'=>'Apel Fuji',
                 'price'=>'38000',
                 'unit' => '/Kg',
