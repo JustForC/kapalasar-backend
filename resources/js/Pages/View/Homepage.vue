@@ -81,7 +81,7 @@
           <div class="d-flex justify-center align-center">
             <splide :options="optionsFlashsale">
               <splide-slide v-for="(product, i) in flashSaleProducts" :key="i">
-                <ProductCard @getTotalPrice="getTotalPrice" :product="product" />
+                <ProductCardStrip @getTotalPrice="getTotalPrice" :product="product" />
               </splide-slide>
             </splide>
           </div>
@@ -323,6 +323,7 @@ import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import Navbar from "../components/Navbar.vue";
 import ProductCard from "../components/ProductCard.vue";
+import ProductCardStrip from "../components/ProductCardStrip.vue";
 import Footer from "../components/Footer.vue";
 import { filters, slides } from "../dummyData/dummy.js";
 import cookie from "../components/cookie";
@@ -333,6 +334,7 @@ export default {
     Splide,
     SplideSlide,
     ProductCard,
+    ProductCardStrip,
     Footer,
     cookie
   },

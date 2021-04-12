@@ -107,48 +107,56 @@ class DatabaseSeeder extends Seeder
             'discount' => 10
         ]);
         Category::insert([
+            'name' => 'Sayuran',
+            'image' => '/upload/category/sayuran.jpeg'
+        ]);
+        Category::insert([
             'name' => 'Buah',
-            'image' => '/upload/category/buah.png'
+            'image' => '/upload/category/buah.jpeg'
         ]);
         Category::insert([
-            'name' => 'Sayur',
-            'image' => '/upload/category/sayur.png'
-        ]);
-        Category::insert([
-            'name' => 'Daging',
-            'image' => '/upload/category/daging.png'
-        ]);
-        Category::insert([
-            'name' => 'Ikan',
-            'image' => '/upload/category/daging.png'
-        ]);
-        Category::insert([
-            'name' => 'Seafood',
-            'image' => '/upload/category/daging.png'
-        ]);
-        Category::insert([
-            'name' => 'Kapalasar Organik',
-            'image' => '/upload/category/ladanglima.png'
+            'name' => 'Buah Premium',
+            'image' => '/upload/category/buah-premium.jpeg'
         ]);
         Category::insert([
             'name' => 'Bumbu',
-            'image' => '/upload/category/gulamerah.png'
+            'image' => '/upload/category/bumbu.jpeg'
         ]);
         Category::insert([
             'name' => 'Bumbu Giling',
-            'image' => '/upload/category/bumbugiling.png'
+            'image' => '/upload/category/bumbu-giling.jpeg'
         ]);
         Category::insert([
             'name' => 'Olahan Kedelai',
-            'image' => '/upload/category/olahankacangkedelai.png'
+            'image' => '/upload/category/olahan-kedelai.jpeg'
         ]);
         Category::insert([
-            'name' => 'Siap Masak',
-            'image' => '/upload/category/olahankacangkedelai.png'
+            'name' => 'Daging dan Ikan',
+            'image' => '/upload/category/daging-ikan.jpeg'
         ]);
         Category::insert([
-            'name' => 'Siap Makan',
-            'image' => '/upload/category/olahankacangkedelai.png'
+            'name' => 'Seafood',
+            'image' => '/upload/category/seafood.jpeg'
+        ]);
+        Category::insert([
+            'name' => 'Olahan Ikan',
+            'image' => '/upload/category/olahan-ikan.jpeg'
+        ]);
+        Category::insert([
+            'name' => 'Kapalasar Organik X Ladang Lima',
+            'image' => '/upload/category/kapalasar-organik-ladang-lima.jpeg'
+        ]);
+        Category::insert([
+            'name' => 'Frozen Food',
+            'image' => '/upload/category/frozen-food.jpeg'
+        ]);
+        Category::insert([
+            'name' => 'Paket Siap Masak',
+            'image' => '/upload/category/siap-masak.jpeg'
+        ]);
+        Category::insert([
+            'name' => 'Paket Siap Makan',
+            'image' => '/upload/category/siap-makan.jpeg'
         ]);
         Flash::insert([
             'name' => '00:00 - 23:59',

@@ -128,6 +128,9 @@ class TransactionController extends Controller
                     return $model->merchants->name;
                 }
             })
+            ->editColumn('total', function($model){
+                return 'Rp '.number_format($model->total, 0, ',', '.');
+            })
             ->addColumn('status', function($model){
                 if($model->status == 1){
                     return 'Dipesan';

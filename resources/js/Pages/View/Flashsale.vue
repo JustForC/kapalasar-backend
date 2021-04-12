@@ -50,7 +50,7 @@
               class="ma-lg-2 v-lazy my-3"
             >
               <v-row justify="center">
-                <ProductCardFlash @getTotalPrice="getTotalPrice" :product="product" />
+                <ProductCard @getTotalPrice="getTotalPrice" :product="product" />
               </v-row>
             </v-col>
           </v-row>
@@ -85,7 +85,7 @@
 // @ is an alias to /src
 import ClientOnly from 'vue-client-only'
 import Navbar from "../components/Navbar.vue";
-import ProductCardFlash from "../components/ProductCardFlash.vue";
+import ProductCard from "../components/ProductCard.vue";
 import Footer from "../components/Footer.vue";
 import { filters, slides } from "../dummyData/dummy.js";
 import Cookie from "../components/cookie";
@@ -93,7 +93,7 @@ export default {
   name: "Home",
   components: {
     Navbar,
-    ProductCardFlash,
+    ProductCard,
     Footer,
     Cookie,
     ClientOnly
