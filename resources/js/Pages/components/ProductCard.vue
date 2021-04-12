@@ -62,7 +62,7 @@
 <script>
 export default {
   name: "ProductCard",
-  props: ["product"],
+  props: ["product", "all_products"],
   data() {
     return {
       // isBtnBeliClicked: false
@@ -140,10 +140,15 @@ export default {
       this.calculatePrice(harga);
     },
     calculatePrice(harga) {
+
       let totalPrice = 0;
       const state = this.$store.state.cart.listCarts;
       state.forEach(item => {
-        totalPrice += item.qty * harga;
+        this.all_products.forEach(product => {
+          if(product.id === item.id){
+            totalPrice += item.qty * product.new_price;
+          }
+        })
       });
 
       this.$store.commit("cart/SET_TOTAL_PRICE", totalPrice);

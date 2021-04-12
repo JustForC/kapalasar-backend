@@ -324,8 +324,8 @@ export default {
   props: {
     check: Boolean,
     user: Object,
-    real_products: Array,
-    real_vouchers: Array
+    real_vouchers: Array,
+    all_products: Array
   },
   data() {
     return {
@@ -430,7 +430,7 @@ export default {
     },
     getProductList() {
       const state = this.$store.state.cart.listCarts;
-      this.real_products.forEach(
+      this.all_products.forEach(
         product => {state.forEach(item => {
           if (item.id == product.id) {
             const cart = {
@@ -458,7 +458,7 @@ export default {
 
       const state = this.$store.state.cart.listCarts;
 
-      let newFullList = this.real_products.filter(item => {
+      let newFullList = this.all_products.filter(item => {
         return temp.includes(item.id);
       });
 

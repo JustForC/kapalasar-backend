@@ -3,14 +3,20 @@
     <div class="home">
      <Navbar :check="check" :user="user"/>
       <v-container class="mt-5" style="background-color:#A6CB26">
-        <div class="jumbotron text-center py-15 ">
-          <h1>Flashsale</h1>
-          <p>
-            Kapalasar.id lahir dan hadir sebagai perantara antara para pedagang di
-            pasar tradisional dengan konsumen yang ada di rumah.
-          </p>
+        <div class="img-thumbnail">
+          <img :src="advertisement.image" />
         </div>
       </v-container>
+
+      <!-- TNC -->
+      <div>
+        <v-container>
+          <div class="d-flex flex-wrap justify-center">
+            <div class="" v-html="advertisement.tnc">
+            </div>
+          </div>
+        </v-container>
+      </div>
 
       <!-- Flashsale -->
       <div>
@@ -50,7 +56,7 @@
               class="ma-lg-2 v-lazy my-3"
             >
               <v-row justify="center">
-                <ProductCard @getTotalPrice="getTotalPrice" :product="product" />
+                <ProductCard @getTotalPrice="getTotalPrice" :product="product" :all_products="all_products"/>
               </v-row>
             </v-col>
           </v-row>
@@ -101,7 +107,9 @@ export default {
   props: {
     check: Boolean,
     user: Object,
-    real_products: Array
+    advertisement: Object,
+    tnc: String,
+    all_products: Array
   },
   data() {
     return {
@@ -142,7 +150,18 @@ export default {
       current: "semua"
     };
   },
+  filters: {
+    pretty: function(value) {
+      return JSON.stringify(JSON.parse(value), null, 2);
+    }
+  },
   methods: {
+    htmlToText(html) {
+      return html.replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    },
+    decode (value) {
+      return he.decode(value)
+    },
     // Carousel Resize based on Screen Size
     onResize () {
         this.windowSize = { x: window.innerWidth, y: window.innerHeight }
@@ -182,7 +201,7 @@ export default {
       // this.notFlashsaleProducts = products.filter(
       //   product => !product.flashSale
       // );
-      this.notFlashsaleProducts = this.real_products;
+      this.notFlashsaleProducts = this.all_products;
     //   this.notFlashsaleProducts = this.real_products.forEach(products => {
     //       return products.products;
     //   })
@@ -271,5 +290,13 @@ export default {
   -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+}
+.img-thumbnail {
+  width: 100%;
+  cursor: pointer;
+}
+.img-thumbnail img {
+  width: 100%;
+  max-height: 400px;
 }
 </style>

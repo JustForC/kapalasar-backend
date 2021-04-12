@@ -30,7 +30,9 @@ class BannerController extends Controller
             'id' => ['required'],
             'name' => ['required'],
             'image' => ['required'],
-            'products' => ['required']
+            'products' => ['required'],
+            'status' => ['required'],
+            'tnc' => ['required'],
         ]);
 
         $image = time().'.'.$request->image->extension();
@@ -38,6 +40,8 @@ class BannerController extends Controller
 
         $advertisement = Advertisement::create([
             'name' => $request->name,
+            'tnc' => $request->tnc,
+            'status' => $request->status,
             'path' => Str::slug($request->name, '-'),
             'image' => '/upload/banner/'.$path->getFileName(),
         ]);
@@ -64,6 +68,8 @@ class BannerController extends Controller
             $advertisement = Advertisement::findOrFail($id);
             $advertisement->products()->sync($request->products);
             $advertisement->update([
+                'tnc' => $request->tnc,
+                'status' => $request->status,
                 'name' => $request->name,
                 'path' => Str::slug($request->name, '-')
             ]);
@@ -108,7 +114,6 @@ class BannerController extends Controller
             ->addColumn('action', function($model){
                 return '<div class="btn-group" role="group">
                             <button type="button" href="'.route('banner.edit', $model->id).'" class="btn btn-primary btn-sm modal-show edit" name="Edit '.$model->name.'" data-toggle="modal" data-target="#modal">Edit</button>
-                            <button type="button" href="'.route('banner.delete', $model->id).'" class="btn btn-danger btn-sm delete" name="Delete '.$model->name.'">Delete</button>
                         </div>';
             })
             ->addIndexColumn()

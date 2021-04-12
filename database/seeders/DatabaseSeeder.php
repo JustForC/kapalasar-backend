@@ -9,11 +9,11 @@ use App\Models\Role;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Flash;
-use App\Models\FlashSale;
 use App\Models\Type;
 use App\Models\Voucher;
 use App\Models\Checkout;
 use App\Models\Advertisement;
+use App\Models\Banner;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -28,26 +28,36 @@ class DatabaseSeeder extends Seeder
     {
         Advertisement::insert([
             'name' => 'Pop Up',
+            'tnc' => 'aturan',
+            'status' => 1,
             'path' => Str::slug('Pop Up', '-'),
             'image' => 'https://media.istockphoto.com/vectors/welcome-lettering-handwritten-modern-calligraphy-brush-painted-for-vector-id1019556854?b=1&k=6&m=1019556854&s=612x612&w=0&h=sgboeSVq1EXsXMDXcqYVbkac54K06TCg1itipvCzUd8='
         ]);
         Advertisement::insert([
             'name' => 'Banner 1',
+            'tnc' => 'aturan',
+            'status' => 1,
             'path' => Str::slug('Banner 1', '-'),
             'image' => '/images/banner/Banner-1.jpg'
         ]);
         Advertisement::insert([
             'name' => 'Banner 2',
+            'tnc' => 'aturan',
+            'status' => 1,
             'path' => Str::slug('Banner 2', '-'),
             'image' => '/images/banner/Banner-2.jpg'
         ]);
         Advertisement::insert([
             'name' => 'Banner 3',
+            'tnc' => 'aturan',
+            'status' => 1,
             'path' => Str::slug('Banner 3', '-'),
             'image' => '/images/banner/Banner-3.jpg'
         ]);
         Advertisement::insert([
             'name' => 'Banner 4',
+            'tnc' => 'aturan',
+            'status' => 1,
             'path' => Str::slug('Banner 4', '-'),
             'image' => '/images/banner/Banner-4.jpg'
         ]);
@@ -92,6 +102,12 @@ class DatabaseSeeder extends Seeder
         Type::insert([
             'name' => 'Potongan Harga (persen)'
         ]);
+        Type::insert([
+            'name' => 'Potongan Harga (persen) & Free Ongkir'
+        ]);
+        Type::insert([
+            'name' => 'Potongan Harga (harga) & Free Ongkir'
+        ]);
         Voucher::insert([
             'types_id' => 1,
             'name' => 'FREEONGKIR'
@@ -107,48 +123,56 @@ class DatabaseSeeder extends Seeder
             'discount' => 10
         ]);
         Category::insert([
+            'name' => 'Sayuran',
+            'image' => '/upload/category/sayuran.jpeg'
+        ]);
+        Category::insert([
             'name' => 'Buah',
-            'image' => '/upload/category/buah.png'
+            'image' => '/upload/category/buah.jpeg'
         ]);
         Category::insert([
-            'name' => 'Sayur',
-            'image' => '/upload/category/sayur.png'
-        ]);
-        Category::insert([
-            'name' => 'Daging',
-            'image' => '/upload/category/daging.png'
-        ]);
-        Category::insert([
-            'name' => 'Ikan',
-            'image' => '/upload/category/daging.png'
-        ]);
-        Category::insert([
-            'name' => 'Seafood',
-            'image' => '/upload/category/daging.png'
-        ]);
-        Category::insert([
-            'name' => 'Kapalasar Organik',
-            'image' => '/upload/category/ladanglima.png'
+            'name' => 'Buah Premium',
+            'image' => '/upload/category/buah-premium.jpeg'
         ]);
         Category::insert([
             'name' => 'Bumbu',
-            'image' => '/upload/category/gulamerah.png'
+            'image' => '/upload/category/bumbu.jpeg'
         ]);
         Category::insert([
             'name' => 'Bumbu Giling',
-            'image' => '/upload/category/bumbugiling.png'
+            'image' => '/upload/category/bumbu-giling.jpeg'
         ]);
         Category::insert([
             'name' => 'Olahan Kedelai',
-            'image' => '/upload/category/olahankacangkedelai.png'
+            'image' => '/upload/category/olahan-kedelai.jpeg'
         ]);
         Category::insert([
-            'name' => 'Siap Masak',
-            'image' => '/upload/category/olahankacangkedelai.png'
+            'name' => 'Daging dan Ikan',
+            'image' => '/upload/category/daging-ikan.jpeg'
         ]);
         Category::insert([
-            'name' => 'Siap Makan',
-            'image' => '/upload/category/olahankacangkedelai.png'
+            'name' => 'Seafood',
+            'image' => '/upload/category/seafood.jpeg'
+        ]);
+        Category::insert([
+            'name' => 'Olahan Ikan',
+            'image' => '/upload/category/olahan-ikan.jpeg'
+        ]);
+        Category::insert([
+            'name' => 'Kapalasar Organik X Ladang Lima',
+            'image' => '/upload/category/kapalasar-organik-ladang-lima.jpeg'
+        ]);
+        Category::insert([
+            'name' => 'Frozen Food',
+            'image' => '/upload/category/frozen-food.jpeg'
+        ]);
+        Category::insert([
+            'name' => 'Paket Siap Masak',
+            'image' => '/upload/category/siap-masak.jpeg'
+        ]);
+        Category::insert([
+            'name' => 'Paket Siap Makan',
+            'image' => '/upload/category/siap-makan.jpeg'
         ]);
         Flash::insert([
             'name' => '00:00 - 23:59',
@@ -185,7 +209,9 @@ class DatabaseSeeder extends Seeder
         //     'start' => '22:00',
         //     'end' => '22:30'
         // ]);
+
         $this->call(ProductSeeder1::class);
+
         // for($i = 1; $i <= 20; $i++){
         //     Product::insert([
         //         'name' => 'Sayur '.$i,
@@ -258,15 +284,6 @@ class DatabaseSeeder extends Seeder
         //         'categories_id' => 5
         //     ]);
         // }
-        $j = 1;
-        for($i = 1; $i <= 9; $i++){
-            FlashSale::insert([
-                'flashes_id' => 1,
-                'products_id' => $j,
-                'new_price' => 5000
-            ]);
-            $j+=3;
-        }
 
         // for($i = 1; $i <= 10; $i++){
         //     Checkout::create([

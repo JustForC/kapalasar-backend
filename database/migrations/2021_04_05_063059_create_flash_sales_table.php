@@ -15,6 +15,7 @@ class CreateFlashSalesTable extends Migration
     {
         Schema::create('flash_sales', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('uniq');
             $table->foreignId('flashes_id')->references('id')->on('flashes')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('products_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade');
             $table->string('image')->nullable();

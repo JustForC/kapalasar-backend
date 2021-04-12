@@ -29,17 +29,14 @@
             <label for="value" class="control-label">Besar Potongan</label>
             <input id="value" type="number" class="form-control" name="value" value="{{$model->value}}" placeholder="Besar Potongan">
         </div>
-        {{-- <div class="form-group">
+        <div class="form-group">
             <label for="start" class="control-label">Waktu Mulai</label>
-            <input id="start" type="date" class="form-control" name="start_date" value="{{$model->start}}">
-            <input id="start" type="time" class="form-control" name="start_time" value="{{$model->start}}">
+            <input id="start" type="datetime-local" class="form-control" name="start" value="{{$model->start}}">
         </div>
         <div class="form-group">
             <label for="end" class="control-label">Waktu Berakhir</label>
-            <input id="end" type="date" class="form-control" name="end_date" value="{{$model->end}}">
-            <input id="end" type="time" class="form-control" name="end_time" value="{{$model->end}}">
-        </div> --}}
-    </div>
+            <input id="end" type="datetime-local" class="form-control" name="end" value="{{$model->end}}">
+        </div>
     <div class="modal-footer">
         <button type="submit" class="btn btn-primary" id="modal-save"></button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal" id="modal-close"></button>

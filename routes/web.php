@@ -7,6 +7,7 @@ use App\Http\Controllers\Dashboard\MerchantController;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\TypeController;
 use App\Http\Controllers\Dashboard\VoucherController;
+use App\Http\Controllers\Dashboard\DataMerchantController;
 use App\Http\Controllers\Dashboard\FlashController;
 use App\Http\Controllers\Dashboard\TransactionController;
 use App\Http\Controllers\Dashboard\HistoryController;
@@ -23,6 +24,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CodeController;
 use App\Http\Controllers\PushNotificationController;
+
 
 Route::get('/send-notification', [PushNotificationController::class, 'send']);
 
@@ -155,6 +157,8 @@ Route::middleware('admin')->group(function(){
         });
     });
 });
+
+Route::get('data',[DataMerchantController::class,'data'])->name('data.merchant');
 
 // Bagian laen
 Route::middleware('superadmin')->group(function(){

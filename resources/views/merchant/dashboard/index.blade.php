@@ -15,32 +15,6 @@
         </div>
         <div class="table-responsive">
           <table id="table" class="table hover" style="width:100%">
-          <tr>
-              <td>#</td>
-              <td>Nama</td>
-              <td>Alamat</td>
-              <td>No. Telephone</td>
-              <td>Discount</td>
-              <td>ID Merchant</td>
-              <td>Total</td>
-              <td>Status</td>
-              <td>Receipt</td>
-              <td>Tanggal Receipt</td>
-            </tr>
-            @foreach($transactions as $index => $t)
-            <tr>
-              <td>{{$index+1}}</td>
-              <td>{{$t->name}}</td>
-              <td>{{$t->address}}</td>
-              <td>{{$t->phone}}</td>
-              <td>{{$t->discount}}</td>
-              <td>{{$t->merchants_id}}</td>
-              <td>{{$t->total}}</td>
-              <td>{{$t->status}}</td>
-              <td>{{$t->receipt}}</td>
-              <td>{{$t->date_receipt}}</td>
-            </tr>
-            @endforeach
           </table>
         </div>
       </div>
@@ -66,20 +40,23 @@
 
 @push('js')
   <script>
-
-    // $('#table').DataTable({
-    //   responsive: true,
-    //   serverSide: true,
-    //   ajax: "",
-    //   order: [[ 1, "asc" ]],
-    //   columns: [
-    //     {title: '#', data: 'DT_RowIndex', name: 'DT_RowIndex', orderable:false, width: '7.5%', className: 'dt-center'},
-    //     {title: 'Name', data: 'name', name: 'name', width: '30%', className: 'dt-head-center'},
-    //     {title: 'Description', data: 'desc', name: 'desc', width: '30%', className: 'dt-head-center'},
-    //     {title: 'User', data: 'users.name', name: 'users.name', width: '30%', className: 'dt-head-center'},
-    //     {title: 'Action', data: 'action', name: 'action', width: '12.5%', className: 'dt-center'},
-    //   ],
-    // });
+    $('#table').DataTable({
+      responsive: true,
+      serverSide: true,
+      ajax: "{{ route('data.merchant') }}",
+      order: [[ 1, "asc" ]],
+      columns: [
+        {title: '#', data: 'DT_RowIndex', name: 'DT_RowIndex', orderable:false, width: '7.5%', className: 'dt-center'},
+        {title: 'Nama', data: 'name', name: 'name', width: '30%', className: 'dt-head-center'},
+        {title: 'Penjual', data: 'merchant', name: 'merchant', width: '30%', className: 'dt-head-center'},
+        {title: 'Status', data: 'status', name: 'status', width: '30%', className: 'dt-head-center'},
+        {title: 'Alamat', data: 'address', name: 'address', width: '30%', className: 'dt-head-center'},
+        {title: 'No Telepon', data: 'phone', name: 'phone', width: '30%', className: 'dt-head-center'},
+        {title: 'Tipe Potongan', data: 'type', name: 'type', width: '30%', className: 'dt-head-center'},
+        {title: 'Jumlah Potongan', data: 'discount', name: 'discount', width: '30%', className: 'dt-head-center'},
+        {title: 'Total', data: 'total', name: 'total', width: '30%', className: 'dt-head-center'},
+      ],
+    });
 
     var ctx = document.getElementById('myChart');
     var ctx = document.getElementById('myChart').getContext('2d');
@@ -137,10 +114,12 @@
         }]
     },
     options: {
-        scales: {
-            y: {
-                beginAtZero: true
+    scales: {
+        yAxes: [{
+              ticks: {
+              stepSize: 1
             }
+          }]
         }
     }
     });

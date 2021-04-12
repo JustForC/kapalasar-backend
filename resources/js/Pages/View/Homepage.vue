@@ -81,7 +81,7 @@
           <div class="d-flex justify-center align-center">
             <splide :options="optionsFlashsale">
               <splide-slide v-for="(product, i) in flashSaleProducts" :key="i">
-                <ProductCard @getTotalPrice="getTotalPrice" :product="product" />
+                <ProductCard @getTotalPrice="getTotalPrice" :product="product" :all_products="all_products" />
               </splide-slide>
             </splide>
           </div>
@@ -139,7 +139,7 @@
               class="ma-lg-2 v-lazy my-3"
             >
               <v-row justify="center">
-                <ProductCard @getTotalPrice="getTotalPrice" :product="product" />
+                <ProductCard @getTotalPrice="getTotalPrice" :product="product" :all_products="all_products"/>
               </v-row>
             </v-col>
           </v-row>
@@ -193,7 +193,7 @@
                 class="ma-lg-2 v-lazy my-3"
               >
                 <v-row justify="center">
-                  <ProductCard @getTotalPrice="getTotalPrice" :product="product" />
+                  <ProductCard @getTotalPrice="getTotalPrice" :product="product" :all_products="all_products"/>
                 </v-row>
               </v-col>
             </v-row>
@@ -247,7 +247,7 @@
                     class="ma-lg-2 v-lazy my-3"
                   >
                     <v-row justify="center">
-                      <ProductCard @getTotalPrice="getTotalPrice" :product="product" />
+                      <ProductCard @getTotalPrice="getTotalPrice" :product="product" :all_products="all_products"/>
                     </v-row>
                   </v-col>
                 </v-row>
@@ -323,6 +323,7 @@ import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import Navbar from "../components/Navbar.vue";
 import ProductCard from "../components/ProductCard.vue";
+// import ProductCardStrip from "../components/ProductCardStrip.vue";
 import Footer from "../components/Footer.vue";
 import { filters, slides } from "../dummyData/dummy.js";
 import cookie from "../components/cookie";
@@ -333,16 +334,16 @@ export default {
     Splide,
     SplideSlide,
     ProductCard,
+    // ProductCardStrip,
     Footer,
     cookie
   },
   props: {
     check: Boolean,
     user: Object,
-    real_products: Array,
     banners: Object,
     popUp: Object,
-    flash_sales: Array
+    all_products: Array
   },
   data() {
     return {
@@ -419,66 +420,62 @@ export default {
       }
     },
     filterFlashSale() {
-      // this.flashSaleProducts = products.filter(product => product.flashSale);
-      // this.flashSaleProducts = this.real_products;
-      this.flashSaleProducts = this.flash_sales.map(products => {
-        return products;
-      });
-      console.log(this.flashSaleProducts);
-
+      this.flashSaleProducts = this.all_products.filter(product => product.flash_sale);
+      // console.log(this.flashSaleProducts, this.all_products);
     },
     filterNotFlashSale() {
       // this.notFlashsaleProducts = products.filter(
       //   product => !product.flashSale
       // );
-      this.notFlashsaleProducts = this.real_products;
+      // this.notFlashsaleProducts = this.real_products;
+      this.notFlashsaleProducts = this.all_products.filter(product => !product.flash_sale);
       this.filteredProducts = this.notFlashsaleProducts;
     },
     filterByKategori(by) {
       this.current = by;
       if (this.current === "sayur") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories.name === "Sayur"
+          product => product.category === "Sayuran"
         );
       } else if (this.current === "buah") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories.name === "Buah"
+          product => product.category === "Buah"
         );
       } else if (this.current === "daging") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories.name === "Daging"
+          product => product.category === "Daging"
         );
       } else if (this.current === "ikan") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories.name === "Ikan"
+          product => product.category === "Ikan"
         );
       } else if (this.current === "seafood") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories.name === "Seafood"
+          product => product.category === "Seafood"
         );
       } else if (this.current === "kapalasar organik") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories.name === "Kapalasar Organik"
+          product => product.category === "Kapalasar Organik"
         );
       } else if (this.current === "bumbu") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories.name === "Bumbu"
+          product => product.category === "Bumbu"
         );
       } else if (this.current === "bumbu giling") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories.name === "Bumbu Giling"
+          product => product.category === "Bumbu Giling"
         );
       } else if (this.current === "olahan kedelai") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories.name === "Olahan Kedelai"
+          product => product.category === "Olahan Kedelai"
         );
       } else if (this.current === "siap masak") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories.name === "Siap Masak"
+          product => product.category === "Siap Masak"
         );
       } else if (this.current === "siap makan") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories.name === "Siap Makan"
+          product => product.category === "Siap Makan"
         );
       } else if (this.current === "promo") {
         this.filteredProducts = this.notFlashsaleProducts.filter(function(item){
@@ -499,11 +496,13 @@ export default {
   created() {
     this.filterFlashSale();
     this.filterNotFlashSale();
+    this.$store.commit("cart/REPLACE", []);
+    this.$store.commit("cart/SET_TOTAL_PRICE", 0);
   },
   mounted() {
     this.changeShowCart(); 
     this.onResize();
-    // console.log(this.notFlashsaleProducts[21].name);
+      // this.$store.commit("cart/SET_TOTAL_PRICE", 0);
   }
 };
 </script>
