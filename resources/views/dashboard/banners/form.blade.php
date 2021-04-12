@@ -31,8 +31,8 @@
         <div class="form-group">
             <label for="status" class="control-label">Status</label><br>
             <select id="status" type="text" class="form-control" name="status">
-                    <option value=0>Tidak Aktif</option>
-                    <option value=1>Aktif</option>
+                <option value=1>Aktif</option>
+                <option value=0>Tidak Aktif</option>
             </select>
         </div>
         <div class="form-group">

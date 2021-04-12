@@ -835,6 +835,8 @@ class HomeController extends Controller
         return Inertia::render('View/Banner', [
             'check' => $check,
             'user' => null,
+            'advertisement' => $advertisement,
+            'tnc' => json_encode($advertisement->tnc),
             'all_products' => $all_products
         ]);
     }
