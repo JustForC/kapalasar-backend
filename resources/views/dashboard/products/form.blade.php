@@ -21,20 +21,20 @@
             <input id="name" type="text" class="form-control" name="name" value="{{$model->name}}" placeholder="Name">
         </div>
         <div class="form-group">
-            <label for="unit" class="control-label">Description</label>
-            <textarea form ="form_modal" id="unit" class="form-control" name="unit" placeholder="Unit" value = "{{$model->unit}}">"{{$model->unit}}"</textarea>
+            <label for="unit" class="control-label">Deskripsi</label>
+            <textarea form ="form_modal" rows="3" id="unit" class="form-control" name="unit" placeholder="Deskripsi" value = "{{$model->unit}}">{{$model->unit}}</textarea>
         </div>
-        <div class="form-group">
+        {{-- <div class="form-group">
             <label for="stock" class="control-label">Stok</label>
             <input id="stock" type="number" class="form-control" name="stock" value="{{$model->stock}}" placeholder="Stock">
-        </div>
+        </div> --}}
         <div class="form-group">
             <label for="price" class="control-label">Harga</label>
             <input id="price" type="number" class="form-control" name="price" value="{{$model->price}}" placeholder="Price">
         </div>
         <div class="form-group">
-            <label for="discount_price" class="control-label">Harga</label>
-            <input id="discount_price" type="discount_price" class="form-control" name="discount_price" value="{{$model->discount_price}}" placeholder="Discount_Price">
+            <label for="discount_price" class="control-label">Harga diskon</label>
+            <input id="discount_price" type="number" class="form-control" name="discount_price" value="{{$model->discount_price}}" placeholder="Harga diskon">
         </div>
         <div class="form-group">
             <label for="product_image" class="control-label">Gambar Produk</label><br/>

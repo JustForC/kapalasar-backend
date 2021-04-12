@@ -11,35 +11,34 @@
         <div class="form-group">
             <label for="category" class="control-label">Jenis Voucher</label><br>
             <select id="category" type="text" class="form-control" name="types_id">
+                <option value="0" selected="selected" disabled>Pilih Jenis Voucher</option>
                 @foreach($types as $type)
-                <option value="{{$type->id}}" >{{$type->name}}</option>
+                    <option value="{{$type->id}}" >{{$type->name}}</option>
                 @endforeach
             </select>
         </div>
         <div class="form-group">
             <label for="name" class="control-label">Nama Voucher</label>
-            <input id="name" type="text" class="form-control" name="name" value="{{$model->name}}" placeholder="Name">
+            <input id="name" type="text" class="form-control" name="name" value="{{$model->name}}" placeholder="Nama Voucher">
         </div>
-        <div class="form-group">
+        {{-- <div class="form-group">
             <label for="amount" class="control-label">Jumlah Voucher</label>
-            <input id="amount" type="number" class="form-control" name="amount" value="{{$model->amount}}" placeholder="Amount">
-        </div>
+            <input id="amount" type="number" class="form-control" name="amount" value="{{$model->amount}}" placeholder="Jumlah Voucher">
+        </div> --}}
         <div class="form-group">
-            <label for="value" class="control-label">Besar Potongan Voucher</label>
-            <input id="value" type="number" class="form-control" name="value" value="{{$model->value}}" placeholder="Value">
+            <label for="value" class="control-label">Besar Potongan</label>
+            <input id="value" type="number" class="form-control" name="value" value="{{$model->value}}" placeholder="Besar Potongan">
         </div>
-        <div class="form-group">
-            <label for="percent" class="control-label">Persen Potongan Voucher</label>
-            <input id="percent" type="number" class="form-control" name="percent" value="{{$model->percent}}" placeholder="Percent">
-        </div>
-        <div class="form-group">
+        {{-- <div class="form-group">
             <label for="start" class="control-label">Waktu Mulai</label>
-            <input id="start" type="datetime-local" class="form-control" name="start" value="{{$model->start}}" placeholder="Start">
+            <input id="start" type="date" class="form-control" name="start_date" value="{{$model->start}}">
+            <input id="start" type="time" class="form-control" name="start_time" value="{{$model->start}}">
         </div>
         <div class="form-group">
             <label for="end" class="control-label">Waktu Berakhir</label>
-            <input id="end" type="datetime-local" class="form-control" name="end" value="{{$model->end}}" placeholder="End">
-        </div>
+            <input id="end" type="date" class="form-control" name="end_date" value="{{$model->end}}">
+            <input id="end" type="time" class="form-control" name="end_time" value="{{$model->end}}">
+        </div> --}}
     </div>
     <div class="modal-footer">
         <button type="submit" class="btn btn-primary" id="modal-save"></button>

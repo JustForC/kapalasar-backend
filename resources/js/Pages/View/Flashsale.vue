@@ -201,29 +201,41 @@ export default {
         this.filteredProducts = this.notFlashsaleProducts.filter(
           product => product.products.categories_id === 1
         );
-      } else if (this.current === "daging dan ikan") {
+      } else if (this.current === "daging") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
           product => product.products.categories_id === 3
         );
-      } else if (this.current === "yoghurt") {
+      } else if (this.current === "ikan") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
           product => product.products.categories_id === 4
         );
-      } else if (this.current === "ladanglima") {
+      } else if (this.current === "seafood") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
           product => product.products.categories_id === 5
         );
-      } else if (this.current === "gula merah") {
+      } else if (this.current === "kapalasar organik") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
           product => product.products.categories_id === 6
         );
-      } else if (this.current === "bumbu giling") {
+      } else if (this.current === "bumbu") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
           product => product.products.categories_id === 7
         );
-      } else if (this.current === "olahan kacang kedelai") {
+      } else if (this.current === "bumbu giling") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
           product => product.products.categories_id === 8
+        );
+      } else if (this.current === "olahan kedelai") {
+        this.filteredProducts = this.notFlashsaleProducts.filter(
+          product => product.products.categories_id === 9
+        );
+      } else if (this.current === "siap masak") {
+        this.filteredProducts = this.notFlashsaleProducts.filter(
+          product => product.products.categories_id === 10
+        );
+      } else if (this.current === "siap makan") {
+        this.filteredProducts = this.notFlashsaleProducts.filter(
+          product => product.products.categories_id === 11
         );
       } else if (this.current === "promo") {
         this.filteredProducts = this.notFlashsaleProducts.filter(function(item){

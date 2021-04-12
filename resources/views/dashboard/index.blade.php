@@ -19,13 +19,13 @@
             <td>#</td>
               <td>Nama</td>
               <td>Alamat</td>
-              <td>No. Telephone</td>
-              <td>Discount</td>
+              <td>No. Telepon</td>
+              <td>Diskon</td>
               <td>ID Merchant</td>
               <td>Total</td>
               <td>Status</td>
-              <td>Receipt</td>
-              <td>Tanggal Receipt</td>
+              {{-- <td>Receipt</td> --}}
+              {{-- <td>Tanggal Receipt</td> --}}
             </tr>
             @foreach($transactions as $index => $t)
             <tr>
@@ -37,8 +37,8 @@
               <td>{{$t->merchants_id}}</td>
               <td>{{$t->total}}</td>
               <td>{{$t->status}}</td>
-              <td>{{$t->receipt}}</td>
-              <td>{{$t->date_receipt}}</td>
+              {{-- <td>{{$t->receipt}}</td> --}}
+              {{-- <td>{{$t->date_receipt}}</td> --}}
             </tr>
             @endforeach
           </table>
