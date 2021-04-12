@@ -17,6 +17,7 @@
         </v-card>
       </v-dialog>
     </v-row>
+    </div>
       <Navbar :check="check" :user="user"/>
       <!-- Carousel -->
       <div class="carousel d-flex justify-center align-center">
@@ -288,7 +289,7 @@
             </a>
           </v-carousel-item>
         </v-carousel>
-      </div>
+    </div>
 
       <!-- <client-only>
         <Cookie />
@@ -314,7 +315,6 @@
           </v-row>
         </v-container>
       </div>
-    </div>
   </v-app>
 </template>
 
