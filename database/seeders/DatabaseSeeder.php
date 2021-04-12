@@ -13,6 +13,7 @@ use App\Models\Type;
 use App\Models\Voucher;
 use App\Models\Checkout;
 use App\Models\Advertisement;
+use App\Models\Banner;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 

@@ -50,7 +50,7 @@
               class="ma-lg-2 v-lazy my-3"
             >
               <v-row justify="center">
-                <ProductCard @getTotalPrice="getTotalPrice" :product="product" />
+                <ProductCard @getTotalPrice="getTotalPrice" :product="product" :all_products="all_products"/>
               </v-row>
             </v-col>
           </v-row>
@@ -101,7 +101,7 @@ export default {
   props: {
     check: Boolean,
     user: Object,
-    real_products: Array
+    all_products: Array
   },
   data() {
     return {
@@ -182,7 +182,7 @@ export default {
       // this.notFlashsaleProducts = products.filter(
       //   product => !product.flashSale
       // );
-      this.notFlashsaleProducts = this.real_products;
+      this.notFlashsaleProducts = this.all_products;
     //   this.notFlashsaleProducts = this.real_products.forEach(products => {
     //       return products.products;
     //   })
