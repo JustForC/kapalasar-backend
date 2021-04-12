@@ -13,9 +13,6 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $cek = Product::orderBy('id', 'desc')->first();
-        $cek2 = FlashSale::orderBy('id', 'desc')->first();
-        dd($cek, $cek2);
         return view('dashboard/products/index');
     }
 
