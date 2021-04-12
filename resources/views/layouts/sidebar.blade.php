@@ -115,11 +115,17 @@
           </ul>
         </div>
       </li>
+      <li class="nav-item {{ request()->is('push') ? 'active' : '' }}">
+        <a href="{{ url('push') }}" class="nav-link">
+          <i class="link-icon" data-feather="send"></i>
+          <span class="link-title">Push Notification</span>
+        </a>
+      </li>
       @endif
       <li class="nav-item {{ request()->is('catalog') ? 'active' : '' }}">
         <a href="{{ url('catalog') }}" class="nav-link">
           <i class="link-icon" data-feather="file"></i>
-          <span class="link-title">Catalog </span>
+          <span class="link-title">Catalog</span>
         </a>
       </li>
     </ul>
