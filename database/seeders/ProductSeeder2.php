@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Models\FlashSale;
 
-class ProductSeeder1 extends Seeder
+class ProductSeeder2 extends Seeder
 {
     /**
      * Run the database seeds.
