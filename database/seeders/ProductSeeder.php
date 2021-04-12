@@ -46,216 +46,262 @@ class ProductSeeder extends Seeder
             'name' => 'Olahan Kacang Kedelai',
             'image' => '/upload/category/olahankacangkedelai.png'
         ]);
-
-
-        DB::table('products')->insert([
-            [
+        
+        $i = 1;
+        DB::table('product')->insert([
+            'uniq' => $i,
             'name'=>'anggur-plain',
             'price'=>'1000',
             'unit' => 1,
             'stock' => 10,
             'image'=>'/upload/product/buah/anggur-plain.jpg',
             'categories_id'=>1,
-            ],
-            [
-                'name'=>'anggur',
-                'price'=>'1000',
-                'unit' => 1,
-            'stock' => 10,
-                'image'=>'/upload/product/buah/anggur.jpg',
-                'categories_id'=>1,
-            ],
-            [
-                'name'=>'apel-fuji-plain',
+        ]);
+        DB::table('product')->insert([
+            'uniq' => $i++,
+            'name'=>'apel-fuji-plain',
                 'price'=>'1000',
                 'unit' => 1,
             'stock' => 10,
                 'image'=>'/upload/product/buah/apel-fuji-plain.jpg',
                 'categories_id'=>1,
-            ],
-            [
-                'name'=>'apel-fuji',
+        ]);
+        DB::table('product')->insert([
+            'uniq' => $i++,
+            'name'=>'apel-fuji',
                 'price'=>'1000',
                 'unit' => 1,
             'stock' => 10,
                 'image'=>'/upload/product/buah/apel-fuji.jpg',
                 'categories_id'=>1,
-            ],
-            [
-                'name'=>'apel',
+        ]);
+        DB::table('product')->insert([
+            'uniq' => $i++,
+            'name'=>'apel',
                 'price'=>'1000',
                 'unit' => 1,
             'stock' => 10,
                 'image'=>'/upload/product/buah/apel.jpg',
                 'categories_id'=>1,
-            ],
-            [
-                'name'=>'apel-washington-plain',
+        ]);
+        DB::table('product')->insert([
+            'uniq' => $i++,
+            'name'=>'apel-washington-plain',
                 'price'=>'1000',
                 'unit' => 1,
             'stock' => 10,
                 'image'=>'/upload/product/buah/apel-washington-plain.jpg',
                 'categories_id'=>1,
-            ],
-            [
-                'name'=>'apel-washington',
+        ]);
+        DB::table('product')->insert([
+            'name'=>'apel-washington',
                 'price'=>'1000',
                 'unit' => 1,
             'stock' => 10,
                 'image'=>'/upload/product/buah/apel-washington.jpg',
                 'categories_id'=>1,
-            ],
-            [
-                'name'=>'apels-plain',
+        ]);
+        DB::table('product')->insert([
+            'uniq' => $i++,
+            'name'=>'apels-plain',
                 'price'=>'1000',
                 'unit' => 1,
             'stock' => 10,
                 'image'=>'/upload/product/buah/apels-plain.jpg',
                 'categories_id'=>1,
-            ],
-            [
-                'name'=>'apels',
+        ]);
+        DB::table('product')->insert([
+            'uniq' => $i++,
+            'name'=>'apels',
                 'price'=>'1000',
                 'unit' => 1,
             'stock' => 10,
                 'image'=>'/upload/product/buah/apels.jpg',
                 'categories_id'=>1,
-            ],
-            [
-                'name'=>'bengkuang-plain',
+        ]);
+        DB::table('product')->insert([
+            'uniq'=> $i++,
+            'name'=>'bengkuang-plain',
                 'price'=>'1000',
                 'unit' => 1,
             'stock' => 10,
                 'image'=>'/upload/product/buah/bengkuang-plain.jpg',
                 'categories_id'=>1,
-            ],
-            [
-                'name'=>'bengkuang',
+        ]);
+        DB::table('product')->insert([
+            'uniq'=> $i++,
+            'name'=>'bengkuang',
                 'price'=>'1000',
                 'unit' => 1,
             'stock' => 10,
                 'image'=>'/upload/product/buah/bengkuang.jpg',
                 'categories_id'=>1,
-            ],
-            [
-                'name'=>'jambu-kristal-plain',
+        ]);
+        DB::table('product')->insert([
+            'uniq'=> $i++,
+            'name'=>'jambu-kristal-plain',
                 'price'=>'1000',
                 'unit' => 1,
             'stock' => 10,
                 'image'=>'/upload/product/buah/jambu-kristal-plain.jpg',
                 'categories_id'=>1,
-            ],
-            [
-                'name'=>'jambu-kristal',
+        ]);
+        DB::table('product')->insert([
+            'uniq'=> $i++,
+            'name'=>'jambu-kristal',
                 'price'=>'1000',
                 'unit' => 1,
             'stock' => 10,
                 'image'=>'/upload/product/buah/jambu-kristal.jpg',
                 'categories_id'=>1,
-            ],
-            [
-                'name'=>'jeruk-dua-plain',
+        ]);
+        DB::table('product')->insert([
+            'uniq'=> $i++,
+            'name'=>'jeruk-dua-plain',
                 'price'=>'1000',
                 'unit' => 1,
             'stock' => 10,
                 'image'=>'/upload/product/buah/jeruk-dua-plain.jpg',
                 'categories_id'=>1,
-            ],
-            [
-                'name'=>'jeruk-dua',
+        ]);
+
+        DB::table('product')->insert([
+            'uniq'=> $i++,
+            'name'=>'jeruk-dua',
                 'price'=>'1000',
                 'unit' => 1,
             'stock' => 10,
                 'image'=>'/upload/product/buah/jeruk-dua.jpg',
                 'categories_id'=>1,
-            ],
-            [
-                'name'=>'jeruk-plain',
+        ]);
+        DB::table('product')->insert([
+            'uniq'=> $i++,
+            'name'=>'jeruk-plain',
                 'price'=>'1000',
                 'unit' => 1,
             'stock' => 10,
                 'image'=>'/upload/product/buah/jeruk-plain.jpg',
                 'categories_id'=>1,
-            ],
-            [
-                'name'=>'jeruk',
+        ]);
+        DB::table('product')->insert([
+            'uniq'=> $i++,
+            'name'=>'jeruk',
                 'price'=>'1000',
                 'unit' => 1,
             'stock' => 10,
                 'image'=>'/upload/product/buah/jeruk.jpg',
                 'categories_id'=>1,
-            ],
-            [
-                'name'=>'manggu-plain',
+        ]);
+        DB::table('product')->insert([
+            'uniq'=> $i++,
+            'name'=>'manggu-plain',
                 'price'=>'1000',
                 'unit' => 1,
             'stock' => 10,
                 'image'=>'/upload/product/buah/manggu-plain.jpg',
                 'categories_id'=>1,
-            ],
-            [
-                'name'=>'manggu',
+        ]);
+        DB::table('product')->insert([
+            'uniq'=> $i++,
+            'name'=>'manggu',
                 'price'=>'1000',
                 'unit' => 1,
             'stock' => 10,
                 'image'=>'/upload/product/buah/manggu.jpg',
                 'categories_id'=>1,
-            ],
-            [
-                'name'=>'melon-plain',
+        ]);
+        DB::table('product')->insert([
+            'uniq'=> $i++,
+            'name'=>'melon-plain',
                 'price'=>'1000',
                 'unit' => 1,
             'stock' => 10,
                 'image'=>'/upload/product/buah/melon-plain.jpg',
                 'categories_id'=>1,
-            ],
-            [
-                'name'=>'melon',
+        ]);
+        DB::table('product')->insert([
+            'uniq'=> $i++,
+            'name'=>'melon',
                 'price'=>'1000',
                 'unit' => 1,
             'stock' => 10,
                 'image'=>'/upload/product/buah/melon.jpg',
                 'categories_id'=>1,
-            ],
-            [
-                'name'=>'nanas-plain',
-                'price'=>'1000',
-                'unit' => 1,
-            'stock' => 10,
-                'image'=>'/upload/product/buah/nanas-plain.jpg',
-                'categories_id'=>1,
-            ],
-            [
-                'name'=>'nanas',
+        ]);
+        DB::table('product')->insert([
+            'uniq'=> $i++,
+            'name'=>'nanas',
                 'price'=>'1000',
                 'unit' => 1,
             'stock' => 10,
                 'image'=>'/upload/product/buah/nanas.jpg',
                 'categories_id'=>1,
-            ],
-            [
-                'name'=>'pisang-dua-plain',
+        ]);
+        DB::table('product')->insert([
+            'uniq'=> $i++,
+            'name'=>'nanas-plain',
+                'price'=>'1000',
+                'unit' => 1,
+            'stock' => 10,
+                'image'=>'/upload/product/buah/nanas-plain.jpg',
+                'categories_id'=>1,
+        ]);
+        DB::table('product')->insert([
+            'uniq'=> $i++,
+            'name'=>'pisang-dua-plain',
                 'price'=>'1000',
                 'unit' => 1,
             'stock' => 10,
                 'image'=>'/upload/product/buah/pisang-dua-plain.jpg',
                 'categories_id'=>1,
-            ],
-            [
-                'name'=>'pisang-dua',
+        ]);
+        DB::table('product')->insert([
+            'uniq'=> $i++,
+            'name'=>'pisang-dua',
                 'price'=>'1000',
                 'unit' => 1,
             'stock' => 10,
                 'image'=>'/upload/product/buah/pisang-dua.jpg',
                 'categories_id'=>1,
-            ],
-            [
-                'name'=>'pisang-satu-plain',
+        ]);
+        DB::table('product')->insert([
+            'uniq'=> $i++,
+            'name'=>'pisang-dua',
                 'price'=>'1000',
                 'unit' => 1,
             'stock' => 10,
-                'image'=>'/upload/product/buah/pisang-satu-plain.jpg',
+                'image'=>'/upload/product/buah/pisang-dua.jpg',
                 'categories_id'=>1,
+        ]);
+
+
+
+
+
+        //
+        DB::table('products')->insert([,
+
+                
+          [
+                
+            ],
+            [
+                
+            ],
+            [
+                
+            ],
+            [
+                
+            ],
+            [
+                
+            ],
+            [
+                
+            ],
+            [
+                
             ],
             [
                 'name'=>'pisang-satu',
