@@ -775,21 +775,33 @@ class HomeController extends Controller
         if($check){
             if(Auth()->user()->roles->name == 'User'){
                 $user = Auth()->user();
-                $flash_sale_prod = FlashSale::with('products')->get();
-                foreach($flash_sale_prod as $product){
+
+                $advertisement = Advertisement::where('path', $slug)->with('products')->first();
+                if(!$advertisement->products->count()) $all_products = null;
+                $i=0;
+                foreach($advertisement->products as $product){
+                    $all_products[$i]['id'] = $product->uniq;
+                    $all_products[$i]['name'] = $product->name;
+                    $all_products[$i]['unit'] = $product->unit;
+                    $all_products[$i]['category'] = $product->categories->name;
+                    $all_products[$i]['stock'] = $product->stock;
+                    $all_products[$i]['image'] = $product->image;
                     if($product->discount_price){
-                        $product->new_price = $product->discount_price;
-                        $product->price = $product->price;
+                        $all_products[$i]['new_price'] = $product->discount_price;
+                        $all_products[$i]['price'] = $product->price;
                     }
                     else{
-                        $product->new_price = $product->price;
-                        $product->price = null;
+                        $all_products[$i]['new_price'] = $product->price;
+                        $all_products[$i]['price'] = null;
                     }
+                    $all_products[$i]['flash_sale'] = false;
+                    $i++;
                 }
+        
                 return Inertia::render('View/Flashsale', [
                     'check' => $check,
                     'user' => $user,
-                    'real_products' => $flash_sale_prod
+                    'all_products' => $all_products
                 ]);
             }
             else if(Auth()->user()->roles->name == 'Super Admin'){
@@ -797,13 +809,33 @@ class HomeController extends Controller
             }
         }
         $user = new User;
-        // $flash_sale_prod = Product::with('categories')->get();
-        $flash_sale_prod = Advertisement::where('path', $slug)->with('products')->first();
-        // dd($flash_sale_prod);
+
+        $advertisement = Advertisement::where('path', $slug)->with('products')->first();
+        if(!$advertisement->products->count()) $all_products = null;
+        $i=0;
+        foreach($advertisement->products as $product){
+            $all_products[$i]['id'] = $product->uniq;
+            $all_products[$i]['name'] = $product->name;
+            $all_products[$i]['unit'] = $product->unit;
+            $all_products[$i]['category'] = $product->categories->name;
+            $all_products[$i]['stock'] = $product->stock;
+            $all_products[$i]['image'] = $product->image;
+            if($product->discount_price){
+                $all_products[$i]['new_price'] = $product->discount_price;
+                $all_products[$i]['price'] = $product->price;
+            }
+            else{
+                $all_products[$i]['new_price'] = $product->price;
+                $all_products[$i]['price'] = null;
+            }
+            $all_products[$i]['flash_sale'] = false;
+            $i++;
+        }
+
         return Inertia::render('View/Banner', [
             'check' => $check,
             'user' => null,
-            'real_products' => $flash_sale_prod->products
+            'all_products' => $all_products
         ]);
     }
 
