@@ -216,6 +216,7 @@ class HomeController extends Controller
             if(Auth()->user()->roles->name == 'User'){
                 $user = Auth()->user();
                 $products = Product::with('categories')->get();
+                $vouchers = Voucher::with('types')->get();
                 foreach($products as $product){
                     if($product->discount_price){
                         $product->new_price = $product->discount_price;
@@ -229,7 +230,8 @@ class HomeController extends Controller
                 return Inertia::render('View/Checkout', [
                     'check' => true,
                     'user' => $user,
-                    'real_products' => $products
+                    'real_products' => $products,
+                    'real_vouchers' => $vouchers
                 ]);
             }
             else if(Auth()->user()->roles->name == 'Super Admin'){

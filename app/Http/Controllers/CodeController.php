@@ -11,6 +11,7 @@ use App\Models\Product;
 use App\Models\Voucher;
 use App\Models\Checkout;
 use App\Models\Cost;
+use App\Models\Advertisement;
 
 class CodeController extends Controller
 {
@@ -22,6 +23,10 @@ class CodeController extends Controller
             if($check){
                 if(Auth()->user()->roles->name == 'User'){
                     $user = Auth()->user();
+                    $banners = Advertisement::get()->reject(function($query){
+                        if($query->id == 1) return true;
+                    });
+                    $popUp = Advertisement::find(1);
                     $products = Product::with('categories')->get();
                     foreach($products as $product){
                         if($product->discount_price){
@@ -37,12 +42,18 @@ class CodeController extends Controller
                         'code' => $code,
                         'check' => true,
                         'user' => $user,
-                        'real_products' => $products
+                        'real_products' => $products,
+                        'banners' => $banners,
+                        'popUp' => $popUp
                     ]);
                 }
                 return redirect()->route('home');
             }
             $user = new User;
+            $banners = Advertisement::get()->reject(function($query){
+                if($query->id == 1) return true;
+            });
+            $popUp = Advertisement::find(1);
             $products = Product::with('categories')->get();
             foreach($products as $product){
                 if($product->discount_price){
@@ -58,7 +69,9 @@ class CodeController extends Controller
                 'code' => $code,
                 'check' => $check,
                 'user' => null,
-                'real_products' => $products
+                'real_products' => $products,
+                'banners' => $banners,
+                'popUp' => $popUp
             ]);
         }
         else{
@@ -75,6 +88,7 @@ class CodeController extends Controller
                 if(Auth()->user()->roles->name == 'User'){
                     $user = Auth()->user();
                     $products = Product::with('categories')->get();
+                    $vouchers = Voucher::with('types')->get();
                     foreach($products as $product){
                         if($product->discount_price){
                             $product->new_price = $product->discount_price;
@@ -89,7 +103,8 @@ class CodeController extends Controller
                         'code' => $code,
                         'check' => true,
                         'user' => $user,
-                        'real_products' => $products
+                        'real_products' => $products,
+                        'real_vouchers' => $vouchers
                     ]);
                 }
                 else if(Auth()->user()->roles->name == 'Super Admin'){
@@ -193,15 +208,42 @@ class CodeController extends Controller
                     'address' => $request->address
                 ]);
                 $user = Auth()->user();
+    
+                if($request->voucher == 'undefined'){
+                    $voucherId = null;
+                    $voucherDisc = null;
+                }
+                else{
+                    $voucher = Voucher::find($request->voucher);
+                    $voucherId = $voucher->id;
+                    $voucherDisc = $voucher->discount;
+                }
+    
+                $image = time().'.'.$request->image->extension();
+                $path =  $request->image->move(public_path('/upload/checkout'),$image);
                 $checkout = Checkout::create([
                     'users_id' => $user->id,
+                    'merchants_id' => $referral->id,
                     'name' => $request->name,
                     'phone' => $request->phone,
                     'address' => $request->address,
                     'total' => $request->price,
+                    'type' => $voucherId,
+                    'discount' => $voucherDisc,
+                    'image' => '/upload/checkout/'.$path->getFileName(),
                     'status' => 1,
                 ]);
-                foreach($request->cart as $cart){
+                $i = 1;
+                foreach($request->cartId as $cartId){
+                    $carts[$i]['id'] = $cartId;
+                    $i++;
+                }
+                $i = 1;
+                foreach($request->cartQty as $cartQty){
+                    $carts[$i]['qty'] = $cartQty;
+                    $i++;
+                }
+                foreach($carts as $cart){
                     $product = Product::find($cart['id']);
                     if($product->discount_price){
                         $cost = Cost::create([
@@ -223,14 +265,41 @@ class CodeController extends Controller
                 return redirect()->route('code.index', $code)->with('checkout', $checkout);;
             }
 
+            if($request->voucher == 'undefined'){
+                $voucherId = null;
+                $voucherDisc = null;
+            }
+            else{
+                $voucher = Voucher::find($request->voucher);
+                $voucherId = $voucher->id;
+                $voucherDisc = $voucher->discount;
+            }
+    
+            $image = time().'.'.$request->image->extension();
+            $path =  $request->image->move(public_path('/upload/checkout'),$image);
             $checkout = Checkout::create([
+                'merchants_id' => $referral->id,
                 'name' => $request->name,
                 'phone' => $request->phone,
                 'address' => $request->address,
                 'total' => $request->price,
+                'type' => $voucherId,
+                'discount' => $voucherDisc,
+                'image' => '/upload/checkout/'.$path->getFileName(),
                 'status' => 1,
             ]);
-            foreach($request->cart as $cart){
+    
+            $i = 1;
+            foreach($request->cartId as $cartId){
+                $carts[$i]['id'] = $cartId;
+                $i++;
+            }
+            $i = 1;
+            foreach($request->cartQty as $cartQty){
+                $carts[$i]['qty'] = $cartQty;
+                $i++;
+            }
+            foreach($carts as $cart){
                 $product = Product::find($cart['id']);
                 if($product->discount_price){
                     $cost = Cost::create([
