@@ -33,21 +33,29 @@ class DatabaseSeeder extends Seeder
         ]);
         Advertisement::insert([
             'name' => 'Banner 1',
+            'tnc' => 'aturan',
+            'status' => true,
             'path' => Str::slug('Banner 1', '-'),
             'image' => '/images/banner/Banner-1.jpg'
         ]);
         Advertisement::insert([
             'name' => 'Banner 2',
+            'tnc' => 'aturan',
+            'status' => true,
             'path' => Str::slug('Banner 2', '-'),
             'image' => '/images/banner/Banner-2.jpg'
         ]);
         Advertisement::insert([
             'name' => 'Banner 3',
+            'tnc' => 'aturan',
+            'status' => true,
             'path' => Str::slug('Banner 3', '-'),
             'image' => '/images/banner/Banner-3.jpg'
         ]);
         Advertisement::insert([
             'name' => 'Banner 4',
+            'tnc' => 'aturan',
+            'status' => true,
             'path' => Str::slug('Banner 4', '-'),
             'image' => '/images/banner/Banner-4.jpg'
         ]);
