@@ -189,6 +189,17 @@ class HomeController extends Controller
             if($query->id == 1) return true;
         });
         $popUp = Advertisement::find(1);
+        $flash_sale_products = FlashSale::orderBy('id', 'desc')->take(5)->get();
+        $i = 0;
+        foreach($flash_sale_products as $flash_sale_product){
+            $flash_sale_products[$i]['price'] = $flash_sale_product->products->price;
+            $flash_sale_products[$i]['name'] = $flash_sale_product->products->name;
+            $flash_sale_products[$i]['stock'] = $flash_sale_product->products->stock;
+            if($flash_sale_product->image == null){
+                $flash_sale_products[$i]['image'] = $flash_sale_product->products->image;
+            }
+            $i++;
+        }
         $products = Product::with('categories')->get();
         foreach($products as $product){
             if($product->discount_price){
@@ -205,7 +216,8 @@ class HomeController extends Controller
             'user' => null,
             'real_products' => $products,
             'banners' => $banners,
-            'popUp' => $popUp
+            'popUp' => $popUp,
+            'flash_sales' => $flash_sale_products
         ]);
     }
 

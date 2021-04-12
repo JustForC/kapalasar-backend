@@ -45,12 +45,12 @@
           delimiter-icon="mdi-circle"
           height="150" :options="optionsCarousel">
           <v-carousel-item v-for="(slide, i) in banners" :key="i">
-            <div class="rounded">
+            <a class="rounded" :href="route('banner', slide.path)">
               <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.image" />
               <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slide.image" />
               <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
               <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
-            </div>
+            </a>
           </v-carousel-item>
         </v-carousel>
       </div>
@@ -153,12 +153,12 @@
                 delimiter-icon="mdi-circle"
                 :options="optionsCarousel">
                 <v-carousel-item >
-                  <div class="rounded">
+                  <a class="rounded" :href="route('banner', banners[1].path)">
                     <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="banners[1].image" />
                     <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="banners[1].image" />
                     <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
                     <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
-                  </div>
+                  </a>
                 </v-carousel-item>
               </v-carousel>
               <!-- Conditional Rendering < 600px -->
@@ -170,12 +170,12 @@
                 delimiter-icon="mdi-circle"
                 height="150" :options="optionsCarousel">
                 <v-carousel-item >
-                  <div class="rounded">
+                  <a class="rounded" :href="route('banner', banners[1].path)">
                     <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="banners[1].image" />
                     <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="banners[1].image" />
                     <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
                     <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
-                  </div>
+                  </a>
                 </v-carousel-item>
               </v-carousel>
             </div>
@@ -207,12 +207,12 @@
                 delimiter-icon="mdi-circle"
                 :options="optionsCarousel">
                 <v-carousel-item >
-                  <div class="rounded">
+                  <a class="rounded" :href="route('banner', banners[2].path)">
                     <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="banners[2].image" />
                     <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="banners[2].image" />
                     <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
                     <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
-                  </div>
+                  </a>
                 </v-carousel-item>
               </v-carousel>
               <!-- Conditional Rendering < 600px -->
@@ -224,12 +224,12 @@
                 delimiter-icon="mdi-circle"
                 height="150" :options="optionsCarousel">
                 <v-carousel-item >
-                  <div class="rounded">
+                  <a class="rounded" :href="route('banner', banners[2].path)">
                     <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="banners[2].image" />
                     <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="banners[2].image" />
                     <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
                     <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
-                  </div>
+                  </a>
                 </v-carousel-item>
               </v-carousel>
             </div>
@@ -263,12 +263,12 @@
           delimiter-icon="mdi-circle"
           :options="optionsCarousel">
           <v-carousel-item >
-            <div class="rounded">
+            <a class="rounded" :href="route('banner', banners[3].path)">
               <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="banners[3].image" />
               <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="banners[3].image" />
               <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
               <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
-            </div>
+            </a>
           </v-carousel-item>
         </v-carousel>
         <!-- Conditional Rendering < 600px -->
@@ -280,12 +280,12 @@
           delimiter-icon="mdi-circle"
           height="150" :options="optionsCarousel">
           <v-carousel-item >
-            <div class="rounded">
+            <a class="rounded" :href="route('banner', banners[3].path)">
               <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="banners[3].image" />
               <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="banners[3].image" />
               <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
               <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
-            </div>
+            </a>
           </v-carousel-item>
         </v-carousel>
       </div>
@@ -341,7 +341,8 @@ export default {
     user: Object,
     real_products: Array,
     banners: Object,
-    popUp: Object
+    popUp: Object,
+    flash_sales: Array
   },
   data() {
     return {
@@ -419,7 +420,12 @@ export default {
     },
     filterFlashSale() {
       // this.flashSaleProducts = products.filter(product => product.flashSale);
-      this.flashSaleProducts = this.real_products;      
+      // this.flashSaleProducts = this.real_products;
+      this.flashSaleProducts = this.flash_sales.map(products => {
+        return products;
+      });
+      console.log(this.flashSaleProducts);
+
     },
     filterNotFlashSale() {
       // this.notFlashsaleProducts = products.filter(

@@ -253,7 +253,7 @@ export default {
 
     },
     finishPayment() {
-      const cart = this.$store.state.cart.listCarts;
+      const carts = this.$store.state.cart.listCarts;
       this.$store.commit("cart/REPLACE", []);
 
       const voucher = this.$store.state.voucher.voucher;
@@ -264,14 +264,6 @@ export default {
 
       const userData = this.$store.state.user.userInfo;
       this.$store.commit("user/ADD", []);
-
-      // const transaction = {
-      //   cart: cart,
-      //   totalPrice: totalPrice,
-      //   user: userData
-      // };
-
-      // this.$store.commit("transaction/ADD", transaction);
 
       let data = new FormData();
       data.append('_token', this.csrf);
@@ -289,7 +281,7 @@ export default {
       data.append('voucher', voucher.type);
       data.append('price', totalPrice);
       data.append('image', this.selectedFile);
-      Inertia.post('/finish', data);
+      Inertia.post(route('code.finish', this.code), data);
 
       // Inertia.post(route('code.finish', this.code), {
       //   method: 'post',

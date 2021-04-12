@@ -27,6 +27,7 @@
                 style="color: #54595f"
                 >Informasi Pembeli</span
               >
+              <v-form ref="form">
               <div class="mx-md-16 mt-md-10 mt-2">
                 <div>
                   <div class="label font-weight-regular">Nama</div>
@@ -65,6 +66,7 @@
                   ></v-textarea>
                 </div>
               </div>
+              </v-form>
             </v-container>
           </v-alert>
 
@@ -84,7 +86,7 @@
                 >Informasi Pembeli</span
               >
               <div class="mx-md-16 mt-md-10 mt-2">
-                <v-form>
+                <v-form ref="form">
                   <div>
                     <span class="label font-weight-bold">Nama</span>
                     <v-text-field
@@ -337,7 +339,10 @@ export default {
       checkedVal: [],
       listCart: [],
       fixedListCart: [],
-      totalPrice: 0
+      totalPrice: 0,
+      rules: {
+        required: value => !!value || "Harus diisi",
+      }
     };
   },
   computed: {
@@ -384,7 +389,8 @@ export default {
             };
             this.$store.commit("user/ADD", data);
             // console.log(this.$store.state.user.userInfo);
-            Inertia.visit('/payment');
+            Inertia.visit(route('code.payment', this.code));
+            // Inertia.visit('/payment');
 
 
 
@@ -416,7 +422,7 @@ export default {
             };
             this.$store.commit("user/ADD", data);
             // console.log(this.$store.state.user.userInfo);
-            Inertia.visit('/payment');
+            Inertia.visit(route('code.payment', this.code));
           }
         }
         else{
