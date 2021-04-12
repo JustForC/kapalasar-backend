@@ -92,6 +92,12 @@ class DatabaseSeeder extends Seeder
         Type::insert([
             'name' => 'Potongan Harga (persen)'
         ]);
+        Type::insert([
+            'name' => 'Potongan Harga (persen) & Free Ongkir'
+        ]);
+        Type::insert([
+            'name' => 'Potongan Harga (harga) & Free Ongkir'
+        ]);
         Voucher::insert([
             'types_id' => 1,
             'name' => 'FREEONGKIR'

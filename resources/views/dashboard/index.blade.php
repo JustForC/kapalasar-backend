@@ -135,10 +135,12 @@
         }]
     },
     options: {
-        scales: {
-            y: {
-                beginAtZero: true
+    scales: {
+        yAxes: [{
+              ticks: {
+              stepSize: 1
             }
+          }]
         }
     }
     });

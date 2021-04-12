@@ -11,6 +11,7 @@ use App\Models\Checkout;
 use App\Models\Cost;
 use App\Models\FlashSale;
 use App\Models\Advertisement;
+use Carbon\Carbon;
 
 use Notification;
 use App\Notifications\PWANotification;
@@ -49,7 +50,6 @@ class HomeController extends Controller
             elseif(Auth()->user()->roles->name == 'Merchant'){
                 $user = Auth()->user();
                 $index = 0;
-                $transactions = Checkout::where('merchants_id','=',Auth()->user()->id)->get();
                 $checkouts = Checkout::where('merchants_id','=',Auth()->user()->id)->get();
                 $januari = 0;
                 $februari = 0;
@@ -101,7 +101,7 @@ class HomeController extends Controller
                         $desember = $desember + 1;
                     }
             }
-                return view('/merchant/dashboard/index',['transactions' => $transactions,
+                return view('/merchant/dashboard/index',[
                     'januari' => $januari,
                     'februari' => $februari,
                     'maret' => $maret,
@@ -579,5 +579,17 @@ class HomeController extends Controller
         abort(404);
     }
 
+    public function cekDateTime(){
+        $date = Carbon::now()->timezone('Asia/Phnom_Penh');
+        $voucher = Voucher::find(6);
+        $start = new Carbon($voucher->start);
+        $end = new Carbon($voucher->end);
+
+        if(Carbon::now()->timezone('Asia/Phnom_Penh') < $end && Carbon::now()->timezone('Asia/Phnom_Penh') > $start){
+            return "Dalam Timeline";
+        }
+
+        return "Tidak dalam timeline";
+    }
 
 }

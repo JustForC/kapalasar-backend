@@ -22,10 +22,21 @@ class MailController extends Controller
         //
         $this->validate($request, [
             'subject' => ['required'],
-            'content' => ['required'],
         ]);
         $users = User::with('roles')->where('roles_id','=',4)->get();
 
+
+        if($request->attachment == NULL){
+            foreach($users as $user){
+                Mails::sendMail($user->email,$request->subject,$request->content);
+            }
+            
+            Mail::create([
+                'target' => 'Semua User',
+                'subject' => $request->subject,
+                'content' => $request->content,
+            ]);
+        }
         foreach($users as $user){
             Mails::sendMailAttached($user->email,$request->subject,$request->content);
         }
