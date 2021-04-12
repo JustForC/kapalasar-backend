@@ -31,10 +31,13 @@ class UserMailController extends Controller
         $this->validate($request, [
             'user_id' => ['required'],
             'subject' => ['required'],
-            'content' => ['required'],
         ]);
 
         $user = User::find($request->user_id);
+
+        if($request->attachment == NULL){
+                Mails::sendMail($user->email,$request->subject,$request->content);
+        }
         
         Mails::sendMailAttached($user->email,$request->subject,$request->content);
 
