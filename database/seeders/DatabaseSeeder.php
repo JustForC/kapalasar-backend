@@ -13,7 +13,9 @@ use App\Models\FlashSale;
 use App\Models\Type;
 use App\Models\Voucher;
 use App\Models\Checkout;
+use App\Models\Advertisement;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,6 +26,26 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        Advertisement::insert([
+            'name' => 'Banner 1',
+            'path' => Str::slug('Banner 1', '-'),
+            'image' => 'images/banner/Banner-1.jpg'
+        ]);
+        Advertisement::insert([
+            'name' => 'Banner 2',
+            'path' => Str::slug('Banner 2', '-'),
+            'image' => 'images/banner/Banner-2.jpg'
+        ]);
+        Advertisement::insert([
+            'name' => 'Banner 3',
+            'path' => Str::slug('Banner 3', '-'),
+            'image' => 'images/banner/Banner-3.jpg'
+        ]);
+        Advertisement::insert([
+            'name' => 'Banner 4',
+            'path' => Str::slug('Banner 4', '-'),
+            'image' => 'images/banner/Banner-4.jpg'
+        ]);
         $faker = Faker::create('id_ID');
         Role::insert([
             'name' => "Super Admin"
