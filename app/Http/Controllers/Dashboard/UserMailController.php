@@ -37,10 +37,16 @@ class UserMailController extends Controller
 
         if($request->attachment == NULL){
                 Mails::sendMail($user->email,$request->subject,$request->content);
+                
+                Mail::create([
+                    'target' => 'Nama = '.$user->name.' Email '.$user->email,
+                    'subject' => $request->subject,
+                    'content' => $request->content,
+                ]);
         }
         
         Mails::sendMailAttached($user->email,$request->subject,$request->content);
-
+        
         Mail::create([
             'target' => 'Nama = '.$user->name.' Email '.$user->email,
             'subject' => $request->subject,

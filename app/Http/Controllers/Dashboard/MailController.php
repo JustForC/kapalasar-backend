@@ -30,6 +30,12 @@ class MailController extends Controller
             foreach($users as $user){
                 Mails::sendMail($user->email,$request->subject,$request->content);
             }
+            
+            Mail::create([
+                'target' => 'Semua User',
+                'subject' => $request->subject,
+                'content' => $request->content,
+            ]);
         }
         foreach($users as $user){
             Mails::sendMailAttached($user->email,$request->subject,$request->content);
