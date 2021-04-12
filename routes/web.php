@@ -16,17 +16,20 @@ use App\Http\Controllers\Dashboard\MailController;
 use App\Http\Controllers\Dashboard\UserMailController;
 use App\Http\Controllers\Dashboard\CatalogController;
 use App\Http\Controllers\Dashboard\MailHistoryController;
+use App\Http\Controllers\Dashboard\BannerController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CodeController;
+use App\Http\Controllers\PushNotificationController;
 
-Route::get('/send-notification', [HomeController::class, 'index']);
+Route::get('/send-notification', [PushNotificationController::class, 'send']);
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('flash_sale', [HomeController::class, 'flash_sale'])->name('flash_sale');
 Route::get('account', [HomeController::class, 'account'])->name('account');
+Route::get('package/{slug}', [HomeController::class, 'banner'])->name('banner');
 
 Route::get('checkout', [HomeController::class, 'checkout'])->name('checkout');
 Route::get('payment', [HomeController::class, 'payment'])->name('payment');
@@ -62,16 +65,26 @@ Route::middleware('admin')->group(function(){
         });
     });
     
-    Route::prefix('ads')->group(function(){
-        Route::get('/', [AdvertisementController::class, 'index'])->name('ads.index');
-        Route::get('create', [AdvertisementController::class, 'create'])->name('ads.create');
-        Route::post('store', [AdvertisementController::class, 'store'])->name('ads.store');
-        Route::get('edit/{id}', [AdvertisementController::class, 'edit'])->name('ads.edit');
-        Route::put('update/{id}', [AdvertisementController::class, 'update'])->name('ads.update');
-        Route::delete('delete/{id}', [AdvertisementController::class, 'destroy'])->name('ads.delete');
-        Route::get('data', [AdvertisementController::class, 'data'])->name('ads.data');
+    // Route::prefix('ads')->group(function(){
+    //     Route::get('/', [AdvertisementController::class, 'index'])->name('ads.index');
+    //     Route::get('create', [AdvertisementController::class, 'create'])->name('ads.create');
+    //     Route::post('store', [AdvertisementController::class, 'store'])->name('ads.store');
+    //     Route::get('edit/{id}', [AdvertisementController::class, 'edit'])->name('ads.edit');
+    //     Route::put('update/{id}', [AdvertisementController::class, 'update'])->name('ads.update');
+    //     Route::delete('delete/{id}', [AdvertisementController::class, 'destroy'])->name('ads.delete');
+    //     Route::get('data', [AdvertisementController::class, 'data'])->name('ads.data');
+    // });
+
+    Route::prefix('banner')->group(function(){
+        Route::get('/', [BannerController::class, 'index'])->name('banner.index');
+        Route::get('create', [BannerController::class, 'create'])->name('banner.create');
+        Route::post('store', [BannerController::class, 'store'])->name('banner.store');
+        Route::get('edit/{id}', [BannerController::class, 'edit'])->name('banner.edit');
+        Route::put('update/{id}', [BannerController::class, 'update'])->name('banner.update');
+        Route::delete('delete/{id}', [BannerController::class, 'destroy'])->name('banner.delete');
+        Route::get('data', [BannerController::class, 'data'])->name('banner.data');
     });
-     
+
     Route::prefix('promotion')->group(function(){
         Route::prefix('voucher')->group(function(){
             Route::get('/', [VoucherController::class, 'index'])->name('voucher.index');

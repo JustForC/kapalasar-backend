@@ -255,20 +255,21 @@ export default {
 
     },
     finishPayment() {
-      console.log(this.selectedFile);
-      console.log(this.isSelecting);
+      // console.log(this.selectedFile);
+      // console.log(this.isSelecting);
 
       const carts = this.$store.state.cart.listCarts;
-      console.log(carts);
-      // this.$store.commit("cart/REPLACE", []);
+      // console.log(carts);
+      this.$store.commit("cart/REPLACE", []);
 
       const voucher = this.$store.state.voucher.voucher;
+      this.$store.commit("voucher/ADD", {});
 
       const totalPrice = this.$store.state.cart.totalPrice;
-      // this.$store.commit("cart/SET_TOTAL_PRICE", 0);
+      this.$store.commit("cart/SET_TOTAL_PRICE", 0);
 
       const userData = this.$store.state.user.userInfo;
-      // this.$store.commit("user/ADD", []);
+      this.$store.commit("user/ADD", []);
 
       // const transaction = {
       //   cart: cart,

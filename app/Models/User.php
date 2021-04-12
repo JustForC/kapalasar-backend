@@ -47,4 +47,7 @@ class User extends Authenticatable
     public function checkouts(){
         return $this->hasMany(Checkout::class);
     }
+    public function merchants(){
+        return $this->hasMany(Checkout::class, 'merchants_id', 'id');
+    }
 }

@@ -32,7 +32,7 @@
       order: [[ 1, "asc" ]],
       columns: [
         {title: '#', data: 'DT_RowIndex', name: 'DT_RowIndex', orderable:false, width: '7.5%', className: 'dt-center'},
-        {title: 'Name', data: 'flashes.name', name: 'flashes.name', width: '30%', className: 'dt-head-center'},
+        // {title: 'Name', data: 'flashes.name', name: 'flashes.name', width: '30%', className: 'dt-head-center'},
         {title: 'Nama Produk', data: 'products.name', name: 'products.name', width: '30%', className: 'dt-head-center'},
         {title: 'Harga Flash', data: 'new_price', name: 'new_price', width: '30%', className: 'dt-head-center'},
         {title: 'Action', data: 'action', name: 'action', width: '12.5%', className: 'dt-center'},

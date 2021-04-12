@@ -13,10 +13,13 @@ class Checkout extends Model
     public function users(){
         return $this->belongsTo(User::class);
     }
+    public function merchants(){
+        return $this->belongsTo(User::class, 'merchants_id', 'id');
+    }
     public function vouchers(){
         return $this->belongsTo(Voucher::class);
     }
     public function costs(){
-        return $this->hasMany(Cost::class, 'checkouts_id', 'id');
+        return $this->belongsTo(Cost::class, 'checkouts_id', 'id');
     }
 }

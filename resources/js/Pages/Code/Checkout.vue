@@ -27,6 +27,7 @@
                 style="color: #54595f"
                 >Informasi Pembeli</span
               >
+              <v-form ref="form">
               <div class="mx-md-16 mt-md-10 mt-2">
                 <div>
                   <div class="label font-weight-regular">Nama</div>
@@ -36,6 +37,7 @@
                     single-line
                     outlined
                     dense
+                    :rules="[rules.required]"
                     v-model="user.name"
                   ></v-text-field>
                 </div>
@@ -47,6 +49,7 @@
                     single-line
                     outlined
                     dense
+                    :rules="[rules.required]"
                     v-model="user.phone"
                   ></v-text-field>
                 </div>
@@ -58,10 +61,12 @@
                     outlined
                     rows="3"
                     auto-grow
+                    :rules="[rules.required]"
                     v-model="user.address"
                   ></v-textarea>
                 </div>
               </div>
+              </v-form>
             </v-container>
           </v-alert>
 
@@ -81,7 +86,7 @@
                 >Informasi Pembeli</span
               >
               <div class="mx-md-16 mt-md-10 mt-2">
-                <v-form>
+                <v-form ref="form">
                   <div>
                     <span class="label font-weight-bold">Nama</span>
                     <v-text-field
@@ -89,6 +94,7 @@
                       single-line
                       outlined
                       dense
+                      :rules="[rules.required]"
                       v-model="nama"
                     ></v-text-field>
                   </div>
@@ -99,6 +105,7 @@
                       outlined
                       single-line
                       dense
+                      :rules="[rules.required]"
                       v-model="phone"
                     ></v-text-field>
                   </div>
@@ -109,6 +116,7 @@
                       outlined
                       rows="2"
                       auto-grow
+                      :rules="[rules.required]"
                       v-model="address"
                     ></v-textarea>
                   </div>
@@ -160,11 +168,17 @@
                         </v-icon>
                       </v-col>
                       <v-col cols="8" class="text-body2 font-weight-medium">
-                        <div>
+                        <div v-if="voucherInUse.type===1">
+                          Anda Mendapat Gratis Ongkir
+                        </div>
+                        <div v-else>
                           Anda Mendapat Potongan Sebesar
-                          <span class="mr-2">{{
+                          <span class="mr-2" v-if="voucherInUse.type===2">{{
                             parseRupiah(voucherInUse.disc)
                           }}</span>
+                          <span class="mr-2" v-if="voucherInUse.type===3">{{
+                            voucherInUse.disc
+                          }}%</span>
                         </div>
                         <div class="text-caption">
                           Voucher " <span>
@@ -242,11 +256,36 @@
               </div>
               <div class="mt-6 mx-md-16">
                 <v-row class="mx-1" v-if="Object.keys(voucherInUse).length">
-                  <div class="label text-subtitle-1">Potongan Harga</div>
+                  <div class="label text-subtitle-1">Biaya Ongkir</div>
+                  <v-spacer></v-spacer>
+                  <div class="totalPrice text-subtitle-1" v-if="voucherInUse.type===1">
+                    {{ parseRupiah('0') }}
+                  </div>
+                  <div class="totalPrice text-subtitle-1" v-else>
+                    {{ parseRupiah('10000') }}
+                  </div>
+                </v-row>
+                <v-row class="mx-1" v-else>
+                  <div class="label text-subtitle-1">Biaya Ongkir</div>
                   <v-spacer></v-spacer>
                   <div class="totalPrice text-subtitle-1">
-                    {{ parseRupiah(voucherInUse.disc) }}
+                    {{ parseRupiah('10000') }}
                   </div>
+                </v-row>
+                <v-row class="mx-1" v-if="Object.keys(voucherInUse).length">
+                  <!-- <div v-if="voucherInUse.type===1"> -->
+                  <!-- </div> -->
+                  <!-- <div v-else> -->
+                    <div class="label text-subtitle-1" v-if="voucherInUse.type===1"></div>
+                    <div class="label text-subtitle-1" v-else>Potongan Harga</div>
+                    <v-spacer></v-spacer>
+                    <div class="totalPrice text-subtitle-1" v-if="voucherInUse.type===2">
+                      {{ parseRupiah(voucherInUse.disc) }}
+                    </div>
+                    <div class="totalPrice text-subtitle-1" v-if="voucherInUse.type===3">
+                      {{ voucherInUse.disc }}%
+                    </div>
+                  <!-- </div> -->
                 </v-row>
                 <v-row class="mx-1">
                   <div class="label text-h6">Total Belanja</div>
@@ -300,7 +339,10 @@ export default {
       checkedVal: [],
       listCart: [],
       fixedListCart: [],
-      totalPrice: 0
+      totalPrice: 0,
+      rules: {
+        required: value => !!value || "Harus diisi",
+      }
     };
   },
   computed: {
@@ -334,33 +376,59 @@ export default {
       window.scrollTo(0, 0);
     },
     addBuyerInfo() {
+      this.$refs.form.validate()
+      const tempState = this.$store.state.cart.tempCart;
       if (!this.check) {
-        const data = {
-          name: this.nama,
-          phone: this.phone,
-          address: this.address
-        };
-        // Validasi Mana ???
-        this.$store.commit("user/ADD", data);
-        console.log(this.$store.state.user.userInfo);
-        Inertia.visit(route('code.payment', this.code));
-        // Inertia.visit('/payment');
-      } else {
-        const data = {
-          name: this.user.name,
-          phone: this.user.phone,
-          address: this.user.address
-        };
-        // Validasi mana ??
-        this.$store.commit("user/ADD", data);
-        console.log(this.$store.state.user.userInfo);
-        Inertia.visit(route('code.payment', this.code));
-        // this.form.post(this.route('register'), {
-        //     onFinish: () => this.form.reset('password', 'password_confirmation'),
-        // });
+        if(tempState !== '' || tempState !== null){
+          // console.log(this.nama, this.phone, this.address)
+          if(this.nama !== '' || this.phone !== '' || this.address !== ''){
+            const data = {
+              name: this.nama,
+              phone: this.phone,
+              address: this.address
+            };
+            this.$store.commit("user/ADD", data);
+            // console.log(this.$store.state.user.userInfo);
+            Inertia.visit(route('code.payment', this.code));
+            // Inertia.visit('/payment');
 
-        // this.$router.push("/payment");
+
+
+            let coba = new FormData();
+            coba.append('_token', this.csrf);
+            const carts = this.$store.state.cart.listCarts;
+            let i = 1;
+            carts.forEach(cart => {
+              coba.append('cartId['+i+']', cart.id);
+              coba.append('cartQty['+i+']', cart.qty);
+              console.log(cart);
+            })
+            console.log(coba.cartId);
+
+            // console.log(carts);
+
+            // })
+          }
+        }
+        else{
+        }
+      } else {
+        if(Object.keys(tempState).length){
+          if(Object.keys(this.user.name).length || Object.keys(this.user.phone).length || Object.keys(this.user.address).length){
+            const data = {
+              name: this.user.name,
+              phone: this.user.phone,
+              address: this.user.address
+            };
+            this.$store.commit("user/ADD", data);
+            // console.log(this.$store.state.user.userInfo);
+            Inertia.visit(route('code.payment', this.code));
+          }
+        }
+        else{
+        }
       }
+      window.scrollTo(0, 0);
     },
     getProductList() {
       const state = this.$store.state.cart.listCarts;
@@ -403,7 +471,7 @@ export default {
         };
       });
 
-      let totalPrice = 0;
+      let totalPrice = 10000;
 
       this.fixedListCart.forEach(item => {
         totalPrice += item.qty * item.new_price;
@@ -413,6 +481,10 @@ export default {
 
       this.totalPrice = this.$store.state.cart.totalPrice;
       this.useVoucher();
+    },
+    getVoucher() {
+      const voucher = this.$store.state.voucher.voucher;
+      this.voucherInUse = voucher;
     },
     cekVoucher() {
       this.real_vouchers.forEach(voucher => {
@@ -435,6 +507,7 @@ export default {
       if (Object.keys(voucher).length) {
         console.log(Object(voucher))
         if(voucher.type == 1){
+          this.totalPrice -= 10000;
         }
         if(voucher.type == 2){
           this.totalPrice -= voucher.disc;
@@ -448,7 +521,16 @@ export default {
     },
     cancelVoucher() {
       const voucher = this.$store.state.voucher.voucher;
-      this.totalPrice += voucher.disc;
+        if(voucher.type == 1){
+          this.totalPrice += 10000;
+        }
+        if(voucher.type == 2){
+          this.totalPrice += voucher.disc;
+        }
+        if(voucher.type == 3){
+          this.totalPrice = this.totalPrice / (100-voucher.disc) * 100;
+        }
+
       this.$store.commit("cart/SET_TOTAL_PRICE", this.totalPrice);
 
       this.voucherInUse = {};
@@ -458,7 +540,7 @@ export default {
   mounted() {
     this.scrollToTop();
     this.getProductList();
-    console.log(this.real_vouchers);
+    this.getVoucher();
   },
   watch: {
     checkedVal() {

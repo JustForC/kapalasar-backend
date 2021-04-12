@@ -32,15 +32,14 @@
       order: [[ 1, "asc" ]],
       columns: [
         {title: '#', data: 'DT_RowIndex', name: 'DT_RowIndex', orderable:false, width: '7.5%', className: 'dt-center'},
-        {title: 'ID', data: 'id', name: 'id', width: '30%', className: 'dt-head-center'},
         {title: 'Nama', data: 'name', name: 'name', width: '30%', className: 'dt-head-center'},
+        {title: 'Penjual', data: 'merchant', name: 'merchant', width: '30%', className: 'dt-head-center'},
         {title: 'Status', data: 'status', name: 'status', width: '30%', className: 'dt-head-center'},
+        {title: 'Alamat', data: 'address', name: 'address', width: '30%', className: 'dt-head-center'},
+        {title: 'No Telepon', data: 'phone', name: 'phone', width: '30%', className: 'dt-head-center'},
         {title: 'Tipe Potongan', data: 'type', name: 'type', width: '30%', className: 'dt-head-center'},
         {title: 'Jumlah Potongan', data: 'discount', name: 'discount', width: '30%', className: 'dt-head-center'},
         {title: 'Total', data: 'total', name: 'total', width: '30%', className: 'dt-head-center'},
-        {title: 'Receipt', data: 'receipt', name: 'receipt', width: '30%', className: 'dt-head-center'},
-        {title: 'Penjual', data: 'merchants_id', name: 'merchants_id', width: '30%', className: 'dt-head-center'},
-        {title: 'Tanggal Receipt', data: 'date_receipt', name: 'date_receipt', width: '30%', className: 'dt-head-center'},
         {title: 'Action', data: 'action', name: 'action', width: '12.5%', className: 'dt-center'},
       ],
     });

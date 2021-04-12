@@ -10,6 +10,7 @@ use App\Models\Voucher;
 use App\Models\Checkout;
 use App\Models\Cost;
 use App\Models\FlashSale;
+use App\Models\Advertisement;
 
 use Notification;
 use App\Notifications\PWANotification;
@@ -23,6 +24,10 @@ class HomeController extends Controller
             if(Auth()->user()->roles->name == 'User'){
                 $user = Auth()->user();
                 $products = Product::with('categories')->get();
+                $banners = Advertisement::get()->reject(function($query){
+                    if($query->id == 1) return true;
+                });
+                $popUp = Advertisement::find(1);
                 foreach($products as $product){
                     if($product->discount_price){
                         $product->new_price = $product->discount_price;
@@ -36,7 +41,9 @@ class HomeController extends Controller
                 return Inertia::render('View/Homepage', [
                     'check' => true,
                     'user' => $user,
-                    'real_products' => $products
+                    'real_products' => $products,
+                    'banners' => $banners,
+                    'popUp' => $popUp
                 ]);
             }
             elseif(Auth()->user()->roles->name == 'Merchant'){
@@ -178,6 +185,21 @@ class HomeController extends Controller
             ]);
         }
         $user = new User;
+        $banners = Advertisement::get()->reject(function($query){
+            if($query->id == 1) return true;
+        });
+        $popUp = Advertisement::find(1);
+        $flash_sale_products = FlashSale::orderBy('id', 'desc')->take(5)->get();
+        $i = 0;
+        foreach($flash_sale_products as $flash_sale_product){
+            $flash_sale_products[$i]['price'] = $flash_sale_product->products->price;
+            $flash_sale_products[$i]['name'] = $flash_sale_product->products->name;
+            $flash_sale_products[$i]['stock'] = $flash_sale_product->products->stock;
+            if($flash_sale_product->image == null){
+                $flash_sale_products[$i]['image'] = $flash_sale_product->products->image;
+            }
+            $i++;
+        }
         $products = Product::with('categories')->get();
         foreach($products as $product){
             if($product->discount_price){
@@ -192,7 +214,10 @@ class HomeController extends Controller
         return Inertia::render('View/Homepage', [
             'check' => $check,
             'user' => null,
-            'real_products' => $products
+            'real_products' => $products,
+            'banners' => $banners,
+            'popUp' => $popUp,
+            'flash_sales' => $flash_sale_products
         ]);
     }
 
@@ -203,6 +228,7 @@ class HomeController extends Controller
             if(Auth()->user()->roles->name == 'User'){
                 $user = Auth()->user();
                 $products = Product::with('categories')->get();
+                $vouchers = Voucher::with('types')->get();
                 foreach($products as $product){
                     if($product->discount_price){
                         $product->new_price = $product->discount_price;
@@ -216,7 +242,8 @@ class HomeController extends Controller
                 return Inertia::render('View/Checkout', [
                     'check' => true,
                     'user' => $user,
-                    'real_products' => $products
+                    'real_products' => $products,
+                    'real_vouchers' => $vouchers
                 ]);
             }
             else if(Auth()->user()->roles->name == 'Super Admin'){
@@ -306,15 +333,16 @@ class HomeController extends Controller
             ]);
             $user = Auth()->user();
 
-            if($request->voucher){
+            if($request->voucher == 'undefined'){
+                $voucherId = null;
+                $voucherDisc = null;
+            }
+            else{
                 $voucher = Voucher::find($request->voucher);
                 $voucherId = $voucher->id;
                 $voucherDisc = $voucher->discount;
             }
-            else{
-                $voucherId = null;
-                $voucherDisc = null;
-            }
+
             $image = time().'.'.$request->image->extension();
             $path =  $request->image->move(public_path('/upload/checkout'),$image);
             $checkout = Checkout::create([
@@ -361,15 +389,16 @@ class HomeController extends Controller
             return redirect()->route('home')->with('checkout', $checkout);;
         }
 
-        if($request->voucher){
+        if($request->voucher == 'undefined'){
+            $voucherId = null;
+            $voucherDisc = null;
+        }
+        else{
             $voucher = Voucher::find($request->voucher);
             $voucherId = $voucher->id;
             $voucherDisc = $voucher->discount;
         }
-        else{
-            $voucherId = null;
-            $voucherDisc = null;
-        }
+
         $image = time().'.'.$request->image->extension();
         $path =  $request->image->move(public_path('/upload/checkout'),$image);
         $checkout = Checkout::create([
@@ -453,6 +482,33 @@ class HomeController extends Controller
             if(Auth()->user()->roles->name == 'User'){
                 $user = Auth()->user();
                 $flash_sale_prod = FlashSale::with('products')->get();
+                return Inertia::render('View/Flashsale', [
+                    'check' => $check,
+                    'user' => $user,
+                    'real_products' => $flash_sale_prod
+                ]);
+            }
+            else if(Auth()->user()->roles->name == 'Super Admin'){
+                return 'super admin';
+            }
+        }
+        $user = new User;
+        // $flash_sale_prod = Product::with('categories')->get();
+        $flash_sale_prod = FlashSale::with('products')->get();
+        return Inertia::render('View/Flashsale', [
+            'check' => $check,
+            'user' => null,
+            'real_products' => $flash_sale_prod
+        ]);
+    }
+
+    public function banner($slug)
+    {
+        $check = Auth()->check();
+        if($check){
+            if(Auth()->user()->roles->name == 'User'){
+                $user = Auth()->user();
+                $flash_sale_prod = FlashSale::with('products')->get();
                 foreach($flash_sale_prod as $product){
                     if($product->discount_price){
                         $product->new_price = $product->discount_price;
@@ -475,11 +531,12 @@ class HomeController extends Controller
         }
         $user = new User;
         // $flash_sale_prod = Product::with('categories')->get();
-        $flash_sale_prod = FlashSale::with('products')->get();
-        return Inertia::render('View/Flashsale', [
+        $flash_sale_prod = Advertisement::where('path', $slug)->with('products')->first();
+        // dd($flash_sale_prod);
+        return Inertia::render('View/Banner', [
             'check' => $check,
             'user' => null,
-            'real_products' => $flash_sale_prod
+            'real_products' => $flash_sale_prod->products
         ]);
     }
 

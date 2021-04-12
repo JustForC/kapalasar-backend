@@ -223,13 +223,11 @@ export default {
               qty: item.qty,
               ...product
             };
-            // console.log(cart);
 
             tempState.forEach(item => {
               if (item == cart.id) {
                 this.listFinalCart.push(cart);
               }
-              // console.log(this.listFinalCart);
             });
           }
         });
@@ -255,8 +253,11 @@ export default {
 
     },
     finishPayment() {
-      const cart = this.$store.state.cart.listCarts;
+      const carts = this.$store.state.cart.listCarts;
       this.$store.commit("cart/REPLACE", []);
+
+      const voucher = this.$store.state.voucher.voucher;
+      this.$store.commit("voucher/ADD", {});
 
       const totalPrice = this.$store.state.cart.totalPrice;
       this.$store.commit("cart/SET_TOTAL_PRICE", 0);
@@ -264,23 +265,33 @@ export default {
       const userData = this.$store.state.user.userInfo;
       this.$store.commit("user/ADD", []);
 
-      // const transaction = {
+      let data = new FormData();
+      data.append('_token', this.csrf);
+      data.append('name', userData.name);
+      data.append('phone', userData.phone);
+      data.append('address', userData.address);
+
+      let i = 1;
+      carts.forEach(cart => {
+        data.append('cartId['+i+']', cart.id);
+        data.append('cartQty['+i+']', cart.qty);
+        console.log(cart);
+        i++;
+      })
+      data.append('voucher', voucher.type);
+      data.append('price', totalPrice);
+      data.append('image', this.selectedFile);
+      Inertia.post(route('code.finish', this.code), data);
+
+      // Inertia.post(route('code.finish', this.code), {
+      //   method: 'post',
+      //   _token: this.csrf,
+      //   name: userData.name,
+      //   phone: userData.phone,
+      //   address: userData.address,
       //   cart: cart,
-      //   totalPrice: totalPrice,
-      //   user: userData
-      // };
-
-      // this.$store.commit("transaction/ADD", transaction);
-
-      Inertia.post(route('code.finish', this.code), {
-        method: 'post',
-        _token: this.csrf,
-        name: userData.name,
-        phone: userData.phone,
-        address: userData.address,
-        cart: cart,
-        price: totalPrice,
-      });
+      //   price: totalPrice,
+      // });
       // Inertia.visit('/');
       // this.$router.push("/");
     }

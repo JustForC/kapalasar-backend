@@ -12,7 +12,7 @@
       <div class="card-body">
         @if(auth()->user()->roles->name == "Super Admin" || auth()->user()->roles->name == "Admin" || auth()->user()->roles->name == "Merchant")
         <div class="d-flex justify-content-between align-items-baseline mb-4 mb-md-3">
-          <h6 class="card-title mb-0">Catalog</h6>
+          <h6 class="card-title mb-0">Katalog</h6>
           @if(auth()->user()->roles->name != "Merchant")
           <button class="btn btn-primary modal-show" type="button" href="{{ route('catalog.create') }}" name="Tambah Kategori Produk" data-toggle="modal" data-target="#modal">+ Add New</button>
           @endif
@@ -21,10 +21,6 @@
           <table id="table" class="table hover" style="width:100%"></table>
         </div>
         @endif
-        <div>
-        </div>
-        <div>
-        </div>
       </div>
     </div>
   </div>

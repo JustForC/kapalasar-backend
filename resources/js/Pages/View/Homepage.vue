@@ -7,7 +7,7 @@
           <v-card-title class="headline font-weight-bold">
                 <v-icon class="mr-1" color="orange darken-2">mdi-sale</v-icon> PROMO HARI INI!
           </v-card-title>
-          <v-img else class="responsive" :contain="true" src="https://medanincode.com/img/thumb/vue/if.png" />
+          <v-img else class="responsive" :contain="true" :src="popUp.image" />
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn class="font-weight-bold" color="green darken-1" text @click="dialog = false">
@@ -17,6 +17,7 @@
         </v-card>
       </v-dialog>
     </v-row>
+    </div>
       <Navbar :check="check" :user="user"/>
       <!-- Carousel -->
       <div class="carousel d-flex justify-center align-center">
@@ -27,13 +28,13 @@
           hide-delimiter-background
           delimiter-icon="mdi-circle"
           :options="optionsCarousel">
-          <v-carousel-item v-for="(slide, i) in slides" :key="i">
-            <div class="rounded">
-              <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
-              <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slide.src" />
+          <v-carousel-item v-for="(slide, i) in banners" :key="i">
+            <a class="rounded" :href="route('banner', slide.path)">
+              <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.image" />
+              <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slide.image" />
               <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
               <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
-            </div>
+            </a>
           </v-carousel-item>
         </v-carousel>
         <!-- Conditional Rendering < 600px -->
@@ -44,13 +45,13 @@
           hide-delimiter-background
           delimiter-icon="mdi-circle"
           height="150" :options="optionsCarousel">
-          <v-carousel-item v-for="(slide, i) in slides" :key="i">
-            <div class="rounded">
-              <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
-              <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slide.src" />
+          <v-carousel-item v-for="(slide, i) in banners" :key="i">
+            <a class="rounded" :href="route('banner', slide.path)">
+              <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.image" />
+              <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slide.image" />
               <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
               <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
-            </div>
+            </a>
           </v-carousel-item>
         </v-carousel>
       </div>
@@ -152,13 +153,13 @@
                 hide-delimiter-background
                 delimiter-icon="mdi-circle"
                 :options="optionsCarousel">
-                <v-carousel-item v-for="(slide, i) in slides" :key="i">
-                  <div class="rounded">
-                    <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
-                    <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slide.src" />
+                <v-carousel-item >
+                  <a class="rounded" :href="route('banner', banners[1].path)">
+                    <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="banners[1].image" />
+                    <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="banners[1].image" />
                     <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
                     <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
-                  </div>
+                  </a>
                 </v-carousel-item>
               </v-carousel>
               <!-- Conditional Rendering < 600px -->
@@ -169,13 +170,13 @@
                 hide-delimiter-background
                 delimiter-icon="mdi-circle"
                 height="150" :options="optionsCarousel">
-                <v-carousel-item v-for="(slide, i) in slides" :key="i">
-                  <div class="rounded">
-                    <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
-                    <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slide.src" />
+                <v-carousel-item >
+                  <a class="rounded" :href="route('banner', banners[1].path)">
+                    <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="banners[1].image" />
+                    <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="banners[1].image" />
                     <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
                     <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
-                  </div>
+                  </a>
                 </v-carousel-item>
               </v-carousel>
             </div>
@@ -206,13 +207,13 @@
                 hide-delimiter-background
                 delimiter-icon="mdi-circle"
                 :options="optionsCarousel">
-                <v-carousel-item v-for="(slide, i) in slides" :key="i">
-                  <div class="rounded">
-                    <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
-                    <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slide.src" />
+                <v-carousel-item >
+                  <a class="rounded" :href="route('banner', banners[2].path)">
+                    <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="banners[2].image" />
+                    <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="banners[2].image" />
                     <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
                     <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
-                  </div>
+                  </a>
                 </v-carousel-item>
               </v-carousel>
               <!-- Conditional Rendering < 600px -->
@@ -223,13 +224,13 @@
                 hide-delimiter-background
                 delimiter-icon="mdi-circle"
                 height="150" :options="optionsCarousel">
-                <v-carousel-item v-for="(slide, i) in slides" :key="i">
-                  <div class="rounded">
-                    <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
-                    <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slide.src" />
+                <v-carousel-item >
+                  <a class="rounded" :href="route('banner', banners[2].path)">
+                    <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="banners[2].image" />
+                    <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="banners[2].image" />
                     <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
                     <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
-                  </div>
+                  </a>
                 </v-carousel-item>
               </v-carousel>
             </div>
@@ -262,13 +263,13 @@
           hide-delimiter-background
           delimiter-icon="mdi-circle"
           :options="optionsCarousel">
-          <v-carousel-item v-for="(slide, i) in slides" :key="i">
-            <div class="rounded">
-              <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
-              <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slide.src" />
+          <v-carousel-item >
+            <a class="rounded" :href="route('banner', banners[3].path)">
+              <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="banners[3].image" />
+              <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="banners[3].image" />
               <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
               <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
-            </div>
+            </a>
           </v-carousel-item>
         </v-carousel>
         <!-- Conditional Rendering < 600px -->
@@ -279,16 +280,16 @@
           hide-delimiter-background
           delimiter-icon="mdi-circle"
           height="150" :options="optionsCarousel">
-          <v-carousel-item v-for="(slide, i) in slides" :key="i">
-            <div class="rounded">
-              <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
-              <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slide.src" />
+          <v-carousel-item >
+            <a class="rounded" :href="route('banner', banners[3].path)">
+              <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="banners[3].image" />
+              <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="banners[3].image" />
               <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
               <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
-            </div>
+            </a>
           </v-carousel-item>
         </v-carousel>
-      </div>
+    </div>
 
       <!-- <client-only>
         <Cookie />
@@ -314,7 +315,6 @@
           </v-row>
         </v-container>
       </div>
-    </div>
   </v-app>
 </template>
 
@@ -339,7 +339,10 @@ export default {
   props: {
     check: Boolean,
     user: Object,
-    real_products: Array
+    real_products: Array,
+    banners: Object,
+    popUp: Object,
+    flash_sales: Array
   },
   data() {
     return {
@@ -417,7 +420,12 @@ export default {
     },
     filterFlashSale() {
       // this.flashSaleProducts = products.filter(product => product.flashSale);
-      this.flashSaleProducts = this.real_products;      
+      // this.flashSaleProducts = this.real_products;
+      this.flashSaleProducts = this.flash_sales.map(products => {
+        return products;
+      });
+      console.log(this.flashSaleProducts);
+
     },
     filterNotFlashSale() {
       // this.notFlashsaleProducts = products.filter(
@@ -436,29 +444,41 @@ export default {
         this.filteredProducts = this.notFlashsaleProducts.filter(
           product => product.categories.name === "Buah"
         );
-      } else if (this.current === "daging dan ikan") {
+      } else if (this.current === "daging") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories.name === "Daging dan Ikan"
+          product => product.categories.name === "Daging"
         );
-      } else if (this.current === "yoghurt") {
+      } else if (this.current === "ikan") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories.name === "Yoghurt"
+          product => product.categories.name === "Ikan"
         );
-      } else if (this.current === "ladanglima") {
+      } else if (this.current === "seafood") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories.name === "Ladanglima"
+          product => product.categories.name === "Seafood"
         );
-      } else if (this.current === "gula merah") {
+      } else if (this.current === "kapalasar organik") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories.name === "Gula Merah"
+          product => product.categories.name === "Kapalasar Organik"
+        );
+      } else if (this.current === "bumbu") {
+        this.filteredProducts = this.notFlashsaleProducts.filter(
+          product => product.categories.name === "Bumbu"
         );
       } else if (this.current === "bumbu giling") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
           product => product.categories.name === "Bumbu Giling"
         );
-      } else if (this.current === "olahan kacang kedelai") {
+      } else if (this.current === "olahan kedelai") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories.name === "Olahan Kacang Kedelai"
+          product => product.categories.name === "Olahan Kedelai"
+        );
+      } else if (this.current === "siap masak") {
+        this.filteredProducts = this.notFlashsaleProducts.filter(
+          product => product.categories.name === "Siap Masak"
+        );
+      } else if (this.current === "siap makan") {
+        this.filteredProducts = this.notFlashsaleProducts.filter(
+          product => product.categories.name === "Siap Makan"
         );
       } else if (this.current === "promo") {
         this.filteredProducts = this.notFlashsaleProducts.filter(function(item){

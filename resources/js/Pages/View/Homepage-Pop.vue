@@ -135,7 +135,7 @@ import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import Navbar from "../components/Navbar.vue";
 import ProductCard from "../components/ProductCard.vue";
 import Footer from "../components/Footer.vue";
-import { products, filters, slides } from "../dummyData/dummy.js";
+// import { products, filters, slides } from "../dummyData/dummy.js";
 import cookie from "../components/cookie";
 
 export default {

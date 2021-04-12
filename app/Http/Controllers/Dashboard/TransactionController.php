@@ -114,7 +114,8 @@ class TransactionController extends Controller
     }
 
     public function data(){
-        $model = Checkout::with('users','vouchers')->where('status', 1)->orWhere('status', 3)->orWhere('status', 4)->get();
+        $model = Checkout::with('users','vouchers', 'merchants')->where('status', 1)->orWhere('status', 3)->orWhere('status', 4)->get();
+        // dd($model);
         return DataTables::of($model)
             ->addColumn('action', function($model){
             return '<div class="btn-group" role="group">
@@ -122,8 +123,24 @@ class TransactionController extends Controller
                         <button type="button" href="'.route('transaction.delete', $model->id).'" class="btn btn-danger btn-sm delete" name="Delete '.$model->name.'">Delete</button>
                     </div>';
             })
-            ->addColumn('timeline', function($model){
-                return date('d M Y', strtotime($model->date)).' '.date('H:i', strtotime($model->start)).' - '.date('H:i', strtotime($model->end));
+            ->addColumn('merchant', function($model){
+                if($model->merchants_id != null){
+                    return $model->merchants->name;
+                }
+            })
+            ->addColumn('status', function($model){
+                if($model->status == 1){
+                    return 'Dipesan';
+                }
+                if($model->status == 2){
+                    return 'Selesai';
+                }
+                if($model->status == 3){
+                    return 'Refund';
+                }
+                if($model->status == 4){
+                    return 'Tidak Selesai';
+                }
             })
             ->addIndexColumn()
             ->removeColumn([])

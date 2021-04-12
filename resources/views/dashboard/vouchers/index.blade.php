@@ -34,10 +34,10 @@
         {title: '#', data: 'DT_RowIndex', name: 'DT_RowIndex', orderable:false, width: '7.5%', className: 'dt-center'},
         {title: 'Nama', data: 'name', name: 'name', width: '10%', className: 'dt-head-center'},
         {title: 'Jenis', data: 'types.name', name: 'types.name', width: '10%', className: 'dt-head-center'},
-        {title: 'Jumlah', data: 'amount', name: 'amount', width: '10%', className: 'dt-head-center'},
+        // {title: 'Jumlah', data: 'amount', name: 'amount', width: '10%', className: 'dt-head-center'},
         {title: 'Besar Potongan', data: 'discount', name: 'discount', width: '15%', className: 'dt-head-center'},
         {title: 'Action', data: 'action', name: 'action', width: '12.5%', className: 'dt-center'},
-        {title: 'Timeline',data: 'timeline', name: 'timeline', width: '12.5%', className: 'dt-center'},
+        // {title: 'Timeline',data: 'timeline', name: 'timeline', width: '12.5%', className: 'dt-center'},
       ],
     });
 
