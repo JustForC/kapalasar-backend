@@ -210,7 +210,7 @@ class DatabaseSeeder extends Seeder
         //     'end' => '22:30'
         // ]);
 
-        $this->call(ProductSeeder1::class);
+        $this->call(ProductSeeder2::class);
 
         // for($i = 1; $i <= 20; $i++){
         //     Product::insert([

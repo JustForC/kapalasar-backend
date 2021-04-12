@@ -35,7 +35,7 @@
         {title: 'Nama', data: 'name', name: 'name', width: '30%', className: 'dt-head-center'},
         {title: 'Kategori', data: 'categories.name', name: 'categories.name', width: '30%', className: 'dt-head-center'},
         {title: 'Deskripsi', data: 'unit', name: 'unit', width: '30%', className: 'dt-head-center'},
-        {title: 'Stok', data: 'stock', name: 'stock', width: '30%', className: 'dt-head-center'},
+        // {title: 'Stok', data: 'stock', name: 'stock', width: '30%', className: 'dt-head-center'},
         {title: 'Harga', data: 'price', name: 'price', width: '30%', className: 'dt-head-center'},
         {title: 'Harga Diskon', data: 'discount_price', name: 'discount_price', width: '30%', className: 'dt-head-center'},
         {title: 'Action', data: 'action', name: 'action', width: '12.5%', className: 'dt-center'},

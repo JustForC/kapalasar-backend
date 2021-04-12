@@ -140,6 +140,12 @@ class ProductController extends Controller
                             </div>';
                 }
             })
+            ->editColumn('discount_price', function($model){
+                return 'Rp '.number_format($model->discount, 0, ',', '.');
+            })
+            ->editColumn('price', function($model){
+                return 'Rp '.number_format($model->price, 0, ',', '.');
+            })
             ->addColumn('timeline', function($model){
                 return date('d M Y', strtotime($model->date)).' '.date('H:i', strtotime($model->start)).' - '.date('H:i', strtotime($model->end));
             })

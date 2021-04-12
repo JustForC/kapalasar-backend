@@ -127,13 +127,57 @@ class HistoryController extends Controller
     }
 
     public function data(){
-        $model = Checkout::with('users','vouchers')->where('status','=', 2)->get();
+        $model = Checkout::with('users','vouchers')->where('status', 2)->orWhere('status', 3)->orWhere('status', 4)->get();
         return DataTables::of($model)
             ->addColumn('action', function($model){
             return '<div class="btn-group" role="group">
                         <button type="button" href="'.route('history.edit', $model->id).'" class="btn btn-primary btn-sm modal-show edit" name="Edit '.$model->name.'" data-toggle="modal" data-target="#modal">Edit</button>
                         <button type="button" href="'.route('history.delete', $model->id).'" class="btn btn-danger btn-sm delete" name="Delete '.$model->name.'">Delete</button>
                     </div>';
+            })
+            ->addColumn('merchant', function($model){
+                if($model->merchants_id != null){
+                    return $model->merchants->name;
+                }
+            })
+            ->editColumn('discount', function($model){
+                if($model->type == 1){
+                    return '';
+                }
+                if($model->type == 2){
+                    return 'Rp '.number_format($model->discount, 0, ',', '.');
+                }
+                if($model->type == 3){
+                    return $model->discount.'%';
+                }
+            })
+            ->editColumn('total', function($model){
+                return 'Rp '.number_format($model->total, 0, ',', '.');
+            })
+            ->editColumn('type', function($model){
+                if($model->type == 1){
+                    return 'Free Ongkir';
+                }
+                if($model->type == 2){
+                    return 'Potongan Harga (harga)';
+                }
+                if($model->type == 3){
+                    return 'Potongan Harga (persen)';
+                }
+            })
+            ->addColumn('status', function($model){
+                if($model->status == 1){
+                    return 'Dipesan';
+                }
+                if($model->status == 2){
+                    return 'Selesai';
+                }
+                if($model->status == 3){
+                    return 'Refund';
+                }
+                if($model->status == 4){
+                    return 'Tidak Selesai';
+                }
             })
             ->addColumn('timeline', function($model){
                 return date('d M Y', strtotime($model->date)).' '.date('H:i', strtotime($model->start)).' - '.date('H:i', strtotime($model->end));

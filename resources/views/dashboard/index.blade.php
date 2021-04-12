@@ -21,7 +21,7 @@
               <td>Alamat</td>
               <td>No. Telepon</td>
               <td>Diskon</td>
-              <td>ID Merchant</td>
+              <td>Merchant</td>
               <td>Total</td>
               <td>Status</td>
               {{-- <td>Receipt</td> --}}

@@ -18,6 +18,7 @@ use App\Http\Controllers\Dashboard\UserMailController;
 use App\Http\Controllers\Dashboard\CatalogController;
 use App\Http\Controllers\Dashboard\MailHistoryController;
 use App\Http\Controllers\Dashboard\BannerController;
+use App\Http\Controllers\Dashboard\PushController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -156,6 +157,12 @@ Route::middleware('admin')->group(function(){
             Route::get('data', [MailHistoryController::class, 'data'])->name('mailhistory.data');
         });
     });
+
+    Route::prefix('push')->group(function(){
+        Route::get('/', [PushController::class, 'index'])->name('push.index');
+        Route::post('send', [PushController::class, 'send'])->name('push.send');
+    });
+
 });
 
 Route::get('data',[DataMerchantController::class,'data'])->name('data.merchant');
