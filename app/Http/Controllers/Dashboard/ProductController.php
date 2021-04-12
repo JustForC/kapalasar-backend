@@ -25,23 +25,47 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => ['required'],
-            'categories_id' => ['required'],
-            'unit' => ['required'],
-            'stock' => ['required'],
-            'price' => ['required'],
-            'product_image' => ['required'],
-        ]);
+        // $this->validate($request, [
+        //     'name' => ['required'],
+        //     'categories_id' => ['required'],
+        //     'unit' => ['required'],
+        //     'price' => ['required'],
+        //     'product_image' => ['required'],
+        //     ]);
 
+        $product = Product::orderBy('id','desc')->first();
+        $flash = FlashSale::orderBy('id','desc')->first();
+
+        if($flash->uniq > $product->uniq){
+            $data = $flash->uniq + 1;
+            $image = time().'-'.'.'.$request->product_image->extension();
+            $path =  $request->product_image->move(public_path('/upload/product'),$image);
+    
+            $model = Product::create([
+                'name' => $request->name,
+                'uniq' => $data,
+                'categories_id' => $request->categories_id,
+                'unit' => $request->unit,
+                'stock' => 1000,
+                'price' => $request->price,
+                'discount_price' => $request->discount_price,
+                'image' => '/upload/product/'.$path->getFileName(),
+            ]);
+
+            return response()->json($model);
+        }
+
+        $data = $product->uniq + 1;
+            
         $image = time().'-'.'.'.$request->product_image->extension();
         $path =  $request->product_image->move(public_path('/upload/product'),$image);
 
         $model = Product::create([
             'name' => $request->name,
+            'uniq' => $data,
             'categories_id' => $request->categories_id,
             'unit' => $request->unit,
-            'stock' => $request->stock,
+            'stock' => 1000,
             'price' => $request->price,
             'discount_price' => $request->discount_price,
             'image' => '/upload/product/'.$path->getFileName(),

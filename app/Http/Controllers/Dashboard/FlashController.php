@@ -47,17 +47,28 @@ class FlashController extends Controller
             'new_price' => ['required'],
         ]);
 
+        $p = Product::orderBy('id','desc')->first();
+        $f = FlashSale::orderBy('id','desc')->first();
         //Kalo gak masukin gambar
         if($request->image == NULL){
             $product = Product::find($request->products_id);
 
-            // $flash = Flash::create([
-            //     'name' => $request->name,
-            //     'start' => $request->start,
-            //     'end' => $request->end,
-            // ]);
+
+            if($f->uniq > $p->uniq){
+                $data = $f->uniq + 1;
+
+                $model = FlashSale::create([
+                    'uniq' => $data,
+                    'flashes_id' => 1,
+                    'products_id' => $request->products_id,
+                    'image' => $product->image,
+                    'new_price' => $request->new_price,
+                ]);
+            }
+            $data = $p + 1;
 
             $model = FlashSale::create([
+                'uniq' => $data,
                 'flashes_id' => 1,
                 'products_id' => $request->products_id,
                 'image' => $product->image,
@@ -76,6 +87,21 @@ class FlashController extends Controller
         //     'end' => $request->end,
         // ]);
 
+        if($f->uniq > $p->uniq){
+            $data = $f + 1;
+
+            $model = FlashSale::create([
+                'flashes_id' => 1,
+                'products_id' => $request->products_id,
+                'image' => '/upload/flash/'.$path->getFileName(),
+                'new_price' => $request->new_price,
+            ]);
+
+            return response()->json($model);
+        }
+
+        $data = $p + 1;
+        
         $model = FlashSale::create([
             'flashes_id' => 1,
             'products_id' => $request->products_id,
