@@ -12,8 +12,43 @@
       <div>
         <v-container>
           <div class="d-flex flex-wrap justify-center">
-            <div class="" v-html="advertisement.tnc">
-            </div>
+            <v-row justify="center">
+            <v-dialog
+              v-model="dialog"
+              width="600px"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  color="green"
+                  dark
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                  Syarat dan Ketentuan
+                </v-btn>
+              </template>
+              <v-card>
+                <v-card-title>
+                  <span class="headline">Syarat dan Ketentuan</span>
+                </v-card-title>
+                <v-card-text>
+                  <div class="" v-html="advertisement.tnc">
+                  </div>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    color="green darken-1"
+                    text
+                    @click="dialog = false"
+                  >
+                    OKAY!
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-row>
+            
           </div>
         </v-container>
       </div>
@@ -22,23 +57,30 @@
       <div>
         <v-container>
           <div class="d-flex flex-wrap justify-center">
-            <v-btn
-              v-for="(filter, i) in filters"
-              :key="i"
-              x-large
-              :large="$vuetify.breakpoint.sm ? true : false"
-              class="mr-2 px-1 my-2"
-              @click="filterByKategori(filter.name)"
-              :color="filter.name == current ? '#a6cb26' : ''"
-              :dark="filter.name == current ? true : false"
-            >
-              <v-img 
-              max-height="25"
-              max-width="25"
-              :src="filter.src"
-              ></v-img>
-              <span class="mx-2">{{ filter.name }}</span>
-            </v-btn>
+              <v-slide-group
+                multiple
+                show-arrows
+              >
+                <v-slide-item
+                  v-for="(filter, i) in filters"
+                  :key="i"
+                >
+                  <v-btn
+                    :large="$vuetify.breakpoint.sm ? true : false"
+                    class="mr-2 px-1 my-2"
+                    @click="filterByKategori(filter.name)"
+                    :color="filter.name == current ? '#a6cb26' : ''"
+                    :dark="filter.name == current ? true : false"
+                  >
+                  <v-img 
+                    max-height="25"
+                    max-width="25"
+                    :src="filter.src"
+                  ></v-img>
+                  <span class="mx-2">{{ filter.name }}</span>
+                  </v-btn>
+                </v-slide-item>
+              </v-slide-group>
           </div>
         </v-container>
       </div>
@@ -147,7 +189,8 @@ export default {
       notFlashsaleProducts: [],
       flashSaleProducts: [],
       filteredProducts: [],
-      current: "semua"
+      current: "semua",
+      dialog: false,
     };
   },
   filters: {
