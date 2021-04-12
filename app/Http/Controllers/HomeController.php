@@ -117,7 +117,7 @@ class HomeController extends Controller
                         $juli = $juli + 1;
                     }
                     elseif($check->created_at->format('M') == 'Aug'){
-                        $aug = $aug + 1;
+                        $agustus = $agustus + 1;
                     }
                     elseif($check->created_at->format('M') == 'Sep'){
                         $september = $september + 1;
@@ -185,7 +185,7 @@ class HomeController extends Controller
                     $juli = $juli + 1;
                 }
                 elseif($check->created_at->format('M') == 'Aug'){
-                    $aug = $aug + 1;
+                    $agustus = $agustus + 1;
                 }
                 elseif($check->created_at->format('M') == 'Sep'){
                     $september = $september + 1;
@@ -535,21 +535,32 @@ class HomeController extends Controller
             }
             foreach($carts as $cart){
                 $product = Product::find($cart['id']);
-                if($product->discount_price){
+                if(!$product){
+                    $flash_sale = FlashSale::where('uniq', $cart['id'])->first();
                     $cost = Cost::create([
                         'checkouts_id' => $checkout->id,
-                        'product' => $product->name,
+                        'product' => $flash_sale->products->name,
                         'amount' => $cart['qty'],
-                        'price' => $product->discount_price
+                        'price' => $flash_sale->new_price
                     ]);
                 }
                 else{
-                    $cost = Cost::create([
-                        'checkouts_id' => $checkout->id,
-                        'product' => $product->name,
-                        'amount' => $cart['qty'],
-                        'price' => $product->price
-                    ]);
+                    if($product->discount_price->count()){
+                        $cost = Cost::create([
+                            'checkouts_id' => $checkout->id,
+                            'product' => $product->name,
+                            'amount' => $cart['qty'],
+                            'price' => $product->discount_price
+                        ]);
+                    }
+                    else{
+                        $cost = Cost::create([
+                            'checkouts_id' => $checkout->id,
+                            'product' => $product->name,
+                            'amount' => $cart['qty'],
+                            'price' => $product->price
+                        ]);
+                    }
                 }
             }
             return redirect()->route('home')->with('checkout', $checkout);;
@@ -589,22 +600,33 @@ class HomeController extends Controller
             $i++;
         }
         foreach($carts as $cart){
-            $product = Product::find($cart['id']);
-            if($product->discount_price){
+            $product = Product::where('uniq', $cart['id'])->first();
+            if(!$product){
+                $flash_sale = FlashSale::where('uniq', $cart['id'])->first();
                 $cost = Cost::create([
                     'checkouts_id' => $checkout->id,
-                    'product' => $product->name,
+                    'product' => $flash_sale->products->name,
                     'amount' => $cart['qty'],
-                    'price' => $product->discount_price
+                    'price' => $flash_sale->new_price
                 ]);
             }
             else{
-                $cost = Cost::create([
-                    'checkouts_id' => $checkout->id,
-                    'product' => $product->name,
-                    'amount' => $cart['qty'],
-                    'price' => $product->price
-                ]);
+                if($product->discount_price){
+                    $cost = Cost::create([
+                        'checkouts_id' => $checkout->id,
+                        'product' => $product->name,
+                        'amount' => $cart['qty'],
+                        'price' => $product->discount_price
+                    ]);
+                }
+                else{
+                    $cost = Cost::create([
+                        'checkouts_id' => $checkout->id,
+                        'product' => $product->name,
+                        'amount' => $cart['qty'],
+                        'price' => $product->price
+                    ]);
+                }
             }
         }
         return redirect()->route('home')->with('checkout', $checkout);;
