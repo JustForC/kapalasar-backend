@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\FlashSale;
+use App\Models\User;
 use DataTables;
 
 class ProductController extends Controller
@@ -140,8 +141,17 @@ class ProductController extends Controller
                             </div>';
                 }
             })
+            ->addColumn('merchant', function($model){
+                if($model->merchants_id != null){
+                    return $model->merchants->name;
+                }
+                else{
+                    $merchant = User::find($model->merchants_id);
+                    return $merchant->name;
+                }
+            })
             ->editColumn('discount_price', function($model){
-                return 'Rp '.number_format($model->discount, 0, ',', '.');
+                return 'Rp '.number_format($model->discount_price, 0, ',', '.');
             })
             ->editColumn('price', function($model){
                 return 'Rp '.number_format($model->price, 0, ',', '.');

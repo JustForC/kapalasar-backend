@@ -123,6 +123,7 @@ Route::middleware('admin')->group(function(){
         Route::get('create', [TransactionController::class, 'create'])->name('transaction.create');
         Route::post('store', [TransactionController::class, 'store'])->name('transaction.store');
         Route::get('edit/{id}', [TransactionController::class, 'edit'])->name('transaction.edit');
+        Route::get('show/{id}', [TransactionController::class, 'show'])->name('transaction.show');
         Route::put('update/{id}', [TransactionController::class, 'update'])->name('transaction.update');
         Route::delete('delete/{id}', [TransactionController::class, 'destroy'])->name('transaction.delete');
         Route::get('data', [TransactionController::class, 'data'])->name('transaction.data');
@@ -133,6 +134,7 @@ Route::middleware('admin')->group(function(){
         Route::get('create', [HistoryController::class, 'create'])->name('history.create');
         Route::post('store', [HistoryController::class, 'store'])->name('history.store');
         Route::get('edit/{id}', [HistoryController::class, 'edit'])->name('history.edit');
+        Route::get('show/{id}', [HistoryController::class, 'show'])->name('history.show');
         Route::put('update/{id}', [HistoryController::class, 'update'])->name('history.update');
         Route::delete('delete/{id}', [HistoryController::class, 'destroy'])->name('history.delete');
         Route::get('data', [HistoryController::class, 'data'])->name('history.data');

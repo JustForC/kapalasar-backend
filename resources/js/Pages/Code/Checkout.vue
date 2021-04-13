@@ -402,7 +402,7 @@ export default {
             };
             this.$store.commit("user/ADD", data);
             // console.log(this.$store.state.user.userInfo);
-            Inertia.visit('/payment');
+            Inertia.visit(route('code.payment', this.code));
 
 
 
@@ -434,7 +434,7 @@ export default {
             };
             this.$store.commit("user/ADD", data);
             // console.log(this.$store.state.user.userInfo);
-            Inertia.visit('/payment');
+            Inertia.visit(route('code.payment', this.code));
           }
         }
         else{

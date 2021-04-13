@@ -296,7 +296,7 @@ export default {
       data.append('voucher', voucher.type);
       data.append('price', totalPrice);
       data.append('image', this.selectedFile);
-      Inertia.post('/finish', data);
+      Inertia.post(route('code.finish', this.code), data);
 
       // Inertia.post('/finish', {
       //   // headers: {'Content-Type': 'multipart/form-data'},

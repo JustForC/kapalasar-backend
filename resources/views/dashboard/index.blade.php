@@ -34,7 +34,11 @@
               <td>{{$t->address}}</td>
               <td>{{$t->phone}}</td>
               <td>{{$t->discount}}</td>
-              <td>{{$t->merchants_id}}</td>
+              @if($t->merchants_id!=NULL)
+                <td>{{$t->merchants->name}}</td>
+              @else
+                <td></td>
+              @endif
               <td>{{$t->total}}</td>
               <td>{{$t->status}}</td>
               {{-- <td>{{$t->receipt}}</td> --}}

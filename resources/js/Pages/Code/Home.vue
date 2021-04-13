@@ -315,7 +315,7 @@
             </div>
             <v-spacer></v-spacer>
             <div class="d-flex align-center">
-              <inertia-link href="/checkout">
+              <inertia-link :href="route('code.checkout', code)">
               <v-btn class="checkout" color="#A6CB26">
                 Checkout
               </v-btn>

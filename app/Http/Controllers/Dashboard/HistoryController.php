@@ -74,6 +74,8 @@ class HistoryController extends Controller
     public function show($id)
     {
         //
+        $model = Checkout::findOrFail($id);
+        return view('dashboard/histories/show',['model' => $model,'users']);
     }
 
     /**
@@ -131,8 +133,9 @@ class HistoryController extends Controller
         return DataTables::of($model)
             ->addColumn('action', function($model){
             return '<div class="btn-group" role="group">
-                        <button type="button" href="'.route('history.edit', $model->id).'" class="btn btn-primary btn-sm modal-show edit" name="Edit '.$model->name.'" data-toggle="modal" data-target="#modal">Edit</button>
-                        <button type="button" href="'.route('history.delete', $model->id).'" class="btn btn-danger btn-sm delete" name="Delete '.$model->name.'">Delete</button>
+                        <button type="button" href="'.route('history.show', $model->id).'" class="btn btn-primary btn-sm modal-show show" name="Detail" data-toggle="modal" data-target="#modal">Detail</button>
+                        <button type="button" href="'.route('history.edit', $model->id).'" class="btn btn-primary btn-sm modal-show edit" name="Edit" data-toggle="modal" data-target="#modal">Edit</button>
+                        <button type="button" href="'.route('history.delete', $model->id).'" class="btn btn-danger btn-sm delete" name="Delete">Delete</button>
                     </div>';
             })
             ->addColumn('merchant', function($model){
