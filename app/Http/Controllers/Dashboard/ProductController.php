@@ -134,7 +134,6 @@ class ProductController extends Controller
         return DataTables::of($model)
             ->addColumn('action', function($model){
                 if(auth()->user()->roles->name == 'Super Admin' || auth()->user()->roles->name == 'Admin'){
-
                     return '<div class="btn-group" role="group">
                                 <button type="button" href="'.route('product.edit', $model->id).'" class="btn btn-primary btn-sm modal-show edit" name="Edit '.$model->name.'" data-toggle="modal" data-target="#modal">Edit</button>
                                 <button type="button" href="'.route('product.delete', $model->id).'" class="btn btn-danger btn-sm delete" name="Delete '.$model->name.'">Delete</button>
@@ -144,10 +143,6 @@ class ProductController extends Controller
             ->addColumn('merchant', function($model){
                 if($model->merchants_id != null){
                     return $model->merchants->name;
-                }
-                else{
-                    $merchant = User::find($model->merchants_id);
-                    return $merchant->name;
                 }
             })
             ->editColumn('discount_price', function($model){
