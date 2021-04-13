@@ -136,7 +136,6 @@ export default {
   props: {
     check: Boolean,
     user: Object,
-    real_products: Array,
     checkouts: Array
   },
   data() {
@@ -170,20 +169,6 @@ export default {
   },
   methods: {
     getTransactionData() {
-      // this.dataTransaction = this.$store.state.transaction.listSuccessTransactions;
-      // const transactionData = this.$store.state.transaction
-      //   .listSuccessTransactions;
-      
-      // dateTransaction = this.checkouts;
-
-      // let dataProduct = [];
-      // let totalPrice = 0;
-      // this.dataTransactions = this.checkouts.map(checkout => {
-      //   return checkout;
-      // })
-      // this.dataCosts = this.checkouts.map(checkout => {
-      //   return checkout.costs;
-      // })
       this.dataTransactions = this.checkouts.map(checkout => {
         return {
           'totalPrice': checkout.total,
@@ -191,42 +176,6 @@ export default {
           'dataUser': checkout
         }
       })
-      // console.log(this.Transactions);
-      // this.dataTransaction = this.checkouts.map(checkouts => {
-      //   totalPrice = checkouts.total
-      //   checkouts.costs.map(cost => {
-      //     // console.log(cost);
-      //     this.real_products.forEach(product => {
-      //       // console.log(product);
-      //       if(product.id == cost.id){
-
-      //         const list = {
-      //           qty: cost.amount,
-      //           ...product
-      //         };
-      //         return totalPrice;
-      //         console.log(list);
-      //         dataProduct.push(list);
-      //       }
-      //     })
-      //   })
-      // })
-      // console.log(this.dataTransaction, this.dataProduct);
-      // products.forEach(product => {
-      //   transactionData.forEach(transaction => {
-      //     totalPrice = transaction.totalPrice;
-      //     transaction.cart.forEach(cart => {
-      //       if (cart.id == product.id) {
-      //         const list = {
-      //           qty: cart.qty,
-      //           ...product
-      //         };
-      //         dataProduct.push(list);
-      //       }
-      //     });
-      //   });
-      // });
-
 
     }
   },

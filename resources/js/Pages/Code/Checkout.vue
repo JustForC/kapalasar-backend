@@ -38,8 +38,9 @@
                     outlined
                     dense
                     :rules="[rules.required]"
-                    v-model="user.name"
+                    v-model="name"
                   ></v-text-field>
+                    <!-- v-model="user.name" -->
                 </div>
                 <div>
                   <div class="label font-weight-regular">No Telepon</div>
@@ -50,8 +51,9 @@
                     outlined
                     dense
                     :rules="[rules.required]"
-                    v-model="user.phone"
+                    v-model="phone"
                   ></v-text-field>
+                    <!-- v-model="user.phone" -->
                 </div>
                 <div>
                   <div class="label font-weight-regular">Alamat</div>
@@ -62,8 +64,9 @@
                     rows="3"
                     auto-grow
                     :rules="[rules.required]"
-                    v-model="user.address"
+                    v-model="address"
                   ></v-textarea>
+                    <!-- v-model="user.address" -->
                 </div>
               </div>
               </v-form>
@@ -95,7 +98,7 @@
                       outlined
                       dense
                       :rules="[rules.required]"
-                      v-model="nama"
+                      v-model="name"
                     ></v-text-field>
                   </div>
                   <div>
@@ -171,12 +174,21 @@
                         <div v-if="voucherInUse.type===1">
                           Anda Mendapat Gratis Ongkir
                         </div>
-                        <div v-else>
+                        <div v-if="voucherInUse.type===2 || voucherInUse.type===3">
                           Anda Mendapat Potongan Sebesar
                           <span class="mr-2" v-if="voucherInUse.type===2">{{
                             parseRupiah(voucherInUse.disc)
                           }}</span>
                           <span class="mr-2" v-if="voucherInUse.type===3">{{
+                            voucherInUse.disc
+                          }}%</span>
+                        </div>
+                        <div v-if="voucherInUse.type===4 || voucherInUse.type===5">
+                          Anda Mendapat Gratis Ongkir dan Potongan Sebesar
+                          <span class="mr-2" v-if="voucherInUse.type===4">{{
+                            parseRupiah(voucherInUse.disc)
+                          }}</span>
+                          <span class="mr-2" v-if="voucherInUse.type===5">{{
                             voucherInUse.disc
                           }}%</span>
                         </div>
@@ -258,7 +270,7 @@
                 <v-row class="mx-1" v-if="Object.keys(voucherInUse).length">
                   <div class="label text-subtitle-1">Biaya Ongkir</div>
                   <v-spacer></v-spacer>
-                  <div class="totalPrice text-subtitle-1" v-if="voucherInUse.type===1">
+                  <div class="totalPrice text-subtitle-1" v-if="voucherInUse.type===1 || voucherInUse.type===4 || voucherInUse.type===5">
                     {{ parseRupiah('0') }}
                   </div>
                   <div class="totalPrice text-subtitle-1" v-else>
@@ -279,10 +291,10 @@
                     <div class="label text-subtitle-1" v-if="voucherInUse.type===1"></div>
                     <div class="label text-subtitle-1" v-else>Potongan Harga</div>
                     <v-spacer></v-spacer>
-                    <div class="totalPrice text-subtitle-1" v-if="voucherInUse.type===2">
+                    <div class="totalPrice text-subtitle-1" v-if="voucherInUse.type===2 || voucherInUse.type===4">
                       {{ parseRupiah(voucherInUse.disc) }}
                     </div>
-                    <div class="totalPrice text-subtitle-1" v-if="voucherInUse.type===3">
+                    <div class="totalPrice text-subtitle-1" v-if="voucherInUse.type===3 || voucherInUse.type===5">
                       {{ voucherInUse.disc }}%
                     </div>
                   <!-- </div> -->
@@ -310,7 +322,7 @@
 </template>
 
 <script>
-import Navbar from "./Components/Navbar.vue";
+import Navbar from "../components/NavbarCode.vue";
 import Footer from "../components/Footer.vue";
 import ProductCartList from "../components/productCartList";
 import { Inertia } from '@inertiajs/inertia';
@@ -325,21 +337,21 @@ export default {
     code: String,
     check: Boolean,
     user: Object,
-    real_products: Array,
-    real_vouchers: Array
+    real_vouchers: Array,
+    all_products: Array
   },
   data() {
     return {
       product: [],
       voucher: "",
       voucherInUse: {},
-      nama: "",
+      name: "",
       phone: "",
       address: "",
       checkedVal: [],
       listCart: [],
       fixedListCart: [],
-      totalPrice: 0,
+      totalPrice: 10000,
       rules: {
         required: value => !!value || "Harus diisi",
       }
@@ -379,18 +391,18 @@ export default {
       this.$refs.form.validate()
       const tempState = this.$store.state.cart.tempCart;
       if (!this.check) {
-        if(tempState !== '' || tempState !== null){
+        if(Object.keys(tempState).length){
+        // if(tempState !== '' || tempState !== null){
           // console.log(this.nama, this.phone, this.address)
           if(this.nama !== '' || this.phone !== '' || this.address !== ''){
             const data = {
-              name: this.nama,
+              name: this.name,
               phone: this.phone,
               address: this.address
             };
             this.$store.commit("user/ADD", data);
             // console.log(this.$store.state.user.userInfo);
-            Inertia.visit(route('code.payment', this.code));
-            // Inertia.visit('/payment');
+            Inertia.visit('/payment');
 
 
 
@@ -416,13 +428,13 @@ export default {
         if(Object.keys(tempState).length){
           if(Object.keys(this.user.name).length || Object.keys(this.user.phone).length || Object.keys(this.user.address).length){
             const data = {
-              name: this.user.name,
-              phone: this.user.phone,
-              address: this.user.address
+              name: this.name,
+              phone: this.phone,
+              address: this.address
             };
             this.$store.commit("user/ADD", data);
             // console.log(this.$store.state.user.userInfo);
-            Inertia.visit(route('code.payment', this.code));
+            Inertia.visit('/payment');
           }
         }
         else{
@@ -430,9 +442,18 @@ export default {
       }
       window.scrollTo(0, 0);
     },
+    getUser() {
+      if (this.check) {
+        this.name = this.user.name;
+        this.phone = this.user.phone;
+        if(this.user.address){
+          this.address = this.user.address;
+        }
+      }
+    },
     getProductList() {
       const state = this.$store.state.cart.listCarts;
-      this.real_products.forEach(
+      this.all_products.forEach(
         product => {state.forEach(item => {
           if (item.id == product.id) {
             const cart = {
@@ -460,7 +481,7 @@ export default {
 
       const state = this.$store.state.cart.listCarts;
 
-      let newFullList = this.real_products.filter(item => {
+      let newFullList = this.all_products.filter(item => {
         return temp.includes(item.id);
       });
 
@@ -498,14 +519,14 @@ export default {
           this.$store.commit("voucher/ADD", this.voucherInUse);
           this.useVoucher();
         } else {
-          console.log("voucher tidak ada");
+          // console.log("voucher tidak ada");
         }
       });
     },
     useVoucher() {
       const voucher = this.$store.state.voucher.voucher;
       if (Object.keys(voucher).length) {
-        console.log(Object(voucher))
+        // console.log(Object(voucher))
         if(voucher.type == 1){
           this.totalPrice -= 10000;
         }
@@ -513,6 +534,14 @@ export default {
           this.totalPrice -= voucher.disc;
         }
         if(voucher.type == 3){
+          this.totalPrice = this.totalPrice * (100-voucher.disc) / 100;
+        }
+        if(voucher.type == 4){
+          this.totalPrice -= 10000;
+          this.totalPrice -= voucher.disc;
+        }
+        if(voucher.type == 5){
+          this.totalPrice -= 10000;
           this.totalPrice = this.totalPrice * (100-voucher.disc) / 100;
         }
         this.$store.commit("cart/SET_TOTAL_PRICE", this.totalPrice);
@@ -530,7 +559,14 @@ export default {
         if(voucher.type == 3){
           this.totalPrice = this.totalPrice / (100-voucher.disc) * 100;
         }
-
+        if(voucher.type == 4){
+          this.totalPrice += 10000;
+          this.totalPrice += voucher.disc;
+        }
+        if(voucher.type == 5){
+          this.totalPrice += 10000;
+          this.totalPrice = this.totalPrice / (100-voucher.disc) * 100;
+        }
       this.$store.commit("cart/SET_TOTAL_PRICE", this.totalPrice);
 
       this.voucherInUse = {};
@@ -541,6 +577,7 @@ export default {
     this.scrollToTop();
     this.getProductList();
     this.getVoucher();
+    this.getUser();
   },
   watch: {
     checkedVal() {

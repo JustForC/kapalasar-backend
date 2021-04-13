@@ -219,6 +219,7 @@ Route::prefix('{code}')->group(function(){
     Route::get('/', [CodeController::class, 'index'])->name('code.index');
     Route::get('flash_sale', [CodeController::class, 'flash_sale'])->name('code.flash_sale');
     Route::get('account', [CodeController::class, 'account'])->name('code.account');
+    Route::get('package/{slug}', [HomeController::class, 'banner'])->name('code.banner');
 
     Route::get('checkout', [CodeController::class, 'checkout'])->name('code.checkout');
     Route::get('payment', [CodeController::class, 'payment'])->name('code.payment');

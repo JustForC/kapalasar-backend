@@ -15,16 +15,27 @@
                         Masuk ke akunmu
                       </h3>
                       <div class="pt-md-16 pt-8 px-md-16 px-10">
+                        <!-- <form @submit="submit"> -->
                         <v-form action = '/login' method = 'post'>
                         <input type="hidden" name="_token" :value="csrf">
                           <div>
                             <span class="label font-weight-medium">Email</span>
                             <v-text-field
-                              v-model="email"
+                              v-model="form.email"
                               name="email"
                               placeholder="Email"
                               outlined
                               dense
+                              :error-messages="$page.errors.email[0]"
+                              v-if="$page.errors.email"
+                            ></v-text-field>
+                            <v-text-field
+                              v-model="form.email"
+                              name="email"
+                              placeholder="Email"
+                              outlined
+                              dense
+                              v-else
                             ></v-text-field>
                           </div>
                           <div>
@@ -32,7 +43,7 @@
                               Password
                               </span>
                             <v-text-field
-                              v-model="password"
+                              v-model="form.password"
                               :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
                               :type="show ? 'text' : 'password'"
                               hint="At least 8 characters"
@@ -41,7 +52,20 @@
                               name = "password"
                               dense
                               placeholder="Password"
-                              
+                              :error-messages="$page.errors.password[0]"
+                              v-if="$page.errors.password"
+                            ><v-icon></v-icon></v-text-field>
+                            <v-text-field
+                              v-model="form.password"
+                              :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+                              :type="show ? 'text' : 'password'"
+                              hint="At least 8 characters"
+                              @click:append="show = !show"
+                              outlined
+                              name = "password"
+                              dense
+                              placeholder="Password"
+                              v-else
                             ><v-icon></v-icon></v-text-field>
                           </div>
                           <div class="font-weight-medium grey--text">
@@ -51,6 +75,7 @@
                             <v-btn type="submit" color="#a6cb26" dark>Masuk</v-btn>
                           </div>
                         </v-form>
+                        <!-- </form> -->
                         <div class="pt-5">
                           Tidak punya akun?
                           <a href="/register">
@@ -95,24 +120,33 @@
 </template>
 
 <script>
-import Navbar from "./Components/Navbar.vue";
 import Footer from "../components/Footer.vue";
+import Navbar from "../components/NavbarCode.vue";
 
 export default {
   components: { Navbar, Footer },
   props: {
     code: String,
     check: Boolean,
-    user: Array
+    user: Array,
+    csrf: String
   },
   data() {
     return {
+      form: this.$inertia.form({
+          email: '',
+          password: ''
+      }),
       show: false,
-      email: "",
-      password: "",
-      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-      }
     }
+  },
+  methods: {
+    submit() {
+      this.form.post(this.route('login'), {
+        preserveScroll: true,
+      });
+    }
+  },
 };
 </script>
 

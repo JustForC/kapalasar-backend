@@ -17,6 +17,7 @@
         </v-card>
       </v-dialog>
     </v-row>
+    </div>
       <Navbar :code="code" :check="check" :user="user"/>
       <!-- Carousel -->
       <div class="carousel d-flex justify-center align-center">
@@ -28,7 +29,7 @@
           delimiter-icon="mdi-circle"
           :options="optionsCarousel">
           <v-carousel-item v-for="(slide, i) in banners" :key="i">
-            <a class="rounded" :href="route('banner', slide.path)">
+            <a class="rounded" :href="route('code.banner', [code, slide.path])">
               <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.image" />
               <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slide.image" />
               <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
@@ -45,7 +46,7 @@
           delimiter-icon="mdi-circle"
           height="150" :options="optionsCarousel">
           <v-carousel-item v-for="(slide, i) in banners" :key="i">
-            <a class="rounded" :href="route('banner', slide.path)">
+            <a class="rounded" :href="route('code.banner', [code, slide.path])">
               <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.image" />
               <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="slide.image" />
               <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
@@ -54,6 +55,7 @@
           </v-carousel-item>
         </v-carousel>
       </div>
+
       <!-- Flash Sale -->
       <div class="flashSale">
         <v-container>
@@ -79,7 +81,7 @@
           <div class="d-flex justify-center align-center">
             <splide :options="optionsFlashsale">
               <splide-slide v-for="(product, i) in flashSaleProducts" :key="i">
-                <ProductCard @getTotalPrice="getTotalPrice" :product="product" />
+                <ProductCard @getTotalPrice="getTotalPrice" :product="product" :all_products="all_products" />
               </splide-slide>
             </splide>
           </div>
@@ -129,7 +131,7 @@
             ></v-text-field>
           </v-toolbar>
         </v-card-text>
-        </v-container>
+        </v-container>        
       </div>
       <!-- Product -->
       <v-lazy>
@@ -146,7 +148,7 @@
               class="ma-lg-2 v-lazy my-3"
             >
               <v-row justify="center">
-                <ProductCard @getTotalPrice="getTotalPrice" :product="product" />
+                <ProductCard @getTotalPrice="getTotalPrice" :product="product" :all_products="all_products"/>
               </v-row>
             </v-col>
           </v-row>
@@ -161,11 +163,11 @@
                 delimiter-icon="mdi-circle"
                 :options="optionsCarousel">
                 <v-carousel-item >
-                  <a class="rounded" :href="route('banner', banners[1].path)">
+                  <a class="rounded" :href="route('code.banner', [code, banners[1].path])">
                     <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="banners[1].image" />
                     <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="banners[1].image" />
-                    <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="banners[1].image" />
-                    <v-img else class="responsive" :contain="true" :src="banners[1].image" /> -->
+                    <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
+                    <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
                   </a>
                 </v-carousel-item>
               </v-carousel>
@@ -178,11 +180,11 @@
                 delimiter-icon="mdi-circle"
                 height="150" :options="optionsCarousel">
                 <v-carousel-item >
-                  <a class="rounded" :href="route('banner', banners[1].path)">
+                  <a class="rounded" :href="route('code.banner', [code, banners[1].path])">
                     <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="banners[1].image" />
                     <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="banners[1].image" />
-                    <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="banners[1].image" />
-                    <v-img else class="responsive" :contain="true" :src="banners[1].image" /> -->
+                    <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
+                    <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
                   </a>
                 </v-carousel-item>
               </v-carousel>
@@ -200,7 +202,7 @@
                 class="ma-lg-2 v-lazy my-3"
               >
                 <v-row justify="center">
-                  <ProductCard @getTotalPrice="getTotalPrice" :product="product" />
+                  <ProductCard @getTotalPrice="getTotalPrice" :product="product" :all_products="all_products"/>
                 </v-row>
               </v-col>
             </v-row>
@@ -215,11 +217,11 @@
                 delimiter-icon="mdi-circle"
                 :options="optionsCarousel">
                 <v-carousel-item >
-                  <a class="rounded" :href="route('banner', banners[2].path)">
+                  <a class="rounded" :href="route('code.banner', [code, banners[2].path])">
                     <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="banners[2].image" />
                     <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="banners[2].image" />
-                    <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="banners[2].image" />
-                    <v-img else class="responsive" :contain="true" :src="banners[2].image" /> -->
+                    <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
+                    <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
                   </a>
                 </v-carousel-item>
               </v-carousel>
@@ -232,11 +234,11 @@
                 delimiter-icon="mdi-circle"
                 height="150" :options="optionsCarousel">
                 <v-carousel-item >
-                  <a class="rounded" :href="route('banner', banners[2].path)">
+                  <a class="rounded" :href="route('code.banner', [code, banners[2].path])">
                     <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="banners[2].image" />
                     <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="banners[2].image" />
-                    <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="banners[2].image" />
-                    <v-img else class="responsive" :contain="true" :src="banners[2].image" /> -->
+                    <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
+                    <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
                   </a>
                 </v-carousel-item>
               </v-carousel>
@@ -254,22 +256,13 @@
                     class="ma-lg-2 v-lazy my-3"
                   >
                     <v-row justify="center">
-                      <ProductCard @getTotalPrice="getTotalPrice" :product="product" />
+                      <ProductCard @getTotalPrice="getTotalPrice" :product="product" :all_products="all_products"/>
                     </v-row>
                   </v-col>
                 </v-row>
               </v-container>
             </v-lazy>
             <!-- End Product Page 3-->
-      <!-- <div class="carousel d-flex justify-center align-center">
-        <splide :options="optionsCarousel">
-          <splide-slide v-for="(slide, i) in slides" :key="i">
-            <div class="rounded">
-              <v-img class="responsive" :src="slide.src" />
-            </div>
-          </splide-slide>
-        </splide>
-      </div> -->
       <!-- Carousel -->
       <div class="carousel d-flex justify-center align-center">
         <v-carousel
@@ -280,11 +273,11 @@
           delimiter-icon="mdi-circle"
           :options="optionsCarousel">
           <v-carousel-item >
-            <a class="rounded" :href="route('banner', banners[3].path)">
+            <a class="rounded" :href="route('code.banner', [code, banners[3].path])">
               <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="banners[3].image" />
               <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="banners[3].image" />
-              <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="banners[3].image" />
-              <v-img else class="responsive" :contain="true" :src="banners[3].image" /> -->
+              <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
+              <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
             </a>
           </v-carousel-item>
         </v-carousel>
@@ -297,15 +290,16 @@
           delimiter-icon="mdi-circle"
           height="150" :options="optionsCarousel">
           <v-carousel-item >
-            <a class="rounded" :href="route('banner', banners[3].path)">
+            <a class="rounded" :href="route('code.banner', [code, banners[3].path])">
               <v-img v-show="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="banners[3].image" />
               <v-img v-show="windowSize.x < 600" class="responsive" :contain="true" :src="banners[3].image" />
-              <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="banners[3].image" />
-              <v-img else class="responsive" :contain="true" :src="banners[3].image" /> -->
+              <!-- <v-img v-if="windowSize.x > 600" class="responsive" :contain="true" aspect-ratio="2.5" :src="slide.src" />
+              <v-img else class="responsive" :contain="true" :src="slide.src" /> -->
             </a>
           </v-carousel-item>
         </v-carousel>
-      </div>
+    </div>
+
       <!-- <client-only>
         <Cookie />
       </client-only> -->
@@ -321,7 +315,7 @@
             </div>
             <v-spacer></v-spacer>
             <div class="d-flex align-center">
-              <inertia-link :href="route('code.checkout', code)">
+              <inertia-link href="/checkout">
               <v-btn class="checkout" color="#A6CB26">
                 Checkout
               </v-btn>
@@ -330,18 +324,17 @@
           </v-row>
         </v-container>
       </div>
-    </div>
   </v-app>
 </template>
 
 <script>
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
-import Navbar from "./Components/Navbar.vue";
-import Footer from "../components/Footer.vue";
+import Navbar from "../components/NavbarCode.vue";
 import ProductCard from "../components/ProductCard.vue";
-import cookie from "../components/cookie";
+import Footer from "../components/Footer.vue";
 import { filters, slides } from "../dummyData/dummy.js";
+import cookie from "../components/cookie";
 export default {
   name: "Home",
   components: {
@@ -349,6 +342,7 @@ export default {
     Splide,
     SplideSlide,
     ProductCard,
+    // ProductCardStrip,
     Footer,
     cookie
   },
@@ -356,9 +350,9 @@ export default {
     code: String,
     check: Boolean,
     user: Object,
-    real_products: Array,
     banners: Object,
-    popUp: Object
+    popUp: Object,
+    all_products: Array
   },
   data() {
     return {
@@ -435,61 +429,62 @@ export default {
       }
     },
     filterFlashSale() {
-      // this.flashSaleProducts = products.filter(product => product.flashSale);
-      this.flashSaleProducts = this.real_products;      
+      this.flashSaleProducts = this.all_products.filter(product => product.flash_sale);
+      // console.log(this.flashSaleProducts, this.all_products);
     },
     filterNotFlashSale() {
       // this.notFlashsaleProducts = products.filter(
       //   product => !product.flashSale
       // );
-      this.notFlashsaleProducts = this.real_products;
+      // this.notFlashsaleProducts = this.real_products;
+      this.notFlashsaleProducts = this.all_products.filter(product => !product.flash_sale);
       this.filteredProducts = this.notFlashsaleProducts;
     },
     filterByKategori(by) {
       this.current = by;
       if (this.current === "sayur") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories.name === "Sayur"
+          product => product.category === "Sayuran"
         );
       } else if (this.current === "buah") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories.name === "Buah"
+          product => product.category === "Buah"
         );
       } else if (this.current === "daging") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories.name === "Daging"
+          product => product.category === "Daging"
         );
       } else if (this.current === "ikan") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories.name === "Ikan"
+          product => product.category === "Ikan"
         );
       } else if (this.current === "seafood") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories.name === "Seafood"
+          product => product.category === "Seafood"
         );
       } else if (this.current === "kapalasar organik") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories.name === "Kapalasar Organik"
+          product => product.category === "Kapalasar Organik"
         );
       } else if (this.current === "bumbu") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories.name === "Bumbu"
+          product => product.category === "Bumbu"
         );
       } else if (this.current === "bumbu giling") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories.name === "Bumbu Giling"
+          product => product.category === "Bumbu Giling"
         );
       } else if (this.current === "olahan kedelai") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories.name === "Olahan Kedelai"
+          product => product.category === "Olahan Kedelai"
         );
       } else if (this.current === "siap masak") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories.name === "Siap Masak"
+          product => product.category === "Siap Masak"
         );
       } else if (this.current === "siap makan") {
         this.filteredProducts = this.notFlashsaleProducts.filter(
-          product => product.categories.name === "Siap Makan"
+          product => product.category === "Siap Makan"
         );
       } else if (this.current === "promo") {
         this.filteredProducts = this.notFlashsaleProducts.filter(function(item){
@@ -510,12 +505,13 @@ export default {
   created() {
     this.filterFlashSale();
     this.filterNotFlashSale();
+    this.$store.commit("cart/REPLACE", []);
+    this.$store.commit("cart/SET_TOTAL_PRICE", 0);
   },
   mounted() {
-    this.changeShowCart();
+    this.changeShowCart(); 
     this.onResize();
-
-    // console.log(this.real_products);
+      // this.$store.commit("cart/SET_TOTAL_PRICE", 0);
   }
 };
 </script>

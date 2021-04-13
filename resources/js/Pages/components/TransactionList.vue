@@ -51,7 +51,7 @@
                           <v-img
                             height="80"
                             max-width="120"
-                            src="../assets/sayuran.jpg"
+                            :src="item.image"
                           ></v-img>
                         </div>
                         <div>
