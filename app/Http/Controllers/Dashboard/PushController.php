@@ -46,6 +46,7 @@ class PushController extends Controller
             }'
         ]);
         echo $response->getBody();
+        return response()->json(true);
 
     }
 }
