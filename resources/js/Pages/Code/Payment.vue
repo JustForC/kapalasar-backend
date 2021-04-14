@@ -173,8 +173,8 @@
 </template>
 
 <script>
-import Navbar from "./Components/Navbar.vue";
 import Footer from "../components/Footer.vue";
+import Navbar from "../components/NavbarCode.vue";
 import ProductFinalList from "../components/ProductFinalList.vue";
 import { Inertia } from '@inertiajs/inertia'
 
@@ -184,13 +184,13 @@ export default {
     code: String,
     check: Boolean,
     user: Object,
-    real_products: Array,
-    real_vouchers: Array
+    real_vouchers: Array,
+    all_products: Array,
+    csrf: String
   },
   data() {
     return {
       Inertia,
-      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       defaultButtonText: "Upload Bukti Transfer",
       selectedFile: null,
       isSelecting: false,
@@ -215,8 +215,11 @@ export default {
     getProductList() {
       const state = this.$store.state.cart.listCarts;
       const tempState = this.$store.state.cart.tempCart;
+      if(!Object.keys(tempState).length){
+        Inertia.visit('/checkout');
+      }
 
-      this.real_products.forEach(product => {
+      this.all_products.forEach(product => {
         state.forEach(item => {
           if (item.id == product.id) {
             const cart = {
@@ -253,7 +256,11 @@ export default {
 
     },
     finishPayment() {
+      // console.log(this.selectedFile);
+      // console.log(this.isSelecting);
+
       const carts = this.$store.state.cart.listCarts;
+      // console.log(carts);
       this.$store.commit("cart/REPLACE", []);
 
       const voucher = this.$store.state.voucher.voucher;
@@ -264,6 +271,14 @@ export default {
 
       const userData = this.$store.state.user.userInfo;
       this.$store.commit("user/ADD", []);
+
+      // const transaction = {
+      //   cart: cart,
+      //   totalPrice: totalPrice,
+      //   user: userData
+      // };
+
+      // this.$store.commit("transaction/ADD", transaction);
 
       let data = new FormData();
       data.append('_token', this.csrf);
@@ -283,14 +298,17 @@ export default {
       data.append('image', this.selectedFile);
       Inertia.post(route('code.finish', this.code), data);
 
-      // Inertia.post(route('code.finish', this.code), {
+      // Inertia.post('/finish', {
+      //   // headers: {'Content-Type': 'multipart/form-data'},
       //   method: 'post',
+      //   // forceFormData: true,
       //   _token: this.csrf,
       //   name: userData.name,
       //   phone: userData.phone,
       //   address: userData.address,
       //   cart: cart,
       //   price: totalPrice,
+      //   image: this.selectedFile,
       // });
       // Inertia.visit('/');
       // this.$router.push("/");

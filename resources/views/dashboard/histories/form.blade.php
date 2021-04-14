@@ -11,41 +11,12 @@
         <div class="form-group">
             <label for="status" class="control-label">Status</label><br>
             <select id="status" type="number" class="form-control" name="status">
-                <option name="status" value=1>Dipesan</option>
-                <option name="status" value=2>Selesai</option>
-                <option name="status" value=3>Refund</option>
-                <option name="status" value=4>Tidak Selesai</option>
+                <option name="status" value=1 @if(1 == $model->status) selected="selected" @endif>Dipesan</option>
+                <option name="status" value=2 @if(2 == $model->status) selected="selected" @endif>Selesai</option>
+                <option name="status" value=3 @if(3 == $model->status) selected="selected" @endif>Refund</option>
+                <option name="status" value=4 @if(4 == $model->status) selected="selected" @endif>Tidak Selesai</option>
             </select>
         </div>
-        @if($model->total == NULL)
-        <div class="form-group">
-            <label for="total" class="control-label">Total</label>
-            <input id="total" type="number" class="form-control" name="total" value="{{$model->total}}" placeholder="Name">
-        </div>
-        @endif
-        @if($model->total == NULL)
-        <div class="form-group">
-            <label for="vouchers_id" class="control-label">Voucher</label><br>
-            <select id="vouchers_id" type="text" class="form-control" name="vouchers_id">
-                @foreach($vouchers as $voucher)
-                <option value="{{$voucher->id}}">{{$voucher->name}}</option>
-                @endforeach
-            </select>
-        </div>
-        @endif
-        @if($model->users_id == NULL)
-        <div class="form-group">
-            <label for="users_id" class="control-label">User</label><br>
-            <select id="users_id" type="text" class="form-control" name="users_id">
-                @foreach($users as $user)
-                <option value="{{$user->id}}">{{$user->name}}</option>
-                @endforeach
-            </select>
-        </div>
-        @endif
-        @if($model->users_id != NULL)
-        <input type="hidden" value = "{{$model->users_id}}" name = "users_id">
-        @endif
     </div>
     <div class="modal-footer">
         <button type="submit" class="btn btn-primary" id="modal-save"></button>

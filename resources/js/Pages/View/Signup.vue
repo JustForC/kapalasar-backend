@@ -1,7 +1,7 @@
 <template>
   <v-app>
   <div>
-    <Navbar />
+    <Navbar :check="check" :user="user"/>
     <div class="my-3">
       <v-container>
         <v-card>
@@ -141,7 +141,6 @@
                             <v-btn type="submit" color="#a6cb26" dark>Daftar</v-btn>
                           </div>
                         </form>
-                        <!-- </v-form> -->
                         <div class="">
                           Punya akun?
                           <a href="/login">
@@ -170,16 +169,12 @@ import Navbar from "../components/Navbar.vue";
 export default {
   components: { Navbar, Footer },
   props: {
-    name: String,
-    email: String,
-    phone: String,
-    password: String,
-    // errors: Object
+    check: Boolean,
+    user: Array,
+    csrf: String
   },
-  props: ['errors'],
   data() {
     return {
-      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       form: this.$inertia.form({
           name: '',
           email: '',
@@ -206,13 +201,8 @@ export default {
       this.form.post(this.route('register'), {
         preserveScroll: true,
       });
-      // console.log(this.form.errors);
-      // console.log(this.props.form.errors);
     }
   },
-  // mounted() {
-  //   console.log(this.name);
-  // }
 };
 </script>
 

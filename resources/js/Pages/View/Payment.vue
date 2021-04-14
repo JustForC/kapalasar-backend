@@ -184,12 +184,12 @@ export default {
     check: Boolean,
     user: Object,
     real_vouchers: Array,
-    all_products: Array
+    all_products: Array,
+    csrf: String
   },
   data() {
     return {
       Inertia,
-      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       defaultButtonText: "Upload Bukti Transfer",
       selectedFile: null,
       isSelecting: false,

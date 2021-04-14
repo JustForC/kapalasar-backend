@@ -1,7 +1,7 @@
 <template>
   <v-app>
   <div>
-    <Navbar/>
+    <Navbar :check="check" :user="user"/>
     <div class="my-3">
       <v-container>
         <v-card>
@@ -15,12 +15,13 @@
                         Masuk ke akunmu
                       </h3>
                       <div class="pt-md-16 pt-8 px-md-16 px-10">
+                        <!-- <form @submit="submit"> -->
                         <v-form action = '/login' method = 'post'>
                         <input type="hidden" name="_token" :value="csrf">
                           <div>
                             <span class="label font-weight-medium">Email</span>
                             <v-text-field
-                              v-model="email"
+                              v-model="form.email"
                               name="email"
                               placeholder="Email"
                               outlined
@@ -29,7 +30,7 @@
                               v-if="$page.errors.email"
                             ></v-text-field>
                             <v-text-field
-                              v-model="email"
+                              v-model="form.email"
                               name="email"
                               placeholder="Email"
                               outlined
@@ -42,7 +43,7 @@
                               Password
                               </span>
                             <v-text-field
-                              v-model="password"
+                              v-model="form.password"
                               :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
                               :type="show ? 'text' : 'password'"
                               hint="At least 8 characters"
@@ -55,7 +56,7 @@
                               v-if="$page.errors.password"
                             ><v-icon></v-icon></v-text-field>
                             <v-text-field
-                              v-model="password"
+                              v-model="form.password"
                               :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
                               :type="show ? 'text' : 'password'"
                               hint="At least 8 characters"
@@ -74,6 +75,7 @@
                             <v-btn type="submit" color="#a6cb26" dark>Masuk</v-btn>
                           </div>
                         </v-form>
+                        <!-- </form> -->
                         <div class="pt-5">
                           Tidak punya akun?
                           <a href="/register">
@@ -123,14 +125,27 @@ import Navbar from "../components/Navbar.vue";
 
 export default {
   components: { Navbar, Footer },
+  props: {
+    check: Boolean,
+    user: Array,
+    csrf: String
+  },
   data() {
     return {
+      form: this.$inertia.form({
+          email: '',
+          password: ''
+      }),
       show: false,
-      email: "",
-      password: "",
-      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-      }
     }
+  },
+  methods: {
+    submit() {
+      this.form.post(this.route('login'), {
+        preserveScroll: true,
+      });
+    }
+  },
 };
 </script>
 

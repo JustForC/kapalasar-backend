@@ -12,6 +12,8 @@ use App\Models\Voucher;
 use App\Models\Checkout;
 use App\Models\Cost;
 use App\Models\Advertisement;
+use App\Models\FlashSale;
+use Carbon\Carbon;
 
 class CodeController extends Controller
 {
@@ -27,24 +29,53 @@ class CodeController extends Controller
                         if($query->id == 1) return true;
                     });
                     $popUp = Advertisement::find(1);
+    
                     $products = Product::with('categories')->get();
+                    $i=0;
                     foreach($products as $product){
+                        $all_products[$i]['id'] = $product->uniq;
+                        $all_products[$i]['name'] = $product->name;
+                        $all_products[$i]['unit'] = $product->unit;
+                        $all_products[$i]['category'] = $product->categories->name;
+                        $all_products[$i]['stock'] = $product->stock;
+                        $all_products[$i]['image'] = $product->image;
                         if($product->discount_price){
-                            $product->new_price = $product->discount_price;
-                            $product->price = $product->price;
+                            $all_products[$i]['new_price'] = $product->discount_price;
+                            $all_products[$i]['price'] = $product->price;
                         }
                         else{
-                            $product->new_price = $product->price;
-                            $product->price = null;
+                            $all_products[$i]['new_price'] = $product->price;
+                            $all_products[$i]['price'] = null;
                         }
+                        $all_products[$i]['flash_sale'] = false;
+                        $i++;
+                    }
+            
+                    $flash_sale_products = FlashSale::orderBy('id', 'desc')->take(12)->get();
+                    foreach($flash_sale_products as $flash_sale_product){
+                        $all_products[$i]['id'] = $flash_sale_product->uniq;
+                        $all_products[$i]['name'] = $flash_sale_product->products->name;
+                        $all_products[$i]['unit'] = $flash_sale_product->products->unit;
+                        $all_products[$i]['category'] = $flash_sale_product->products->categories->name;
+                        $all_products[$i]['stock'] = $flash_sale_product->products->stock;
+                        $all_products[$i]['new_price'] = $flash_sale_product->new_price;
+                        $all_products[$i]['price'] = $flash_sale_product->products->price;
+                        if($flash_sale_product->image == null){
+                            $all_products[$i]['image'] = $flash_sale_product->products->image;
+                        }
+                        else{
+                            $all_products[$i]['image'] = $flash_sale_product->image;
+                        }
+                        $all_products[$i]['flash_sale'] = true;
+                        $i++;
                     }
                     return Inertia::render('Code/Home', [
                         'code' => $code,
                         'check' => true,
                         'user' => $user,
-                        'real_products' => $products,
                         'banners' => $banners,
-                        'popUp' => $popUp
+                        'popUp' => $popUp,
+                        'all_products' => $all_products
                     ]);
                 }
                 return redirect()->route('home');
@@ -54,24 +85,54 @@ class CodeController extends Controller
                 if($query->id == 1) return true;
             });
             $popUp = Advertisement::find(1);
+    
             $products = Product::with('categories')->get();
+            $i=0;
             foreach($products as $product){
+                $all_products[$i]['id'] = $product->uniq;
+                $all_products[$i]['name'] = $product->name;
+                $all_products[$i]['unit'] = $product->unit;
+                $all_products[$i]['category'] = $product->categories->name;
+                $all_products[$i]['stock'] = $product->stock;
+                $all_products[$i]['image'] = $product->image;
                 if($product->discount_price){
-                    $product->new_price = $product->discount_price;
-                    $product->price = $product->price;
+                    $all_products[$i]['new_price'] = $product->discount_price;
+                    $all_products[$i]['price'] = $product->price;
                 }
                 else{
-                    $product->new_price = $product->price;
-                    $product->price = null;
+                    $all_products[$i]['new_price'] = $product->price;
+                    $all_products[$i]['price'] = null;
                 }
+                $all_products[$i]['flash_sale'] = false;
+                $i++;
             }
+    
+            $flash_sale_products = FlashSale::orderBy('id', 'desc')->take(12)->get();
+            foreach($flash_sale_products as $flash_sale_product){
+                $all_products[$i]['id'] = $flash_sale_product->uniq;
+                $all_products[$i]['name'] = $flash_sale_product->products->name;
+                $all_products[$i]['unit'] = $flash_sale_product->products->unit;
+                $all_products[$i]['category'] = $flash_sale_product->products->categories->name;
+                $all_products[$i]['stock'] = $flash_sale_product->products->stock;
+                $all_products[$i]['new_price'] = $flash_sale_product->new_price;
+                $all_products[$i]['price'] = $flash_sale_product->products->price;
+                if($flash_sale_product->image == null){
+                    $all_products[$i]['image'] = $flash_sale_product->products->image;
+                }
+                else{
+                    $all_products[$i]['image'] = $flash_sale_product->image;
+                }
+                $all_products[$i]['flash_sale'] = true;
+                $i++;
+            }
+    
             return Inertia::render('Code/Home', [
                 'code' => $code,
                 'check' => $check,
                 'user' => null,
-                'real_products' => $products,
                 'banners' => $banners,
-                'popUp' => $popUp
+                'popUp' => $popUp,
+                'all_products' => $all_products
             ]);
         }
         else{
@@ -87,24 +148,54 @@ class CodeController extends Controller
             if($check){
                 if(Auth()->user()->roles->name == 'User'){
                     $user = Auth()->user();
-                    $products = Product::with('categories')->get();
                     $vouchers = Voucher::with('types')->get();
+
+                    $products = Product::with('categories')->get();
+                    $i=0;
                     foreach($products as $product){
+                        $all_products[$i]['id'] = $product->uniq;
+                        $all_products[$i]['name'] = $product->name;
+                        $all_products[$i]['unit'] = $product->unit;
+                        $all_products[$i]['category'] = $product->categories->name;
+                        $all_products[$i]['stock'] = $product->stock;
+                        $all_products[$i]['image'] = $product->image;
                         if($product->discount_price){
-                            $product->new_price = $product->discount_price;
-                            $product->price = $product->price;
+                            $all_products[$i]['new_price'] = $product->discount_price;
+                            $all_products[$i]['price'] = $product->price;
                         }
                         else{
-                            $product->new_price = $product->price;
-                            $product->price = null;
+                            $all_products[$i]['new_price'] = $product->price;
+                            $all_products[$i]['price'] = null;
                         }
+                        $all_products[$i]['flash_sale'] = false;
+                        $i++;
                     }
+            
+                    $flash_sale_products = FlashSale::orderBy('id', 'desc')->take(12)->get();
+                    foreach($flash_sale_products as $flash_sale_product){
+                        $all_products[$i]['id'] = $flash_sale_product->uniq;
+                        $all_products[$i]['name'] = $flash_sale_product->products->name;
+                        $all_products[$i]['unit'] = $flash_sale_product->products->unit;
+                        $all_products[$i]['category'] = $flash_sale_product->products->categories->name;
+                        $all_products[$i]['stock'] = $flash_sale_product->products->stock;
+                        $all_products[$i]['new_price'] = $flash_sale_product->new_price;
+                        $all_products[$i]['price'] = $flash_sale_product->products->price;
+                        if($flash_sale_product->image == null){
+                            $all_products[$i]['image'] = $flash_sale_product->products->image;
+                        }
+                        else{
+                            $all_products[$i]['image'] = $flash_sale_product->image;
+                        }
+                        $all_products[$i]['flash_sale'] = true;
+                        $i++;
+                    }
+
                     return Inertia::render('Code/Checkout', [
                         'code' => $code,
                         'check' => true,
                         'user' => $user,
-                        'real_products' => $products,
-                        'real_vouchers' => $vouchers
+                        'real_vouchers' => $vouchers,
+                        'all_products' => $all_products
                     ]);
                 }
                 else if(Auth()->user()->roles->name == 'Super Admin'){
@@ -112,24 +203,54 @@ class CodeController extends Controller
                 }
             }
             $user = new User;
-            $products = Product::with('categories')->get();
             $vouchers = Voucher::with('types')->get();
+
+            $products = Product::with('categories')->get();
+            $i=0;
             foreach($products as $product){
+                $all_products[$i]['id'] = $product->uniq;
+                $all_products[$i]['name'] = $product->name;
+                $all_products[$i]['unit'] = $product->unit;
+                $all_products[$i]['category'] = $product->categories->name;
+                $all_products[$i]['stock'] = $product->stock;
+                $all_products[$i]['image'] = $product->image;
                 if($product->discount_price){
-                    $product->new_price = $product->discount_price;
-                    $product->price = $product->price;
+                    $all_products[$i]['new_price'] = $product->discount_price;
+                    $all_products[$i]['price'] = $product->price;
                 }
                 else{
-                    $product->new_price = $product->price;
-                    $product->price = null;
+                    $all_products[$i]['new_price'] = $product->price;
+                    $all_products[$i]['price'] = null;
                 }
+                $all_products[$i]['flash_sale'] = false;
+                $i++;
             }
+    
+            $flash_sale_products = FlashSale::orderBy('id', 'desc')->take(12)->get();
+            foreach($flash_sale_products as $flash_sale_product){
+                $all_products[$i]['id'] = $flash_sale_product->uniq;
+                $all_products[$i]['name'] = $flash_sale_product->products->name;
+                $all_products[$i]['unit'] = $flash_sale_product->products->unit;
+                $all_products[$i]['category'] = $flash_sale_product->products->categories->name;
+                $all_products[$i]['stock'] = $flash_sale_product->products->stock;
+                $all_products[$i]['new_price'] = $flash_sale_product->new_price;
+                $all_products[$i]['price'] = $flash_sale_product->products->price;
+                if($flash_sale_product->image == null){
+                    $all_products[$i]['image'] = $flash_sale_product->products->image;
+                }
+                else{
+                    $all_products[$i]['image'] = $flash_sale_product->image;
+                }
+                $all_products[$i]['flash_sale'] = true;
+                $i++;
+            }
+    
             return Inertia::render('Code/Checkout', [
                 'code' => $code,
                 'check' => $check,
                 'user' => null,
-                'real_products' => $products,
-                'real_vouchers' => $vouchers
+                'real_vouchers' => $vouchers,
+                'all_products' => $all_products
             ]);
         }
         else{
@@ -146,23 +267,54 @@ class CodeController extends Controller
                 if(Auth()->user()->roles->name == 'User'){
                     $user = Auth()->user();
                     $vouchers = Voucher::with('types')->get();
+
                     $products = Product::with('categories')->get();
+                    $i=0;
                     foreach($products as $product){
+                        $all_products[$i]['id'] = $product->uniq;
+                        $all_products[$i]['name'] = $product->name;
+                        $all_products[$i]['unit'] = $product->unit;
+                        $all_products[$i]['category'] = $product->categories->name;
+                        $all_products[$i]['stock'] = $product->stock;
+                        $all_products[$i]['image'] = $product->image;
                         if($product->discount_price){
-                            $product->new_price = $product->discount_price;
-                            $product->price = $product->price;
+                            $all_products[$i]['new_price'] = $product->discount_price;
+                            $all_products[$i]['price'] = $product->price;
                         }
                         else{
-                            $product->new_price = $product->price;
-                            $product->price = null;
+                            $all_products[$i]['new_price'] = $product->price;
+                            $all_products[$i]['price'] = null;
                         }
+                        $all_products[$i]['flash_sale'] = false;
+                        $i++;
                     }
+            
+                    $flash_sale_products = FlashSale::orderBy('id', 'desc')->take(12)->get();
+                    foreach($flash_sale_products as $flash_sale_product){
+                        $all_products[$i]['id'] = $flash_sale_product->uniq;
+                        $all_products[$i]['name'] = $flash_sale_product->products->name;
+                        $all_products[$i]['unit'] = $flash_sale_product->products->unit;
+                        $all_products[$i]['category'] = $flash_sale_product->products->categories->name;
+                        $all_products[$i]['stock'] = $flash_sale_product->products->stock;
+                        $all_products[$i]['new_price'] = $flash_sale_product->new_price;
+                        $all_products[$i]['price'] = $flash_sale_product->products->price;
+                        if($flash_sale_product->image == null){
+                            $all_products[$i]['image'] = $flash_sale_product->products->image;
+                        }
+                        else{
+                            $all_products[$i]['image'] = $flash_sale_product->image;
+                        }
+                        $all_products[$i]['flash_sale'] = true;
+                        $i++;
+                    }
+
                     return Inertia::render('Code/Payment', [
                         'code' => $code,
                         'check' => true,
                         'user' => $user,
-                        'real_products' => $products,
-                        'real_vouchers' => $vouchers
+                        'real_vouchers' => $vouchers,
+                        'all_products' => $all_products,
+                        'csrf' => csrf_token()
                     ]);
                 }
                 else if(Auth()->user()->roles->name == 'Super Admin'){
@@ -170,24 +322,56 @@ class CodeController extends Controller
                 }
             }
             $user = new User;
+
             $vouchers = Voucher::with('types')->get();
+
             $products = Product::with('categories')->get();
+            $i=0;
             foreach($products as $product){
+                $all_products[$i]['id'] = $product->uniq;
+                $all_products[$i]['name'] = $product->name;
+                $all_products[$i]['unit'] = $product->unit;
+                $all_products[$i]['category'] = $product->categories->name;
+                $all_products[$i]['stock'] = $product->stock;
+                $all_products[$i]['image'] = $product->image;
                 if($product->discount_price){
-                    $product->new_price = $product->discount_price;
-                    $product->price = $product->price;
+                    $all_products[$i]['new_price'] = $product->discount_price;
+                    $all_products[$i]['price'] = $product->price;
                 }
                 else{
-                    $product->new_price = $product->price;
-                    $product->price = null;
+                    $all_products[$i]['new_price'] = $product->price;
+                    $all_products[$i]['price'] = null;
                 }
+                $all_products[$i]['flash_sale'] = false;
+                $i++;
             }
+    
+            $flash_sale_products = FlashSale::orderBy('id', 'desc')->take(12)->get();
+            foreach($flash_sale_products as $flash_sale_product){
+                $all_products[$i]['id'] = $flash_sale_product->uniq;
+                $all_products[$i]['name'] = $flash_sale_product->products->name;
+                $all_products[$i]['unit'] = $flash_sale_product->products->unit;
+                $all_products[$i]['category'] = $flash_sale_product->products->categories->name;
+                $all_products[$i]['stock'] = $flash_sale_product->products->stock;
+                $all_products[$i]['new_price'] = $flash_sale_product->new_price;
+                $all_products[$i]['price'] = $flash_sale_product->products->price;
+                if($flash_sale_product->image == null){
+                    $all_products[$i]['image'] = $flash_sale_product->products->image;
+                }
+                else{
+                    $all_products[$i]['image'] = $flash_sale_product->image;
+                }
+                $all_products[$i]['flash_sale'] = true;
+                $i++;
+            }
+
             return Inertia::render('Code/Payment', [
                 'code' => $code,
                 'check' => $check,
                 'user' => null,
-                'real_products' => $products,
-                'real_vouchers' => $vouchers
+                'real_vouchers' => $vouchers,
+                'all_products' => $all_products,
+                'csrf' => csrf_token()
             ]);
         }
         else{
@@ -208,7 +392,7 @@ class CodeController extends Controller
                     'address' => $request->address
                 ]);
                 $user = Auth()->user();
-    
+
                 if($request->voucher == 'undefined'){
                     $voucherId = null;
                     $voucherDisc = null;
@@ -218,7 +402,7 @@ class CodeController extends Controller
                     $voucherId = $voucher->id;
                     $voucherDisc = $voucher->discount;
                 }
-    
+
                 $image = time().'.'.$request->image->extension();
                 $path =  $request->image->move(public_path('/upload/checkout'),$image);
                 $checkout = Checkout::create([
@@ -233,6 +417,7 @@ class CodeController extends Controller
                     'image' => '/upload/checkout/'.$path->getFileName(),
                     'status' => 1,
                 ]);
+
                 $i = 1;
                 foreach($request->cartId as $cartId){
                     $carts[$i]['id'] = $cartId;
@@ -244,25 +429,45 @@ class CodeController extends Controller
                     $i++;
                 }
                 foreach($carts as $cart){
-                    $product = Product::find($cart['id']);
-                    if($product->discount_price){
+                    $product = Product::where('uniq', $cart['id'])->first();
+                    if(!$product){
+                        $flash_sale = FlashSale::where('uniq', $cart['id'])->first();
+                        if($flash_sale->image){
+                            $flash_sale_image = $flash_sale->image;
+                        }
+                        else{
+                            $flash_sale_image = $flash_sale->products->image;
+                        }
                         $cost = Cost::create([
                             'checkouts_id' => $checkout->id,
-                            'product' => $product->name,
+                            'product' => $flash_sale->products->name,
                             'amount' => $cart['qty'],
-                            'price' => $product->discount_price
+                            'price' => $flash_sale->new_price,
+                            'image' => $flash_sale_image
                         ]);
                     }
                     else{
-                        $cost = Cost::create([
-                            'checkouts_id' => $checkout->id,
-                            'product' => $product->name,
-                            'amount' => $cart['qty'],
-                            'price' => $product->price
-                        ]);
+                        if($product->discount_price){
+                            $cost = Cost::create([
+                                'checkouts_id' => $checkout->id,
+                                'product' => $product->name,
+                                'amount' => $cart['qty'],
+                                'price' => $product->discount_price,
+                                'image' => $product->image
+                            ]);
+                        }
+                        else{
+                            $cost = Cost::create([
+                                'checkouts_id' => $checkout->id,
+                                'product' => $product->name,
+                                'amount' => $cart['qty'],
+                                'price' => $product->price,
+                                'image' => $product->image
+                            ]);
+                        }
                     }
                 }
-                return redirect()->route('code.index', $code)->with('checkout', $checkout);;
+                return redirect()->route('code.index', $code);
             }
 
             if($request->voucher == 'undefined'){
@@ -300,25 +505,45 @@ class CodeController extends Controller
                 $i++;
             }
             foreach($carts as $cart){
-                $product = Product::find($cart['id']);
-                if($product->discount_price){
+                $product = Product::where('uniq', $cart['id'])->first();
+                if(!$product){
+                    $flash_sale = FlashSale::where('uniq', $cart['id'])->first();
+                    if($flash_sale->image){
+                        $flash_sale_image = $flash_sale->image;
+                    }
+                    else{
+                        $flash_sale_image = $flash_sale->products->image;
+                    }
                     $cost = Cost::create([
                         'checkouts_id' => $checkout->id,
-                        'product' => $product->name,
+                        'product' => $flash_sale->products->name,
                         'amount' => $cart['qty'],
-                        'price' => $product->discount_price
+                        'price' => $flash_sale->new_price,
+                        'image' => $flash_sale_image
                     ]);
                 }
                 else{
-                    $cost = Cost::create([
-                        'checkouts_id' => $checkout->id,
-                        'product' => $product->name,
-                        'amount' => $cart['qty'],
-                        'price' => $product->price
-                    ]);
+                    if($product->discount_price){
+                        $cost = Cost::create([
+                            'checkouts_id' => $checkout->id,
+                            'product' => $product->name,
+                            'amount' => $cart['qty'],
+                            'price' => $product->discount_price,
+                            'image' => $product->image
+                        ]);
+                    }
+                    else{
+                        $cost = Cost::create([
+                            'checkouts_id' => $checkout->id,
+                            'product' => $product->name,
+                            'amount' => $cart['qty'],
+                            'price' => $product->price,
+                            'image' => $product->image
+                        ]);
+                    }
                 }
             }
-            return redirect()->route('code.index', $code)->with('checkout', $checkout);;
+            return redirect()->route('code.index', $code);
         }
         else{
             abort(404);
@@ -329,33 +554,22 @@ class CodeController extends Controller
     {
         $referral = User::where('referral_code', $code)->first();
         if($referral){
-        $check = Auth()->check();
-        if($check){
-            if(Auth()->user()->roles->name == 'User'){
-                $user = Auth()->user();
-                $products = Product::with('categories')->get();
-                foreach($products as $product){
-                    if($product->discount_price){
-                        $product->new_price = $product->discount_price;
-                        $product->price = $product->price;
-                    }
-                    else{
-                        $product->new_price = $product->price;
-                        $product->price = null;
-                    }
+            $check = Auth()->check();
+            if($check){
+                if(Auth()->user()->roles->name == 'User'){
+                    $user = Auth()->user();
+                    $checkouts = Checkout::where('users_id', $user->id)->first();
+                    return Inertia::render('Code/Account', [
+                        'code' => $code,
+                        'check' => true,
+                        'user' => $user,
+                        'checkouts' => $checkouts
+                    ]);
                 }
-                $checkouts = Checkout::where('users_id', $user->id)->first();
-                return Inertia::render('View/Account', [
-                    'check' => true,
-                    'user' => $user,
-                    'real_products' => $products,
-                    'checkouts' => $checkouts
-                ]);
+                return view('/dashboard/index');
             }
-            return view('/dashboard/index');
-        }
-        return redirect()->route('login');
-        }
+                return redirect()->route('code.login', $code);
+            }
         else{
             abort(404);
         }
@@ -369,9 +583,52 @@ class CodeController extends Controller
             if($check){
                 if(Auth()->user()->roles->name == 'User'){
                     $user = Auth()->user();
-                    return Inertia::render('View/Flashsale', [
-                        'check' => true,
-                        'user' => $user
+    
+                    $products = Product::with('categories')->get();
+                    $i=0;
+                    foreach($products as $product){
+                        $all_products[$i]['id'] = $product->uniq;
+                        $all_products[$i]['name'] = $product->name;
+                        $all_products[$i]['unit'] = $product->unit;
+                        $all_products[$i]['category'] = $product->categories->name;
+                        $all_products[$i]['stock'] = $product->stock;
+                        $all_products[$i]['image'] = $product->image;
+                        if($product->discount_price){
+                            $all_products[$i]['new_price'] = $product->discount_price;
+                            $all_products[$i]['price'] = $product->price;
+                        }
+                        else{
+                            $all_products[$i]['new_price'] = $product->price;
+                            $all_products[$i]['price'] = null;
+                        }
+                        $all_products[$i]['flash_sale'] = false;
+                        $i++;
+                    }
+            
+                    $flash_sale_products = FlashSale::orderBy('id', 'desc')->take(12)->get();
+                    foreach($flash_sale_products as $flash_sale_product){
+                        $all_products[$i]['id'] = $flash_sale_product->uniq;
+                        $all_products[$i]['name'] = $flash_sale_product->products->name;
+                        $all_products[$i]['unit'] = $flash_sale_product->products->unit;
+                        $all_products[$i]['category'] = $flash_sale_product->products->categories->name;
+                        $all_products[$i]['stock'] = $flash_sale_product->products->stock;
+                        $all_products[$i]['new_price'] = $flash_sale_product->new_price;
+                        $all_products[$i]['price'] = $flash_sale_product->products->price;
+                        if($flash_sale_product->image == null){
+                            $all_products[$i]['image'] = $flash_sale_product->products->image;
+                        }
+                        else{
+                            $all_products[$i]['image'] = $flash_sale_product->image;
+                        }
+                        $all_products[$i]['flash_sale'] = true;
+                        $i++;
+                    }
+            
+                    return Inertia::render('Code/Flashsale', [
+                        'code' => $code,
+                        'check' => $check,
+                        'user' => $user,
+                        'all_products' => $all_products
                     ]);
                 }
                 else if(Auth()->user()->roles->name == 'Super Admin'){
@@ -379,9 +636,134 @@ class CodeController extends Controller
                 }
             }
             $user = new User;
-            return Inertia::render('View/Flashsale', [
+    
+            $products = Product::with('categories')->get();
+            $i=0;
+            foreach($products as $product){
+                $all_products[$i]['id'] = $product->uniq;
+                $all_products[$i]['name'] = $product->name;
+                $all_products[$i]['unit'] = $product->unit;
+                $all_products[$i]['category'] = $product->categories->name;
+                $all_products[$i]['stock'] = $product->stock;
+                $all_products[$i]['image'] = $product->image;
+                if($product->discount_price){
+                    $all_products[$i]['new_price'] = $product->discount_price;
+                    $all_products[$i]['price'] = $product->price;
+                }
+                else{
+                    $all_products[$i]['new_price'] = $product->price;
+                    $all_products[$i]['price'] = null;
+                }
+                $all_products[$i]['flash_sale'] = false;
+                $i++;
+            }
+    
+            $flash_sale_products = FlashSale::orderBy('id', 'desc')->take(12)->get();
+            foreach($flash_sale_products as $flash_sale_product){
+                $all_products[$i]['id'] = $flash_sale_product->uniq;
+                $all_products[$i]['name'] = $flash_sale_product->products->name;
+                $all_products[$i]['unit'] = $flash_sale_product->products->unit;
+                $all_products[$i]['category'] = $flash_sale_product->products->categories->name;
+                $all_products[$i]['stock'] = $flash_sale_product->products->stock;
+                $all_products[$i]['new_price'] = $flash_sale_product->new_price;
+                $all_products[$i]['price'] = $flash_sale_product->products->price;
+                if($flash_sale_product->image == null){
+                    $all_products[$i]['image'] = $flash_sale_product->products->image;
+                }
+                else{
+                    $all_products[$i]['image'] = $flash_sale_product->image;
+                }
+                $all_products[$i]['flash_sale'] = true;
+                $i++;
+            }
+    
+            return Inertia::render('Code/Flashsale', [
+                'code' => $code,
                 'check' => $check,
-                'user' => null
+                'user' => null,
+                'all_products' => $all_products
+            ]);
+        }
+        else{
+            abort(404);
+        }
+    }
+
+    public function banner($code, $slug)
+    {
+        $referral = User::where('referral_code', $code)->first();
+        if($referral){
+            $check = Auth()->check();
+            if($check){
+                if(Auth()->user()->roles->name == 'User'){
+                    $user = Auth()->user();
+    
+                    $advertisement = Advertisement::where('path', $slug)->with('products')->first();
+                    if(!$advertisement->products->count()) $all_products = null;
+                    $i=0;
+                    foreach($advertisement->products as $product){
+                        $all_products[$i]['id'] = $product->uniq;
+                        $all_products[$i]['name'] = $product->name;
+                        $all_products[$i]['unit'] = $product->unit;
+                        $all_products[$i]['category'] = $product->categories->name;
+                        $all_products[$i]['stock'] = $product->stock;
+                        $all_products[$i]['image'] = $product->image;
+                        if($product->discount_price){
+                            $all_products[$i]['new_price'] = $product->discount_price;
+                            $all_products[$i]['price'] = $product->price;
+                        }
+                        else{
+                            $all_products[$i]['new_price'] = $product->price;
+                            $all_products[$i]['price'] = null;
+                        }
+                        $all_products[$i]['flash_sale'] = false;
+                        $i++;
+                    }
+            
+                    return Inertia::render('Code/Banner', [
+                        'code' => $code,
+                        'check' => $check,
+                        'user' => $user,
+                        'advertisement' => $advertisement,
+                        'tnc' => json_encode($advertisement->tnc),
+                        'all_products' => $all_products
+                    ]);
+                }
+                else if(Auth()->user()->roles->name == 'Super Admin'){
+                    return 'super admin';
+                }
+            }
+            $user = new User;
+    
+            $advertisement = Advertisement::where('path', $slug)->with('products')->first();
+            if(!$advertisement->products->count()) $all_products = null;
+            $i=0;
+            foreach($advertisement->products as $product){
+                $all_products[$i]['id'] = $product->uniq;
+                $all_products[$i]['name'] = $product->name;
+                $all_products[$i]['unit'] = $product->unit;
+                $all_products[$i]['category'] = $product->categories->name;
+                $all_products[$i]['stock'] = $product->stock;
+                $all_products[$i]['image'] = $product->image;
+                if($product->discount_price){
+                    $all_products[$i]['new_price'] = $product->discount_price;
+                    $all_products[$i]['price'] = $product->price;
+                }
+                else{
+                    $all_products[$i]['new_price'] = $product->price;
+                    $all_products[$i]['price'] = null;
+                }
+                $all_products[$i]['flash_sale'] = false;
+                $i++;
+            }
+    
+            return Inertia::render('Code/Banner', [
+                'code' => $code,
+                'check' => $check,
+                'user' => null,
+                'advertisement' => $advertisement,
+                'tnc' => json_encode($advertisement->tnc),
+                'all_products' => $all_products
             ]);
         }
         else{
@@ -401,7 +783,8 @@ class CodeController extends Controller
             return Inertia::render('Code/Register', [
                 'code' => $code,
                 'check' => $check,
-                'user' => $user
+                'user' => $user,
+                'csrf' => csrf_token()
             ]);
         }
         else{

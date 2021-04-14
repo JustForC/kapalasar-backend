@@ -38,8 +38,6 @@
                       </h3>
                       <div class="pt-5">
 
-
-                        <!-- <v-form action="/register" method="post"> -->
                         <form @submit.prevent="submit">
                         <input type="hidden" name="_token" :value="csrf">
                           <div>
@@ -51,7 +49,19 @@
                               name = "name"
                               outlined
                               dense
+                              :error-messages="$page.errors.name[0]"
+                              v-if="$page.errors.name"
                             ></v-text-field>
+                            <v-text-field
+                              v-model="form.name"
+                              :rules="[rules.required]"
+                              placeholder="Nama Lengkap"
+                              name = "name"
+                              outlined
+                              dense
+                              v-else
+                            ></v-text-field>
+
                             <span class="label font-weight-medium">Email</span>
                             <v-text-field
                               v-model="form.email"
@@ -60,7 +70,19 @@
                               name = "email"
                               outlined
                               dense
+                              :error-messages="$page.errors.email[0]"
+                              v-if="$page.errors.email"
                             ></v-text-field>
+                            <v-text-field
+                              v-model="form.email"
+                              :rules="[rules.required, rules.email]"
+                              placeholder="Email"
+                              name = "email"
+                              outlined
+                              dense
+                              v-else
+                            ></v-text-field>
+
                             <span class="label font-weight-medium"
                               >Nomor Telepon</span
                             >
@@ -71,9 +93,19 @@
                               name = "phone"
                               outlined
                               dense
+                              :error-messages="$page.errors.phone[0]"
+                              v-if="$page.errors.phone"
                             ></v-text-field>
-                            <v-row>
-                            </v-row>
+                            <v-text-field
+                              v-model="form.phone"
+                              :rules="[rules.required, rules.onlyNum]"
+                              placeholder="Nomor Telepon"
+                              name = "phone"
+                              outlined
+                              dense
+                              v-else
+                            ></v-text-field>
+
                             <span class="label font-weight-medium"
                               >Password</span
                             >
@@ -88,13 +120,27 @@
                               name = "password"
                               dense
                               placeholder="Password"
+                              :error-messages="$page.errors.password[0]"
+                              v-if="$page.errors.password"
+                            ></v-text-field>
+                            <v-text-field
+                              v-model="form.password"
+                              :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+                              :rules="[rules.required, rules.min]"
+                              :type="show ? 'text' : 'password'"
+                              hint="At least 8 characters"
+                              @click:append="show = !show"
+                              outlined
+                              name = "password"
+                              dense
+                              placeholder="Password"
+                              v-else
                             ></v-text-field>
                           </div>
                           <div class="pb-3 text-center">
                             <v-btn type="submit" color="#a6cb26" dark>Daftar</v-btn>
                           </div>
                         </form>
-                        <!-- </v-form> -->
                         <div class="">
                           Punya akun?
                           <a href="/login">
@@ -118,18 +164,18 @@
 
 <script>
 import Footer from "../components/Footer.vue";
-import Navbar from "./Components/Navbar.vue";
+import Navbar from "../components/NavbarCode.vue";
 
 export default {
   components: { Navbar, Footer },
   props: {
     code: String,
     check: Boolean,
-    user: Array
+    user: Array,
+    csrf: String
   },
   data() {
     return {
-      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       form: this.$inertia.form({
           name: '',
           email: '',
@@ -152,12 +198,12 @@ export default {
     };
   },
   methods: {
-      submit() {
-          this.form.post(this.route('register'), {
-              onFinish: () => this.form.reset('password', 'password_confirmation'),
-          })
-      }
-  }
+    submit() {
+      this.form.post(this.route('register'), {
+        preserveScroll: true,
+      });
+    }
+  },
 };
 </script>
 

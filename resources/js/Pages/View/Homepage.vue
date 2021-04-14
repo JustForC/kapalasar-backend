@@ -91,21 +91,30 @@
       <div>
         <v-container>
           <div class="d-flex flex-wrap justify-center">
-            <v-btn
-              v-for="(filter, i) in filters"
-              :key="i"
-              :large="$vuetify.breakpoint.sm ? true : false"
-              class="mr-2 px-1 my-2"
-              @click="filterByKategori(filter.name)"
-              :color="filter.name == current ? '#a6cb26' : ''"
-              :dark="filter.name == current ? true : false"
-            >
-              <v-img 
-              max-height="15"
-              max-width="20"
-              :src="filter.src"></v-img>
-              <span class="mx-2">{{ filter.name }}</span>
-            </v-btn>
+            <v-slide-group
+                multiple
+                show-arrows
+              >
+                <v-slide-item
+                  v-for="(filter, i) in filters"
+                  :key="i"
+                >
+                  <v-btn
+                    :large="$vuetify.breakpoint.sm ? true : false"
+                    class="mr-2 px-1 my-2"
+                    @click="filterByKategori(filter.name)"
+                    :color="filter.name == current ? '#a6cb26' : ''"
+                    :dark="filter.name == current ? true : false"
+                  >
+                  <v-img 
+                    max-height="25"
+                    max-width="25"
+                    :src="filter.src"
+                  ></v-img>
+                  <span class="mx-2">{{ filter.name }}</span>
+                  </v-btn>
+                </v-slide-item>
+              </v-slide-group>
           </div>
           <v-card-text>
           <v-toolbar

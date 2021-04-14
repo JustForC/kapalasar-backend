@@ -16,34 +16,18 @@ class RegisterController extends Controller
     {
         $check = Auth()->check();
         if($check){
-            $user = Auth()->user();
-            return Inertia::render('View/Signup', [
-                'check' => $check,
-                'user' => $user
-            ]);
+            return redirect()->route('home');
         }
         $user = new User;
         return Inertia::render('View/Signup', [
             'check' => $check,
-            'user' => $user
+            'user' => $user,
+            'csrf' => csrf_token()
         ]);
     }
 
     public function register(Request $request)
     {
-        // $request->validateWithBag('registerURL', [
-        //     'email' => ['required', 'email', 'unique:users,email'],
-        //     'password' => ['required', 'min:8'],
-        //     'name' => ['required'],
-        //     'phone' => ['required']
-        // ]);
-        // Inertia::share([
-        //     'errors' => function () {
-        //         return Session::get('errors')
-        //             ? Session::get('errors')->getBag('default')->getMessages()
-        //             : (object) [];
-        //     },
-        // ]);
         //Error messages
         $messages = [
             'name.required' => 'Nama tidak boleh kosong',

@@ -13,16 +13,13 @@ class LoginController extends Controller
     {
         $check = Auth()->check();
         if($check){
-            $user = Auth()->user();
-            return Inertia::render('View/Signin', [
-                'check' => $check,
-                'user' => $user
-            ]);
+            return redirect()->route('home');
         }
         $user = new User;
         return Inertia::render('View/Signin', [
             'check' => $check,
-            'user' => $user
+            'user' => $user,
+            'csrf' => csrf_token()
         ]);
     }
 

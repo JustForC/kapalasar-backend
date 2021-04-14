@@ -26,7 +26,8 @@ class CreateCheckoutsTable extends Migration
             $table->string('discount')->nullable();
             // penjual / referal code
             $table->foreignId('merchants_id')->nullable()->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->text('detail');
+            $table->text('detail')->nullable();
+            $table->text('extra_order')->nullable();
             $table->bigInteger('total');
             $table->integer('status');
             $table->string('image');
