@@ -24,13 +24,10 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CodeController;
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\PushNotificationController;
 
 
-//
-Route::get('/coba/random',[Controller::class, 'random']);
-//
+
 
 Route::get('/send-notification', [PushNotificationController::class, 'send']);
 

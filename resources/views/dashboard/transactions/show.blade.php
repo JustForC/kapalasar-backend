@@ -22,6 +22,16 @@
           </tr>
           @endforeach
         </table>
+        </div>
+        <div class="mt-3">
+        <div class="form-group">
+            <label for="detail" class="control-label">Detail Tambahan</label>
+            <textarea id="detail" rows="5" class="form-control" name="detail" disabled="true">{!!$model->detail!!}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="extra_order" class="control-label">Extra Order</label>
+            <textarea id="extra_order" rows="5" class="form-control" name="extra_order" disabled="true">{!!$model->extra_order!!}</textarea>
+        </div>
       </div>
 </div>
 <div class="modal-footer">

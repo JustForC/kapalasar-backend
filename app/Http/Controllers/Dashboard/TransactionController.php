@@ -95,6 +95,7 @@ class TransactionController extends Controller
         $model = Checkout::findOrFail($id)->update([
             'status'=> $request->status,
             'detail'=> $request->detail,
+            'extra_order'=> $request->extra_order,
         ]);
 
         return response()->json($model);
@@ -116,7 +117,7 @@ class TransactionController extends Controller
     }
 
     public function data(){
-        $model = Checkout::with('users','vouchers', 'merchants')->where('status', 1)->orWhere('status', 3)->orWhere('status', 4)->get();
+        $model = Checkout::with('users','vouchers', 'merchants')->where('status', 1)->get();
         // dd($model);
         return DataTables::of($model)
             ->addColumn('action', function($model){

@@ -21,6 +21,10 @@
             <label for="detail" class="control-label">Detail Pesanan</label>
             <textarea form ="form_modal" id="detail" class="form-control" name="detail" placeholder="Detail Pesanan" value = "{{$model->detail}}">{{$model->detail}}</textarea>
         </div>
+        <div class="form-group">
+            <label for="extra_order" class="control-label">Extra Order</label>
+            <textarea form ="form_modal" id="extra_order" class="form-control" name="extra_order" placeholder="Extra Order" value = "{{$model->extra_order}}">{{$model->extra_order}}</textarea>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="submit" class="btn btn-primary" id="modal-save"></button>

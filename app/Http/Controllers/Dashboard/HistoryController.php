@@ -104,9 +104,6 @@ class HistoryController extends Controller
     {
         //
         $model = Checkout::findOrFail($id)->update([
-            'users_id' => $request->users_id,
-            'vouchers_id'=> $request->vouchers_id,
-            'total'=> $request->total,
             'status'=> $request->status,
         ]);
 
