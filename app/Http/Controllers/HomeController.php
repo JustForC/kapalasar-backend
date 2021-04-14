@@ -29,7 +29,7 @@ class HomeController extends Controller
                 });
                 $popUp = Advertisement::find(1);
 
-                $products = Product::with('categories')->get();
+                $products = Product::with('categories')->get()->shuffle();
                 $i=0;
                 foreach($products as $product){
                     $all_products[$i]['id'] = $product->uniq;
@@ -221,7 +221,7 @@ class HomeController extends Controller
         });
         $popUp = Advertisement::find(1);
 
-        $products = Product::with('categories')->get();
+        $products = Product::with('categories')->get()->shuffle();
         $i=0;
         foreach($products as $product){
             $all_products[$i]['id'] = $product->uniq;

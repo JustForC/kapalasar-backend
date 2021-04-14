@@ -25,13 +25,13 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        // $this->validate($request, [
-        //     'name' => ['required'],
-        //     'categories_id' => ['required'],
-        //     'unit' => ['required'],
-        //     'price' => ['required'],
-        //     'product_image' => ['required'],
-        //     ]);
+        $this->validate($request, [
+            'name' => ['required|max:17'],
+            'categories_id' => ['required'],
+            'unit' => ['required'],
+            'price' => ['required'],
+            'product_image' => ['required'],
+            ]);
 
         $product = Product::orderBy('id','desc')->first();
         $flash = FlashSale::orderBy('id','desc')->first();
@@ -47,6 +47,7 @@ class ProductController extends Controller
                 'categories_id' => $request->categories_id,
                 'unit' => $request->unit,
                 'stock' => 1000,
+                'status' => $request->status,
                 'price' => $request->price,
                 'discount_price' => $request->discount_price,
                 'image' => '/upload/product/'.$path->getFileName(),
@@ -66,6 +67,7 @@ class ProductController extends Controller
             'categories_id' => $request->categories_id,
             'unit' => $request->unit,
             'stock' => 1000,
+            'status' => $request->status,
             'price' => $request->price,
             'discount_price' => $request->discount_price,
             'image' => '/upload/product/'.$path->getFileName(),
@@ -84,7 +86,7 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => ['required'],
+            'name' => ['required|max:17'],
             'categories_id' => ['required'],
             'unit' => ['required'],
             'stock' => ['required'],

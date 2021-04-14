@@ -93,6 +93,7 @@ class TransactionController extends Controller
         //
         $model = Checkout::findOrFail($id)->update([
             'status'=> $request->status,
+            'detail'=> $request->detail,
         ]);
 
         return response()->json($model);

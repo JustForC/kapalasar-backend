@@ -37,6 +37,7 @@
         {title: 'Telepon', data: 'phone', name: 'phone', width: '30%', className: 'dt-head-center'},
         {title: 'Alamat', data: 'address', name: 'address', width: '30%', className: 'dt-head-center'},
         {title: 'Status', data: 'status', name: 'status', width: '30%', className: 'dt-head-center'},
+        {title: 'Detail', data: 'detail', name: 'detail', width: '30%', className: 'dt-head-center'},
         {title: 'Tipe Potongan', data: 'type', name: 'type', width: '30%', className: 'dt-head-center'},
         {title: 'Jumlah Potongan', data: 'discount', name: 'discount', width: '30%', className: 'dt-head-center'},
         {title: 'Total', data: 'total', name: 'total', width: '30%', className: 'dt-head-center'},

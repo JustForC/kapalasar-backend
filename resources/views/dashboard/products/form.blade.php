@@ -17,6 +17,13 @@
             </select>
         </div>
         <div class="form-group">
+            <label for="status" class="control-label">Kategori</label><br>
+            <select id="status" type="text" class="form-control" name="status">
+                <option value=1>Aktif</option>
+                <option value=2>Tidak Aktif</option>
+            </select>
+        </div>
+        <div class="form-group">
             <label for="name" class="control-label">Nama Produk</label>
             <input id="name" type="text" class="form-control" name="name" value="{{$model->name}}" placeholder="Name">
         </div>

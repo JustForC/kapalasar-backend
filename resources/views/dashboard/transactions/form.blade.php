@@ -17,6 +17,10 @@
                 <option name="status" value=4 @if(4 == $model->status) selected="selected" @endif>Tidak Selesai</option>
             </select>
         </div>
+        <div class="form-group">
+            <label for="detail" class="control-label">Detail Pesanan</label>
+            <textarea form ="form_modal" id="detail" class="form-control" name="detail" placeholder="Detail Pesanan" value = "{{$model->detail}}">{{$model->detail}}</textarea>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="submit" class="btn btn-primary" id="modal-save"></button>
