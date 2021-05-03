@@ -1,7 +1,8 @@
 <template>
   <v-app>
-    <div class="home">
+    <!-- <div class="home">
       <v-row justify="center">
+        <p class="alert alert-success">{{sessions}}</p>
       <v-dialog v-model="dialog" persistent max-width="500">
         <v-card>
           <v-card-title class="headline font-weight-bold">
@@ -17,7 +18,7 @@
         </v-card>
       </v-dialog>
     </v-row>
-    </div>
+    </div> -->
       <Navbar :check="check" :user="user"/>
       <!-- Carousel -->
       <div class="carousel d-flex justify-center align-center">
@@ -352,7 +353,8 @@ export default {
     user: Object,
     banners: Object,
     popUp: Object,
-    all_products: Array
+    all_products: Array,
+    sessions: Object,
   },
   data() {
     return {

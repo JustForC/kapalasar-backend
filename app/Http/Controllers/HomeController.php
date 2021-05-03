@@ -573,7 +573,11 @@ class HomeController extends Controller
                     }
                 }
             }
-            return redirect()->route('home');
+            return Inertia::render('View/Thankyou', [
+                'check' => $check,
+                'user' => null,
+            ]);
+            // return redirect()->route('home')->with('success', 'your message here');
         }
 
         if($request->voucher == 'undefined'){
@@ -648,7 +652,11 @@ class HomeController extends Controller
                 }
             }
         }
-        return redirect()->route('home');
+        return Inertia::render('View/Thankyou', [
+            'check' => $check,
+            'user' => null,
+        ]);
+        // return redirect()->route('home')->with('success', 'your message here');
 
     }
 
