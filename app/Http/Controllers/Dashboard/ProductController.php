@@ -90,7 +90,6 @@ class ProductController extends Controller
             'name' => ['required'],
             'categories_id' => ['required'],
             'unit' => ['required'],
-            'stock' => ['required'],
             'price' => ['required'],
         ]);
 
